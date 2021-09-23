@@ -31,8 +31,8 @@ namespace tp_plataformas_2
         private void mnuVolver_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FrmMain VtnaMain = new FrmMain();
-            VtnaMain.Show();
+            FrmPrincipal VtnaPrincipal = new FrmPrincipal();
+            VtnaPrincipal.Show();
         }
 
         private void btnContinuar_Click(object sender, EventArgs e)
@@ -99,5 +99,9 @@ namespace tp_plataformas_2
 
         }
 
+        private void mnuMenu_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

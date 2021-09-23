@@ -32,7 +32,6 @@ namespace tp_plataformas_2
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuVolver = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAcercaDe = new System.Windows.Forms.ToolStripMenuItem();
             this.btnContinuar = new System.Windows.Forms.Button();
             this.cboAdministracion = new System.Windows.Forms.ComboBox();
@@ -52,25 +51,18 @@ namespace tp_plataformas_2
             // mnuMenu
             // 
             this.mnuMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuVolver,
-            this.mnuSalir});
+            this.mnuVolver});
             this.mnuMenu.Name = "mnuMenu";
             this.mnuMenu.Size = new System.Drawing.Size(50, 20);
             this.mnuMenu.Text = "Menu";
+            this.mnuMenu.Click += new System.EventHandler(this.mnuMenu_Click);
             // 
             // mnuVolver
             // 
             this.mnuVolver.Name = "mnuVolver";
-            this.mnuVolver.Size = new System.Drawing.Size(106, 22);
+            this.mnuVolver.Size = new System.Drawing.Size(180, 22);
             this.mnuVolver.Text = "Volver";
             this.mnuVolver.Click += new System.EventHandler(this.mnuVolver_Click);
-            // 
-            // mnuSalir
-            // 
-            this.mnuSalir.Name = "mnuSalir";
-            this.mnuSalir.Size = new System.Drawing.Size(106, 22);
-            this.mnuSalir.Text = "Salir";
-            this.mnuSalir.Click += new System.EventHandler(this.mnuSalir_Click_1);
             // 
             // mnuAcercaDe
             // 
