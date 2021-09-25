@@ -61,12 +61,30 @@ namespace tp_plataformas_2
                 VtnaPrincipal.Show();
             }else if (usuario.Equals("u") && password.Equals("u"))
             {
-                MessageBox.Show("Usuario tipo usuario - Iria nueva ventana");
+                MessageBox.Show("¡Gracias por su visita!");
+                this.Hide();
+
+                FrmUsuarioNoAdmin VtnasuarioNoAdmin = new FrmUsuarioNoAdmin();
+                VtnasuarioNoAdmin.Show();
             }
             else
             {
                 MessageBox.Show("Usuario invalido!");
             }
+        }
+
+        private void btnConfiguracion_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FrmConfiguracion VtnaConfiguracion = new FrmConfiguracion();
+            VtnaConfiguracion.Show();
+        }
+
+        private void btnRegistrarse_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FrmRegistrarUsuario VtnaRegistrarUsuario = new FrmRegistrarUsuario();
+            VtnaRegistrarUsuario.Show();
         }
     }
 }

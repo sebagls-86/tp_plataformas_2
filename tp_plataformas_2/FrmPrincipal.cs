@@ -56,5 +56,10 @@ namespace tp_plataformas_2
             FrmMain VtnaMain = new FrmMain();
             VtnaMain.Show();
         }
+
+        private void mnuSalir_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

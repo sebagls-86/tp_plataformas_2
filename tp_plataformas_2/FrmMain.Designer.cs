@@ -38,9 +38,8 @@ namespace tp_plataformas_2
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnIngresar = new System.Windows.Forms.Button();
-            this.lblConfigurarCuenta = new System.Windows.Forms.Label();
             this.lblRegistrarse = new System.Windows.Forms.Label();
-            this.btnConfigurarUsuario = new System.Windows.Forms.Button();
+            this.btnConfiguracion = new System.Windows.Forms.Button();
             this.btnRegistrarse = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -89,7 +88,7 @@ namespace tp_plataformas_2
             // 
             // cargandoMain
             // 
-            this.cargandoMain.Location = new System.Drawing.Point(0, 474);
+            this.cargandoMain.Location = new System.Drawing.Point(-2, 425);
             this.cargandoMain.Name = "cargandoMain";
             this.cargandoMain.Size = new System.Drawing.Size(384, 23);
             this.cargandoMain.TabIndex = 5;
@@ -121,53 +120,44 @@ namespace tp_plataformas_2
             this.btnIngresar.UseVisualStyleBackColor = true;
             this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
             // 
-            // lblConfigurarCuenta
-            // 
-            this.lblConfigurarCuenta.AutoSize = true;
-            this.lblConfigurarCuenta.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblConfigurarCuenta.Location = new System.Drawing.Point(19, 300);
-            this.lblConfigurarCuenta.Name = "lblConfigurarCuenta";
-            this.lblConfigurarCuenta.Size = new System.Drawing.Size(331, 21);
-            this.lblConfigurarCuenta.TabIndex = 9;
-            this.lblConfigurarCuenta.Text = "Tengo usuario y quiero configurar mi cuenta";
-            // 
             // lblRegistrarse
             // 
             this.lblRegistrarse.AutoSize = true;
             this.lblRegistrarse.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblRegistrarse.Location = new System.Drawing.Point(19, 375);
+            this.lblRegistrarse.Location = new System.Drawing.Point(20, 342);
             this.lblRegistrarse.Name = "lblRegistrarse";
             this.lblRegistrarse.Size = new System.Drawing.Size(287, 21);
             this.lblRegistrarse.TabIndex = 10;
             this.lblRegistrarse.Text = "No tengo usuario y deseo registrarme";
             // 
-            // btnConfigurarUsuario
+            // btnConfiguracion
             // 
-            this.btnConfigurarUsuario.Location = new System.Drawing.Point(20, 325);
-            this.btnConfigurarUsuario.Name = "btnConfigurarUsuario";
-            this.btnConfigurarUsuario.Size = new System.Drawing.Size(116, 23);
-            this.btnConfigurarUsuario.TabIndex = 11;
-            this.btnConfigurarUsuario.Text = "Configurar cuenta";
-            this.btnConfigurarUsuario.UseVisualStyleBackColor = true;
+            this.btnConfiguracion.Location = new System.Drawing.Point(84, 265);
+            this.btnConfiguracion.Name = "btnConfiguracion";
+            this.btnConfiguracion.Size = new System.Drawing.Size(209, 23);
+            this.btnConfiguracion.TabIndex = 11;
+            this.btnConfiguracion.Text = "Configurar almacenamiento";
+            this.btnConfiguracion.UseVisualStyleBackColor = true;
+            this.btnConfiguracion.Click += new System.EventHandler(this.btnConfiguracion_Click);
             // 
             // btnRegistrarse
             // 
-            this.btnRegistrarse.Location = new System.Drawing.Point(20, 413);
+            this.btnRegistrarse.Location = new System.Drawing.Point(20, 385);
             this.btnRegistrarse.Name = "btnRegistrarse";
             this.btnRegistrarse.Size = new System.Drawing.Size(116, 23);
             this.btnRegistrarse.TabIndex = 12;
             this.btnRegistrarse.Text = "Registrarse";
             this.btnRegistrarse.UseVisualStyleBackColor = true;
+            this.btnRegistrarse.Click += new System.EventHandler(this.btnRegistrarse_Click);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 498);
+            this.ClientSize = new System.Drawing.Size(382, 450);
             this.Controls.Add(this.btnRegistrarse);
-            this.Controls.Add(this.btnConfigurarUsuario);
+            this.Controls.Add(this.btnConfiguracion);
             this.Controls.Add(this.lblRegistrarse);
-            this.Controls.Add(this.lblConfigurarCuenta);
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsuario);
@@ -197,9 +187,8 @@ namespace tp_plataformas_2
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btnIngresar;
-        private System.Windows.Forms.Label lblConfigurarCuenta;
         private System.Windows.Forms.Label lblRegistrarse;
-        private System.Windows.Forms.Button btnConfigurarUsuario;
+        private System.Windows.Forms.Button btnConfiguracion;
         private System.Windows.Forms.Button btnRegistrarse;
     }
 }

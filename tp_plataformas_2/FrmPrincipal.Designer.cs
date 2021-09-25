@@ -35,7 +35,6 @@ namespace tp_plataformas_2
             this.cargandoMain = new System.Windows.Forms.ProgressBar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAcercaDe = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,30 +94,23 @@ namespace tp_plataformas_2
             // mnuMenu
             // 
             this.mnuMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSalir,
             this.cerrarSesionToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.mnuMenu.Name = "mnuMenu";
             this.mnuMenu.Size = new System.Drawing.Size(50, 20);
             this.mnuMenu.Text = "Menu";
             // 
-            // mnuSalir
-            // 
-            this.mnuSalir.Name = "mnuSalir";
-            this.mnuSalir.Size = new System.Drawing.Size(142, 22);
-            this.mnuSalir.Text = "Salir";
-            // 
             // cerrarSesionToolStripMenuItem
             // 
             this.cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
-            this.cerrarSesionToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.cerrarSesionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cerrarSesionToolStripMenuItem.Text = "Cerrar sesion";
             this.cerrarSesionToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesionToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -168,7 +160,6 @@ namespace tp_plataformas_2
         private System.Windows.Forms.ProgressBar cargandoMain;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnuMenu;
-        private System.Windows.Forms.ToolStripMenuItem mnuSalir;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuAcercaDe;

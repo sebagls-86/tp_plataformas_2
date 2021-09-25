@@ -35,6 +35,7 @@ namespace tp_plataformas_2
             this.mnuAcercaDe = new System.Windows.Forms.ToolStripMenuItem();
             this.btnContinuar = new System.Windows.Forms.Button();
             this.cboAdministracion = new System.Windows.Forms.ComboBox();
+            this.cargandoMain = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +61,7 @@ namespace tp_plataformas_2
             // mnuVolver
             // 
             this.mnuVolver.Name = "mnuVolver";
-            this.mnuVolver.Size = new System.Drawing.Size(180, 22);
+            this.mnuVolver.Size = new System.Drawing.Size(106, 22);
             this.mnuVolver.Text = "Volver";
             this.mnuVolver.Click += new System.EventHandler(this.mnuVolver_Click);
             // 
@@ -104,11 +105,19 @@ namespace tp_plataformas_2
             this.cboAdministracion.TabIndex = 4;
             this.cboAdministracion.Text = "Seleccione una opcion";
             // 
+            // cargandoMain
+            // 
+            this.cargandoMain.Location = new System.Drawing.Point(0, 132);
+            this.cargandoMain.Name = "cargandoMain";
+            this.cargandoMain.Size = new System.Drawing.Size(429, 23);
+            this.cargandoMain.TabIndex = 21;
+            // 
             // FrmAdministracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(429, 136);
+            this.ClientSize = new System.Drawing.Size(429, 155);
+            this.Controls.Add(this.cargandoMain);
             this.Controls.Add(this.cboAdministracion);
             this.Controls.Add(this.btnContinuar);
             this.Controls.Add(this.menuStrip1);
@@ -132,5 +141,6 @@ namespace tp_plataformas_2
         private System.Windows.Forms.ToolStripMenuItem mnuAcercaDe;
         private System.Windows.Forms.Button btnContinuar;
         private System.Windows.Forms.ComboBox cboAdministracion;
+        private System.Windows.Forms.ProgressBar cargandoMain;
     }
 }
