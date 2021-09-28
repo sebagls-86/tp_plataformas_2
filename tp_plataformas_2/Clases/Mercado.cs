@@ -14,7 +14,7 @@ namespace tp_plataformas_2
 
         const int maxCategorias = 10;
 
-
+        int cantCategorias = 0;
         public Mercado()
         {
             productos = new List<Producto>();
@@ -28,7 +28,7 @@ namespace tp_plataformas_2
 
         private int getCategoriaId() //Generamos el ID autoincremental de Categoria
         {
-            int cantCategorias = 0;
+
 
             for (int i = 0; i < categorias.Length; i++)
             {
@@ -43,21 +43,17 @@ namespace tp_plataformas_2
 
         public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)//Creamos producto y lo agregamos al array list de productos
         {
-            int id = this.productos.Count + 1;
 
 
-            for (int i = 0; i < this.categorias.Length; i++)
+            if (categorias[idCategoria] != null && categorias[idCategoria].Id == idCategoria)
             {
-
-                if (categorias[i] != null && categorias[i].Id == idCategoria)
-                {
-                    Producto producto = new Producto(id, nombre, precio, Cantidad, categorias[i]);
-                    this.productos.Add(producto);
-                }
-
-
-
+                Producto producto = new Producto(idCategoria, nombre, precio, Cantidad, categorias[idCategoria]);
+                this.productos.Add(producto);
             }
+
+
+
+
 
             return true;
         }
@@ -72,7 +68,7 @@ namespace tp_plataformas_2
                     productos[i].Precio = Precio;
                     productos[i].Cantidad = Cantidad;
                     productos[i].Id = ID;
-                    productos[i].Cat = productos[ID_Categoria - 1].Cat; // :)
+                    productos[i].Cat = productos[ID_Categoria].Cat; // :)
 
                     Console.WriteLine("Producto modificado con éxito " + Nombre + Precio + Cantidad + ID);
                 }
@@ -82,25 +78,28 @@ namespace tp_plataformas_2
         }
 
         public bool EliminarProducto(int id)
+
+
         {
-            foreach (Producto producto in productos)
+            bool encontre = false;
+            int i = 0;
+            while (!encontre && i < productos.Count)
             {
-                if (producto.Id.Equals(id))
+                encontre = productos[i].Id == id;
+                if (encontre)
                 {
 
-                    productos.RemoveAll(producto => producto.Id == id);
+                    productos.Remove(productos[i]);
                     Console.WriteLine("Producto " + id + " eliminado con éxito!");
-                    break;
-
                 }
                 else
-                {
-                    Console.WriteLine("Producto " + id + " no encontrado!");
-                }
+                    i++;
             }
-            return true;
-
+            return encontre;
         }
+
+
+
 
         public void BuscarProductos(String Query)
         {
@@ -117,10 +116,10 @@ namespace tp_plataformas_2
             }
 
             productos.Sort();
-            
+
             foreach (Producto p in productos)
             {
-                Console.WriteLine(p.Nombre + " - " + p.Precio);
+                Console.WriteLine(p);
             }
 
 
@@ -139,7 +138,7 @@ namespace tp_plataformas_2
                 }
 
             }
-            var ordenada = productosBuscados.OrderByDescending(producto => producto.Nombre).ThenBy(producto => producto.Precio);
+            var ordenada = productosBuscados.OrderByDescending(producto => producto.Precio);
             foreach (Producto p in ordenada)
             {
 
@@ -154,10 +153,10 @@ namespace tp_plataformas_2
 
             foreach (Producto producto in productos)
             {
-                if (producto.Cat.Equals(ID_Categoria))
+                if (producto.Cat.Id == ID_Categoria)
                 {
                     productos.Sort();
-                    Console.WriteLine(producto.Nombre);
+                    Console.WriteLine(producto);
                 }
 
             }
@@ -189,32 +188,35 @@ namespace tp_plataformas_2
         public bool ModificarUsuario(int ID, int DNI, string Nombre, string Apellido, string Mail, string Password, int CUIT_CUIL, bool EsEmpresa)
         {
 
-            for (int i = 0; i < usuarios.Count; i++)
-            {
-                if (usuarios[i].Id == ID)
-                {
-                    usuarios[i].Nombre = Nombre;
-                    usuarios[i].Apellido = Apellido;
-                    usuarios[i].Dni = DNI;
-                    usuarios[i].Mail = Mail;
-                    usuarios[i].Password = Password;
-                    if (!EsEmpresa)
-                    {
-                        ClienteFinal c = (ClienteFinal)usuarios[i];
-                        c.Cuil = CUIT_CUIL;
 
-                        Console.WriteLine("Usuario modificado con éxito\n" +
-                                            " " + Nombre + " " + Apellido + " " + Mail + " " + Password + " " + DNI + " " + CUIT_CUIL);
-                    }
-                    else
-                    {
-                        Empresa c = (Empresa)usuarios[i];
-                        c.Cuit = CUIT_CUIL;
-                        Console.WriteLine("Usuario modificado con éxito\n" +
-                                            " " + Nombre + " " + Apellido + " " + Mail + " " + Password + " " + DNI + " " + CUIT_CUIL);
-                    }
+            if (usuarios[ID] != null)
+            {
+                usuarios[ID].Nombre = Nombre;
+                usuarios[ID].Apellido = Apellido;
+                usuarios[ID].Dni = DNI;
+                usuarios[ID].Mail = Mail;
+                usuarios[ID].Password = Password;
+                if (!EsEmpresa)
+                {
+                    ClienteFinal c = (ClienteFinal)usuarios[ID];
+                    c.Cuil = CUIT_CUIL;
+
+                    Console.WriteLine("Usuario modificado con éxito\n" +
+                                        " " + Nombre + " " + Apellido + " " + Mail + " " + Password + " " + DNI + " " + CUIT_CUIL);
+                }
+                else
+                {
+                    Empresa c = (Empresa)usuarios[ID];
+                    c.Cuit = CUIT_CUIL;
+                    Console.WriteLine("Usuario modificado con éxito\n" +
+                                        " " + Nombre + " " + Apellido + " " + Mail + " " + Password + " " + DNI + " " + CUIT_CUIL);
                 }
             }
+            else
+            {
+                Console.WriteLine("Usuario no encontrado");
+            }
+
 
             return true;
         }
@@ -223,81 +225,22 @@ namespace tp_plataformas_2
 
         public bool EliminarUsuario(int id)
         {
-
-            foreach (Usuario usuario in usuarios)
+            bool encontre = false;
+            int i = 0;
+            while (!encontre && i < productos.Count)
             {
-                if (usuario.Id.Equals(id))
+                encontre = productos[i].Id == id;
+                if (encontre)
                 {
-                    usuarios.RemoveAll(usuario => usuario.Id == id);
-                    Console.WriteLine("Usuario " + id + " eliminado con Ã©xito!");
-                    break;
 
+                    productos.Remove(productos[i]);
                 }
                 else
-                {
-                    Console.WriteLine("Usuario " + id + " no encontrado!");
-                }
-
+                    i++;
             }
-            return true;
-
+            return encontre;
         }
 
-        public bool ExisteUsuarioPorId(int id) //implementado para el case 7 del switch main
-        {
-
-            bool usuarioExiste = false;
-            List<Usuario> usuariosBuscados = new List<Usuario>();
-
-            foreach (Usuario usuario in usuarios)
-            {
-                if (usuario.Id == id)
-                {
-
-                    usuarioExiste = true;
-                }
-
-            }
-
-            return usuarioExiste;
-        }
-
-        public bool ExisteProductoPorId(int id) //implementado para el case 11 del switch main
-        {
-            bool productoExiste = false;
-            List<Producto> productosExistentes = new List<Producto>();
-
-            foreach (Producto producto in productos)
-            {
-                if (producto.Id == id)
-                {
-
-                    productoExiste = true;
-                }
-
-            }
-
-            return productoExiste;
-        }
-
-        public bool ExisteCategoriaPorId(int id) //implementado para el case 7 del switch main
-        {
-
-            bool categoriaExiste = false;
-
-
-            foreach (Categoria categoria in categorias)
-            {
-                if (categoria.Id == id)
-                {
-
-                    categoriaExiste = true;
-                }
-
-            }
-
-            return categoriaExiste;
-        }
 
         public void MostrarUsuarios()
         {
@@ -342,31 +285,42 @@ namespace tp_plataformas_2
 
         public bool ModificarCategoria(int ID, string Nombre)
         {
-            foreach (Categoria categoria in categorias)
+
+            if (categorias[ID] != null)
             {
-                if (categoria.Id == ID)
-                {
-                    categoria.Nombre = Nombre;
-                }
+                categorias[ID].Nombre = Nombre;
+                Console.WriteLine("Categoria modificada con exito");
             }
+            else
+            {
+                Console.WriteLine("Categoria no encontrada");
+            }
+
 
             return true;
         }
 
         public bool EliminarCategoria(int ID)
+
         {
-
-            for (int i = 0; i < categorias.Length; i++)
+            bool encontre = false;
+            int i = 0;
+            while (!encontre && i < categorias.Length)
             {
-                if (categorias[i].Id == ID)
+                encontre = categorias[i].Id == ID;
+                if (encontre)
                 {
+
                     categorias[i] = null;
+                    Console.WriteLine("Categoria " + ID + " eliminada con éxito!");
                 }
-
+                else
+                    i++;
             }
-
-            return true;
+            return encontre;
         }
+
+
 
         public bool BuscarCategoria(string Nombre)
         {
@@ -385,9 +339,10 @@ namespace tp_plataformas_2
         public void MostrarCategorias()
         {
             for (int i = 0; i < categorias.Length; i++)
-            {
-                Console.WriteLine(categorias[i]);
-            }
+                if (categorias[i] != null)
+                {
+                    Console.WriteLine(categorias[i]);
+                }
         }
 
         public bool AgregarAlCarro(int Id_Producto, int Cantidad, int Id_Usuario)
@@ -418,7 +373,7 @@ namespace tp_plataformas_2
                 else
                 {
                     usuarioEncontrado.MiCarro.AgregarProducto(productoEncontrado, Cantidad);
-                    productoEncontrado.Cantidad -= Cantidad;
+
                     sePudoAgregar = true;
 
                     Console.WriteLine("El producto {0} con cantidad {1} se ha añadido al carro del usuario {2}.", productoEncontrado.Nombre, Cantidad, usuarioEncontrado.Nombre);
@@ -578,11 +533,16 @@ namespace tp_plataformas_2
 
         public void MostrarProductoEnPantalla()
         {
-            
-            for (int i = 0; i < productos.Count; i++)
+            productos.Sort();
+
+            foreach (Producto producto in productos)
             {
-                Console.WriteLine(productos[i].ToString());
+                if (producto != null)
+                    Console.WriteLine(producto);
+
             }
+
+
 
         }
 
