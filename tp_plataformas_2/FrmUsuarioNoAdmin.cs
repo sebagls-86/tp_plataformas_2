@@ -15,6 +15,7 @@ namespace tp_plataformas_2
         public FrmUsuarioNoAdmin()
         {
             InitializeComponent();
+
         }
 
         private void cerrarSesionToolStripMenuItem_Click(object sender, EventArgs e)

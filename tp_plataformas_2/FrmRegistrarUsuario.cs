@@ -54,5 +54,10 @@ namespace tp_plataformas_2
         {
 
         }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

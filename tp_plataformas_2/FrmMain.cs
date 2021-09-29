@@ -57,7 +57,7 @@ namespace tp_plataformas_2
                 MessageBox.Show("Usuario detectado = ADMIN");
                 this.Hide();
 
-                FrmPrincipal VtnaPrincipal = new FrmPrincipal();
+                FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm();
                 VtnaPrincipal.Show();
             }else if (usuario.Equals("u") && password.Equals("u"))
             {

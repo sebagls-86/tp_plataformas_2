@@ -73,7 +73,7 @@ namespace tp_plataformas_2
             // mnuSalir
             // 
             this.mnuSalir.Name = "mnuSalir";
-            this.mnuSalir.Size = new System.Drawing.Size(180, 22);
+            this.mnuSalir.Size = new System.Drawing.Size(106, 22);
             this.mnuSalir.Text = "Volver";
             this.mnuSalir.Click += new System.EventHandler(this.mnuSalir_Click);
             // 
@@ -149,6 +149,7 @@ namespace tp_plataformas_2
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(393, 23);
             this.txtNombre.TabIndex = 12;
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
             // txtApellido
             // 
