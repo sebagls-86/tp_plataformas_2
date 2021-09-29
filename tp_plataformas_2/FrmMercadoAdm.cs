@@ -8,19 +8,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace tp_plataformas_2
 {
     public partial class FrmMercadoAdm : Form
     {
+        Mercado mercado = new Mercado();
         public FrmMercadoAdm()
         {
             InitializeComponent();
-            int fila = dataTableCategorias.Rows.Add();
-            dataTableCategorias.Rows[fila].Cells[0].Value = "";
-            dataTableCategorias.Rows[fila].Cells[1].Value = "";
+
+            mercado.AgregarCategoria("ani");
+            mercado.AgregarCategoria("marcos");
+            mercado.AgregarCategoria("seba");
+            mercado.AgregarCategoria("ema");
+
+
+            string[] categorias = new string[10];
+            categorias = mercado.MostrarCategorias();
+
+            for (int i = 0; i < categorias.Length; i++)
+            {
+                int row = i + 1;
+                int fila = dataTableCategorias.Rows.Add();
+                dataTableCategorias.Rows[fila].Cells[0].Value = row;
+                dataTableCategorias.Rows[fila].Cells[1].Value = categorias[i];
+
+            }
+
+
+
+
         }
 
-        
+
 
         private void FrmMercadoAdmin_Load(object sender, EventArgs e)
         {
