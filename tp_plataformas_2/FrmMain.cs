@@ -19,7 +19,7 @@ namespace tp_plataformas_2
 
         private void btnExit(object sender, EventArgs e)
         {
-            Dispose();
+            Application.Exit();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace tp_plataformas_2
 
         private void mnuSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
