@@ -336,19 +336,19 @@ namespace tp_plataformas_2
             return true;
         }
 
-        public string[] MostrarCategorias()
+        public Categoria[] MostrarCategorias()
         {
 
-            string[] muestreo = new string[maxCategorias];
-            for (int i = 0; i < categorias.Length; i++)
-            {
-                if(categorias[i] != null)
-                {
-                    muestreo[i] = categorias[i].Nombre;
-                }
-            }
+            //string[] muestreo = new string[maxCategorias];
+            //for (int i = 0; i < categorias.Length; i++)
+            //{
+            //    if(categorias[i] != null)
+            //    {
+            //        muestreo[i] = categorias[i].Nombre;
+            //    }
+            //}
             
-            return muestreo;
+            return categorias;
         }
 
         public bool AgregarAlCarro(int Id_Producto, int Cantidad, int Id_Usuario)
