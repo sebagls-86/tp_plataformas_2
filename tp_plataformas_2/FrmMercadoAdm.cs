@@ -17,22 +17,10 @@ namespace tp_plataformas_2
         public FrmMercadoAdm()
         {
             InitializeComponent();
-            string[] categorias = new string[10];
 
-            //mercado.AgregarCategoria("ani");
-            //mercado.AgregarCategoria("marcos");
-            //mercado.AgregarCategoria("seba");
-            mercado.AgregarCategoria("ema");
-
-            //categorias = mercado.MostrarCategorias();
-            //for (int i = 0; i < categorias.Length; i++)
-            //{
-            //    int row = i + 1;
-            //    int fila = dataTableCategorias.Rows.Add();
-            //    dataTableCategorias.Rows[fila].Cells[0].Value = row;
-            //    dataTableCategorias.Rows[fila].Cells[1].Value = categorias[i];
-
-            //}
+            //string[] arraydealgo = new string[10];
+            //arraydealgo  = FileManager.ReadFile("categorias");
+            //test.Text = arraydealgo[0];
 
         }
 
@@ -52,15 +40,16 @@ namespace tp_plataformas_2
             panelCategorias.Visible = true;
             panelMuestraCategoria.Visible = true;
 
+            /* --- Titulo Principal ---*/
             lblMainTitle.Text = "Categorias";
 
-            Categoria[] categorias;
+            /* --- DataTableGrid ---*/
+            dataTableCategorias.DataSource = mercado.MostrarCategorias();
+            dataTableCategorias.Width = 300;
 
-            categorias = mercado.MostrarCategorias();
-            dataTableCategorias.DataSource = categorias;
-
+            dataTableCategorias.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataTableCategorias.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             
-          
 
         }
 
@@ -116,18 +105,22 @@ namespace tp_plataformas_2
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             string categoriaNueva = txtboxNombreCategoria.Text;
-            bool istrue = mercado.AgregarCategoria(categoriaNueva);
-            if (istrue)
+            bool istrue;
+            // ATENCION PASAR ESTA LOGICA A AGREGARCATEGORIA
+            if(categoriaNueva != " ")
             {
-                txtboxNombreCategoria.Text = " ";
+                istrue = mercado.AgregarCategoria(categoriaNueva);
+                if (istrue)
+                {
+
+                    FileManager.SaveFileCategorias("categorias", categoriaNueva);
+                    txtboxNombreCategoria.Text = " ";
+
+                }
 
             }
-            //mercado.AgregarCategoria("carnes1");
-            //mercado.AgregarCategoria("carnes2");
-            //mercado.AgregarCategoria("carnes3");
-            //mercado.AgregarCategoria("carnes4");
-            //mercado.AgregarCategoria("carnes5");
             
+                      
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -135,5 +128,7 @@ namespace tp_plataformas_2
             Application.Exit();
 
         }
+
+        
     }
 }

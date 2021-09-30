@@ -15,6 +15,12 @@ namespace tp_plataformas_2
         const int maxCategorias = 10;
 
         int cantCategorias = 0;
+
+        /* --- Variables auxiliares  ---*/
+
+        private string[] contenidos = new string[10];
+
+
         public Mercado()
         {
             productos = new List<Producto>();
@@ -22,38 +28,38 @@ namespace tp_plataformas_2
             compras = new List<Compra>();
             categorias = new Categoria[maxCategorias];
 
+            FileManager.CreateFolder();
+            
+
+            /*---  Categorias leer datos ---*/
+            FileManager.CreateFile("categorias");
+            contenidos = FileManager.ReadFileCategorias();
+            ObtenerCategorias();
+
+
 
         }
 
-
-        private int getCategoriaId() //Generamos el ID autoincremental de Categoria
+        private void ObtenerCategorias()
         {
-
-
-            for (int i = 0; i < categorias.Length; i++)
+            foreach (string contenido in contenidos)
             {
-                if (categorias[i] != null)
+                if (contenido != null && contenido != "")
                 {
-                    cantCategorias++;
-
+                    AgregarCategoria(contenido);
                 }
-            }
-            return cantCategorias + 1;
-        }
 
+            }
+
+        }
         public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)//Creamos producto y lo agregamos al array list de productos
         {
-
 
             if (categorias[idCategoria] != null && categorias[idCategoria].Id == idCategoria)
             {
                 Producto producto = new Producto(idCategoria, nombre, precio, Cantidad, categorias[idCategoria]);
                 this.productos.Add(producto);
             }
-
-
-
-
 
             return true;
         }
@@ -78,8 +84,6 @@ namespace tp_plataformas_2
         }
 
         public bool EliminarProducto(int id)
-
-
         {
             bool encontre = false;
             int i = 0;
@@ -331,14 +335,14 @@ namespace tp_plataformas_2
                     Console.WriteLine(categoria.Nombre);
                 }
 
-
+               
             }
             return true;
         }
 
         public Categoria[] MostrarCategorias()
         {
-    
+            
             return categorias;
         }
 
