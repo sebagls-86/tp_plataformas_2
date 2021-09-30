@@ -37,8 +37,6 @@ namespace tp_plataformas_2
             this.label1 = new System.Windows.Forms.Label();
             this.panelMuestraCategoria = new System.Windows.Forms.Panel();
             this.dataTableCategorias = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnAgregarCategoria = new System.Windows.Forms.Button();
@@ -134,30 +132,12 @@ namespace tp_plataformas_2
             // dataTableCategorias
             // 
             this.dataTableCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataTableCategorias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.Name});
             this.dataTableCategorias.Location = new System.Drawing.Point(199, 105);
             this.dataTableCategorias.Name = "dataTableCategorias";
             this.dataTableCategorias.RowTemplate.Height = 25;
             this.dataTableCategorias.Size = new System.Drawing.Size(535, 306);
             this.dataTableCategorias.TabIndex = 6;
             this.dataTableCategorias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTableCategorias_CellContentClick);
-            // 
-            // Id
-            // 
-            this.Id.FillWeight = 15F;
-            this.Id.HeaderText = "ID";
-            this.Id.MaxInputLength = 2;
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
-            // Name
-            // 
-            this.Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Name.HeaderText = "Nombre";
-            this.Name.Name = "Name";
-            this.Name.ReadOnly = true;
             // 
             // button3
             // 

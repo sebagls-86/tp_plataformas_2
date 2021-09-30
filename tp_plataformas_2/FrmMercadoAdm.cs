@@ -56,32 +56,14 @@ namespace tp_plataformas_2
 
             Categoria[] categorias;
 
-            //mercado.AgregarCategoria("ani");
-            //mercado.AgregarCategoria("marcos");
-            //mercado.AgregarCategoria("seba");
-            //mercado.AgregarCategoria("ema");
             categorias = mercado.MostrarCategorias();
             dataTableCategorias.DataSource = categorias;
+
             
-            //dataTableCategorias.DataSource = categorias[0];
-            //for (int i = 0; i < categorias.Length; i++)
-            //{
-            //    if (categorias[i] != null)
-            //    {
-            //        int row = i + 1;
-            //        int fila = dataTableCategorias.Rows.Add();
-            //        dataTableCategorias.Rows[fila].Cells[0].Value = row;
-            //        dataTableCategorias.Rows[fila].Cells[1].Value = categorias[i];
-
-            //    }
-
-            //}
+          
 
         }
 
-
-
-    
 
         private void btnProductos_Click(object sender, EventArgs e)
         {

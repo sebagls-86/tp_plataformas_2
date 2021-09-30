@@ -254,10 +254,10 @@ namespace tp_plataformas_2
 
         public bool AgregarCategoria(string nombre) //Agregamos una categoria al array de categorias
         {
-            if (getCategoriaId() <= maxCategorias)
+            if (cantCategorias <= maxCategorias)
             {
-
-                int id = getCategoriaId();
+                cantCategorias++;
+                int id = cantCategorias;
 
                 Categoria categoria = new Categoria(id, nombre);
 
@@ -338,16 +338,7 @@ namespace tp_plataformas_2
 
         public Categoria[] MostrarCategorias()
         {
-
-            //string[] muestreo = new string[maxCategorias];
-            //for (int i = 0; i < categorias.Length; i++)
-            //{
-            //    if(categorias[i] != null)
-            //    {
-            //        muestreo[i] = categorias[i].Nombre;
-            //    }
-            //}
-            
+    
             return categorias;
         }
 
