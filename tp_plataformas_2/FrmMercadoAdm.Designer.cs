@@ -31,19 +31,26 @@ namespace tp_plataformas_2
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMercadoAdm));
             this.panelCategorias = new System.Windows.Forms.Panel();
-            this.panelAgregarCategoria = new System.Windows.Forms.Panel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataTableCategorias = new System.Windows.Forms.DataGridView();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.panelUsuarios = new System.Windows.Forms.Panel();
-            this.lblTitleUsuarios = new System.Windows.Forms.Label();
             this.txtboxNombreCategoria = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panelMuestraCategoria = new System.Windows.Forms.Panel();
-            this.dataTableCategorias = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.panelCompras = new System.Windows.Forms.Panel();
             this.lblTitleCompras = new System.Windows.Forms.Label();
-            this.btnAgregarCategoria = new System.Windows.Forms.Button();
+            this.panelUsuarios = new System.Windows.Forms.Panel();
+            this.lblTitleUsuarios = new System.Windows.Forms.Label();
             this.panelProductos = new System.Windows.Forms.Panel();
             this.lblTitleProductos = new System.Windows.Forms.Label();
             this.btnProductos = new System.Windows.Forms.Button();
@@ -59,13 +66,14 @@ namespace tp_plataformas_2
             this.btnLogOut = new System.Windows.Forms.Button();
             this.lblMainTitle = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.test = new System.Windows.Forms.Label();
             this.panelCategorias.SuspendLayout();
-            this.panelAgregarCategoria.SuspendLayout();
-            this.panelUsuarios.SuspendLayout();
-            this.panelMuestraCategoria.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableCategorias)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.panelCompras.SuspendLayout();
+            this.panelUsuarios.SuspendLayout();
             this.panelProductos.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -73,12 +81,9 @@ namespace tp_plataformas_2
             // panelCategorias
             // 
             this.panelCategorias.BackColor = System.Drawing.Color.Transparent;
-            this.panelCategorias.Controls.Add(this.panelAgregarCategoria);
+            this.panelCategorias.Controls.Add(this.tabControl1);
             this.panelCategorias.Controls.Add(this.panelMuestraCategoria);
-            this.panelCategorias.Controls.Add(this.button3);
-            this.panelCategorias.Controls.Add(this.button2);
             this.panelCategorias.Controls.Add(this.panelCompras);
-            this.panelCategorias.Controls.Add(this.btnAgregarCategoria);
             this.panelCategorias.Location = new System.Drawing.Point(181, 65);
             this.panelCategorias.MinimumSize = new System.Drawing.Size(1076, 596);
             this.panelCategorias.Name = "panelCategorias";
@@ -86,21 +91,54 @@ namespace tp_plataformas_2
             this.panelCategorias.TabIndex = 0;
             this.panelCategorias.Visible = false;
             // 
-            // panelAgregarCategoria
+            // tabControl1
             // 
-            this.panelAgregarCategoria.Controls.Add(this.btnAgregar);
-            this.panelAgregarCategoria.Controls.Add(this.panelUsuarios);
-            this.panelAgregarCategoria.Controls.Add(this.txtboxNombreCategoria);
-            this.panelAgregarCategoria.Controls.Add(this.label1);
-            this.panelAgregarCategoria.Location = new System.Drawing.Point(0, 96);
-            this.panelAgregarCategoria.Name = "panelAgregarCategoria";
-            this.panelAgregarCategoria.Size = new System.Drawing.Size(1083, 500);
-            this.panelAgregarCategoria.TabIndex = 8;
-            this.panelAgregarCategoria.Visible = false;
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Location = new System.Drawing.Point(0, 3);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1083, 502);
+            this.tabControl1.TabIndex = 9;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dataTableCategorias);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1075, 474);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Listado";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dataTableCategorias
+            // 
+            this.dataTableCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataTableCategorias.Location = new System.Drawing.Point(208, 81);
+            this.dataTableCategorias.Name = "dataTableCategorias";
+            this.dataTableCategorias.RowTemplate.Height = 25;
+            this.dataTableCategorias.Size = new System.Drawing.Size(535, 274);
+            this.dataTableCategorias.TabIndex = 6;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.btnAgregar);
+            this.tabPage1.Controls.Add(this.txtboxNombreCategoria);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1075, 474);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Agregar";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(509, 228);
+            this.btnAgregar.Location = new System.Drawing.Point(573, 215);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(126, 35);
             this.btnAgregar.TabIndex = 2;
@@ -108,28 +146,9 @@ namespace tp_plataformas_2
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // panelUsuarios
-            // 
-            this.panelUsuarios.Controls.Add(this.lblTitleUsuarios);
-            this.panelUsuarios.Controls.Add(this.panelProductos);
-            this.panelUsuarios.Location = new System.Drawing.Point(0, 0);
-            this.panelUsuarios.Name = "panelUsuarios";
-            this.panelUsuarios.Size = new System.Drawing.Size(1102, 621);
-            this.panelUsuarios.TabIndex = 3;
-            this.panelUsuarios.Visible = false;
-            // 
-            // lblTitleUsuarios
-            // 
-            this.lblTitleUsuarios.AutoSize = true;
-            this.lblTitleUsuarios.Location = new System.Drawing.Point(30, 18);
-            this.lblTitleUsuarios.Name = "lblTitleUsuarios";
-            this.lblTitleUsuarios.Size = new System.Drawing.Size(52, 15);
-            this.lblTitleUsuarios.TabIndex = 1;
-            this.lblTitleUsuarios.Text = "Usuarios";
-            // 
             // txtboxNombreCategoria
             // 
-            this.txtboxNombreCategoria.Location = new System.Drawing.Point(255, 120);
+            this.txtboxNombreCategoria.Location = new System.Drawing.Point(267, 123);
             this.txtboxNombreCategoria.Name = "txtboxNombreCategoria";
             this.txtboxNombreCategoria.Size = new System.Drawing.Size(335, 23);
             this.txtboxNombreCategoria.TabIndex = 1;
@@ -137,48 +156,94 @@ namespace tp_plataformas_2
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(103, 61);
+            this.label1.Location = new System.Drawing.Point(164, 88);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(133, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Agregar categoria panel";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label4);
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Controls.Add(this.label2);
+            this.tabPage3.Controls.Add(this.txtId);
+            this.tabPage3.Controls.Add(this.txtNombre);
+            this.tabPage3.Controls.Add(this.btnModificar);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1075, 474);
+            this.tabPage3.TabIndex = 3;
+            this.tabPage3.Text = "Modificar";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(290, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 15);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "ACA VA UN TITULO";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(167, 109);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 15);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Nombre";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(168, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(18, 15);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "ID";
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(278, 69);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(100, 23);
+            this.txtId.TabIndex = 2;
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(278, 102);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(273, 23);
+            this.txtNombre.TabIndex = 1;
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(565, 202);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(143, 56);
+            this.btnModificar.TabIndex = 0;
+            this.btnModificar.Text = "Aceptar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(1075, 474);
+            this.tabPage4.TabIndex = 4;
+            this.tabPage4.Text = "Eliminar";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // panelMuestraCategoria
             // 
-            this.panelMuestraCategoria.Controls.Add(this.dataTableCategorias);
             this.panelMuestraCategoria.Location = new System.Drawing.Point(0, 96);
             this.panelMuestraCategoria.Name = "panelMuestraCategoria";
             this.panelMuestraCategoria.Size = new System.Drawing.Size(1083, 497);
             this.panelMuestraCategoria.TabIndex = 7;
             this.panelMuestraCategoria.Visible = false;
-            // 
-            // dataTableCategorias
-            // 
-            this.dataTableCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataTableCategorias.Location = new System.Drawing.Point(173, 44);
-            this.dataTableCategorias.Name = "dataTableCategorias";
-            this.dataTableCategorias.RowTemplate.Height = 25;
-            this.dataTableCategorias.Size = new System.Drawing.Size(535, 274);
-            this.dataTableCategorias.TabIndex = 6;
-            this.dataTableCategorias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTableCategorias_CellContentClick);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(494, 27);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(189, 49);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(284, 27);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(189, 49);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // panelCompras
             // 
@@ -198,22 +263,29 @@ namespace tp_plataformas_2
             this.lblTitleCompras.TabIndex = 1;
             this.lblTitleCompras.Text = "Compras";
             // 
-            // btnAgregarCategoria
+            // panelUsuarios
             // 
-            this.btnAgregarCategoria.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarCategoria.Image")));
-            this.btnAgregarCategoria.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregarCategoria.Location = new System.Drawing.Point(157, 27);
-            this.btnAgregarCategoria.Name = "btnAgregarCategoria";
-            this.btnAgregarCategoria.Size = new System.Drawing.Size(106, 49);
-            this.btnAgregarCategoria.TabIndex = 3;
-            this.btnAgregarCategoria.Text = "Agregar";
-            this.btnAgregarCategoria.UseVisualStyleBackColor = true;
-            this.btnAgregarCategoria.Click += new System.EventHandler(this.btnAgregarCategoria_Click);
+            this.panelUsuarios.Controls.Add(this.lblTitleUsuarios);
+            this.panelUsuarios.Location = new System.Drawing.Point(3, 0);
+            this.panelUsuarios.Name = "panelUsuarios";
+            this.panelUsuarios.Size = new System.Drawing.Size(1102, 621);
+            this.panelUsuarios.TabIndex = 3;
+            this.panelUsuarios.Visible = false;
+            // 
+            // lblTitleUsuarios
+            // 
+            this.lblTitleUsuarios.AutoSize = true;
+            this.lblTitleUsuarios.Location = new System.Drawing.Point(30, 18);
+            this.lblTitleUsuarios.Name = "lblTitleUsuarios";
+            this.lblTitleUsuarios.Size = new System.Drawing.Size(52, 15);
+            this.lblTitleUsuarios.TabIndex = 1;
+            this.lblTitleUsuarios.Text = "Usuarios";
             // 
             // panelProductos
             // 
             this.panelProductos.Controls.Add(this.lblTitleProductos);
-            this.panelProductos.Location = new System.Drawing.Point(0, 0);
+            this.panelProductos.Controls.Add(this.panelUsuarios);
+            this.panelProductos.Location = new System.Drawing.Point(178, 575);
             this.panelProductos.Name = "panelProductos";
             this.panelProductos.Size = new System.Drawing.Size(1102, 621);
             this.panelProductos.TabIndex = 1;
@@ -345,22 +417,13 @@ namespace tp_plataformas_2
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // test
-            // 
-            this.test.AutoSize = true;
-            this.test.Location = new System.Drawing.Point(11, 46);
-            this.test.Name = "test";
-            this.test.Size = new System.Drawing.Size(38, 15);
-            this.test.TabIndex = 7;
-            this.test.Text = "label2";
-            // 
             // FrmMercadoAdm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.test);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.panelProductos);
             this.Controls.Add(this.lblMainTitle);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnUsuarios);
@@ -379,14 +442,17 @@ namespace tp_plataformas_2
             this.Text = "Mercado - Administrador";
             this.Load += new System.EventHandler(this.FrmMercadoAdmin_Load);
             this.panelCategorias.ResumeLayout(false);
-            this.panelAgregarCategoria.ResumeLayout(false);
-            this.panelAgregarCategoria.PerformLayout();
-            this.panelUsuarios.ResumeLayout(false);
-            this.panelUsuarios.PerformLayout();
-            this.panelMuestraCategoria.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataTableCategorias)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.panelCompras.ResumeLayout(false);
             this.panelCompras.PerformLayout();
+            this.panelUsuarios.ResumeLayout(false);
+            this.panelUsuarios.PerformLayout();
             this.panelProductos.ResumeLayout(false);
             this.panelProductos.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -417,18 +483,24 @@ namespace tp_plataformas_2
         private System.Windows.Forms.Label lblTitleUsuarios;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Label lblMainTitle;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnAgregarCategoria;
         private System.Windows.Forms.DataGridView dataTableCategorias;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Name;
         private System.Windows.Forms.Panel panelMuestraCategoria;
-        private System.Windows.Forms.Panel panelAgregarCategoria;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.TextBox txtboxNombreCategoria;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label test;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.Button btnModificar;
     }
 }

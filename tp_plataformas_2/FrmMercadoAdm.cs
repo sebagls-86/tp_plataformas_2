@@ -91,16 +91,6 @@ namespace tp_plataformas_2
             FrmMain.Show();
         }
 
-        private void btnAgregarCategoria_Click(object sender, EventArgs e)
-        {
-            panelMuestraCategoria.Visible = false;
-            panelAgregarCategoria.Visible = true;
-        }
-
-        private void dataTableCategorias_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -123,12 +113,19 @@ namespace tp_plataformas_2
                       
         }
 
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            int id = Int32.Parse(txtId.Text);
+            string nuevoNombre = txtNombre.Text;
+            
+            mercado.ModificarCategoria(id, nuevoNombre);
+   
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
 
         }
-
-        
     }
 }

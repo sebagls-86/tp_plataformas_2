@@ -84,7 +84,7 @@ namespace tp_plataformas_2
 
         public static void SaveFileCategorias(string file, string contenido)
         {
-            string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado\";
+            string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
             string fileName = file + ".txt";
             string sourceFile = Path.Combine(sourcePath, fileName);
 
@@ -93,6 +93,41 @@ namespace tp_plataformas_2
 
             archivo.Close();
         }
+        public static void SaveAllData(Categoria[] categorias)
+        {
+
+            string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
+            string fileName = "categorias.txt";
+            string sourceFile = Path.Combine(sourcePath, fileName);
+            //StreamWriter archivo = new StreamWriter(sourceFile, true);
+            string[] contenido = new string[10];
+            int i = 0;
+            foreach (Categoria categoria in categorias)
+            {
+                
+                if(categoria != null)
+                {
+
+                    contenido[i] = categoria.Nombre;
+                }
+                i++;
+                
+            }
+
+            File.WriteAllLines(sourceFile, contenido);
+            //archivo.Close();
+            //string[] lines = { "First line", "Second line", "Third line" };
+            //File.WriteAllLines("WriteLines.txt", lines)
+
+            //string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
+            //string fileName = file + ".txt";
+            //string sourceFile = Path.Combine(sourcePath, fileName);
+
+            //StreamWriter archivo = new StreamWriter(sourceFile, true);
+            //archivo.WriteLine(contenido);
+
+        }
+
     }
 }
 

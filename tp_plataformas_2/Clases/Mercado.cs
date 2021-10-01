@@ -33,7 +33,6 @@ namespace tp_plataformas_2
 
             /*---  Categorias leer datos ---*/
             FileManager.CreateFile("categorias");
-            contenidos = FileManager.ReadFileCategorias();
             ObtenerCategorias();
 
 
@@ -42,6 +41,7 @@ namespace tp_plataformas_2
 
         private void ObtenerCategorias()
         {
+            contenidos = FileManager.ReadFileCategorias();
             foreach (string contenido in contenidos)
             {
                 if (contenido != null && contenido != "")
@@ -289,10 +289,11 @@ namespace tp_plataformas_2
 
         public bool ModificarCategoria(int ID, string Nombre)
         {
-
+            ID = ID - 1;
             if (categorias[ID] != null)
             {
                 categorias[ID].Nombre = Nombre;
+                FileManager.SaveAllData(categorias);
                 Console.WriteLine("Categoria modificada con exito");
             }
             else
