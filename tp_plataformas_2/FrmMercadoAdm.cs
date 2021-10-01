@@ -49,7 +49,12 @@ namespace tp_plataformas_2
 
             dataTableCategorias.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataTableCategorias.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            
+
+            dataTableCeliminar.DataSource = mercado.MostrarCategorias();
+            dataTableCeliminar.Width = 300;
+
+            dataTableCeliminar.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataTableCeliminar.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
         }
 
@@ -95,22 +100,13 @@ namespace tp_plataformas_2
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             string categoriaNueva = txtboxNombreCategoria.Text;
-            bool istrue;
-            // ATENCION PASAR ESTA LOGICA A AGREGARCATEGORIA
-            if(categoriaNueva != " ")
+            if (!categoriaNueva.Equals(""))
             {
-                istrue = mercado.AgregarCategoria(categoriaNueva);
-                if (istrue)
+                if (mercado.AgregarCategoria(categoriaNueva))
                 {
-
-                    FileManager.SaveFileCategorias("categorias", categoriaNueva);
-                    txtboxNombreCategoria.Text = " ";
-
+                    txtboxNombreCategoria.Text = "";
                 }
-
             }
-            
-                      
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -121,11 +117,19 @@ namespace tp_plataformas_2
             mercado.ModificarCategoria(id, nuevoNombre);
    
         }
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            int idEliminado = int.Parse(txtIdEliminar.Text);
+            mercado.EliminarCategoria(idEliminado);
+            
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
 
         }
+
     }
 }

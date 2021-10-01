@@ -270,7 +270,7 @@ namespace tp_plataformas_2
 
                 do
                 {
-                    if (categorias[j] == null)
+                    if (categorias[j] == null || categorias[j].Equals(""))
                     {
                         categorias[j] = categoria;
                         auxiliar = 1;
@@ -279,7 +279,7 @@ namespace tp_plataformas_2
 
                 } while (auxiliar == 0);
 
-
+                FileManager.SaveAllData(categorias);
                 return true;
 
             }
@@ -306,20 +306,25 @@ namespace tp_plataformas_2
         }
 
         public bool EliminarCategoria(int ID)
-
         {
             bool encontre = false;
             int i = 0;
             while (!encontre && i < categorias.Length)
             {
-                encontre = categorias[i].Id == ID;
+                if (categorias[i] != null)
+                {
+                    encontre = categorias[i].Id == ID;
+
+                }
                 if (encontre)
                 {
 
                     categorias[i] = null;
                     Console.WriteLine("Categoria " + ID + " eliminada con éxito!");
+                    FileManager.SaveAllData(categorias);
+                    cantCategorias--;
                 }
-                else
+                
                     i++;
             }
             return encontre;

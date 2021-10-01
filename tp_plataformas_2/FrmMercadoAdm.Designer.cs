@@ -46,6 +46,10 @@ namespace tp_plataformas_2
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnModificar = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataTableCeliminar = new System.Windows.Forms.DataGridView();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtIdEliminar = new System.Windows.Forms.TextBox();
             this.panelMuestraCategoria = new System.Windows.Forms.Panel();
             this.panelCompras = new System.Windows.Forms.Panel();
             this.lblTitleCompras = new System.Windows.Forms.Label();
@@ -72,6 +76,8 @@ namespace tp_plataformas_2
             ((System.ComponentModel.ISupportInitialize)(this.dataTableCategorias)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTableCeliminar)).BeginInit();
             this.panelCompras.SuspendLayout();
             this.panelUsuarios.SuspendLayout();
             this.panelProductos.SuspendLayout();
@@ -230,12 +236,51 @@ namespace tp_plataformas_2
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.dataTableCeliminar);
+            this.tabPage4.Controls.Add(this.btnEliminar);
+            this.tabPage4.Controls.Add(this.label5);
+            this.tabPage4.Controls.Add(this.txtIdEliminar);
             this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(1075, 474);
             this.tabPage4.TabIndex = 4;
             this.tabPage4.Text = "Eliminar";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dataTableCeliminar
+            // 
+            this.dataTableCeliminar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataTableCeliminar.Location = new System.Drawing.Point(55, 119);
+            this.dataTableCeliminar.Name = "dataTableCeliminar";
+            this.dataTableCeliminar.RowTemplate.Height = 25;
+            this.dataTableCeliminar.Size = new System.Drawing.Size(240, 150);
+            this.dataTableCeliminar.TabIndex = 3;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(364, 198);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(142, 37);
+            this.btnEliminar.TabIndex = 2;
+            this.btnEliminar.Text = "button2";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(312, 140);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 15);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Id";
+            // 
+            // txtIdEliminar
+            // 
+            this.txtIdEliminar.Location = new System.Drawing.Point(386, 139);
+            this.txtIdEliminar.Name = "txtIdEliminar";
+            this.txtIdEliminar.Size = new System.Drawing.Size(100, 23);
+            this.txtIdEliminar.TabIndex = 0;
             // 
             // panelMuestraCategoria
             // 
@@ -449,6 +494,9 @@ namespace tp_plataformas_2
             this.tabPage1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTableCeliminar)).EndInit();
             this.panelCompras.ResumeLayout(false);
             this.panelCompras.PerformLayout();
             this.panelUsuarios.ResumeLayout(false);
@@ -502,5 +550,9 @@ namespace tp_plataformas_2
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtIdEliminar;
+        private System.Windows.Forms.DataGridView dataTableCeliminar;
     }
 }
