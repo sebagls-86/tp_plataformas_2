@@ -31,17 +31,26 @@ namespace tp_plataformas_2
         private void mnuVolver_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FrmMain VtnaMain = new FrmMain();
-            VtnaMain.Show();
+            FrmPrincipal VtnaPrincipal = new FrmPrincipal();
+            VtnaPrincipal.Show();
         }
 
         private void btnContinuar_Click(object sender, EventArgs e)
         {
-            string opcionSeleccionada = cboAdministracion.Text;            
+            string opcionSeleccionada = cboAdministracion.Text;
 
-            Mercado mercado = new Mercado();
+            cargandoMain.Minimum = 1;
+            cargandoMain.Maximum = 100;
+            cargandoMain.Step = 1;
 
-          if (opcionSeleccionada.Equals("Alta de categoría"))
+            for (int i = 0; i < 100; i++)
+            {
+                cargandoMain.PerformStep();
+            }
+
+
+
+            if (opcionSeleccionada.Equals("Alta de categoría"))
             {
                 MessageBox.Show(opcionSeleccionada);
             }else if (opcionSeleccionada.Equals("Baja de categoría"))
@@ -99,5 +108,9 @@ namespace tp_plataformas_2
 
         }
 
+        private void mnuMenu_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

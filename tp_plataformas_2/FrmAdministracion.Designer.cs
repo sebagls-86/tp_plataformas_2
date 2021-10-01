@@ -32,10 +32,10 @@ namespace tp_plataformas_2
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuVolver = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAcercaDe = new System.Windows.Forms.ToolStripMenuItem();
             this.btnContinuar = new System.Windows.Forms.Button();
             this.cboAdministracion = new System.Windows.Forms.ComboBox();
+            this.cargandoMain = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,11 +52,11 @@ namespace tp_plataformas_2
             // mnuMenu
             // 
             this.mnuMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuVolver,
-            this.mnuSalir});
+            this.mnuVolver});
             this.mnuMenu.Name = "mnuMenu";
             this.mnuMenu.Size = new System.Drawing.Size(50, 20);
             this.mnuMenu.Text = "Menu";
+            this.mnuMenu.Click += new System.EventHandler(this.mnuMenu_Click);
             // 
             // mnuVolver
             // 
@@ -64,13 +64,6 @@ namespace tp_plataformas_2
             this.mnuVolver.Size = new System.Drawing.Size(106, 22);
             this.mnuVolver.Text = "Volver";
             this.mnuVolver.Click += new System.EventHandler(this.mnuVolver_Click);
-            // 
-            // mnuSalir
-            // 
-            this.mnuSalir.Name = "mnuSalir";
-            this.mnuSalir.Size = new System.Drawing.Size(106, 22);
-            this.mnuSalir.Text = "Salir";
-            this.mnuSalir.Click += new System.EventHandler(this.mnuSalir_Click_1);
             // 
             // mnuAcercaDe
             // 
@@ -112,11 +105,19 @@ namespace tp_plataformas_2
             this.cboAdministracion.TabIndex = 4;
             this.cboAdministracion.Text = "Seleccione una opcion";
             // 
+            // cargandoMain
+            // 
+            this.cargandoMain.Location = new System.Drawing.Point(0, 132);
+            this.cargandoMain.Name = "cargandoMain";
+            this.cargandoMain.Size = new System.Drawing.Size(429, 23);
+            this.cargandoMain.TabIndex = 21;
+            // 
             // FrmAdministracion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(429, 136);
+            this.ClientSize = new System.Drawing.Size(429, 155);
+            this.Controls.Add(this.cargandoMain);
             this.Controls.Add(this.cboAdministracion);
             this.Controls.Add(this.btnContinuar);
             this.Controls.Add(this.menuStrip1);
@@ -140,5 +141,6 @@ namespace tp_plataformas_2
         private System.Windows.Forms.ToolStripMenuItem mnuAcercaDe;
         private System.Windows.Forms.Button btnContinuar;
         private System.Windows.Forms.ComboBox cboAdministracion;
+        private System.Windows.Forms.ProgressBar cargandoMain;
     }
 }
