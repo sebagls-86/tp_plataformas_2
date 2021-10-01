@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace tp_plataformas_2
 {
+
+
     class Mercado
     {
         public List<Producto> productos { get; set; }
@@ -19,6 +21,11 @@ namespace tp_plataformas_2
         /* --- Variables auxiliares  ---*/
 
         private string[] contenidos = new string[10];
+
+        public static void Main(String[] args)
+        {
+
+        }
 
 
         public Mercado()
@@ -371,8 +378,8 @@ namespace tp_plataformas_2
             }
             else
             {
-                usuarioEncontrado = usuarios.Find(usuario => usuario.Id == Id_Usuario);
-                productoEncontrado = productos.Find(producto => producto.Id == Id_Producto);
+                usuarioEncontrado = usuarios[Id_Usuario];
+                productoEncontrado = productos[Id_Producto];
                 if (Cantidad > productoEncontrado.Cantidad)
                 {
                     Console.WriteLine("La cantidad que se quiere agregar es mayor al stock disponible.");
@@ -409,23 +416,20 @@ namespace tp_plataformas_2
             }
             else
             {
-                usuarioEncontrado = usuarios.Find(usuario => usuario.Id == Id_Usuario);
-                productoEncontrado = productos.Find(producto => producto.Id == Id_Producto);
+                usuarioEncontrado = usuarios[Id_Usuario];
+                productoEncontrado = productos[Id_Producto];
                 if (!usuarioEncontrado.MiCarro.Productos.ContainsKey(productoEncontrado))
                 {
                     Console.WriteLine("El producto {0} no se encuentra en el carro de {1}.", productoEncontrado, usuarioEncontrado.Nombre);
                 }
                 else if (usuarioEncontrado.MiCarro.Productos[productoEncontrado] < Cantidad || Cantidad == 0)
                 {
-                    productoEncontrado.Cantidad += usuarioEncontrado.MiCarro.Productos[productoEncontrado];
                     usuarioEncontrado.MiCarro.RemoverProducto(productoEncontrado, Cantidad);
                     Console.WriteLine("El producto {0} ha sido removido en su totalidad del carro del usuario {1}.", productoEncontrado.Nombre, usuarioEncontrado.Nombre);
                 }
                 else
                 {
-
                     usuarioEncontrado.MiCarro.RemoverProducto(productoEncontrado, Cantidad);
-                    productoEncontrado.Cantidad += Cantidad;
                     sePudoDisminuir = true;
                     Console.WriteLine("El producto {0} con cantidad {1} se ha removido del carro del usuario {2}.", productoEncontrado.Nombre, Cantidad, usuarioEncontrado.Nombre);
 
@@ -449,13 +453,7 @@ namespace tp_plataformas_2
             }
             else
             {
-                usuarioEncontrado = usuarios.Find(usuario => usuario.Id == Id_Usuario);
-
-                foreach (Producto producto in usuarioEncontrado.MiCarro.Productos.Keys)
-                {
-                    productos.Find(product => product.Id == producto.Id).Cantidad += usuarioEncontrado.MiCarro.Productos[producto];
-                }
-                usuarios.Find(usuario => usuario.Id == Id_Usuario).MiCarro.Vaciar();
+                usuarioEncontrado = usuarios[Id_Usuario].MiCarro.Vaciar();
                 Console.WriteLine("Se ha vaciado el carro correctamente.");
                 sePudoVaciar = true;
             }
