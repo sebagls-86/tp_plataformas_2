@@ -93,7 +93,7 @@ namespace tp_plataformas_2
 
             archivo.Close();
         }
-        public static void SaveAllData(Categoria[] categorias)
+        public static void SaveArrayCategorias(Categoria[] categorias)
         {
 
             string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
@@ -104,19 +104,71 @@ namespace tp_plataformas_2
             int i = 0;
             foreach (Categoria categoria in categorias)
             {
-                
-                if(categoria != null)
-                {
 
-                    contenido[i] = categoria.Nombre + 5;
-                    Console.WriteLine(contenido[i]);
+                if (categoria != null)
+                {
+                    if (categoria.Nombre != null)
+                    {
+                        contenido[i] = categoria.Nombre;
+                    }
+                    else
+                    {
+                        contenido[i] = " ";
+                    }
+                    //contenido[i] = categoria.Nombre;
+                    //Console.WriteLine(contenido[i]);
                 }
+                else
+                {
+                    contenido[i] = " ";
+                }
+
                 i++;
-                
+
             }
 
             File.WriteAllLines(sourceFile, contenido);
-  
+
+
+        }
+
+
+        public static void SaveListProductos(List<Producto> listaProducto)
+        {
+            string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
+            string fileName = "productos.txt";
+            string sourceFile = Path.Combine(sourcePath, fileName);
+
+            //List<Producto> contenido = new List<Producto>();
+            string[] contenido = new string[1000];
+            //string datoGuardar ;
+            int i = 0;
+            foreach (Producto producto in listaProducto)
+            {
+                contenido[i] = producto.ToString();
+                i++;
+            }
+
+            File.WriteAllLines(sourceFile, contenido);
+
+        }
+        public static void SaveListClientes(List<Usuario> listaUsuarios)
+        {
+            string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
+            string fileName = "productos.txt";
+            string sourceFile = Path.Combine(sourcePath, fileName);
+
+            //List<Producto> contenido = new List<Producto>();
+            string[] contenido = new string[1000];
+            //string datoGuardar ;
+            int i = 0;
+            foreach (Usuario usuario in listaUsuarios)
+            {
+                contenido[i] = usuario.ToString();
+                i++;
+            }
+
+            File.WriteAllLines(sourceFile, contenido);
 
         }
 

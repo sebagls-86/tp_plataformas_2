@@ -172,24 +172,25 @@ namespace tp_plataformas_2
         }
 
 
-        public bool AgregarUsuario(int dni, String nombre, String apellido, String mail, String password, int cuil, bool esEmpresa)
+        public bool AgregarUsuario(int dni, String nombre, String apellido, String mail, String password, int cuil, bool esEmpresa, bool esAdmin)
         {
 
             int id = usuarios.Count + 1;
             Carro micarro = new Carro(id);
             if (esEmpresa)
             {
-                Usuario empresa = new Empresa(id, dni, nombre, apellido, mail, password, micarro, cuil);
+                Usuario empresa = new Empresa(id, dni, nombre, apellido, mail, password, micarro, cuil, esAdmin);
                 usuarios.Add(empresa);
                 Console.WriteLine("La empresa fue creada con exito");
             }
             else
             {
-                Usuario cliente = new ClienteFinal(id, dni, nombre, apellido, mail, password, micarro, cuil);
+                Usuario cliente = new ClienteFinal(id, dni, nombre, apellido, mail, password, micarro, cuil, esAdmin);
                 usuarios.Add(cliente);
                 Console.WriteLine("Usuario creado con exito");
             }
 
+            FileManager.SaveListClientes(usuarios);
             return true;
 
         }
@@ -599,9 +600,54 @@ namespace tp_plataformas_2
 
             }
 
+        }
+
+
+        public int IniciarSesion(int DNI, string clave)
+        {
+            bool Inicia = false;
+            int Id = -1;
+            int i = 0;
+            while (!Inicia && i < usuarios.Count)
+            {
+                Inicia = usuarios[i].Dni == DNI && usuarios[i].Password == clave;
+                if (Inicia)
+                {
+                    Id = usuarios[i].Id;
+                }
+                
+                    i++;
+            }
+            return Id;
 
 
         }
 
+        public bool esAdmin(int id) {
+
+            bool esAdmin = false;
+
+            int i = 0;
+            while (!esAdmin && i < usuarios.Count)
+            {
+                
+                if (esAdmin = usuarios[i].Id == id && usuarios[i].EsAdmin == true)
+                {
+                    esAdmin = true;
+                }
+                else if (esAdmin = usuarios[i].Id == id && usuarios[i].EsAdmin == false)
+                { 
+                   esAdmin = false;
+
+                }
+               
+                    i++;
+                
+            }
+            return esAdmin;
+
+          
+        }
+            
     }
 }
