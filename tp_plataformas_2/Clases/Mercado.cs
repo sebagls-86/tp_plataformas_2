@@ -260,28 +260,44 @@ namespace tp_plataformas_2
             }
         }
 
+        private bool BuscarCategoria(int ID)
+        {
+            foreach(Categoria categoria in categorias)
+            {
+                if(categoria == null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public bool AgregarCategoria(string nombre) //Agregamos una categoria al array de categorias
         {
             if (cantCategorias <= maxCategorias)
+
             {
                 cantCategorias++;
                 int id = cantCategorias;
-
-                Categoria categoria = new Categoria(id, nombre);
-
-                int auxiliar = 0;
-                int j = 0;
-
-                do
+                if (BuscarCategoria(id))
                 {
-                    if (categorias[j] == null || categorias[j].Equals(""))
-                    {
-                        categorias[j] = categoria;
-                        auxiliar = 1;
-                    }
-                    j++;
+                    Categoria categoria = new Categoria(id, nombre);
 
-                } while (auxiliar == 0);
+                    int auxiliar = 0;
+                    int j = 0;
+
+                    do
+                    {
+                        if (categorias[j] == null || categorias[j].Equals(""))
+                        {
+                            categorias[j] = categoria;
+                            auxiliar = 1;
+                        }
+                        j++;
+
+                    } while (auxiliar == 0);
+                }
+
+               
 
                 FileManager.SaveAllData(categorias);
                 return true;

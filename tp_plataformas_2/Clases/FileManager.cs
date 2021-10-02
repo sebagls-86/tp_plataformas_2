@@ -108,23 +108,15 @@ namespace tp_plataformas_2
                 if(categoria != null)
                 {
 
-                    contenido[i] = categoria.Nombre;
+                    contenido[i] = categoria.Nombre + 5;
+                    Console.WriteLine(contenido[i]);
                 }
                 i++;
                 
             }
 
             File.WriteAllLines(sourceFile, contenido);
-            //archivo.Close();
-            //string[] lines = { "First line", "Second line", "Third line" };
-            //File.WriteAllLines("WriteLines.txt", lines)
-
-            //string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
-            //string fileName = file + ".txt";
-            //string sourceFile = Path.Combine(sourcePath, fileName);
-
-            //StreamWriter archivo = new StreamWriter(sourceFile, true);
-            //archivo.WriteLine(contenido);
+  
 
         }
 

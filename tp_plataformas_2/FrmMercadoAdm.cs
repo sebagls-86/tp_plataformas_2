@@ -18,9 +18,7 @@ namespace tp_plataformas_2
         {
             InitializeComponent();
 
-            //string[] arraydealgo = new string[10];
-            //arraydealgo  = FileManager.ReadFile("categorias");
-            //test.Text = arraydealgo[0];
+            
 
         }
 
@@ -28,7 +26,7 @@ namespace tp_plataformas_2
 
         private void FrmMercadoAdmin_Load(object sender, EventArgs e)
         {
-            lblMainTitle.Text = "";
+            lblMainTitle.Text = "AMB Mercado";
         }
         
 
@@ -38,7 +36,7 @@ namespace tp_plataformas_2
             panelUsuarios.Visible = false;
             panelProductos.Visible = false;
             panelCategorias.Visible = true;
-            panelMuestraCategoria.Visible = true;
+            //panelMuestraCategoria.Visible = true;
 
             /* --- Titulo Principal ---*/
             lblMainTitle.Text = "Categorias";
@@ -111,25 +109,75 @@ namespace tp_plataformas_2
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            int id = Int32.Parse(txtId.Text);
-            string nuevoNombre = txtNombre.Text;
+            int id;
+            bool isParsable = int.TryParse(txtIDCategoriaModificar.Text, out id);
+            if (isParsable)
+            {
+                string nuevoNombre = txtNombreCategoriaModificar.Text;
+                mercado.ModificarCategoria(id, nuevoNombre);
+
+            }
             
-            mercado.ModificarCategoria(id, nuevoNombre);
    
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             int idEliminado = int.Parse(txtIdEliminar.Text);
             mercado.EliminarCategoria(idEliminado);
-            
+           
+
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            
 
         }
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void lblMainTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Plataformas de Desarrollo");
+        }
+
+        private void kimAnastaciaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelCompras_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tabPage5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
