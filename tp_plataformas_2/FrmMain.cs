@@ -64,8 +64,8 @@ namespace tp_plataformas_2
                 MessageBox.Show("¡Gracias por su visita!");
                 this.Hide();
 
-                FrmUsuarioNoAdmin VtnasuarioNoAdmin = new FrmUsuarioNoAdmin();
-                VtnasuarioNoAdmin.Show();
+                FrmCliente VtnCliente = new FrmCliente();
+                VtnCliente.Show();
             }
             else
             {
