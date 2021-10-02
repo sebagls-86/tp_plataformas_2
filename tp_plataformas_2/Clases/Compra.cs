@@ -7,12 +7,16 @@ namespace tp_plataformas_2
     class Compra : IComparable<Compra>
     {
         public int Id { get; set; }
-        Usuario Comprador;
-        Dictionary<Producto, int> Productos { get; set; }
+        public Usuario Comprador;
+        public Dictionary<Producto, int> Productos { get; set; }
         public Double Total { get; set; }
 
-        public Compra(int Id, Usuario usuario, Producto producto, double total)
+        public Compra(int _Id, Usuario usuario, Dictionary<Producto, int> productos, Double total)
         {
+            Id = _Id;
+            Comprador = usuario;
+            Productos = productos;
+            Total = total;
         }
 
         public int CompareTo(Compra other)
