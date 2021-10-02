@@ -152,7 +152,7 @@ namespace tp_plataformas_2
             File.WriteAllLines(sourceFile, contenido);
 
         }
-        public static void SaveListClientes(List<Usuario> listaUsuarios)
+        public static void SaveListUsuarios(List<Usuario> listaUsuarios)
         {
             string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
             string fileName = "usuarios.txt";
@@ -172,7 +172,36 @@ namespace tp_plataformas_2
 
         }
 
+        public static string[] ReadFileUsuarios()
+        {
+            string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
+
+            string fileName = "usuarios.txt";
+            string sourceFile = Path.Combine(sourcePath, fileName);
+
+            string line;
+
+            string[] contenido = new string[1000];
+
+            if (File.Exists(sourceFile))
+            {
+                StreamReader archivo = new StreamReader(sourceFile);
+                int counter = 0;
+                while ((line = archivo.ReadLine()) != null)
+                {
+                    contenido[counter] = line;
+                    //System.Console.WriteLine(line);
+                    counter++;
+                }
+
+                archivo.Close();
+
+            }
+            return contenido;
+        }
     }
+
+
 }
 
 
