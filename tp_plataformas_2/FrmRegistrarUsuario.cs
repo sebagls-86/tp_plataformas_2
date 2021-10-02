@@ -48,17 +48,24 @@ namespace tp_plataformas_2
            
             string nombre = txtNombre.Text;
             string apellido = txtApellido.Text;
-            string tipoUsuario = txtDni.Text;
             string cuil = txtCuil.Text;
             string mail = txtMail.Text;
             string password = txtPassword.Text;
 
+            int tipoUsuario = 0;
 
+            if (radioButton1.Checked) {
 
+                tipoUsuario = 2;
+
+             }else if (radioButton2.Checked)
+            {
+                tipoUsuario = 3;
+            }
 
             try
             {
-                if (nombre == "" || apellido == "" || cuil == "" || mail == "" || password == "" || tipoUsuario == "")
+                if (nombre == "" || apellido == "" || cuil == "" || mail == "" || password == "")
 
                 {
                     throw new Excepciones("Por favor complete todos los campos");
@@ -71,11 +78,11 @@ namespace tp_plataformas_2
                     try
                     {
                         int cuitI = Int32.Parse(cuil);
-                        int tipoUsuarioI = Int32.Parse(tipoUsuario);
+                        
 
 
 
-                        mercado.AgregarUsuario(cuitI, nombre, apellido, mail, password, tipoUsuarioI);
+                        mercado.AgregarUsuario(cuitI, nombre, apellido, mail, password, tipoUsuario);
                         
                         MessageBox.Show("Usuario creado con exito");
 
@@ -88,7 +95,7 @@ namespace tp_plataformas_2
                     catch (FormatException)
                     {
 
-                        MessageBox.Show("El cuit y tipo de usuario deben ser numericos");
+                        MessageBox.Show("El cuit debe ser numerico");
                     }
 
                 }
