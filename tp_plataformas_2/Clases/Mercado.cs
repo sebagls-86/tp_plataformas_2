@@ -171,61 +171,39 @@ namespace tp_plataformas_2
         }
 
 
-        public bool AgregarUsuario(int dni, String nombre, String apellido, String mail, String password, int cuil, bool esEmpresa, bool esAdmin)
+        public bool AgregarUsuario(int cuil, String nombre, String apellido, String mail, String password, int tipoUsuario)
         {
 
             int id = usuarios.Count + 1;
             Carro micarro = new Carro(id);
-            if (esEmpresa)
-            {
-                Usuario empresa = new Empresa(id, dni, nombre, apellido, mail, password, micarro, cuil, esAdmin);
-                usuarios.Add(empresa);
-                FileManager.SaveListClientes(usuarios);
+           
+                Usuario usuario = new Usuario(id, cuil, nombre, apellido, mail, password, micarro, tipoUsuario);
+                usuarios.Add(usuario);
+                FileManager.SaveListUsuarios(usuarios);
                 Console.WriteLine("La empresa fue creada con exito");
-            }
-            else
-            {
-                Usuario cliente = new ClienteFinal(id, dni, nombre, apellido, mail, password, micarro, cuil, esAdmin);
-                usuarios.Add(cliente);
-                FileManager.SaveListClientes(usuarios);
-                Console.WriteLine("Usuario creado con exito");
-            }
+            
 
             
             
             return true;
 
         }
-        public bool ModificarUsuario(int ID, int DNI, string Nombre, string Apellido, string Mail, string Password, int CUIT_CUIL, bool EsEmpresa)
+        public bool ModificarUsuario(int ID, int cuil, String nombre, String apellido, String mail, String password, int tipoUsuario)
         {
 
 
             if (usuarios[ID] != null)
             {
-                usuarios[ID].Nombre = Nombre;
-                usuarios[ID].Apellido = Apellido;
-                usuarios[ID].Dni = DNI;
-                usuarios[ID].Mail = Mail;
-                usuarios[ID].Password = Password;
-                if (!EsEmpresa)
-                {
-                    ClienteFinal c = (ClienteFinal)usuarios[ID];
-                    c.Cuil = CUIT_CUIL;
-
-                    Console.WriteLine("Usuario modificado con éxito\n" +
-                                        " " + Nombre + " " + Apellido + " " + Mail + " " + Password + " " + DNI + " " + CUIT_CUIL);
-                }
-                else
-                {
-                    Empresa c = (Empresa)usuarios[ID];
-                    c.Cuit = CUIT_CUIL;
-                    Console.WriteLine("Usuario modificado con éxito\n" +
-                                        " " + Nombre + " " + Apellido + " " + Mail + " " + Password + " " + DNI + " " + CUIT_CUIL);
-                }
+                usuarios[ID].Nombre = nombre;
+                usuarios[ID].Apellido = apellido;
+                usuarios[ID].Cuil = cuil;
+                usuarios[ID].Mail = mail;
+                usuarios[ID].Password = password;
+                
             }
             else
             {
-                Console.WriteLine("Usuario no encontrado");
+                return false;
             }
 
 
@@ -238,13 +216,13 @@ namespace tp_plataformas_2
         {
             bool encontre = false;
             int i = 0;
-            while (!encontre && i < productos.Count)
+            while (!encontre && i < usuarios.Count)
             {
-                encontre = productos[i].Id == id;
+                encontre = usuarios[i].Id == id;
                 if (encontre)
                 {
 
-                    productos.Remove(productos[i]);
+                    usuarios.Remove(usuarios[i]);
                 }
                 else
                     i++;
@@ -259,7 +237,7 @@ namespace tp_plataformas_2
             for (int i = 0; i < usuarios.Count; i++)
             {
                 usuarios.Sort();
-                Console.WriteLine(usuarios[i].Id + "-" + usuarios[i].Nombre + "-" + usuarios[i].Mail + "-" + usuarios[i].Dni);
+                
             }
         }
 
@@ -498,10 +476,9 @@ namespace tp_plataformas_2
                 {
                     precioTotal += producto.Precio;
                 }
-                if(usuarioEncontrado is ClienteFinal || usuarioEncontrado is Empresa)
-                {
+               
                     precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal,IVA);
-                }
+                
                 Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos); 
                 Compra compra = new Compra(compras.Count + 1,usuarioEncontrado,productosCompra,precioTotal);
                 compras.Add(compra);
@@ -591,28 +568,22 @@ namespace tp_plataformas_2
         }
 
 
-        public void MostrarProductoEnPantalla()
+        public List<Producto> MostrarProductoEnPantalla()
         {
             productos.Sort();
 
-            foreach (Producto producto in productos)
-            {
-                if (producto != null)
-                    Console.WriteLine(producto);
-
-            }
-
+            return productos;
         }
 
 
-        public int IniciarSesion(int DNI, string clave)
+        public int IniciarSesion(int cuil, string clave)
         {
             bool Inicia = false;
             int Id = -1;
             int i = 0;
             while (!Inicia && i < usuarios.Count)
             {
-                Inicia = usuarios[i].Dni == DNI && usuarios[i].Password == clave;
+                Inicia = usuarios[i].Cuil == cuil && usuarios[i].Password == clave;
                 if (Inicia)
                 {
                     Id = usuarios[i].Id;
@@ -633,11 +604,11 @@ namespace tp_plataformas_2
             while (!esAdmin && i < usuarios.Count)
             {
                 
-                if (esAdmin = usuarios[i].Id == id && usuarios[i].EsAdmin == true)
+                if (esAdmin = usuarios[i].Id == id && usuarios[i].TipoUsuario == 1)
                 {
                     esAdmin = true;
                 }
-                else if (esAdmin = usuarios[i].Id == id && usuarios[i].EsAdmin == false)
+                else if (esAdmin = usuarios[i].Id == id && usuarios[i].TipoUsuario != 1)
                 { 
                    esAdmin = false;
 
