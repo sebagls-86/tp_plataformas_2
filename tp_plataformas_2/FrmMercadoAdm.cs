@@ -26,7 +26,7 @@ namespace tp_plataformas_2
 
         private void FrmMercadoAdmin_Load(object sender, EventArgs e)
         {
-            lblMainTitle.Text = "";
+            lblMainTitle.Text = "AMB Mercado";
         }
         
 
@@ -36,7 +36,7 @@ namespace tp_plataformas_2
             panelUsuarios.Visible = false;
             panelProductos.Visible = false;
             panelCategorias.Visible = true;
-            panelMuestraCategoria.Visible = true;
+            //panelMuestraCategoria.Visible = true;
 
             /* --- Titulo Principal ---*/
             lblMainTitle.Text = "Categorias";
@@ -110,10 +110,10 @@ namespace tp_plataformas_2
         private void btnModificar_Click(object sender, EventArgs e)
         {
             int id;
-            bool isParsable = int.TryParse(txtId.Text, out id);
+            bool isParsable = int.TryParse(txtIDCategoriaModificar.Text, out id);
             if (isParsable)
             {
-                string nuevoNombre = txtNombre.Text;
+                string nuevoNombre = txtNombreCategoriaModificar.Text;
                 mercado.ModificarCategoria(id, nuevoNombre);
 
             }
@@ -138,6 +138,46 @@ namespace tp_plataformas_2
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void lblMainTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Plataformas de Desarrollo");
+        }
+
+        private void kimAnastaciaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelCompras_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tabPage5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
