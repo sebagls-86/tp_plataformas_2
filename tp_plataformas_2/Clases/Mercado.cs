@@ -40,6 +40,7 @@ namespace tp_plataformas_2
             FileManager.CreateFile("usuarios");
 
             ObtenerCategorias();
+            ReadFileUsuarios();
         }
 
         private void ObtenerCategorias()
@@ -50,6 +51,30 @@ namespace tp_plataformas_2
                 if (contenido != null && contenido != "")
                 {
                     AgregarCategoria(contenido);
+                }
+
+            }
+
+        }
+        private void ReadFileUsuarios()
+        {
+            contenidos = FileManager.ReadFileUsuarios();
+            char delimiterChars = '|';
+
+            foreach (string contenido in contenidos)
+            {
+                if (contenido != null && contenido != "")
+                {
+                    string[] propiedades = contenido.Split(delimiterChars);
+
+                    
+                    int cuil = int.Parse(propiedades[1]);
+                    string nombre = propiedades[2];
+                    string apellido = propiedades[3];
+                    string mail = propiedades[4];
+                    string password = propiedades[5];
+                    int tipoUsuario = int.Parse(propiedades[6]);
+                    AgregarUsuario(cuil, nombre, apellido, mail, password, tipoUsuario);
                 }
 
             }

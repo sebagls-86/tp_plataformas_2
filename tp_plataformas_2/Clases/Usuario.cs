@@ -35,9 +35,7 @@ namespace tp_plataformas_2
 
         public override string ToString()
         {
-            return $"{Id} {"-"} {Cuil}{"-"}{Nombre}{"-"}" +
-                $"{Apellido} {"-"} {Mail} {"-"} {Password}" +
-                $"{"-"} {TipoUsuario}";
+            return $"{Id}|{Cuil}|{Nombre}|{Apellido}|{Mail}|{Password}|{TipoUsuario}";
         }
     }
 }

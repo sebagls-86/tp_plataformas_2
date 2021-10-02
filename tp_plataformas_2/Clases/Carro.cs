@@ -102,7 +102,7 @@ namespace tp_plataformas_2
 
         public override string ToString()
         {
-            return $"{Id} {"-"} {Productos}";
+            return $"{Id}|{Productos}";
         }
     }
 }
