@@ -155,7 +155,7 @@ namespace tp_plataformas_2
         public static void SaveListClientes(List<Usuario> listaUsuarios)
         {
             string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
-            string fileName = "productos.txt";
+            string fileName = "usuarios.txt";
             string sourceFile = Path.Combine(sourcePath, fileName);
 
             //List<Producto> contenido = new List<Producto>();

@@ -34,13 +34,12 @@ namespace tp_plataformas_2
 
             FileManager.CreateFolder();
             
-
-            /*---  Categorias leer datos ---*/
             FileManager.CreateFile("categorias");
+            FileManager.CreateFile("productos");
+            FileManager.CreateFile("compras");
+            FileManager.CreateFile("usuarios");
+
             ObtenerCategorias();
-
-
-
         }
 
         private void ObtenerCategorias()
@@ -181,16 +180,19 @@ namespace tp_plataformas_2
             {
                 Usuario empresa = new Empresa(id, dni, nombre, apellido, mail, password, micarro, cuil, esAdmin);
                 usuarios.Add(empresa);
+                FileManager.SaveListClientes(usuarios);
                 Console.WriteLine("La empresa fue creada con exito");
             }
             else
             {
                 Usuario cliente = new ClienteFinal(id, dni, nombre, apellido, mail, password, micarro, cuil, esAdmin);
                 usuarios.Add(cliente);
+                FileManager.SaveListClientes(usuarios);
                 Console.WriteLine("Usuario creado con exito");
             }
 
-            FileManager.SaveListClientes(usuarios);
+            
+            
             return true;
 
         }
@@ -300,7 +302,7 @@ namespace tp_plataformas_2
 
                
 
-                FileManager.SaveAllData(categorias);
+                FileManager.SaveArrayCategorias(categorias);
                 return true;
 
             }
@@ -314,7 +316,7 @@ namespace tp_plataformas_2
             if (categorias[ID] != null)
             {
                 categorias[ID].Nombre = Nombre;
-                FileManager.SaveAllData(categorias);
+                FileManager.SaveArrayCategorias(categorias);
                 Console.WriteLine("Categoria modificada con exito");
             }
             else
@@ -342,7 +344,7 @@ namespace tp_plataformas_2
 
                     categorias[i] = null;
                     Console.WriteLine("Categoria " + ID + " eliminada con éxito!");
-                    FileManager.SaveAllData(categorias);
+                    FileManager.SaveArrayCategorias(categorias);
                     cantCategorias--;
                 }
                 
