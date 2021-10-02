@@ -6,7 +6,7 @@ namespace tp_plataformas_2
     {
         public int Cuit { get; set; }
 
-        public Empresa(int id, int dni, String nombre, String apellido, String mail, String password, Carro carro, int cuil) : base(id, dni, nombre, apellido, mail, password, carro)
+        public Empresa(int id, int dni, String nombre, String apellido, String mail, String password, Carro carro, int cuil, bool esAdmin) : base(id, dni, nombre, apellido, mail, password, carro, esAdmin)
         {
             Cuit = cuil;
         }

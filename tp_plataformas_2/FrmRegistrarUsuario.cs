@@ -7,11 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using tp_plataformas_2.Clases;
+
 
 namespace tp_plataformas_2
 {
     public partial class FrmRegistrarUsuario : Form
     {
+        Mercado mercado = new Mercado();
+
         public FrmRegistrarUsuario()
         {
             InitializeComponent();
@@ -40,6 +44,8 @@ namespace tp_plataformas_2
                 cargandoMain.PerformStep();
             }
 
+            
+           
             string nombre = txtNombre.Text;
             string apellido = txtApellido.Text;
             string dni = txtDni.Text;
@@ -47,8 +53,55 @@ namespace tp_plataformas_2
             string mail = txtMail.Text;
             string password = txtPassword.Text;
 
-            MessageBox.Show("Usuario creado con exito");
-        }
+
+
+
+            try
+            {
+                if (nombre == "" || apellido == "" || dni == "" || cuil == "" || mail == "" || password == "")
+
+                {
+                    throw new Excepciones("Por favor complete todos los campos");
+
+                }
+
+                else
+                {
+
+                    try
+                    {
+                        int cuitI = Int32.Parse(cuil);
+                        int dniI = Int32.Parse(dni);
+
+
+                        
+                        mercado.AgregarUsuario(dniI, nombre, apellido, mail, password, cuitI, false, false);
+                        
+                        MessageBox.Show("Usuario creado con exito");
+
+                        FrmMain VtnaConfiguracion = new FrmMain();
+                        VtnaConfiguracion.Show();
+
+                        this.Hide();
+
+                    }
+                    catch (FormatException)
+                    {
+
+                        MessageBox.Show("El cuit/dni deben ser numericos");
+                    }
+
+                }
+
+            }
+            catch (Excepciones ex)
+            {
+
+                MessageBox.Show(ex.Message);
+                
+            }
+
+         }
 
         private void cargandoMain_Click(object sender, EventArgs e)
         {

@@ -34,13 +34,12 @@ namespace tp_plataformas_2
 
             FileManager.CreateFolder();
             
-
-            /*---  Categorias leer datos ---*/
             FileManager.CreateFile("categorias");
+            FileManager.CreateFile("productos");
+            FileManager.CreateFile("compras");
+            FileManager.CreateFile("usuarios");
+
             ObtenerCategorias();
-
-
-
         }
 
         private void ObtenerCategorias()
@@ -172,24 +171,28 @@ namespace tp_plataformas_2
         }
 
 
-        public bool AgregarUsuario(int dni, String nombre, String apellido, String mail, String password, int cuil, bool esEmpresa)
+        public bool AgregarUsuario(int dni, String nombre, String apellido, String mail, String password, int cuil, bool esEmpresa, bool esAdmin)
         {
 
             int id = usuarios.Count + 1;
             Carro micarro = new Carro(id);
             if (esEmpresa)
             {
-                Usuario empresa = new Empresa(id, dni, nombre, apellido, mail, password, micarro, cuil);
+                Usuario empresa = new Empresa(id, dni, nombre, apellido, mail, password, micarro, cuil, esAdmin);
                 usuarios.Add(empresa);
+                FileManager.SaveListClientes(usuarios);
                 Console.WriteLine("La empresa fue creada con exito");
             }
             else
             {
-                Usuario cliente = new ClienteFinal(id, dni, nombre, apellido, mail, password, micarro, cuil);
+                Usuario cliente = new ClienteFinal(id, dni, nombre, apellido, mail, password, micarro, cuil, esAdmin);
                 usuarios.Add(cliente);
+                FileManager.SaveListClientes(usuarios);
                 Console.WriteLine("Usuario creado con exito");
             }
 
+            
+            
             return true;
 
         }
@@ -299,7 +302,7 @@ namespace tp_plataformas_2
 
                
 
-                FileManager.SaveAllData(categorias);
+                FileManager.SaveArrayCategorias(categorias);
                 return true;
 
             }
@@ -313,7 +316,7 @@ namespace tp_plataformas_2
             if (categorias[ID] != null)
             {
                 categorias[ID].Nombre = Nombre;
-                FileManager.SaveAllData(categorias);
+                FileManager.SaveArrayCategorias(categorias);
                 Console.WriteLine("Categoria modificada con exito");
             }
             else
@@ -341,7 +344,7 @@ namespace tp_plataformas_2
 
                     categorias[i] = null;
                     Console.WriteLine("Categoria " + ID + " eliminada con éxito!");
-                    FileManager.SaveAllData(categorias);
+                    FileManager.SaveArrayCategorias(categorias);
                     cantCategorias--;
                 }
                 
@@ -599,9 +602,54 @@ namespace tp_plataformas_2
 
             }
 
+        }
+
+
+        public int IniciarSesion(int DNI, string clave)
+        {
+            bool Inicia = false;
+            int Id = -1;
+            int i = 0;
+            while (!Inicia && i < usuarios.Count)
+            {
+                Inicia = usuarios[i].Dni == DNI && usuarios[i].Password == clave;
+                if (Inicia)
+                {
+                    Id = usuarios[i].Id;
+                }
+                
+                    i++;
+            }
+            return Id;
 
 
         }
 
+        public bool esAdmin(int id) {
+
+            bool esAdmin = false;
+
+            int i = 0;
+            while (!esAdmin && i < usuarios.Count)
+            {
+                
+                if (esAdmin = usuarios[i].Id == id && usuarios[i].EsAdmin == true)
+                {
+                    esAdmin = true;
+                }
+                else if (esAdmin = usuarios[i].Id == id && usuarios[i].EsAdmin == false)
+                { 
+                   esAdmin = false;
+
+                }
+               
+                    i++;
+                
+            }
+            return esAdmin;
+
+          
+        }
+            
     }
 }

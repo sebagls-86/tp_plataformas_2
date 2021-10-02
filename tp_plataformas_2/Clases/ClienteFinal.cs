@@ -8,7 +8,7 @@ namespace tp_plataformas_2
         public int Cuil { get; set; }
 
 
-        public ClienteFinal(int id, int dni, String nombre, String apellido, String mail, String password, Carro carro, int cuil) : base(id, dni, nombre, apellido, mail, password, carro)
+        public ClienteFinal(int id, int dni, String nombre, String apellido, String mail, String password, Carro carro, int cuil, bool esAdmin) : base(id, dni, nombre, apellido, mail, password, carro, esAdmin)
         {
             Cuil = cuil;
         }

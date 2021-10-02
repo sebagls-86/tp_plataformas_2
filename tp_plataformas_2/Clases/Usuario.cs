@@ -12,9 +12,9 @@ namespace tp_plataformas_2
         public string Mail { get; set; }
         public string Password { get; set; }
         public Carro MiCarro { get; set; }
+        public bool EsAdmin { get; set; }
 
-
-        protected Usuario(int id, int dni, string nombre, string apellido, string mail, string password, Carro carro)
+        protected Usuario(int id, int dni, string nombre, string apellido, string mail, string password, Carro carro, bool esAdmin)
         {
             Id = id;
             Dni = dni;
@@ -23,6 +23,7 @@ namespace tp_plataformas_2
             Mail = mail;
             Password = password;
             MiCarro = carro;
+            EsAdmin = esAdmin;
         }
 
         public int CompareTo(Usuario other)
