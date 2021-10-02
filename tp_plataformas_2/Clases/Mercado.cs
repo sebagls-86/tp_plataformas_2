@@ -4,11 +4,14 @@ using System.Linq;
 
 namespace tp_plataformas_2
 {
+
+
     class Mercado
     {
         public List<Producto> productos { get; set; }
         public List<Usuario> usuarios { get; set; }
         public Categoria[] categorias { get; set; }
+        public readonly double IVA = 21;
 
         public List<Compra> compras { get; set; }
 
@@ -26,6 +29,7 @@ namespace tp_plataformas_2
             productos = new List<Producto>();
             usuarios = new List<Usuario>();
             compras = new List<Compra>();
+            compras.Add(null);
             categorias = new Categoria[maxCategorias];
 
             FileManager.CreateFolder();
@@ -371,8 +375,8 @@ namespace tp_plataformas_2
             }
             else
             {
-                usuarioEncontrado = usuarios.Find(usuario => usuario.Id == Id_Usuario);
-                productoEncontrado = productos.Find(producto => producto.Id == Id_Producto);
+                usuarioEncontrado = usuarios[Id_Usuario];
+                productoEncontrado = productos[Id_Producto];
                 if (Cantidad > productoEncontrado.Cantidad)
                 {
                     Console.WriteLine("La cantidad que se quiere agregar es mayor al stock disponible.");
@@ -409,23 +413,20 @@ namespace tp_plataformas_2
             }
             else
             {
-                usuarioEncontrado = usuarios.Find(usuario => usuario.Id == Id_Usuario);
-                productoEncontrado = productos.Find(producto => producto.Id == Id_Producto);
+                usuarioEncontrado = usuarios[Id_Usuario];
+                productoEncontrado = productos[Id_Producto];
                 if (!usuarioEncontrado.MiCarro.Productos.ContainsKey(productoEncontrado))
                 {
                     Console.WriteLine("El producto {0} no se encuentra en el carro de {1}.", productoEncontrado, usuarioEncontrado.Nombre);
                 }
                 else if (usuarioEncontrado.MiCarro.Productos[productoEncontrado] < Cantidad || Cantidad == 0)
                 {
-                    productoEncontrado.Cantidad += usuarioEncontrado.MiCarro.Productos[productoEncontrado];
                     usuarioEncontrado.MiCarro.RemoverProducto(productoEncontrado, Cantidad);
                     Console.WriteLine("El producto {0} ha sido removido en su totalidad del carro del usuario {1}.", productoEncontrado.Nombre, usuarioEncontrado.Nombre);
                 }
                 else
                 {
-
                     usuarioEncontrado.MiCarro.RemoverProducto(productoEncontrado, Cantidad);
-                    productoEncontrado.Cantidad += Cantidad;
                     sePudoDisminuir = true;
                     Console.WriteLine("El producto {0} con cantidad {1} se ha removido del carro del usuario {2}.", productoEncontrado.Nombre, Cantidad, usuarioEncontrado.Nombre);
 
@@ -449,13 +450,7 @@ namespace tp_plataformas_2
             }
             else
             {
-                usuarioEncontrado = usuarios.Find(usuario => usuario.Id == Id_Usuario);
-
-                foreach (Producto producto in usuarioEncontrado.MiCarro.Productos.Keys)
-                {
-                    productos.Find(product => product.Id == producto.Id).Cantidad += usuarioEncontrado.MiCarro.Productos[producto];
-                }
-                usuarios.Find(usuario => usuario.Id == Id_Usuario).MiCarro.Vaciar();
+                usuarios[Id_Usuario].MiCarro.Vaciar();
                 Console.WriteLine("Se ha vaciado el carro correctamente.");
                 sePudoVaciar = true;
             }
@@ -466,49 +461,88 @@ namespace tp_plataformas_2
 
         public bool Comprar(int ID_Usuario)
         {
-
-            //   Busca el usuario pasado como parÃ¡metro 
-
-            //Le pide su carro y a este los productos con la cantidad respectiva.
-
-            //En base a esto calcula el total segÃºn el tipo de usuario, 
-            //       a la hora de hacer una compra existe una diferencia si el usuario es
-            //       ClienteFinal o Empresa ya que este Ãºltimo paga 21 % menos(descuenta IVA),
-            //       esto se debe ver reflejado en el total de la compra.
-
-            //Crea un nuevo elemento compra con el detalle necesario
-            //       (ID auto - incremental, Comprador = ID_Usuario, Productos copiando los
-            //       elementos del carrito a un nuevo diccionario(Â¡cuidado con las referencias!)
-            //       y el total segÃºn calculado).
-
-            //Disminuye el stock de los productos segÃºn lo comprado por el usuario. 
-
-            //Luego vacÃ­a el carrito del usuario. 
-
-            //Muestra el resultado por pantalla(ToString de la compra recientemente creada) 
-            //       y devuelve el valor correspondiente indicando si la ejecuciÃ³n fue correcta.
-
-
-            return true;
+            Double precioTotal = 0;
+            bool sePudoComprar = false;
+            Usuario usuarioEncontrado;
+            if (MercadoHelper.SonMenoresACero(new List<int> { ID_Usuario }))
+            {
+                Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
+            }
+            else if (!MercadoHelper.ExisteElUsuario(ID_Usuario, usuarios))
+            {
+                Console.WriteLine("El usuario con id {0} no se pudo encontrar", ID_Usuario);
+            }
+            else
+            {
+                usuarioEncontrado = usuarios[ID_Usuario];
+                foreach(Producto producto in usuarioEncontrado.MiCarro.Productos.Keys)
+                {
+                    precioTotal += producto.Precio;
+                }
+                if(usuarioEncontrado is ClienteFinal || usuarioEncontrado is Empresa)
+                {
+                    precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal,IVA);
+                }
+                Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos); 
+                Compra compra = new Compra(compras.Count + 1,usuarioEncontrado,productosCompra,precioTotal);
+                compras.Add(compra);
+                foreach(Producto producto in productosCompra.Keys){
+                    productos[producto.Id].Cantidad -= producto.Cantidad;
+                }
+                usuarioEncontrado.MiCarro.Vaciar();
+                sePudoComprar = true;
+            }
+            return sePudoComprar;
         }
 
-        public bool ModificarCompra(int ID, double Total)
+        public bool ModificarCompra(int ID, Double Total)
         {
 
-            //Solo se permite modificar el total en caso que haya un error de facturaciÃ³n.
-            //El resto de los datos no pueden ser modificados.
+            bool seModifico = false;
+            if (MercadoHelper.SonMenoresACero(new List<int> { ID }))
+            {
+                Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
+            }
+            if (compras[ID] != null)
+            {
+                foreach (Producto producto in compras[ID].Productos.Keys)
+                {
+                    productos[producto.Id].Cantidad += producto.Cantidad;
+                }
+                compras[ID].Total = Total ;
+                seModifico = true;
+            } else
+            {
+                Console.WriteLine("La compra con Id {0} no existe.",ID);
+            }
 
-            return true;
+            return seModifico;
+
         }
 
         public bool EliminarCompra(int ID)
         {
-            // Nuestro ÂbotÃ³n de arrepentimientoÂ
+            bool seElimino = false;
+            if (MercadoHelper.SonMenoresACero(new List<int> { ID }))
+            {
+                Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
+            }
+            if(compras[ID] != null)
+            {
+                foreach (Producto producto in compras[ID].Productos.Keys)
+                {
+                    productos[producto.Id].Cantidad += producto.Cantidad;
+                }
+                compras[ID] = null;
+                seElimino = true;
+            }
+            else
+            {
+                Console.WriteLine("La compra con Id {0} no existe.", ID);
+            }
 
-
-            return true;
+            return seElimino;
         }
-
         public void MostrarTodosLosProductosPorPrecio()
         {
             var productoPorPrecio = productos.OrderBy(producto => producto.Precio);
