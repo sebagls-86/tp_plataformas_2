@@ -131,9 +131,13 @@ namespace tp_plataformas_2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            
 
         }
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
