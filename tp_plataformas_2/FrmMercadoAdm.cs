@@ -18,9 +18,7 @@ namespace tp_plataformas_2
         {
             InitializeComponent();
 
-            //string[] arraydealgo = new string[10];
-            //arraydealgo  = FileManager.ReadFile("categorias");
-            //test.Text = arraydealgo[0];
+            
 
         }
 
@@ -111,25 +109,35 @@ namespace tp_plataformas_2
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            int id = Int32.Parse(txtId.Text);
-            string nuevoNombre = txtNombre.Text;
+            int id;
+            bool isParsable = int.TryParse(txtId.Text, out id);
+            if (isParsable)
+            {
+                string nuevoNombre = txtNombre.Text;
+                mercado.ModificarCategoria(id, nuevoNombre);
+
+            }
             
-            mercado.ModificarCategoria(id, nuevoNombre);
    
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             int idEliminado = int.Parse(txtIdEliminar.Text);
             mercado.EliminarCategoria(idEliminado);
-            
+           
+
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            
 
         }
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

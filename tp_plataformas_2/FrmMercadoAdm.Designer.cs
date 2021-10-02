@@ -29,9 +29,10 @@ namespace tp_plataformas_2
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMercadoAdm));
             this.panelCategorias = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabUsuarios = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataTableCategorias = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -54,7 +55,12 @@ namespace tp_plataformas_2
             this.panelCompras = new System.Windows.Forms.Panel();
             this.lblTitleCompras = new System.Windows.Forms.Label();
             this.panelUsuarios = new System.Windows.Forms.Panel();
-            this.lblTitleUsuarios = new System.Windows.Forms.Label();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
             this.panelProductos = new System.Windows.Forms.Panel();
             this.lblTitleProductos = new System.Windows.Forms.Label();
             this.btnProductos = new System.Windows.Forms.Button();
@@ -69,9 +75,10 @@ namespace tp_plataformas_2
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.lblMainTitle = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.btnExit = new System.Windows.Forms.Button();
             this.panelCategorias.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tabUsuarios.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableCategorias)).BeginInit();
             this.tabPage1.SuspendLayout();
@@ -80,34 +87,38 @@ namespace tp_plataformas_2
             ((System.ComponentModel.ISupportInitialize)(this.dataTableCeliminar)).BeginInit();
             this.panelCompras.SuspendLayout();
             this.panelUsuarios.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelProductos.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelCategorias
             // 
             this.panelCategorias.BackColor = System.Drawing.Color.Transparent;
-            this.panelCategorias.Controls.Add(this.tabControl1);
+            this.panelCategorias.Controls.Add(this.tabUsuarios);
             this.panelCategorias.Controls.Add(this.panelMuestraCategoria);
             this.panelCategorias.Controls.Add(this.panelCompras);
-            this.panelCategorias.Location = new System.Drawing.Point(181, 65);
+            this.panelCategorias.Location = new System.Drawing.Point(37, 128);
             this.panelCategorias.MinimumSize = new System.Drawing.Size(1076, 596);
             this.panelCategorias.Name = "panelCategorias";
             this.panelCategorias.Size = new System.Drawing.Size(1083, 596);
             this.panelCategorias.TabIndex = 0;
             this.panelCategorias.Visible = false;
             // 
-            // tabControl1
+            // tabUsuarios
             // 
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(0, 3);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1083, 502);
-            this.tabControl1.TabIndex = 9;
+            this.tabUsuarios.Controls.Add(this.tabPage2);
+            this.tabUsuarios.Controls.Add(this.tabPage1);
+            this.tabUsuarios.Controls.Add(this.tabPage3);
+            this.tabUsuarios.Controls.Add(this.tabPage4);
+            this.tabUsuarios.Location = new System.Drawing.Point(0, 3);
+            this.tabUsuarios.Name = "tabUsuarios";
+            this.tabUsuarios.SelectedIndex = 0;
+            this.tabUsuarios.Size = new System.Drawing.Size(1083, 502);
+            this.tabUsuarios.TabIndex = 9;
             // 
             // tabPage2
             // 
@@ -310,26 +321,77 @@ namespace tp_plataformas_2
             // 
             // panelUsuarios
             // 
-            this.panelUsuarios.Controls.Add(this.lblTitleUsuarios);
-            this.panelUsuarios.Location = new System.Drawing.Point(3, 0);
+            this.panelUsuarios.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panelUsuarios.Controls.Add(this.tabControl2);
+            this.panelUsuarios.Location = new System.Drawing.Point(40, 128);
             this.panelUsuarios.Name = "panelUsuarios";
-            this.panelUsuarios.Size = new System.Drawing.Size(1102, 621);
+            this.panelUsuarios.Size = new System.Drawing.Size(1071, 541);
             this.panelUsuarios.TabIndex = 3;
             this.panelUsuarios.Visible = false;
             // 
-            // lblTitleUsuarios
+            // tabControl2
             // 
-            this.lblTitleUsuarios.AutoSize = true;
-            this.lblTitleUsuarios.Location = new System.Drawing.Point(30, 18);
-            this.lblTitleUsuarios.Name = "lblTitleUsuarios";
-            this.lblTitleUsuarios.Size = new System.Drawing.Size(52, 15);
-            this.lblTitleUsuarios.TabIndex = 1;
-            this.lblTitleUsuarios.Text = "Usuarios";
+            this.tabControl2.Controls.Add(this.tabPage6);
+            this.tabControl2.Controls.Add(this.tabPage7);
+            this.tabControl2.Controls.Add(this.tabPage8);
+            this.tabControl2.Controls.Add(this.tabPage9);
+            this.tabControl2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tabControl2.Location = new System.Drawing.Point(27, 69);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(1013, 426);
+            this.tabControl2.TabIndex = 2;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.dataGridView1);
+            this.tabPage6.Location = new System.Drawing.Point(4, 30);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(1005, 392);
+            this.tabPage6.TabIndex = 1;
+            this.tabPage6.Text = "Lista";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(46, 76);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(667, 260);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Location = new System.Drawing.Point(4, 30);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(1005, 392);
+            this.tabPage7.TabIndex = 2;
+            this.tabPage7.Text = "Agregar";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Location = new System.Drawing.Point(4, 30);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Size = new System.Drawing.Size(1005, 392);
+            this.tabPage8.TabIndex = 3;
+            this.tabPage8.Text = "Modificar";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.Location = new System.Drawing.Point(4, 30);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Size = new System.Drawing.Size(1005, 392);
+            this.tabPage9.TabIndex = 4;
+            this.tabPage9.Text = "Eliminar";
+            this.tabPage9.UseVisualStyleBackColor = true;
             // 
             // panelProductos
             // 
             this.panelProductos.Controls.Add(this.lblTitleProductos);
-            this.panelProductos.Controls.Add(this.panelUsuarios);
             this.panelProductos.Location = new System.Drawing.Point(178, 575);
             this.panelProductos.Name = "panelProductos";
             this.panelProductos.Size = new System.Drawing.Size(1102, 621);
@@ -347,9 +409,10 @@ namespace tp_plataformas_2
             // 
             // btnProductos
             // 
-            this.btnProductos.Location = new System.Drawing.Point(12, 303);
+            this.btnProductos.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnProductos.Location = new System.Drawing.Point(410, 62);
             this.btnProductos.Name = "btnProductos";
-            this.btnProductos.Size = new System.Drawing.Size(141, 94);
+            this.btnProductos.Size = new System.Drawing.Size(141, 43);
             this.btnProductos.TabIndex = 1;
             this.btnProductos.Text = "Productos";
             this.btnProductos.UseVisualStyleBackColor = true;
@@ -357,9 +420,10 @@ namespace tp_plataformas_2
             // 
             // btnCategorias
             // 
-            this.btnCategorias.Location = new System.Drawing.Point(12, 194);
+            this.btnCategorias.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCategorias.Location = new System.Drawing.Point(249, 62);
             this.btnCategorias.Name = "btnCategorias";
-            this.btnCategorias.Size = new System.Drawing.Size(141, 94);
+            this.btnCategorias.Size = new System.Drawing.Size(141, 43);
             this.btnCategorias.TabIndex = 0;
             this.btnCategorias.Text = "Categorias";
             this.btnCategorias.UseVisualStyleBackColor = true;
@@ -413,9 +477,10 @@ namespace tp_plataformas_2
             // 
             // btnCompras
             // 
-            this.btnCompras.Location = new System.Drawing.Point(12, 416);
+            this.btnCompras.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCompras.Location = new System.Drawing.Point(574, 62);
             this.btnCompras.Name = "btnCompras";
-            this.btnCompras.Size = new System.Drawing.Size(141, 94);
+            this.btnCompras.Size = new System.Drawing.Size(141, 43);
             this.btnCompras.TabIndex = 2;
             this.btnCompras.Text = "Compras";
             this.btnCompras.UseVisualStyleBackColor = true;
@@ -423,9 +488,10 @@ namespace tp_plataformas_2
             // 
             // btnUsuarios
             // 
-            this.btnUsuarios.Location = new System.Drawing.Point(12, 526);
+            this.btnUsuarios.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnUsuarios.Location = new System.Drawing.Point(736, 62);
             this.btnUsuarios.Name = "btnUsuarios";
-            this.btnUsuarios.Size = new System.Drawing.Size(141, 94);
+            this.btnUsuarios.Size = new System.Drawing.Size(141, 43);
             this.btnUsuarios.TabIndex = 3;
             this.btnUsuarios.Text = "Usuarios";
             this.btnUsuarios.UseVisualStyleBackColor = true;
@@ -434,7 +500,7 @@ namespace tp_plataformas_2
             // btnLogOut
             // 
             this.btnLogOut.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOut.Image")));
-            this.btnLogOut.Location = new System.Drawing.Point(1211, 27);
+            this.btnLogOut.Location = new System.Drawing.Point(1025, 67);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(41, 32);
             this.btnLogOut.TabIndex = 4;
@@ -445,33 +511,35 @@ namespace tp_plataformas_2
             // 
             this.lblMainTitle.AutoSize = true;
             this.lblMainTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblMainTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblMainTitle.Location = new System.Drawing.Point(181, 24);
+            this.lblMainTitle.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblMainTitle.Location = new System.Drawing.Point(41, 54);
             this.lblMainTitle.Name = "lblMainTitle";
-            this.lblMainTitle.Size = new System.Drawing.Size(54, 30);
+            this.lblMainTitle.Size = new System.Drawing.Size(81, 45);
             this.lblMainTitle.TabIndex = 5;
             this.lblMainTitle.Text = "Title";
             // 
-            // button1
+            // btnExit
             // 
-            this.button1.Location = new System.Drawing.Point(1105, 33);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 25);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnExit.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnExit.Location = new System.Drawing.Point(1072, 67);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(39, 32);
+            this.btnExit.TabIndex = 7;
+            this.btnExit.Text = "X";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // FrmMercadoAdm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.btnUsuarios);
+            this.Controls.Add(this.panelUsuarios);
             this.Controls.Add(this.panelProductos);
             this.Controls.Add(this.lblMainTitle);
             this.Controls.Add(this.btnLogOut);
-            this.Controls.Add(this.btnUsuarios);
             this.Controls.Add(this.btnCompras);
             this.Controls.Add(this.btnProductos);
             this.Controls.Add(this.btnCategorias);
@@ -483,11 +551,12 @@ namespace tp_plataformas_2
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1280, 720);
             this.MinimumSize = new System.Drawing.Size(1280, 720);
+            //this.Name = "FrmMercadoAdm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mercado - Administrador";
             this.Load += new System.EventHandler(this.FrmMercadoAdmin_Load);
             this.panelCategorias.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.tabUsuarios.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataTableCategorias)).EndInit();
             this.tabPage1.ResumeLayout(false);
@@ -500,11 +569,14 @@ namespace tp_plataformas_2
             this.panelCompras.ResumeLayout(false);
             this.panelCompras.PerformLayout();
             this.panelUsuarios.ResumeLayout(false);
-            this.panelUsuarios.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelProductos.ResumeLayout(false);
             this.panelProductos.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -528,7 +600,6 @@ namespace tp_plataformas_2
         private System.Windows.Forms.Panel panelCompras;
         private System.Windows.Forms.Label lblTitleCompras;
         private System.Windows.Forms.Panel panelUsuarios;
-        private System.Windows.Forms.Label lblTitleUsuarios;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Label lblMainTitle;
         private System.Windows.Forms.DataGridView dataTableCategorias;
@@ -538,8 +609,7 @@ namespace tp_plataformas_2
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.TextBox txtboxNombreCategoria;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabUsuarios;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage3;
@@ -554,5 +624,13 @@ namespace tp_plataformas_2
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtIdEliminar;
         private System.Windows.Forms.DataGridView dataTableCeliminar;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnExit;
     }
 }
