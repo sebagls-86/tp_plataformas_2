@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace tp_plataformas_2
 {
-    public partial class FrmDetalleProducto : Form
+    public partial class FrmCheckOut : Form
     {
-        public FrmDetalleProducto()
+        public FrmCheckOut()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string productoNombre = lblProductoNombre.Text;
-            string precioPorudcto = lblPrecioProducto.Text;
-            string productoCategoria = lblCategoriaProducto.Text;
-            string cantidadComprar = txtCantidadComprar.Text;
-
-            MessageBox.Show("Producto agregado con exito");
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -35,8 +25,13 @@ namespace tp_plataformas_2
         private void volverToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FrmCliente VtnaCliente = new FrmCliente();
-            VtnaCliente.Show();
+            FrmCliente VtnaFrmCliente = new FrmCliente();
+            VtnaFrmCliente.Show();
+        }
+
+        private void btnComprar_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Compra realizada con exito");
         }
     }
 }

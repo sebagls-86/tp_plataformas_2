@@ -43,6 +43,7 @@ namespace tp_plataformas_2
             this.txtboxNombreCategoria = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,9 +51,14 @@ namespace tp_plataformas_2
             this.txtNombreCategoriaModificar = new System.Windows.Forms.TextBox();
             this.btnCategoriaModificar = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.dataTableCeliminar = new System.Windows.Forms.DataGridView();
-            this.btnEliminar = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
             this.txtIdEliminar = new System.Windows.Forms.TextBox();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.dataTableCeliminar = new System.Windows.Forms.DataGridView();
             this.panelCompras = new System.Windows.Forms.Panel();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage13 = new System.Windows.Forms.TabPage();
@@ -174,12 +180,6 @@ namespace tp_plataformas_2
             this.lblMainTitle = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.btnExit = new System.Windows.Forms.Button();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.panelCategorias.SuspendLayout();
             this.tabUsuarios.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -188,7 +188,10 @@ namespace tp_plataformas_2
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.tabPage4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableCeliminar)).BeginInit();
             this.panelCompras.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -220,9 +223,6 @@ namespace tp_plataformas_2
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelCategorias
@@ -354,6 +354,15 @@ namespace tp_plataformas_2
             this.tabPage3.Text = "Modificar";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox10.Image")));
+            this.pictureBox10.Location = new System.Drawing.Point(909, 6);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(50, 62);
+            this.pictureBox10.TabIndex = 10;
+            this.pictureBox10.TabStop = false;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -419,14 +428,53 @@ namespace tp_plataformas_2
             this.tabPage4.Text = "Eliminar";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // dataTableCeliminar
+            // label5
             // 
-            this.dataTableCeliminar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataTableCeliminar.Location = new System.Drawing.Point(21, 97);
-            this.dataTableCeliminar.Name = "dataTableCeliminar";
-            this.dataTableCeliminar.RowTemplate.Height = 25;
-            this.dataTableCeliminar.Size = new System.Drawing.Size(384, 189);
-            this.dataTableCeliminar.TabIndex = 3;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(21, 29);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(175, 25);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Eliminar Categoria";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label41);
+            this.groupBox2.Controls.Add(this.label44);
+            this.groupBox2.Controls.Add(this.txtIdEliminar);
+            this.groupBox2.Controls.Add(this.btnEliminar);
+            this.groupBox2.Location = new System.Drawing.Point(605, 26);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(304, 260);
+            this.groupBox2.TabIndex = 20;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Eliminar";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(14, 92);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(77, 21);
+            this.label41.TabIndex = 20;
+            this.label41.Text = "eliminar.";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(14, 71);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(290, 21);
+            this.label44.TabIndex = 19;
+            this.label44.Text = "Ingrese ID de la operacion que desea";
+            // 
+            // txtIdEliminar
+            // 
+            this.txtIdEliminar.Location = new System.Drawing.Point(31, 183);
+            this.txtIdEliminar.Name = "txtIdEliminar";
+            this.txtIdEliminar.Size = new System.Drawing.Size(111, 29);
+            this.txtIdEliminar.TabIndex = 0;
             // 
             // btnEliminar
             // 
@@ -438,12 +486,23 @@ namespace tp_plataformas_2
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // txtIdEliminar
+            // pictureBox11
             // 
-            this.txtIdEliminar.Location = new System.Drawing.Point(31, 183);
-            this.txtIdEliminar.Name = "txtIdEliminar";
-            this.txtIdEliminar.Size = new System.Drawing.Size(111, 29);
-            this.txtIdEliminar.TabIndex = 0;
+            this.pictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox11.Image")));
+            this.pictureBox11.Location = new System.Drawing.Point(921, 6);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(50, 62);
+            this.pictureBox11.TabIndex = 11;
+            this.pictureBox11.TabStop = false;
+            // 
+            // dataTableCeliminar
+            // 
+            this.dataTableCeliminar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataTableCeliminar.Location = new System.Drawing.Point(21, 97);
+            this.dataTableCeliminar.Name = "dataTableCeliminar";
+            this.dataTableCeliminar.RowTemplate.Height = 25;
+            this.dataTableCeliminar.Size = new System.Drawing.Size(384, 189);
+            this.dataTableCeliminar.TabIndex = 3;
             // 
             // panelCompras
             // 
@@ -1591,74 +1650,15 @@ namespace tp_plataformas_2
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // pictureBox10
-            // 
-            this.pictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox10.Image")));
-            this.pictureBox10.Location = new System.Drawing.Point(909, 6);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(50, 62);
-            this.pictureBox10.TabIndex = 10;
-            this.pictureBox10.TabStop = false;
-            // 
-            // pictureBox11
-            // 
-            this.pictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox11.Image")));
-            this.pictureBox11.Location = new System.Drawing.Point(921, 6);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(50, 62);
-            this.pictureBox11.TabIndex = 11;
-            this.pictureBox11.TabStop = false;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label41);
-            this.groupBox2.Controls.Add(this.label44);
-            this.groupBox2.Controls.Add(this.txtIdEliminar);
-            this.groupBox2.Controls.Add(this.btnEliminar);
-            this.groupBox2.Location = new System.Drawing.Point(605, 26);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(304, 260);
-            this.groupBox2.TabIndex = 20;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Eliminar";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(14, 92);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(77, 21);
-            this.label41.TabIndex = 20;
-            this.label41.Text = "eliminar.";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(14, 71);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(290, 21);
-            this.label44.TabIndex = 19;
-            this.label44.Text = "Ingrese ID de la operacion que desea";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(21, 29);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(175, 25);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Eliminar Categoria";
-            // 
             // FrmMercadoAdm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1144, 691);
-            this.Controls.Add(this.panelCategorias);
             this.Controls.Add(this.panelCompras);
             this.Controls.Add(this.panelProductos);
+            this.Controls.Add(this.panelCategorias);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnUsuarios);
             this.Controls.Add(this.lblMainTitle);
@@ -1689,8 +1689,12 @@ namespace tp_plataformas_2
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableCeliminar)).EndInit();
             this.panelCompras.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
@@ -1733,10 +1737,6 @@ namespace tp_plataformas_2
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
