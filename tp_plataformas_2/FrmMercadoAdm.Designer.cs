@@ -77,25 +77,25 @@ namespace tp_plataformas_2
             this.label13 = new System.Windows.Forms.Label();
             this.dgvUsuariosLista = new System.Windows.Forms.DataGridView();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.txtCuilCuit = new System.Windows.Forms.TextBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.txtCuil = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.pictureUsuarios = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtUsuarioClave = new System.Windows.Forms.TextBox();
-            this.txtUsuarioMail = new System.Windows.Forms.TextBox();
-            this.txtUsuarioDNI = new System.Windows.Forms.TextBox();
-            this.txtUsuarioApellido = new System.Windows.Forms.TextBox();
-            this.radioClienteFinal = new System.Windows.Forms.RadioButton();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.txtMail = new System.Windows.Forms.TextBox();
+            this.txtApellido = new System.Windows.Forms.TextBox();
+            this.radioCliente = new System.Windows.Forms.RadioButton();
             this.radioEmpresa = new System.Windows.Forms.RadioButton();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtUsuarioNombre = new System.Windows.Forms.TextBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnAgregarUsuario = new System.Windows.Forms.Button();
             this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.txtModificarDNI = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -180,8 +180,6 @@ namespace tp_plataformas_2
             this.lblMainTitle = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.btnExit = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.panelCategorias.SuspendLayout();
             this.tabUsuarios.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -688,23 +686,21 @@ namespace tp_plataformas_2
             // tabPage7
             // 
             this.tabPage7.Controls.Add(this.radioButton1);
-            this.tabPage7.Controls.Add(this.txtCuilCuit);
+            this.tabPage7.Controls.Add(this.txtCuil);
             this.tabPage7.Controls.Add(this.label22);
             this.tabPage7.Controls.Add(this.pictureUsuarios);
             this.tabPage7.Controls.Add(this.label12);
             this.tabPage7.Controls.Add(this.label11);
-            this.tabPage7.Controls.Add(this.txtUsuarioClave);
-            this.tabPage7.Controls.Add(this.txtUsuarioMail);
-            this.tabPage7.Controls.Add(this.txtUsuarioDNI);
-            this.tabPage7.Controls.Add(this.txtUsuarioApellido);
-            this.tabPage7.Controls.Add(this.radioClienteFinal);
+            this.tabPage7.Controls.Add(this.txtPassword);
+            this.tabPage7.Controls.Add(this.txtMail);
+            this.tabPage7.Controls.Add(this.txtApellido);
+            this.tabPage7.Controls.Add(this.radioCliente);
             this.tabPage7.Controls.Add(this.radioEmpresa);
             this.tabPage7.Controls.Add(this.label10);
             this.tabPage7.Controls.Add(this.label9);
-            this.tabPage7.Controls.Add(this.label8);
             this.tabPage7.Controls.Add(this.label7);
             this.tabPage7.Controls.Add(this.label6);
-            this.tabPage7.Controls.Add(this.txtUsuarioNombre);
+            this.tabPage7.Controls.Add(this.txtNombre);
             this.tabPage7.Controls.Add(this.btnAgregarUsuario);
             this.tabPage7.Location = new System.Drawing.Point(4, 41);
             this.tabPage7.Name = "tabPage7";
@@ -713,21 +709,33 @@ namespace tp_plataformas_2
             this.tabPage7.Text = "Agregar";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
-            // txtCuilCuit
+            // radioButton1
             // 
-            this.txtCuilCuit.Location = new System.Drawing.Point(179, 239);
-            this.txtCuilCuit.Name = "txtCuilCuit";
-            this.txtCuilCuit.Size = new System.Drawing.Size(243, 39);
-            this.txtCuilCuit.TabIndex = 17;
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(629, 254);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(194, 36);
+            this.radioButton1.TabIndex = 18;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Administrador";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // txtCuil
+            // 
+            this.txtCuil.Location = new System.Drawing.Point(179, 207);
+            this.txtCuil.Name = "txtCuil";
+            this.txtCuil.Size = new System.Drawing.Size(243, 39);
+            this.txtCuil.TabIndex = 17;
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(56, 247);
+            this.label22.Location = new System.Drawing.Point(48, 209);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(120, 32);
+            this.label22.Size = new System.Drawing.Size(127, 32);
             this.label22.TabIndex = 16;
-            this.label22.Text = "CUIL/CUT";
+            this.label22.Text = "CUIL/CUIT";
             // 
             // pictureUsuarios
             // 
@@ -757,60 +765,53 @@ namespace tp_plataformas_2
             this.label11.TabIndex = 13;
             this.label11.Text = "Se deben completar todos los campos";
             // 
-            // txtUsuarioClave
+            // txtPassword
             // 
-            this.txtUsuarioClave.Location = new System.Drawing.Point(177, 347);
-            this.txtUsuarioClave.Name = "txtUsuarioClave";
-            this.txtUsuarioClave.Size = new System.Drawing.Size(243, 39);
-            this.txtUsuarioClave.TabIndex = 12;
+            this.txtPassword.Location = new System.Drawing.Point(177, 329);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(243, 39);
+            this.txtPassword.TabIndex = 12;
             // 
-            // txtUsuarioMail
+            // txtMail
             // 
-            this.txtUsuarioMail.Location = new System.Drawing.Point(178, 294);
-            this.txtUsuarioMail.Name = "txtUsuarioMail";
-            this.txtUsuarioMail.Size = new System.Drawing.Size(243, 39);
-            this.txtUsuarioMail.TabIndex = 11;
+            this.txtMail.Location = new System.Drawing.Point(178, 276);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.Size = new System.Drawing.Size(243, 39);
+            this.txtMail.TabIndex = 11;
             // 
-            // txtUsuarioDNI
+            // txtApellido
             // 
-            this.txtUsuarioDNI.Location = new System.Drawing.Point(177, 187);
-            this.txtUsuarioDNI.Name = "txtUsuarioDNI";
-            this.txtUsuarioDNI.Size = new System.Drawing.Size(243, 39);
-            this.txtUsuarioDNI.TabIndex = 10;
+            this.txtApellido.Location = new System.Drawing.Point(177, 137);
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.Size = new System.Drawing.Size(243, 39);
+            this.txtApellido.TabIndex = 9;
             // 
-            // txtUsuarioApellido
+            // radioCliente
             // 
-            this.txtUsuarioApellido.Location = new System.Drawing.Point(177, 131);
-            this.txtUsuarioApellido.Name = "txtUsuarioApellido";
-            this.txtUsuarioApellido.Size = new System.Drawing.Size(243, 39);
-            this.txtUsuarioApellido.TabIndex = 9;
-            // 
-            // radioClienteFinal
-            // 
-            this.radioClienteFinal.AutoSize = true;
-            this.radioClienteFinal.Location = new System.Drawing.Point(631, 201);
-            this.radioClienteFinal.Name = "radioClienteFinal";
-            this.radioClienteFinal.Size = new System.Drawing.Size(173, 36);
-            this.radioClienteFinal.TabIndex = 8;
-            this.radioClienteFinal.TabStop = true;
-            this.radioClienteFinal.Text = "Cliente Final";
-            this.radioClienteFinal.UseVisualStyleBackColor = true;
+            this.radioCliente.AutoSize = true;
+            this.radioCliente.Location = new System.Drawing.Point(631, 201);
+            this.radioCliente.Name = "radioCliente";
+            this.radioCliente.Size = new System.Drawing.Size(201, 36);
+            this.radioCliente.TabIndex = 8;
+            this.radioCliente.TabStop = true;
+            this.radioCliente.Text = "No es empresa";
+            this.radioCliente.UseVisualStyleBackColor = true;
             // 
             // radioEmpresa
             // 
             this.radioEmpresa.AutoSize = true;
             this.radioEmpresa.Location = new System.Drawing.Point(631, 153);
             this.radioEmpresa.Name = "radioEmpresa";
-            this.radioEmpresa.Size = new System.Drawing.Size(131, 36);
+            this.radioEmpresa.Size = new System.Drawing.Size(161, 36);
             this.radioEmpresa.TabIndex = 7;
             this.radioEmpresa.TabStop = true;
-            this.radioEmpresa.Text = "Empresa";
+            this.radioEmpresa.Text = "Es empresa";
             this.radioEmpresa.UseVisualStyleBackColor = true;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(41, 349);
+            this.label10.Location = new System.Drawing.Point(41, 337);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(138, 32);
             this.label10.TabIndex = 6;
@@ -819,20 +820,11 @@ namespace tp_plataformas_2
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(55, 302);
+            this.label9.Location = new System.Drawing.Point(55, 280);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(61, 32);
             this.label9.TabIndex = 5;
             this.label9.Text = "Mail";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(54, 195);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 32);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "DNI";
             // 
             // label7
             // 
@@ -852,12 +844,12 @@ namespace tp_plataformas_2
             this.label6.TabIndex = 2;
             this.label6.Text = "Nombre";
             // 
-            // txtUsuarioNombre
+            // txtNombre
             // 
-            this.txtUsuarioNombre.Location = new System.Drawing.Point(177, 84);
-            this.txtUsuarioNombre.Name = "txtUsuarioNombre";
-            this.txtUsuarioNombre.Size = new System.Drawing.Size(243, 39);
-            this.txtUsuarioNombre.TabIndex = 1;
+            this.txtNombre.Location = new System.Drawing.Point(177, 84);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(243, 39);
+            this.txtNombre.TabIndex = 1;
             // 
             // btnAgregarUsuario
             // 
@@ -867,6 +859,7 @@ namespace tp_plataformas_2
             this.btnAgregarUsuario.TabIndex = 0;
             this.btnAgregarUsuario.Text = "Agregar";
             this.btnAgregarUsuario.UseVisualStyleBackColor = true;
+            this.btnAgregarUsuario.Click += new System.EventHandler(this.btnAgregarUsuario_Click);
             // 
             // tabPage8
             // 
@@ -896,6 +889,17 @@ namespace tp_plataformas_2
             this.tabPage8.TabIndex = 3;
             this.tabPage8.Text = "Modificar";
             this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(611, 265);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(194, 36);
+            this.radioButton2.TabIndex = 36;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Administrador";
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // txtModificarDNI
             // 
@@ -1660,29 +1664,6 @@ namespace tp_plataformas_2
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(629, 254);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(194, 36);
-            this.radioButton1.TabIndex = 18;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Administrador";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(611, 265);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(194, 36);
-            this.radioButton2.TabIndex = 36;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Administrador";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
             // FrmMercadoAdm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1820,25 +1801,23 @@ namespace tp_plataformas_2
         private System.Windows.Forms.TabPage tabPage9;
         private System.Windows.Forms.DataGridView dgvUsuariosLista;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.TextBox txtUsuarioDNI;
-        private System.Windows.Forms.TextBox txtUsuarioApellido;
-        private System.Windows.Forms.RadioButton radioClienteFinal;
+        private System.Windows.Forms.TextBox txtApellido;
+        private System.Windows.Forms.RadioButton radioCliente;
         private System.Windows.Forms.RadioButton radioEmpresa;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtUsuarioNombre;
+        private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button btnAgregarUsuario;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtUsuarioClave;
-        private System.Windows.Forms.TextBox txtUsuarioMail;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.TextBox txtMail;
         private System.Windows.Forms.PictureBox pictureUsuarios;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureCategorias;
-        private System.Windows.Forms.TextBox txtCuilCuit;
+        private System.Windows.Forms.TextBox txtCuil;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox txtModificarDNI;
         private System.Windows.Forms.Label label15;
