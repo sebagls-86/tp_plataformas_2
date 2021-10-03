@@ -46,16 +46,16 @@ namespace tp_plataformas_2
 
         private void dgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //El indice de la fila arranca en 0 (e =  parametro del evento)
+            ////El indice de la fila arranca en 0 (e =  parametro del evento)
 
-            int fila = e.RowIndex; //Fila doblecliqueada
+            //int fila = e.RowIndex; //Fila doblecliqueada
 
-            if (fila != -1)
-            {
-                this.Hide();
-                FrmDetalleProducto VtnaFrmDetalleProducto = new FrmDetalleProducto();
-                VtnaFrmDetalleProducto.Show();
-            }
+            //if (fila != -1)
+            //{
+            //    this.Hide();
+            //    FrmDetalleProducto VtnaFrmDetalleProducto = new FrmDetalleProducto();
+            //    VtnaFrmDetalleProducto.Show();
+            //}
 
 
         }

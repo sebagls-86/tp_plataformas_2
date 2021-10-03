@@ -189,6 +189,28 @@ namespace tp_plataformas_2
 
         }
 
+        public Producto BuscarProductoPorId(String Id)
+        {
+            Producto producto;
+            bool sePudoParsear = Int32.TryParse(Id, out int idProducto);
+            if (!sePudoParsear)
+            {
+                throw new Excepciones("No se pudo parsear el ID del producto buscado.");
+            } else if (MercadoHelper.SonMenoresACero(new List<int> { idProducto }))
+            {
+                throw new Excepciones("El indice del producto que quiere buscar es menor a 0.");
+            } else if (!MercadoHelper.ExisteElProducto(idProducto,productos))
+            {
+                throw new Excepciones("No existe el producto con ID " + idProducto);
+            } else
+            {
+                producto = productos[idProducto];
+            }
+            
+            return producto;
+        }
+
+
         public void BuscarProductosPorPrecio(String Query)
         {
             List<Producto> productosBuscados = new List<Producto>();
