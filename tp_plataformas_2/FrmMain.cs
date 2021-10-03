@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using tp_plataformas_2.Clases;
 
@@ -18,7 +11,7 @@ namespace tp_plataformas_2
         {
             Mercado = new Mercado();
             InitializeComponent();
-            
+
         }
         public FrmMain(Mercado mercado)
         {
@@ -50,7 +43,7 @@ namespace tp_plataformas_2
         private void btnIngresar_Click(object sender, EventArgs e)
         {
 
-            
+
             cargandoMain.Minimum = 1;
             cargandoMain.Maximum = 100;
             cargandoMain.Step = 1;
@@ -60,7 +53,7 @@ namespace tp_plataformas_2
                 cargandoMain.PerformStep();
             }
 
-            
+
             //Mercado.AgregarUsuario(123, "seba", "sosa", "seba@sosa", "seba", 1234, false, true);
             //Mercado.AgregarUsuario(1234, "seba", "sosa", "seba@sosa", "seba1", 1234, false, false);
             string usuario = txtUsuario.Text;
@@ -80,19 +73,20 @@ namespace tp_plataformas_2
 
                 if (inicio != -1)
                 {
-                   
+
                     bool Admin = Mercado.esAdmin(inicio);
 
-                    if (Admin) { 
-                    
-                    MessageBox.Show("Usuario detectado = ADMIN");
-                    this.Hide();
+                    if (Admin)
+                    {
 
-                    FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm(Mercado);
-                    VtnaPrincipal.Show();
+                        MessageBox.Show("Usuario detectado = ADMIN");
+                        this.Hide();
+
+                        FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm(Mercado);
+                        VtnaPrincipal.Show();
 
                     }
-                    else if(Admin == false)
+                    else if (Admin == false)
                     {
                         MessageBox.Show("¡Gracias por su visita!");
                         this.Hide();
@@ -107,8 +101,8 @@ namespace tp_plataformas_2
                 {
                     throw new Excepciones("Usuario no encontrado");
                 }
-            } 
-            
+            }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

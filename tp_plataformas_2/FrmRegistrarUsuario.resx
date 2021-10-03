@@ -60,4 +60,25 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureUsuarios.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAPJJREFUSEvt
+        1jFKxEAARuE0goWdVxCx22useAo9gqUHWO+wNlsKVl7DUmsV1DtYLfqmGAj5X3YRMtjkwQch+4chW6Wb
+        +48u8IUf8YwFmvQJO7R6xSEmzw6bUnmxc0Q2ntoHIhu2ENmohchGLUQ2Mltc4xhneIDtxkQ2MhsMe4Rt
+        TWQjc4Nht7CtiWxk7jHsL393ZCPzhAPUyvULbGsiG41ZoVaubTMmstEuNfttl8hG5htr1O5Q7tnWRDbq
+        e8MljjCs3LvCO+zZvshGfSfY1yns2b7IRi1ENmohslEL0b5Pnynoh0D5LGl5eDl0ibm5lnXdL0bN5RVy
+        0pAIAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAPJJREFUSEvt
+        1jFKxEAARuE0goWdVxCx22useAo9gqUHWO+wNlsKVl7DUmsV1DtYLfqmGAj5X3YRMtjkwQch+4chW6Wb
+        +48u8IUf8YwFmvQJO7R6xSEmzw6bUnmxc0Q2ntoHIhu2ENmohchGLUQ2Mltc4xhneIDtxkQ2MhsMe4Rt
+        TWQjc4Nht7CtiWxk7jHsL393ZCPzhAPUyvULbGsiG41ZoVaubTMmstEuNfttl8hG5htr1O5Q7tnWRDbq
+        e8MljjCs3LvCO+zZvshGfSfY1yns2b7IRi1ENmohslEL0b5Pnynoh0D5LGl5eDl0ibm5lnXdL0bN5RVy
+        0pAIAAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

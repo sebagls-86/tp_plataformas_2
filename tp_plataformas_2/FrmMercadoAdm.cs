@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using tp_plataformas_2.Clases;
 
@@ -98,7 +91,7 @@ namespace tp_plataformas_2
 
             try
             {
-                dgvUsuariosLista.DataSource = mercado.MostrarUsuarios();
+                dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
             }
             catch (Exception ex)
             {
@@ -148,7 +141,7 @@ namespace tp_plataformas_2
         private void btnEliminar_Click(object sender, EventArgs e)
         {
 
-            
+
             try
             {
                 int idEliminado = int.Parse(txtIdEliminar.Text);
@@ -181,7 +174,7 @@ namespace tp_plataformas_2
 
         }
 
-            private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
 
 
@@ -204,7 +197,9 @@ namespace tp_plataformas_2
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Hide();
+            FrmMain VtnaMain = new FrmMain();
+            VtnaMain.Show();
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
@@ -380,27 +375,27 @@ namespace tp_plataformas_2
 
 
 
-            private void btnAgregarProducto_Click(object sender, EventArgs e)
-            {
-                string nombre = txtNombreProductoAgregar.Text;
-                double precio = double.Parse(txtPrecioProductoAgregar.Text);
-                int cantidad = int.Parse(txtCantidadProductoAgregar.Text);
-                int idCategoria = int.Parse(txtIdCategoriaProductoAgregar.Text);
+        private void btnAgregarProducto_Click(object sender, EventArgs e)
+        {
+            string nombre = txtNombreProductoAgregar.Text;
+            double precio = double.Parse(txtPrecioProductoAgregar.Text);
+            int cantidad = int.Parse(txtCantidadProductoAgregar.Text);
+            int idCategoria = int.Parse(txtIdCategoriaProductoAgregar.Text);
 
-                if (Mercado.AgregarProducto(nombre, precio, cantidad, idCategoria))
-                {
-                    txtNombreProductoAgregar.Text = "";
-                    txtPrecioProductoAgregar.Text = "";
-                    txtCantidadProductoAgregar.Text = "";
-                    txtIdCategoriaProductoAgregar.Text = "";
-                    MessageBox.Show("Producto Agregado");
-                }
-                else
-                {
-                    MessageBox.Show("no se agrego");
-                }
-                dgvProductos.Refresh();
+            if (Mercado.AgregarProducto(nombre, precio, cantidad, idCategoria))
+            {
+                txtNombreProductoAgregar.Text = "";
+                txtPrecioProductoAgregar.Text = "";
+                txtCantidadProductoAgregar.Text = "";
+                txtIdCategoriaProductoAgregar.Text = "";
+                MessageBox.Show("Producto Agregado");
             }
+            else
+            {
+                MessageBox.Show("no se agrego");
+            }
+            dgvProductos.Refresh();
+        }
 
         private void btnModificaar_Click(object sender, EventArgs e)
         {
@@ -432,7 +427,7 @@ namespace tp_plataformas_2
 
             try
             {
-                if (id == "" || nombre == "" || apellido == "" ||  mail == "" || password == "")
+                if (id == "" || nombre == "" || apellido == "" || mail == "" || password == "")
 
                 {
                     throw new Excepciones("Por favor complete todos los campos");
@@ -449,7 +444,7 @@ namespace tp_plataformas_2
                         try
                         {
 
-                            bool Modifica = mercado.ModificarUsuario(ID, nombre, apellido, mail, password, tipoUsuario);
+                            bool Modifica = Mercado.ModificarUsuario(ID, nombre, apellido, mail, password, tipoUsuario);
 
                             if (Modifica == true)
                             {
@@ -494,7 +489,10 @@ namespace tp_plataformas_2
 
         }
 
-        
+        private void volverToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+         Application.Exit();
+        }
     }
 }
 

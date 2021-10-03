@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO; //Librerias para trabajar con archivos
+using System.Windows.Forms;
 
 namespace tp_plataformas_2
 {
@@ -39,8 +32,9 @@ namespace tp_plataformas_2
         {
 
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
-            folderDialog.Description = "Selecionar ruta de guardado";
-            folderDialog.RootFolder = Environment.SpecialFolder.MyDocuments;
+            //folderDialog.Description = "Selecionar ruta de guardado";
+            folderDialog.RootFolder = Environment.SpecialFolder.Desktop;
+            //folderDialog.RootFolder = @"\AppData\Local\Mercado";
 
             if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -61,6 +55,17 @@ namespace tp_plataformas_2
 
             string rutaDirectorio = txtDirectorio.Text;
             MessageBox.Show("Ruta seleccionada: \n" + rutaDirectorio + "\n¡Guardada con exito!");
+        }
+
+        private void txtDirectorio_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void FrmConfiguracion_Load(object sender, EventArgs e)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
+            txtDirectorio.Text = path;
         }
     }
 }
