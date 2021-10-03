@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using tp_plataformas_2.Clases;
 
 namespace tp_plataformas_2
 {
@@ -68,6 +68,7 @@ namespace tp_plataformas_2
             dgvProductos.DataSource = mercado.MostrarProductoEnPantalla();
             //dgvProductos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             //dgvProductos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            
         }
 
         private void btnCompras_Click(object sender, EventArgs e)
@@ -87,6 +88,8 @@ namespace tp_plataformas_2
             panelCompras.Visible = false;
             panelUsuarios.Visible = true;
             lblMainTitle.Text = "Usuarios";
+
+            dgvUsuariosLista.DataSource = mercado.MostrarUsuarios();
 
         }
 
@@ -190,22 +193,115 @@ namespace tp_plataformas_2
 
         }
 
+        private void btnAgregarUsuario_Click(object sender, EventArgs e)
+        {
+
+
+
+
+            string nombre = txtNombre.Text;
+            string apellido = txtApellido.Text;
+            string cuil = txtCuil.Text;
+            string mail = txtMail.Text;
+            string password = txtPassword.Text;
+
+            int tipoUsuario = 0;
+
+            if (radioEmpresa.Checked)
+            {
+
+                tipoUsuario = 2;
+
+            }
+            else if (radioCliente.Checked)
+            {
+                tipoUsuario = 3;
+            }
+            else
+            {
+                tipoUsuario = 1;
+            }
+
+            try
+            {
+                if (nombre == "" || apellido == "" || cuil == "" || mail == "" || password == "")
+
+                {
+                    throw new Excepciones("Por favor complete todos los campos");
+
+                }
+
+                else
+                {
+
+                    try
+                    {
+                        int cuitI = Int32.Parse(cuil);
+                        try
+                        {
+
+                            bool Agrega = mercado.AgregarUsuario(cuitI, nombre, apellido, mail, password, tipoUsuario);
+
+                            if (Agrega == true)
+                            {
+
+                                MessageBox.Show("Usuario creado con exito");
+
+                                FrmMain VtnaConfiguracion = new FrmMain();
+                                VtnaConfiguracion.Show();
+
+                                this.Hide();
+
+                            }
+                            else
+                            {
+                                throw new Excepciones("CUIT ya ingresado");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    catch (FormatException)
+                    {
+
+                        MessageBox.Show("El cuit debe ser numerico");
+                    }
+
+                }
+
+            }
+            catch (Excepciones ex)
+            {
+
+                MessageBox.Show(ex.Message);
+
+            }
+
+
+        }
+
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
             string nombre = txtNombreProductoAgregar.Text;
             double precio = double.Parse(txtPrecioProductoAgregar.Text);
             int cantidad = int.Parse(txtCantidadProductoAgregar.Text);
-            int categoriaID = int.Parse(txtIdCategoriaProductoAgregar.Text);
+            int idCategoria = int.Parse(txtIdCategoriaProductoAgregar.Text);
 
-            if(mercado.AgregarProducto(nombre, precio, cantidad, categoriaID))
+            if (mercado.AgregarProducto(nombre, precio, cantidad,idCategoria))
             {
-                MessageBox.Show("producto agregado");
+                txtNombreProductoAgregar.Text = "";
+                txtPrecioProductoAgregar.Text = "";
+                txtCantidadProductoAgregar.Text = "";
+                txtIdCategoriaProductoAgregar.Text = "";
+                MessageBox.Show("Producto Agregado");
             }
             else
             {
-                MessageBox.Show("producto no agregado");
-
+                MessageBox.Show("no se agrego");
             }
+            dgvProductos.Refresh();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace tp_plataformas_2
         const int maxCategorias = 10;
 
         int cantCategorias = 0;
-
+        int cantProductos = 0; 
         /* --- Variables auxiliares  ---*/
 
         private string[] contenidos = new string[10];
@@ -41,6 +41,7 @@ namespace tp_plataformas_2
 
             ObtenerCategorias();
             ReadFileUsuarios();
+            ReadFileProductos();
         }
 
         private void ObtenerCategorias()
@@ -80,14 +81,42 @@ namespace tp_plataformas_2
             }
 
         }
+        private void ReadFileProductos()
+        {
+            contenidos = FileManager.ReadFileProductos();
+            char delimiterChars = '|';
+
+            foreach (string contenido in contenidos)
+            {
+                if (contenido != null && contenido != "")
+                {
+                    string[] propiedades = contenido.Split(delimiterChars);
+                    
+
+                    int Id = int.Parse(propiedades[0]);
+                    string nombre = propiedades[1];
+                    double precio = double.Parse(propiedades[2]);
+                    int cantidad = int.Parse(propiedades[3]);
+                    int idCat = int.Parse(propiedades[4]);
+                    string categoriaNombre = propiedades[5];
+
+                    AgregarProducto(nombre, precio, cantidad, idCat);
+
+                    
+                }
+
+            }
+
+        }
         public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)//Creamos producto y lo agregamos al array list de productos
         {
             int indice = idCategoria - 1;
             if (categorias[indice] != null && categorias[indice].Id == idCategoria)
             {
-                Producto producto = new Producto(idCategoria, nombre, precio, Cantidad, categorias[idCategoria]);
+                Producto producto = new Producto(cantProductos, nombre, precio, Cantidad, categorias[idCategoria]);
                 this.productos.Add(producto);
                 FileManager.SaveListProductos(productos);
+                cantProductos++;
                 return true;
             }
 
@@ -202,6 +231,16 @@ namespace tp_plataformas_2
         public bool AgregarUsuario(int cuil, String nombre, String apellido, String mail, String password, int tipoUsuario)
         {
 
+            foreach(Usuario persona in usuarios)
+            {
+                if(persona.Cuil == cuil)
+                {
+                    return false;
+                }
+
+            }
+
+
             int id = usuarios.Count + 1;
             Carro micarro = new Carro(id);
            
@@ -259,14 +298,13 @@ namespace tp_plataformas_2
         }
 
 
-        public void MostrarUsuarios()
+        public List<Usuario> MostrarUsuarios()
         {
-            Console.WriteLine("Estos son los Usuarios registrados:");
-            for (int i = 0; i < usuarios.Count; i++)
-            {
+            
                 usuarios.Sort();
-                
-            }
+             
+
+            return usuarios;
         }
 
         private bool BuscarCategoria(int ID)
@@ -610,7 +648,7 @@ namespace tp_plataformas_2
 
         public List<Producto> MostrarProductoEnPantalla()
         {
-            //productos.Sort();
+            productos.Sort();
 
             return productos;
         }
