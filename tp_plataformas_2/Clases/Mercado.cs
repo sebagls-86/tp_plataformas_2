@@ -356,7 +356,7 @@ namespace tp_plataformas_2
             }
             else
             {
-                usuario = usuarios[idUsuario];
+                usuario = usuarios[idUsuario - 1];
             }
 
             return usuario;
@@ -709,9 +709,8 @@ namespace tp_plataformas_2
         }
 
 
-        public Usuario IniciarSesion(int cuil, string clave)
+        public int IniciarSesion(int cuil, string clave)
         {
-            Usuario usuario = null;
             bool Inicia = false;
             int Id = -1;
             int i = 0;
@@ -720,12 +719,12 @@ namespace tp_plataformas_2
                 Inicia = usuarios[i].Cuil == cuil && usuarios[i].Password == clave;
                 if (Inicia)
                 {
-                    usuario = usuarios[i];
+                    Id = usuarios[i].Id;
                 }
-                
-                    i++;
+
+                i++;
             }
-            return usuario;
+            return Id;
 
 
         }
