@@ -78,11 +78,11 @@ namespace tp_plataformas_2
                     try
                     {
                         int cuitI = Int32.Parse(cuil);
-                        
+                        try { 
 
+                        bool Agrega = mercado.AgregarUsuario(cuitI, nombre, apellido, mail, password, tipoUsuario);
 
-
-                        mercado.AgregarUsuario(cuitI, nombre, apellido, mail, password, tipoUsuario);
+                            if (Agrega ==true) { 
                         
                         MessageBox.Show("Usuario creado con exito");
 
@@ -91,6 +91,16 @@ namespace tp_plataformas_2
 
                         this.Hide();
 
+                            }
+                            else
+                            {
+                                throw new Excepciones("CUIT ya ingresado");
+                            }
+                        }
+                        catch(Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                     }
                     catch (FormatException)
                     {

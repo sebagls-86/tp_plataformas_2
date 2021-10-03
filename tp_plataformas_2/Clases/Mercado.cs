@@ -199,6 +199,16 @@ namespace tp_plataformas_2
         public bool AgregarUsuario(int cuil, String nombre, String apellido, String mail, String password, int tipoUsuario)
         {
 
+            foreach(Usuario persona in usuarios)
+            {
+                if(persona.Cuil == cuil)
+                {
+                    return false;
+                }
+
+            }
+
+
             int id = usuarios.Count + 1;
             Carro micarro = new Carro(id);
            
@@ -256,14 +266,13 @@ namespace tp_plataformas_2
         }
 
 
-        public void MostrarUsuarios()
+        public List<Usuario> MostrarUsuarios()
         {
-            Console.WriteLine("Estos son los Usuarios registrados:");
-            for (int i = 0; i < usuarios.Count; i++)
-            {
+            
                 usuarios.Sort();
-                
-            }
+             
+
+            return usuarios;
         }
 
         private bool BuscarCategoria(int ID)
