@@ -27,7 +27,7 @@ namespace tp_plataformas_2
 
         public override string ToString()
         {
-            return $"{Id}|{Nombre}|{Precio}|{Cantidad}|{Cat}";
+            return $"{Id}|{Nombre}|{Precio}|{Cantidad}|{Cat.Id}|{Cat.Nombre}";
         }
     }
 }

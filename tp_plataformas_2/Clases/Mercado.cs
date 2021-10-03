@@ -18,7 +18,7 @@ namespace tp_plataformas_2
         const int maxCategorias = 10;
 
         int cantCategorias = 0;
-
+        int cantProductos = 0; 
         /* --- Variables auxiliares  ---*/
 
         private string[] contenidos = new string[10];
@@ -41,6 +41,7 @@ namespace tp_plataformas_2
 
             ObtenerCategorias();
             ReadFileUsuarios();
+            ReadFileProductos();
         }
 
         private void ObtenerCategorias()
@@ -80,16 +81,47 @@ namespace tp_plataformas_2
             }
 
         }
-        public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)//Creamos producto y lo agregamos al array list de productos
+        private void ReadFileProductos()
         {
+            contenidos = FileManager.ReadFileProductos();
+            char delimiterChars = '|';
 
-            if (categorias[idCategoria] != null && categorias[idCategoria].Id == idCategoria)
+            foreach (string contenido in contenidos)
             {
-                Producto producto = new Producto(idCategoria, nombre, precio, Cantidad, categorias[idCategoria]);
-                this.productos.Add(producto);
+                if (contenido != null && contenido != "")
+                {
+                    string[] propiedades = contenido.Split(delimiterChars);
+                    
+
+                    int Id = int.Parse(propiedades[0]);
+                    string nombre = propiedades[1];
+                    double precio = double.Parse(propiedades[2]);
+                    int cantidad = int.Parse(propiedades[3]);
+                    int idCat = int.Parse(propiedades[4]);
+                    string categoriaNombre = propiedades[5];
+
+                    AgregarProducto(nombre, precio, cantidad, idCat);
+
+                    
+                }
+
             }
 
-            return true;
+        }
+        public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)//Creamos producto y lo agregamos al array list de productos
+        {
+            int indice = idCategoria - 1;
+            if (categorias[indice] != null && categorias[indice].Id == idCategoria)
+            {
+                Producto producto = new Producto(cantProductos, nombre, precio, Cantidad, categorias[idCategoria]);
+                this.productos.Add(producto);
+                FileManager.SaveListProductos(productos);
+                cantProductos++;
+                return true;
+            }
+
+            return false;
+            
         }
 
         public bool ModificarProducto(int ID, string Nombre, double Precio, int Cantidad, int ID_Categoria)
@@ -288,11 +320,21 @@ namespace tp_plataformas_2
         }
         public bool AgregarCategoria(string nombre) //Agregamos una categoria al array de categorias
         {
+            foreach (Categoria categoria in categorias)
+            {
+                if (categoria != null)
+                {
+                    if (categoria.Nombre.Equals(" "))
+                    {
+                        categoria.Nombre = nombre;
+                        break;
+                    }
+                }
+            }
             if (cantCategorias <= maxCategorias)
 
             {
-                cantCategorias++;
-                int id = cantCategorias;
+                int id = cantCategorias + 1;
                 if (BuscarCategoria(id))
                 {
                     Categoria categoria = new Categoria(id, nombre);
@@ -302,8 +344,9 @@ namespace tp_plataformas_2
 
                     do
                     {
-                        if (categorias[j] == null || categorias[j].Equals(""))
+                        if (categorias[j] == null)
                         {
+                            cantCategorias++;
                             categorias[j] = categoria;
                             auxiliar = 1;
                         }
@@ -312,7 +355,9 @@ namespace tp_plataformas_2
                     } while (auxiliar == 0);
                 }
 
-               
+
+
+
 
                 FileManager.SaveArrayCategorias(categorias);
                 return true;
@@ -329,11 +374,10 @@ namespace tp_plataformas_2
             {
                 categorias[ID].Nombre = Nombre;
                 FileManager.SaveArrayCategorias(categorias);
-                Console.WriteLine("Categoria modificada con exito");
             }
             else
             {
-                Console.WriteLine("Categoria no encontrada");
+                return false;
             }
 
 
@@ -354,13 +398,13 @@ namespace tp_plataformas_2
                 if (encontre)
                 {
 
-                    categorias[i] = null;
+                    categorias[i].Nombre = " ";
                     Console.WriteLine("Categoria " + ID + " eliminada con éxito!");
                     FileManager.SaveArrayCategorias(categorias);
-                    cantCategorias--;
+                    //cantCategorias--;
                 }
-                
-                    i++;
+
+                i++;
             }
             return encontre;
         }
