@@ -97,11 +97,6 @@ namespace tp_plataformas_2
             // dgvProductos
             // 
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.Nombre,
-            this.Precio,
-            this.Categoria});
             this.dgvProductos.Location = new System.Drawing.Point(284, 223);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.RowTemplate.Height = 25;

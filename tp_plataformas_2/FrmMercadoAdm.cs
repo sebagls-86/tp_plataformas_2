@@ -14,17 +14,18 @@ namespace tp_plataformas_2
     public partial class FrmMercadoAdm : Form
     {
         Mercado Mercado { get; set; }
-
-        public FrmMercadoAdm()
+        Usuario Usuario { get; set; }
+        public FrmMercadoAdm(Usuario usuario)
         {
-
             InitializeComponent();
+            Usuario = usuario;
 
         }
-        public FrmMercadoAdm(Mercado mercado)
+        public FrmMercadoAdm(Mercado mercado,Usuario usuario)
         {
-            Mercado = mercado;
             InitializeComponent();
+            Usuario = usuario;
+            Mercado = mercado;
 
         }
 

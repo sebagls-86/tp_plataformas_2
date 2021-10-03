@@ -338,6 +338,30 @@ namespace tp_plataformas_2
             return usuarios;
         }
 
+        public Usuario BuscarUsuarioPorId(String Id)
+        {
+            Usuario usuario;
+            bool sePudoParsear = Int32.TryParse(Id, out int idUsuario);
+            if (!sePudoParsear)
+            {
+                throw new Excepciones("No se pudo parsear el ID del producto buscado.");
+            }
+            else if (MercadoHelper.SonMenoresACero(new List<int> { idUsuario }))
+            {
+                throw new Excepciones("El indice del producto que quiere buscar es menor a 0.");
+            }
+            else if (!MercadoHelper.ExisteElUsuario(idUsuario, usuarios))
+            {
+                throw new Excepciones("No existe el producto con ID " + idUsuario);
+            }
+            else
+            {
+                usuario = usuarios[idUsuario - 1];
+            }
+
+            return usuario;
+        }
+
         private bool BuscarCategoria(int ID)
         {
             foreach(Categoria categoria in categorias)
@@ -469,23 +493,23 @@ namespace tp_plataformas_2
             Producto productoEncontrado;
             if (MercadoHelper.SonMenoresACero(new List<int> { Id_Producto, Cantidad, Id_Usuario }))
             {
-                Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
+                throw new Excepciones("Los parametros numericos deben ser mayor o igual a 0");
             }
             else if (!MercadoHelper.ExisteElUsuario(Id_Usuario, usuarios))
             {
-                Console.WriteLine("El usuario con id {0} no se pudo encontrar", Id_Usuario);
+                throw new Excepciones("El usuario con id "+ Id_Usuario + " no se pudo encontrar" );
             }
             else if (!MercadoHelper.ExisteElProducto(Id_Producto, productos))
             {
-                Console.WriteLine("El producto con id {0} no se pudo encontrar", Id_Producto);
+                throw new Excepciones("El producto con id "+Id_Producto+" no se pudo encontrar");
             }
             else
             {
-                usuarioEncontrado = usuarios[Id_Usuario];
+                usuarioEncontrado = usuarios[Id_Usuario - 1];
                 productoEncontrado = productos[Id_Producto];
                 if (Cantidad > productoEncontrado.Cantidad)
                 {
-                    Console.WriteLine("La cantidad que se quiere agregar es mayor al stock disponible.");
+                    throw new Excepciones("La cantidad que se quiere agregar es mayor al stock disponible.");
                 }
                 else
                 {
@@ -519,7 +543,7 @@ namespace tp_plataformas_2
             }
             else
             {
-                usuarioEncontrado = usuarios[Id_Usuario];
+                usuarioEncontrado = usuarios[Id_Usuario - 1];
                 productoEncontrado = productos[Id_Producto];
                 if (!usuarioEncontrado.MiCarro.Productos.ContainsKey(productoEncontrado))
                 {
@@ -556,7 +580,7 @@ namespace tp_plataformas_2
             }
             else
             {
-                usuarios[Id_Usuario].MiCarro.Vaciar();
+                usuarios[Id_Usuario - 1].MiCarro.Vaciar();
                 Console.WriteLine("Se ha vaciado el carro correctamente.");
                 sePudoVaciar = true;
             }
@@ -572,15 +596,15 @@ namespace tp_plataformas_2
             Usuario usuarioEncontrado;
             if (MercadoHelper.SonMenoresACero(new List<int> { ID_Usuario }))
             {
-                Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
+                throw new Excepciones("Los parametros numericos deben ser mayor o igual a 0");
             }
             else if (!MercadoHelper.ExisteElUsuario(ID_Usuario, usuarios))
             {
-                Console.WriteLine("El usuario con id {0} no se pudo encontrar", ID_Usuario);
+                throw new Excepciones("El usuario con id "+ID_Usuario+" no se pudo encontrar");
             }
             else
             {
-                usuarioEncontrado = usuarios[ID_Usuario];
+                usuarioEncontrado = usuarios[ID_Usuario - 1];
                 foreach(Producto producto in usuarioEncontrado.MiCarro.Productos.Keys)
                 {
                     precioTotal += producto.Precio;
@@ -590,6 +614,7 @@ namespace tp_plataformas_2
                 
                 Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos); 
                 Compra compra = new Compra(compras.Count + 1,usuarioEncontrado,productosCompra,precioTotal);
+                
                 compras.Add(compra);
                 foreach(Producto producto in productosCompra.Keys){
                     productos[producto.Id].Cantidad -= producto.Cantidad;
@@ -703,8 +728,8 @@ namespace tp_plataformas_2
                 {
                     Id = usuarios[i].Id;
                 }
-                
-                    i++;
+
+                i++;
             }
             return Id;
 

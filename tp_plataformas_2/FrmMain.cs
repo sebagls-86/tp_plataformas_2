@@ -17,7 +17,7 @@ namespace tp_plataformas_2
         {
             Mercado = new Mercado();
             InitializeComponent();
-            
+
         }
         public FrmMain(Mercado mercado)
         {
@@ -49,7 +49,7 @@ namespace tp_plataformas_2
         private void btnIngresar_Click(object sender, EventArgs e)
         {
 
-            
+
             cargandoMain.Minimum = 1;
             cargandoMain.Maximum = 100;
             cargandoMain.Step = 1;
@@ -59,12 +59,11 @@ namespace tp_plataformas_2
                 cargandoMain.PerformStep();
             }
 
-            
+
             //Mercado.AgregarUsuario(123, "seba", "sosa", "seba@sosa", "seba", 1234, false, true);
             //Mercado.AgregarUsuario(1234, "seba", "sosa", "seba@sosa", "seba1", 1234, false, false);
             string usuario = txtUsuario.Text;
             string password = txtPassword.Text;
-
 
 
             try
@@ -75,28 +74,30 @@ namespace tp_plataformas_2
 
 
                 int inicio = Mercado.IniciarSesion(idUsuario, password);
-
+                string idUsuarioLogueado = "" + inicio;
+                Usuario usuarioLogueado = Mercado.BuscarUsuarioPorId(idUsuarioLogueado);
 
                 if (inicio != -1)
                 {
-                   
+
                     bool Admin = Mercado.esAdmin(inicio);
 
-                    if (Admin) { 
-                    
-                    MessageBox.Show("Usuario detectado = ADMIN");
-                    this.Hide();
+                    if (Admin)
+                    {
 
-                    FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm(Mercado);
-                    VtnaPrincipal.Show();
+                        MessageBox.Show("Usuario detectado = ADMIN");
+                        this.Hide();
+
+                        FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm(Mercado,usuarioLogueado);
+                        VtnaPrincipal.Show();
 
                     }
-                    else if(Admin == false)
+                    else if (Admin == false)
                     {
                         MessageBox.Show("¡Gracias por su visita!");
                         this.Hide();
 
-                        FrmCliente VtnCliente = new FrmCliente(Mercado);
+                        FrmCliente VtnCliente = new FrmCliente(Mercado, usuarioLogueado);
                         VtnCliente.Show();
                     }
 
@@ -106,8 +107,8 @@ namespace tp_plataformas_2
                 {
                     throw new Excepciones("Usuario no encontrado");
                 }
-            } 
-            
+            }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

@@ -14,16 +14,20 @@ namespace tp_plataformas_2
     {
 
         Mercado Mercado { get; set; }
-
-        public FrmDetalleProducto(Producto producto)
+        Usuario Comprador { get; set; }
+        Producto Producto { get; set; }
+        public FrmDetalleProducto(Producto producto, Usuario comprador)
         {
+            Comprador = comprador;
             Mercado = new Mercado();
             InitializeComponent();
         }
 
-        public FrmDetalleProducto(Mercado mercado, Producto producto)
+        public FrmDetalleProducto(Mercado mercado, Producto producto, Usuario comprador)
         {
             Mercado = mercado;
+            Comprador = comprador;
+            Producto = producto;
             InitializeComponent();
             lblProductoNombre.Text = "PRODUCTO: " + producto.Nombre;
             lblPrecioProducto.Text = "PRECIO: $" + producto.Precio;
@@ -32,15 +36,29 @@ namespace tp_plataformas_2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int cantidad = 0;
+            bool sePudoParsear = Int32.TryParse(txtCantidadComprar.Text, out cantidad);
+            bool sePudoAgregar = false;
             try
             {
-                Mercado.BuscarProductoPorId(txtCantidadComprar.Text);
+                cantidad = Int32.Parse(txtCantidadComprar.Text);
+                sePudoAgregar = Mercado.AgregarAlCarro(Producto.Id, cantidad, Comprador.Id);
+                if (sePudoAgregar)
+                {
+                    MessageBox.Show("PRODUCTO AGREGADO AL CARRO-> \n" + Producto.ToString());
+                    this.Hide();
+                    FrmCliente VtnaCliente = new FrmCliente(Mercado, Comprador);
+                    VtnaCliente.Show();
+                } else
+                {
+                    MessageBox.Show("ERROR AL AGREGAR EL PRODUCTO");
+                }
             }
             catch (Excepciones ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            MessageBox.Show("Producto agregado con exito");
+
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -51,9 +69,10 @@ namespace tp_plataformas_2
         private void volverToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FrmCliente VtnaCliente = new FrmCliente(Mercado);
+            FrmCliente VtnaCliente = new FrmCliente(Mercado, Comprador);
             VtnaCliente.Show();
         }
+
 
     }
 }
