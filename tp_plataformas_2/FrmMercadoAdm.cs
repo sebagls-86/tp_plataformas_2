@@ -205,7 +205,9 @@ namespace tp_plataformas_2
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Hide();
+            FrmMain VtnaMain = new FrmMain();
+            VtnaMain.Show();
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
@@ -539,6 +541,11 @@ namespace tp_plataformas_2
             {
                 MessageBox.Show("Producto No Modificado");
             }
+        }
+
+        private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
