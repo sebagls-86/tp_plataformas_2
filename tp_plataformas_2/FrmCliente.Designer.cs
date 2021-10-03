@@ -35,7 +35,6 @@ namespace tp_plataformas_2
             this.mnuMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAcercaDe = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +57,16 @@ namespace tp_plataformas_2
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AGREGAR = new System.Windows.Forms.Button();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.callejaHoracioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cohenNicolasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kimAnastaciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kukutchkaMarcosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lopezEmmanuelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lopezSosaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.motzoFrancoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarro)).BeginInit();
@@ -72,7 +81,7 @@ namespace tp_plataformas_2
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuMenu,
-            this.mnuAcercaDe});
+            this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1142, 24);
@@ -85,28 +94,22 @@ namespace tp_plataformas_2
             this.cerrarSesionToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.mnuMenu.Name = "mnuMenu";
-            this.mnuMenu.Size = new System.Drawing.Size(50, 20);
-            this.mnuMenu.Text = "Menu";
+            this.mnuMenu.Size = new System.Drawing.Size(60, 20);
+            this.mnuMenu.Text = "Archivo";
             // 
             // cerrarSesionToolStripMenuItem
             // 
             this.cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
-            this.cerrarSesionToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.cerrarSesionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cerrarSesionToolStripMenuItem.Text = "Volver";
             this.cerrarSesionToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesionToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
-            // mnuAcercaDe
-            // 
-            this.mnuAcercaDe.Name = "mnuAcercaDe";
-            this.mnuAcercaDe.Size = new System.Drawing.Size(71, 20);
-            this.mnuAcercaDe.Text = "Acerca de";
             // 
             // dgvProductos
             // 
@@ -321,6 +324,77 @@ namespace tp_plataformas_2
             this.AGREGAR.UseVisualStyleBackColor = false;
             this.AGREGAR.Click += new System.EventHandler(this.AGREGAR_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem2});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(71, 20);
+            this.toolStripMenuItem1.Text = "Acerca de";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Text = "Materia";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.callejaHoracioToolStripMenuItem,
+            this.cohenNicolasToolStripMenuItem,
+            this.kimAnastaciaToolStripMenuItem,
+            this.kukutchkaMarcosToolStripMenuItem,
+            this.lopezEmmanuelToolStripMenuItem,
+            this.lopezSosaToolStripMenuItem,
+            this.motzoFrancoToolStripMenuItem});
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Text = "Integrantes";
+            // 
+            // callejaHoracioToolStripMenuItem
+            // 
+            this.callejaHoracioToolStripMenuItem.Name = "callejaHoracioToolStripMenuItem";
+            this.callejaHoracioToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.callejaHoracioToolStripMenuItem.Text = "Calleja Horacio";
+            // 
+            // cohenNicolasToolStripMenuItem
+            // 
+            this.cohenNicolasToolStripMenuItem.Name = "cohenNicolasToolStripMenuItem";
+            this.cohenNicolasToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.cohenNicolasToolStripMenuItem.Text = "Cohen Nicolas";
+            // 
+            // kimAnastaciaToolStripMenuItem
+            // 
+            this.kimAnastaciaToolStripMenuItem.Name = "kimAnastaciaToolStripMenuItem";
+            this.kimAnastaciaToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.kimAnastaciaToolStripMenuItem.Text = "Kim Anastasia";
+            // 
+            // kukutchkaMarcosToolStripMenuItem
+            // 
+            this.kukutchkaMarcosToolStripMenuItem.Name = "kukutchkaMarcosToolStripMenuItem";
+            this.kukutchkaMarcosToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.kukutchkaMarcosToolStripMenuItem.Text = "Kukutchka Marcos";
+            // 
+            // lopezEmmanuelToolStripMenuItem
+            // 
+            this.lopezEmmanuelToolStripMenuItem.Name = "lopezEmmanuelToolStripMenuItem";
+            this.lopezEmmanuelToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.lopezEmmanuelToolStripMenuItem.Text = "Lopez Emmanuel";
+            // 
+            // lopezSosaToolStripMenuItem
+            // 
+            this.lopezSosaToolStripMenuItem.Name = "lopezSosaToolStripMenuItem";
+            this.lopezSosaToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.lopezSosaToolStripMenuItem.Text = "Lopez Sosa Sebastian";
+            // 
+            // motzoFrancoToolStripMenuItem
+            // 
+            this.motzoFrancoToolStripMenuItem.Name = "motzoFrancoToolStripMenuItem";
+            this.motzoFrancoToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.motzoFrancoToolStripMenuItem.Text = "Motzo Franco";
+            // 
             // FrmCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -364,7 +438,6 @@ namespace tp_plataformas_2
         private System.Windows.Forms.ToolStripMenuItem mnuMenu;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuAcercaDe;
         private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
@@ -387,5 +460,15 @@ namespace tp_plataformas_2
         private System.Windows.Forms.TextBox txtBuscarProductos;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button AGREGAR;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem callejaHoracioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cohenNicolasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kimAnastaciaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kukutchkaMarcosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lopezEmmanuelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lopezSosaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem motzoFrancoToolStripMenuItem;
     }
 }
