@@ -12,9 +12,21 @@ namespace tp_plataformas_2
 {
     public partial class FrmCliente : Form
     {
+
+        Mercado Mercado { get; set; }
+
         public FrmCliente()
         {
+            Mercado = new Mercado();
             InitializeComponent();
+        }
+
+        public FrmCliente(Mercado mercado)
+        {
+            Mercado = mercado;
+            InitializeComponent();
+            dgvCategorias.DataSource = Mercado.MostrarCategorias();
+            dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
         }
 
         private void cerrarSesionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -48,6 +60,11 @@ namespace tp_plataformas_2
             this.Hide();
             FrmCheckOut VtnaFrmCheckOut = new FrmCheckOut();
             VtnaFrmCheckOut.Show();
+        }
+
+        private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

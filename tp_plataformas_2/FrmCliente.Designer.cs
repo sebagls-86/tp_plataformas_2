@@ -121,6 +121,7 @@ namespace tp_plataformas_2
             this.dgvProductos.RowTemplate.Height = 25;
             this.dgvProductos.Size = new System.Drawing.Size(542, 293);
             this.dgvProductos.TabIndex = 13;
+            this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
             // 
             // ID
             // 
@@ -287,7 +288,7 @@ namespace tp_plataformas_2
             // 
             // btnTestDetalleProducto
             // 
-            this.btnTestDetalleProducto.Location = new System.Drawing.Point(490, 378);
+            this.btnTestDetalleProducto.Location = new System.Drawing.Point(490, 386);
             this.btnTestDetalleProducto.Name = "btnTestDetalleProducto";
             this.btnTestDetalleProducto.Size = new System.Drawing.Size(28, 23);
             this.btnTestDetalleProducto.TabIndex = 29;
