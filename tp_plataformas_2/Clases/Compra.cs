@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace tp_plataformas_2
 {
-    class Compra : IComparable<Compra>
+    public class Compra : IComparable<Compra>
     {
         public int Id { get; set; }
         public Usuario Comprador;

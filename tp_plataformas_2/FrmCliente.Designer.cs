@@ -124,6 +124,7 @@ namespace tp_plataformas_2
             this.dgvProductos.RowTemplate.Height = 25;
             this.dgvProductos.Size = new System.Drawing.Size(774, 488);
             this.dgvProductos.TabIndex = 13;
+            this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
             // 
             // ID
             // 

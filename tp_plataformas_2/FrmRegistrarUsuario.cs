@@ -51,7 +51,7 @@ namespace tp_plataformas_2
             string cuil = txtCuil.Text;
             string mail = txtMail.Text;
             string password = txtPassword.Text;
-
+            int cuilUsuario = 0;
             int tipoUsuario = 0;
 
             if (radioButton1.Checked) {
@@ -77,10 +77,16 @@ namespace tp_plataformas_2
 
                     try
                     {
-                        int cuitI = Int32.Parse(cuil);
+
+                        //int cuitI = Int32.TryParse(cuil out );
                         try { 
 
-                        bool Agrega = mercado.AgregarUsuario(cuitI, nombre, apellido, mail, password, tipoUsuario);
+                        bool esParseable = Int32.TryParse(cuil, out cuilUsuario);
+                            if (!esParseable)
+                            {
+                                throw new Excepciones("El valor ingresado en CUIL no se pudo parsear a INT.");
+                            }
+                        bool Agrega = mercado.AgregarUsuario(cuilUsuario, nombre, apellido, mail, password, tipoUsuario);
 
                             if (Agrega ==true) { 
                         

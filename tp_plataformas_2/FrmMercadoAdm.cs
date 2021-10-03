@@ -13,15 +13,20 @@ namespace tp_plataformas_2
 {
     public partial class FrmMercadoAdm : Form
     {
-        Mercado mercado = new Mercado();
+        Mercado Mercado { get; set; }
+
         public FrmMercadoAdm()
         {
+
             InitializeComponent();
 
-
+        }
+        public FrmMercadoAdm(Mercado mercado)
+        {
+            Mercado = mercado;
+            InitializeComponent();
 
         }
-
 
 
         private void FrmMercadoAdmin_Load(object sender, EventArgs e)
@@ -42,13 +47,13 @@ namespace tp_plataformas_2
             lblMainTitle.Text = "Categorias";
 
             /* --- DataTableGrid ---*/
-            dataTableCategorias.DataSource = mercado.MostrarCategorias();
+            dataTableCategorias.DataSource = Mercado.MostrarCategorias();
             dataTableCategorias.Width = 300;
 
             dataTableCategorias.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataTableCategorias.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            dataTableCeliminar.DataSource = mercado.MostrarCategorias();
+            dataTableCeliminar.DataSource = Mercado.MostrarCategorias();
             dataTableCeliminar.Width = 300;
 
             dataTableCeliminar.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -65,7 +70,7 @@ namespace tp_plataformas_2
             panelProductos.Visible = true;
             lblMainTitle.Text = "Productos";
 
-            dgvProductos.DataSource = mercado.MostrarProductoEnPantalla();
+            dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
             //dgvProductos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             //dgvProductos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
@@ -109,7 +114,7 @@ namespace tp_plataformas_2
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FrmMain FrmMain = new FrmMain();
+            FrmMain FrmMain = new FrmMain(Mercado);
             FrmMain.Show();
         }
 
@@ -119,7 +124,7 @@ namespace tp_plataformas_2
             string categoriaNueva = txtboxNombreCategoria.Text;
             if (!categoriaNueva.Equals(""))
             {
-                if (mercado.AgregarCategoria(categoriaNueva))
+                if (Mercado.AgregarCategoria(categoriaNueva))
                 {
                     txtboxNombreCategoria.Text = "";
                 }
@@ -133,7 +138,7 @@ namespace tp_plataformas_2
             if (isParsable)
             {
                 string nuevoNombre = txtNombreCategoriaModificar.Text;
-                mercado.ModificarCategoria(id, nuevoNombre);
+                Mercado.ModificarCategoria(id, nuevoNombre);
                 txtNombreCategoriaModificar.Text = "";
                 txtIDCategoriaModificar.Text = "";
             }
@@ -150,7 +155,7 @@ namespace tp_plataformas_2
 
                 try
                 {
-                    if (mercado.EliminarCategoria(idEliminado))
+                    if (Mercado.EliminarCategoria(idEliminado))
                     {
                         txtIdEliminar.Text = "";
                         this.Refresh();
@@ -279,7 +284,7 @@ namespace tp_plataformas_2
                         try
                         {
 
-                            bool Agrega = mercado.AgregarUsuario(cuitI, nombre, apellido, mail, password, tipoUsuario);
+                            bool Agrega = Mercado.AgregarUsuario(cuitI, nombre, apellido, mail, password, tipoUsuario);
 
                             if (Agrega == true)
                             {
@@ -335,7 +340,7 @@ namespace tp_plataformas_2
                 try
                 {
 
-                    bool Elimina = mercado.EliminarUsuario(idEliminar);
+                    bool Elimina = Mercado.EliminarUsuario(idEliminar);
 
                     if (Elimina == true)
                     {
@@ -382,7 +387,7 @@ namespace tp_plataformas_2
                 int cantidad = int.Parse(txtCantidadProductoAgregar.Text);
                 int idCategoria = int.Parse(txtIdCategoriaProductoAgregar.Text);
 
-                if (mercado.AgregarProducto(nombre, precio, cantidad, idCategoria))
+                if (Mercado.AgregarProducto(nombre, precio, cantidad, idCategoria))
                 {
                     txtNombreProductoAgregar.Text = "";
                     txtPrecioProductoAgregar.Text = "";

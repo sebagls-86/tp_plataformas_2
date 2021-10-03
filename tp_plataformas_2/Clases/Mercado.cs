@@ -6,7 +6,7 @@ namespace tp_plataformas_2
 {
 
 
-    class Mercado
+    public class Mercado
     {
         public List<Producto> productos { get; set; }
         public List<Usuario> usuarios { get; set; }
@@ -31,7 +31,7 @@ namespace tp_plataformas_2
             compras = new List<Compra>();
             compras.Add(null);
             categorias = new Categoria[maxCategorias];
-
+             
             FileManager.CreateFolder();
             
             FileManager.CreateFile("categorias");
@@ -113,7 +113,7 @@ namespace tp_plataformas_2
             int indice = idCategoria - 1;
             if (categorias[indice] != null && categorias[indice].Id == idCategoria)
             {
-                Producto producto = new Producto(cantProductos, nombre, precio, Cantidad, categorias[idCategoria]);
+                Producto producto = new Producto(cantProductos, nombre, precio, Cantidad, categorias[indice]);
                 this.productos.Add(producto);
                 FileManager.SaveListProductos(productos);
                 cantProductos++;

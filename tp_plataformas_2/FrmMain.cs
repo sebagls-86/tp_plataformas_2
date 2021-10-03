@@ -13,13 +13,20 @@ namespace tp_plataformas_2
 {
     public partial class FrmMain : Form
     {
-        Mercado mercado = new Mercado();
+        Mercado Mercado { get; set; }
         public FrmMain()
         {
-            
+            Mercado = new Mercado();
             InitializeComponent();
             
         }
+        public FrmMain(Mercado mercado)
+        {
+            Mercado = mercado;
+            InitializeComponent();
+
+        }
+
 
         private void btnExit(object sender, EventArgs e)
         {
@@ -54,8 +61,8 @@ namespace tp_plataformas_2
             }
 
             
-            //mercado.AgregarUsuario(123, "seba", "sosa", "seba@sosa", "seba", 1234, false, true);
-            //mercado.AgregarUsuario(1234, "seba", "sosa", "seba@sosa", "seba1", 1234, false, false);
+            //Mercado.AgregarUsuario(123, "seba", "sosa", "seba@sosa", "seba", 1234, false, true);
+            //Mercado.AgregarUsuario(1234, "seba", "sosa", "seba@sosa", "seba1", 1234, false, false);
             string usuario = txtUsuario.Text;
             string password = txtPassword.Text;
 
@@ -68,20 +75,20 @@ namespace tp_plataformas_2
                 int idUsuario = Int32.Parse(usuario);
 
 
-                int inicio = mercado.IniciarSesion(idUsuario, password);
+                int inicio = Mercado.IniciarSesion(idUsuario, password);
 
 
                 if (inicio != -1)
                 {
                    
-                    bool Admin = mercado.esAdmin(inicio);
+                    bool Admin = Mercado.esAdmin(inicio);
 
                     if (Admin) { 
                     
                     MessageBox.Show("Usuario detectado = ADMIN");
                     this.Hide();
 
-                    FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm();
+                    FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm(Mercado);
                     VtnaPrincipal.Show();
 
                     }
@@ -90,7 +97,7 @@ namespace tp_plataformas_2
                         MessageBox.Show("¡Gracias por su visita!");
                         this.Hide();
 
-                        FrmCliente VtnCliente = new FrmCliente();
+                        FrmCliente VtnCliente = new FrmCliente(Mercado);
                         VtnCliente.Show();
                     }
 
