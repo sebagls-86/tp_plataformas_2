@@ -18,7 +18,7 @@ namespace tp_plataformas_2
         {
             InitializeComponent();
 
-            
+
 
         }
 
@@ -28,7 +28,7 @@ namespace tp_plataformas_2
         {
             lblMainTitle.Text = "AMB Mercado";
         }
-        
+
 
         private void btnCategorias_Click(object sender, EventArgs e)
         {
@@ -68,7 +68,7 @@ namespace tp_plataformas_2
             dgvProductos.DataSource = mercado.MostrarProductoEnPantalla();
             //dgvProductos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             //dgvProductos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            
+
         }
 
         private void btnCompras_Click(object sender, EventArgs e)
@@ -124,22 +124,45 @@ namespace tp_plataformas_2
                 txtNombreCategoriaModificar.Text = "";
                 txtIDCategoriaModificar.Text = "";
             }
-            
-   
+
+
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            int idEliminado = int.Parse(txtIdEliminar.Text);
-            mercado.EliminarCategoria(idEliminado);
-            txtIdEliminar.Text = "";
-            this.Refresh();
+            try
+            {
+                int idEliminado = int.Parse(txtIdEliminar.Text);
+
+                try
+                {
+                    if (mercado.EliminarCategoria(idEliminado))
+                    {
+                        txtIdEliminar.Text = "";
+                        this.Refresh();
+
+                    }
+                    else
+                    {
+                        throw new Excepciones("Categoria no encontrada");
+                    }
+
+                } catch (Excepciones ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("El id debe ser numerico");
+            }
 
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -165,7 +188,7 @@ namespace tp_plataformas_2
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -247,10 +270,11 @@ namespace tp_plataformas_2
 
                                 MessageBox.Show("Usuario creado con exito");
 
-                                FrmMain VtnaConfiguracion = new FrmMain();
-                                VtnaConfiguracion.Show();
-
-                                this.Hide();
+                                txtNombre.Text = "";
+                                txtApellido.Text = "";
+                                txtCuil.Text = "";
+                                txtMail.Text = "";
+                                txtPassword.Text = "";
 
                             }
                             else
@@ -282,26 +306,77 @@ namespace tp_plataformas_2
 
         }
 
-        private void btnAgregarProducto_Click(object sender, EventArgs e)
-        {
-            string nombre = txtNombreProductoAgregar.Text;
-            double precio = double.Parse(txtPrecioProductoAgregar.Text);
-            int cantidad = int.Parse(txtCantidadProductoAgregar.Text);
-            int idCategoria = int.Parse(txtIdCategoriaProductoAgregar.Text);
 
-            if (mercado.AgregarProducto(nombre, precio, cantidad,idCategoria))
+
+        private void btnEliminarUsuario_Click(object sender, EventArgs e)
+        {
+
+
+            string id = txtIdEliminaar.Text;
+
+            try
             {
-                txtNombreProductoAgregar.Text = "";
-                txtPrecioProductoAgregar.Text = "";
-                txtCantidadProductoAgregar.Text = "";
-                txtIdCategoriaProductoAgregar.Text = "";
-                MessageBox.Show("Producto Agregado");
+                int idEliminar = Int32.Parse(id);
+                try
+                {
+
+                    bool Elimina = mercado.EliminarUsuario(idEliminar);
+
+                    if (Elimina == true)
+                    {
+
+                        MessageBox.Show("Usuario eliminado");
+
+                        txtIdEliminaar.Text = "";
+
+
+                    }
+                    else
+                    {
+                        throw new Excepciones("Usuario no encontrado");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+
             }
-            else
+            catch (FormatException)
             {
-                MessageBox.Show("no se agrego");
+
+                MessageBox.Show("El id debe ser numerico");
             }
-            dgvProductos.Refresh();
+
+            this.Refresh();
         }
+
+        private void panelCategorias_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+            private void btnAgregarProducto_Click(object sender, EventArgs e)
+            {
+                string nombre = txtNombreProductoAgregar.Text;
+                double precio = double.Parse(txtPrecioProductoAgregar.Text);
+                int cantidad = int.Parse(txtCantidadProductoAgregar.Text);
+                int idCategoria = int.Parse(txtIdCategoriaProductoAgregar.Text);
+
+                if (mercado.AgregarProducto(nombre, precio, cantidad, idCategoria))
+                {
+                    txtNombreProductoAgregar.Text = "";
+                    txtPrecioProductoAgregar.Text = "";
+                    txtCantidadProductoAgregar.Text = "";
+                    txtIdCategoriaProductoAgregar.Text = "";
+                    MessageBox.Show("Producto Agregado");
+                }
+                else
+                {
+                    MessageBox.Show("no se agrego");
+                }
+                dgvProductos.Refresh();
+            }
     }
 }
+
