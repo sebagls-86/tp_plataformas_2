@@ -290,6 +290,8 @@ namespace tp_plataformas_2
                 {
 
                     usuarios.Remove(usuarios[i]);
+                    
+                    FileManager.SaveListUsuarios(usuarios);
                 }
                 else
                     i++;

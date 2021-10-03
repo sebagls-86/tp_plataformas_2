@@ -234,6 +234,7 @@ namespace tp_plataformas_2
             this.panelCategorias.Size = new System.Drawing.Size(1102, 542);
             this.panelCategorias.TabIndex = 0;
             this.panelCategorias.Visible = false;
+            this.panelCategorias.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCategorias_Paint);
             // 
             // tabUsuarios
             // 
@@ -1093,6 +1094,7 @@ namespace tp_plataformas_2
             this.btnEliminarUsuario.TabIndex = 37;
             this.btnEliminarUsuario.Text = "Eliminar";
             this.btnEliminarUsuario.UseVisualStyleBackColor = true;
+            this.btnEliminarUsuario.Click += new System.EventHandler(this.btnEliminarUsuario_Click);
             // 
             // label24
             // 
@@ -1670,11 +1672,11 @@ namespace tp_plataformas_2
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1144, 691);
-            this.Controls.Add(this.panelProductos);
+            this.ClientSize = new System.Drawing.Size(1138, 674);
             this.Controls.Add(this.panelCategorias);
             this.Controls.Add(this.panelUsuarios);
             this.Controls.Add(this.panelCompras);
+            this.Controls.Add(this.panelProductos);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnUsuarios);
             this.Controls.Add(this.lblMainTitle);

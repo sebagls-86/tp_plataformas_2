@@ -129,6 +129,8 @@ namespace tp_plataformas_2
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+
+            
             try
             {
                 int idEliminado = int.Parse(txtIdEliminar.Text);
@@ -146,7 +148,8 @@ namespace tp_plataformas_2
                         throw new Excepciones("Categoria no encontrada");
                     }
 
-                } catch (Excepciones ex)
+                }
+                catch (Excepciones ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -160,7 +163,7 @@ namespace tp_plataformas_2
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+            private void button1_Click(object sender, EventArgs e)
         {
 
 
@@ -306,8 +309,6 @@ namespace tp_plataformas_2
 
         }
 
-
-
         private void btnEliminarUsuario_Click(object sender, EventArgs e)
         {
 
@@ -354,7 +355,11 @@ namespace tp_plataformas_2
 
         private void panelCategorias_Paint(object sender, PaintEventArgs e)
         {
+
         }
+
+
+
 
             private void btnAgregarProducto_Click(object sender, EventArgs e)
             {
