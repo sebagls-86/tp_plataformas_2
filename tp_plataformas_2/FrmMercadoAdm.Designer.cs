@@ -151,10 +151,10 @@ namespace tp_plataformas_2
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.tabPage12 = new System.Windows.Forms.TabPage();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnEliminarProducto = new System.Windows.Forms.Button();
             this.label42 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.txtEliminarProductoID = new System.Windows.Forms.TextBox();
             this.btnProductos = new System.Windows.Forms.Button();
             this.btnCategorias = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -1383,6 +1383,7 @@ namespace tp_plataformas_2
             this.btnProductoModificar.TabIndex = 32;
             this.btnProductoModificar.Text = "Modificar";
             this.btnProductoModificar.UseVisualStyleBackColor = true;
+            this.btnProductoModificar.Click += new System.EventHandler(this.btnProductoModificar_Click);
             // 
             // pictureBox5
             // 
@@ -1396,10 +1397,10 @@ namespace tp_plataformas_2
             // tabPage12
             // 
             this.tabPage12.Controls.Add(this.pictureBox6);
-            this.tabPage12.Controls.Add(this.button3);
+            this.tabPage12.Controls.Add(this.btnEliminarProducto);
             this.tabPage12.Controls.Add(this.label42);
             this.tabPage12.Controls.Add(this.label43);
-            this.tabPage12.Controls.Add(this.textBox14);
+            this.tabPage12.Controls.Add(this.txtEliminarProductoID);
             this.tabPage12.Location = new System.Drawing.Point(4, 30);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Size = new System.Drawing.Size(1005, 392);
@@ -1416,15 +1417,15 @@ namespace tp_plataformas_2
             this.pictureBox6.TabIndex = 38;
             this.pictureBox6.TabStop = false;
             // 
-            // button3
+            // btnEliminarProducto
             // 
-            this.button3.Location = new System.Drawing.Point(232, 170);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(171, 52);
-            this.button3.TabIndex = 37;
-            this.button3.Text = "Eliminar";
-            this.button3.UseVisualStyleBackColor = true;
-            
+            this.btnEliminarProducto.Location = new System.Drawing.Point(232, 170);
+            this.btnEliminarProducto.Name = "btnEliminarProducto";
+            this.btnEliminarProducto.Size = new System.Drawing.Size(171, 52);
+            this.btnEliminarProducto.TabIndex = 37;
+            this.btnEliminarProducto.Text = "Eliminar";
+            this.btnEliminarProducto.UseVisualStyleBackColor = true;
+            this.btnEliminarProducto.Click += new System.EventHandler(this.btnEliminarProducto_Click);
             // 
             // label42
             // 
@@ -1445,12 +1446,12 @@ namespace tp_plataformas_2
             this.label43.TabIndex = 35;
             this.label43.Text = "ID";
             // 
-            // textBox14
+            // txtEliminarProductoID
             // 
-            this.textBox14.Location = new System.Drawing.Point(178, 106);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(225, 29);
-            this.textBox14.TabIndex = 34;
+            this.txtEliminarProductoID.Location = new System.Drawing.Point(178, 106);
+            this.txtEliminarProductoID.Name = "txtEliminarProductoID";
+            this.txtEliminarProductoID.Size = new System.Drawing.Size(225, 29);
+            this.txtEliminarProductoID.TabIndex = 34;
             // 
             // btnProductos
             // 
@@ -1845,10 +1846,10 @@ namespace tp_plataformas_2
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.TabPage tabPage12;
         private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnEliminarProducto;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox txtEliminarProductoID;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage13;
         private System.Windows.Forms.PictureBox pictureBox7;

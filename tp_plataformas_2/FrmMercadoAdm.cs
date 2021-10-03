@@ -348,7 +348,7 @@ namespace tp_plataformas_2
                     {
 
                         MessageBox.Show("Usuario eliminado");
-                        this.Refresh();
+                        //this.Refresh();
                         txtIdEliminaar.Text = "";
                         dgvUsuariosLista.DataSource = null;
                         dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
@@ -405,7 +405,7 @@ namespace tp_plataformas_2
             {
                 MessageBox.Show("no se agrego");
             }
-            dgvProductos.Refresh();
+            //dgvProductos.Refresh();
         }
 
         private void btnModificaar_Click(object sender, EventArgs e)
@@ -499,7 +499,47 @@ namespace tp_plataformas_2
 
         }
 
-       
+        private void btnEliminarProducto_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(txtEliminarProductoID.Text);
+            if (Mercado.EliminarProducto(id))
+            {
+                MessageBox.Show("Producto Eliminado");
+                txtEliminarProductoID.Text = "";
+                dgvProductos.DataSource = null;
+                dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
+            }
+            else
+            {
+                MessageBox.Show("ID Producto No Encontrado");
+            }
+        }
+
+        private void btnProductoModificar_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(txtIdProductoModificar.Text);
+            string nombre = txtProductoNombreModificar.Text;
+            double precio = double.Parse(txtPrecioProductoModificar.Text);
+            int cantidad = int.Parse(txtCantidadProductoModificar.Text);
+            int idCategoria = int.Parse(txtIdCategoriaProductoModificar.Text);
+
+            if (Mercado.ModificarProducto(id,nombre,precio,cantidad,idCategoria))
+            {
+                MessageBox.Show("Producto Modificado");
+                txtIdProductoModificar.Text = "";
+                txtProductoNombreModificar.Text = "";
+                txtPrecioProductoModificar.Text = "";
+                txtCantidadProductoModificar.Text = "";
+                txtIdCategoriaProductoModificar.Text = "";
+
+                dgvProductos.DataSource = null;
+                dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
+            }
+            else
+            {
+                MessageBox.Show("Producto No Modificado");
+            }
+        }
     }
 }
 
