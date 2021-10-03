@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using tp_plataformas_2.Clases;
+using tp_plataformas_2;
 
 namespace tp_plataformas_2
 {
@@ -151,6 +151,7 @@ namespace tp_plataformas_2
                     if (Mercado.EliminarCategoria(idEliminado))
                     {
                         txtIdEliminar.Text = "";
+                       
                         this.Refresh();
 
                     }
@@ -285,7 +286,8 @@ namespace tp_plataformas_2
                             {
 
                                 MessageBox.Show("Usuario creado con exito");
-                                this.Refresh();
+                                dgvUsuariosLista.DataSource = null;
+                                dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
                                 txtNombre.Text = "";
                                 txtApellido.Text = "";
                                 txtCuil.Text = "";
@@ -341,8 +343,10 @@ namespace tp_plataformas_2
                     {
 
                         MessageBox.Show("Usuario eliminado");
-                        this.Refresh();
+                        //this.Refresh();
                         txtIdEliminaar.Text = "";
+                        dgvUsuariosLista.DataSource = null;
+                        dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
 
 
                     }
@@ -389,12 +393,14 @@ namespace tp_plataformas_2
                 txtCantidadProductoAgregar.Text = "";
                 txtIdCategoriaProductoAgregar.Text = "";
                 MessageBox.Show("Producto Agregado");
-            }
+                dgvProductos.DataSource = null;
+                dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
+        }
             else
             {
                 MessageBox.Show("no se agrego");
             }
-            dgvProductos.Refresh();
+            //dgvProductos.Refresh();
         }
 
         private void btnModificaar_Click(object sender, EventArgs e)
@@ -450,7 +456,6 @@ namespace tp_plataformas_2
                             {
 
                                 MessageBox.Show("Usuario modificado con exito");
-                                this.Refresh();
                                 txtIdUsuarioModificar.Text = "";
                                 txtModificarNombre.Text = "";
                                 txtModificarApellido.Text = "";
@@ -489,9 +494,46 @@ namespace tp_plataformas_2
 
         }
 
-        private void volverToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnEliminarProducto_Click(object sender, EventArgs e)
         {
-         Application.Exit();
+            int id = int.Parse(txtEliminarProductoID.Text);
+            if (Mercado.EliminarProducto(id))
+            {
+                MessageBox.Show("Producto Eliminado");
+                txtEliminarProductoID.Text = "";
+                dgvProductos.DataSource = null;
+                dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
+            }
+            else
+            {
+                MessageBox.Show("ID Producto No Encontrado");
+            }
+        }
+
+        private void btnProductoModificar_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(txtIdProductoModificar.Text);
+            string nombre = txtProductoNombreModificar.Text;
+            double precio = double.Parse(txtPrecioProductoModificar.Text);
+            int cantidad = int.Parse(txtCantidadProductoModificar.Text);
+            int idCategoria = int.Parse(txtIdCategoriaProductoModificar.Text);
+
+            if (Mercado.ModificarProducto(id,nombre,precio,cantidad,idCategoria))
+            {
+                MessageBox.Show("Producto Modificado");
+                txtIdProductoModificar.Text = "";
+                txtProductoNombreModificar.Text = "";
+                txtPrecioProductoModificar.Text = "";
+                txtCantidadProductoModificar.Text = "";
+                txtIdCategoriaProductoModificar.Text = "";
+
+                dgvProductos.DataSource = null;
+                dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
+            }
+            else
+            {
+                MessageBox.Show("Producto No Modificado");
+            }
         }
     }
 }

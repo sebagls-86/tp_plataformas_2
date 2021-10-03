@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace tp_plataformas_2.Clases
+namespace tp_plataformas_2
 {
     public class Excepciones : Exception
     {

@@ -151,10 +151,10 @@ namespace tp_plataformas_2
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.tabPage12 = new System.Windows.Forms.TabPage();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnEliminarProducto = new System.Windows.Forms.Button();
             this.label42 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.txtEliminarProductoID = new System.Windows.Forms.TextBox();
             this.btnProductos = new System.Windows.Forms.Button();
             this.btnCategorias = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -1384,6 +1384,7 @@ namespace tp_plataformas_2
             this.btnProductoModificar.TabIndex = 32;
             this.btnProductoModificar.Text = "Modificar";
             this.btnProductoModificar.UseVisualStyleBackColor = true;
+            this.btnProductoModificar.Click += new System.EventHandler(this.btnProductoModificar_Click);
             // 
             // pictureBox5
             // 
@@ -1397,10 +1398,10 @@ namespace tp_plataformas_2
             // tabPage12
             // 
             this.tabPage12.Controls.Add(this.pictureBox6);
-            this.tabPage12.Controls.Add(this.button3);
+            this.tabPage12.Controls.Add(this.btnEliminarProducto);
             this.tabPage12.Controls.Add(this.label42);
             this.tabPage12.Controls.Add(this.label43);
-            this.tabPage12.Controls.Add(this.textBox14);
+            this.tabPage12.Controls.Add(this.txtEliminarProductoID);
             this.tabPage12.Location = new System.Drawing.Point(4, 30);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Size = new System.Drawing.Size(1005, 392);
@@ -1417,14 +1418,15 @@ namespace tp_plataformas_2
             this.pictureBox6.TabIndex = 38;
             this.pictureBox6.TabStop = false;
             // 
-            // button3
+            // btnEliminarProducto
             // 
-            this.button3.Location = new System.Drawing.Point(232, 170);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(171, 52);
-            this.button3.TabIndex = 37;
-            this.button3.Text = "Eliminar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnEliminarProducto.Location = new System.Drawing.Point(232, 170);
+            this.btnEliminarProducto.Name = "btnEliminarProducto";
+            this.btnEliminarProducto.Size = new System.Drawing.Size(171, 52);
+            this.btnEliminarProducto.TabIndex = 37;
+            this.btnEliminarProducto.Text = "Eliminar";
+            this.btnEliminarProducto.UseVisualStyleBackColor = true;
+            this.btnEliminarProducto.Click += new System.EventHandler(this.btnEliminarProducto_Click);
             // 
             // label42
             // 
@@ -1445,12 +1447,12 @@ namespace tp_plataformas_2
             this.label43.TabIndex = 35;
             this.label43.Text = "ID";
             // 
-            // textBox14
+            // txtEliminarProductoID
             // 
-            this.textBox14.Location = new System.Drawing.Point(178, 106);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(225, 29);
-            this.textBox14.TabIndex = 34;
+            this.txtEliminarProductoID.Location = new System.Drawing.Point(178, 106);
+            this.txtEliminarProductoID.Name = "txtEliminarProductoID";
+            this.txtEliminarProductoID.Size = new System.Drawing.Size(225, 29);
+            this.txtEliminarProductoID.TabIndex = 34;
             // 
             // btnProductos
             // 
@@ -1494,12 +1496,14 @@ namespace tp_plataformas_2
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.menuToolStripMenuItem.Text = "Archivo";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.menuToolStripMenuItem.Text = "Menu";
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.salirToolStripMenuItem.Text = "Volver";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
@@ -1514,7 +1518,7 @@ namespace tp_plataformas_2
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(133, 22);
             this.toolStripMenuItem3.Text = "Materia";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
@@ -1529,7 +1533,7 @@ namespace tp_plataformas_2
             this.lopezSosaToolStripMenuItem,
             this.motzoFrancoToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
             this.toolStripMenuItem2.Text = "Integrantes";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
@@ -1644,10 +1648,10 @@ namespace tp_plataformas_2
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1144, 691);
-            this.Controls.Add(this.panelUsuarios);
-            this.Controls.Add(this.panelCategorias);
-            this.Controls.Add(this.panelCompras);
             this.Controls.Add(this.panelProductos);
+            this.Controls.Add(this.panelCategorias);
+            this.Controls.Add(this.panelUsuarios);
+            this.Controls.Add(this.panelCompras);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnUsuarios);
             this.Controls.Add(this.lblMainTitle);
@@ -1662,7 +1666,6 @@ namespace tp_plataformas_2
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1160, 730);
             this.MinimumSize = new System.Drawing.Size(1160, 730);
-            //this.Name = "FrmMercadoAdm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mercado - Administrador";
             this.Load += new System.EventHandler(this.FrmMercadoAdmin_Load);
@@ -1854,10 +1857,10 @@ namespace tp_plataformas_2
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.TabPage tabPage12;
         private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnEliminarProducto;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox txtEliminarProductoID;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage13;
         private System.Windows.Forms.PictureBox pictureBox7;

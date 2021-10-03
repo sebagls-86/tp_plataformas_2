@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using tp_plataformas_2.Clases;
+using tp_plataformas_2;
 
 
 namespace tp_plataformas_2
