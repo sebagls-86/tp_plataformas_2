@@ -82,14 +82,17 @@ namespace tp_plataformas_2
         }
         public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)//Creamos producto y lo agregamos al array list de productos
         {
-
-            if (categorias[idCategoria] != null && categorias[idCategoria].Id == idCategoria)
+            int indice = idCategoria - 1;
+            if (categorias[indice] != null && categorias[indice].Id == idCategoria)
             {
                 Producto producto = new Producto(idCategoria, nombre, precio, Cantidad, categorias[idCategoria]);
                 this.productos.Add(producto);
+                FileManager.SaveListProductos(productos);
+                return true;
             }
 
-            return true;
+            return false;
+            
         }
 
         public bool ModificarProducto(int ID, string Nombre, double Precio, int Cantidad, int ID_Categoria)
@@ -607,7 +610,7 @@ namespace tp_plataformas_2
 
         public List<Producto> MostrarProductoEnPantalla()
         {
-            productos.Sort();
+            //productos.Sort();
 
             return productos;
         }

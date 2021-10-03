@@ -65,6 +65,9 @@ namespace tp_plataformas_2
             panelProductos.Visible = true;
             lblMainTitle.Text = "Productos";
 
+            dgvProductos.DataSource = mercado.MostrarProductoEnPantalla();
+            //dgvProductos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //dgvProductos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
         private void btnCompras_Click(object sender, EventArgs e)
@@ -185,6 +188,24 @@ namespace tp_plataformas_2
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAgregarProducto_Click(object sender, EventArgs e)
+        {
+            string nombre = txtNombreProductoAgregar.Text;
+            double precio = double.Parse(txtPrecioProductoAgregar.Text);
+            int cantidad = int.Parse(txtCantidadProductoAgregar.Text);
+            int categoriaID = int.Parse(txtIdCategoriaProductoAgregar.Text);
+
+            if(mercado.AgregarProducto(nombre, precio, cantidad, categoriaID))
+            {
+                MessageBox.Show("producto agregado");
+            }
+            else
+            {
+                MessageBox.Show("producto no agregado");
+
+            }
         }
     }
 }

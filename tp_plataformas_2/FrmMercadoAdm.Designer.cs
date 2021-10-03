@@ -1316,6 +1316,7 @@ namespace tp_plataformas_2
             this.btnAgregarProducto.TabIndex = 0;
             this.btnAgregarProducto.Text = "Agregar";
             this.btnAgregarProducto.UseVisualStyleBackColor = true;
+            this.btnAgregarProducto.Click += new System.EventHandler(this.btnAgregarProducto_Click);
             // 
             // tabPage11
             // 
@@ -1689,8 +1690,8 @@ namespace tp_plataformas_2
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1144, 691);
-            this.Controls.Add(this.panelCategorias);
             this.Controls.Add(this.panelProductos);
+            this.Controls.Add(this.panelCategorias);
             this.Controls.Add(this.panelUsuarios);
             this.Controls.Add(this.panelCompras);
             this.Controls.Add(this.btnExit);
