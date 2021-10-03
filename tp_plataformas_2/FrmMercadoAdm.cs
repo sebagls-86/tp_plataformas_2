@@ -83,6 +83,7 @@ namespace tp_plataformas_2
             panelProductos.Visible = false;
             panelCompras.Visible = true;
             lblMainTitle.Text = "Compras";
+            dgvComprasRealizadas.DataSource = Mercado.mostrarComprasRealizadas();
 
         }
 
@@ -543,9 +544,24 @@ namespace tp_plataformas_2
             }
         }
 
+
+        private void btnEliminarCompra_Click(object sender, EventArgs e)
+        {
+            int idCompra = int.Parse(txtEliminarCompraId.Text);
+
+            /*  DESCOMENTAR ESTO  */
+            //if (Mercado.EliminarCompra(idCompra))
+            //{
+            //    txtEliminarCompraId.Text = "";
+            //    MessageBox.Show("Compra Eliminada");
+
+            //}
+            
+         }
         private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+
         }
     }
 }

@@ -65,11 +65,11 @@ namespace tp_plataformas_2
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label39 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtEliminarCompraId = new System.Windows.Forms.TextBox();
+            this.btnEliminarCompra = new System.Windows.Forms.Button();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.label37 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvComprasRealizadas = new System.Windows.Forms.DataGridView();
             this.panelUsuarios = new System.Windows.Forms.Panel();
             this.tcUsuarios = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
@@ -195,7 +195,7 @@ namespace tp_plataformas_2
             this.tabPage13.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComprasRealizadas)).BeginInit();
             this.panelUsuarios.SuspendLayout();
             this.tcUsuarios.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -530,7 +530,7 @@ namespace tp_plataformas_2
             this.tabPage13.Controls.Add(this.groupBox1);
             this.tabPage13.Controls.Add(this.pictureBox7);
             this.tabPage13.Controls.Add(this.label37);
-            this.tabPage13.Controls.Add(this.dataGridView1);
+            this.tabPage13.Controls.Add(this.dgvComprasRealizadas);
             this.tabPage13.Location = new System.Drawing.Point(4, 30);
             this.tabPage13.Name = "tabPage13";
             this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
@@ -543,8 +543,8 @@ namespace tp_plataformas_2
             // 
             this.groupBox1.Controls.Add(this.label39);
             this.groupBox1.Controls.Add(this.label38);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.txtEliminarCompraId);
+            this.groupBox1.Controls.Add(this.btnEliminarCompra);
             this.groupBox1.Location = new System.Drawing.Point(680, 87);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(304, 260);
@@ -570,21 +570,22 @@ namespace tp_plataformas_2
             this.label38.TabIndex = 19;
             this.label38.Text = "Ingrese ID de la operacion que desea";
             // 
-            // textBox1
+            // txtEliminarCompraId
             // 
-            this.textBox1.Location = new System.Drawing.Point(39, 187);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 29);
-            this.textBox1.TabIndex = 18;
+            this.txtEliminarCompraId.Location = new System.Drawing.Point(39, 187);
+            this.txtEliminarCompraId.Name = "txtEliminarCompraId";
+            this.txtEliminarCompraId.Size = new System.Drawing.Size(100, 29);
+            this.txtEliminarCompraId.TabIndex = 18;
             // 
-            // button1
+            // btnEliminarCompra
             // 
-            this.button1.Location = new System.Drawing.Point(164, 187);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 29);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Confirmar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnEliminarCompra.Location = new System.Drawing.Point(164, 187);
+            this.btnEliminarCompra.Name = "btnEliminarCompra";
+            this.btnEliminarCompra.Size = new System.Drawing.Size(100, 29);
+            this.btnEliminarCompra.TabIndex = 17;
+            this.btnEliminarCompra.Text = "Confirmar";
+            this.btnEliminarCompra.UseVisualStyleBackColor = true;
+            this.btnEliminarCompra.Click += new System.EventHandler(this.btnEliminarCompra_Click);
             // 
             // pictureBox7
             // 
@@ -605,15 +606,15 @@ namespace tp_plataformas_2
             this.label37.TabIndex = 1;
             this.label37.Text = "Compras Realizadas";
             // 
-            // dataGridView1
+            // dgvComprasRealizadas
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(46, 87);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(477, 260);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvComprasRealizadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvComprasRealizadas.Location = new System.Drawing.Point(46, 87);
+            this.dgvComprasRealizadas.Name = "dgvComprasRealizadas";
+            this.dgvComprasRealizadas.RowHeadersWidth = 62;
+            this.dgvComprasRealizadas.RowTemplate.Height = 25;
+            this.dgvComprasRealizadas.Size = new System.Drawing.Size(477, 260);
+            this.dgvComprasRealizadas.TabIndex = 0;
             // 
             // panelUsuarios
             // 
@@ -1646,10 +1647,10 @@ namespace tp_plataformas_2
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1144, 691);
+            this.Controls.Add(this.panelCompras);
             this.Controls.Add(this.panelProductos);
             this.Controls.Add(this.panelCategorias);
             this.Controls.Add(this.panelUsuarios);
-            this.Controls.Add(this.panelCompras);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnUsuarios);
             this.Controls.Add(this.lblMainTitle);
@@ -1693,7 +1694,7 @@ namespace tp_plataformas_2
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComprasRealizadas)).EndInit();
             this.panelUsuarios.ResumeLayout(false);
             this.tcUsuarios.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
@@ -1864,12 +1865,12 @@ namespace tp_plataformas_2
         private System.Windows.Forms.TabPage tabPage13;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvComprasRealizadas;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtEliminarCompraId;
+        private System.Windows.Forms.Button btnEliminarCompra;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.PictureBox pictureBox9;
