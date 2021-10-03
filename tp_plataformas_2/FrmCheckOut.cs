@@ -27,7 +27,6 @@ namespace tp_plataformas_2
             InitializeComponent();
             Mercado = mercado;
             Usuario = usuario;
-            MessageBox.Show(""+Usuario.MiCarro.Productos.Keys);
             List<Producto> productos = new List<Producto>();
             foreach(Producto producto in Usuario.MiCarro.Productos.Keys)
             {
@@ -43,14 +42,31 @@ namespace tp_plataformas_2
 
         private void volverToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FrmCliente VtnaFrmCliente = new FrmCliente(Mercado,Usuario);
             this.Hide();
-            FrmCliente VtnaFrmCliente = new FrmCliente(Usuario);
             VtnaFrmCliente.Show();
         }
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Compra realizada con exito");
+            try
+            {
+                bool sePudoComprar = Mercado.Comprar(Usuario.Id);
+                if (sePudoComprar)
+                {
+                    MessageBox.Show("Se compraron los productos exitosamente.");
+                    FrmCliente frmCliente = new FrmCliente(Mercado, Usuario);
+                    this.Hide();
+                    frmCliente.Show();
+
+                } else
+                {
+                    MessageBox.Show("Ha ocurrido un error en la compra");
+                }
+            }catch(Exception ex)
+            {
+                    MessageBox.Show(ex.Message);
+            }
         }
     }
 }

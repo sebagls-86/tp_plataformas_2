@@ -35,13 +35,17 @@ namespace tp_plataformas_2
             this.mnuMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAcercaDe = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.callejaHoracioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cohenNicolasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kimAnastaciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kukutchkaMarcosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lopezEmmanuelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lopezSosaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.motzoFrancoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pbCarro = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,8 +58,6 @@ namespace tp_plataformas_2
             this.label3 = new System.Windows.Forms.Label();
             this.lblCantidadProductosEnCarro = new System.Windows.Forms.Label();
             this.dgvCategorias = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AGREGAR = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
@@ -72,7 +74,7 @@ namespace tp_plataformas_2
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuMenu,
-            this.mnuAcercaDe});
+            this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1142, 24);
@@ -85,8 +87,8 @@ namespace tp_plataformas_2
             this.cerrarSesionToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.mnuMenu.Name = "mnuMenu";
-            this.mnuMenu.Size = new System.Drawing.Size(50, 20);
-            this.mnuMenu.Text = "Menu";
+            this.mnuMenu.Size = new System.Drawing.Size(60, 20);
+            this.mnuMenu.Text = "Archivo";
             // 
             // cerrarSesionToolStripMenuItem
             // 
@@ -102,21 +104,80 @@ namespace tp_plataformas_2
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
-            // mnuAcercaDe
+            // toolStripMenuItem1
             // 
-            this.mnuAcercaDe.Name = "mnuAcercaDe";
-            this.mnuAcercaDe.Size = new System.Drawing.Size(71, 20);
-            this.mnuAcercaDe.Text = "Acerca de";
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem2});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(71, 20);
+            this.toolStripMenuItem1.Text = "Acerca de";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(133, 22);
+            this.toolStripMenuItem3.Text = "Materia";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.callejaHoracioToolStripMenuItem,
+            this.cohenNicolasToolStripMenuItem,
+            this.kimAnastaciaToolStripMenuItem,
+            this.kukutchkaMarcosToolStripMenuItem,
+            this.lopezEmmanuelToolStripMenuItem,
+            this.lopezSosaToolStripMenuItem,
+            this.motzoFrancoToolStripMenuItem});
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
+            this.toolStripMenuItem2.Text = "Integrantes";
+            // 
+            // callejaHoracioToolStripMenuItem
+            // 
+            this.callejaHoracioToolStripMenuItem.Name = "callejaHoracioToolStripMenuItem";
+            this.callejaHoracioToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.callejaHoracioToolStripMenuItem.Text = "Calleja Horacio";
+            // 
+            // cohenNicolasToolStripMenuItem
+            // 
+            this.cohenNicolasToolStripMenuItem.Name = "cohenNicolasToolStripMenuItem";
+            this.cohenNicolasToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.cohenNicolasToolStripMenuItem.Text = "Cohen Nicolas";
+            // 
+            // kimAnastaciaToolStripMenuItem
+            // 
+            this.kimAnastaciaToolStripMenuItem.Name = "kimAnastaciaToolStripMenuItem";
+            this.kimAnastaciaToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.kimAnastaciaToolStripMenuItem.Text = "Kim Anastasia";
+            // 
+            // kukutchkaMarcosToolStripMenuItem
+            // 
+            this.kukutchkaMarcosToolStripMenuItem.Name = "kukutchkaMarcosToolStripMenuItem";
+            this.kukutchkaMarcosToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.kukutchkaMarcosToolStripMenuItem.Text = "Kukutchka Marcos";
+            // 
+            // lopezEmmanuelToolStripMenuItem
+            // 
+            this.lopezEmmanuelToolStripMenuItem.Name = "lopezEmmanuelToolStripMenuItem";
+            this.lopezEmmanuelToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.lopezEmmanuelToolStripMenuItem.Text = "Lopez Emmanuel";
+            // 
+            // lopezSosaToolStripMenuItem
+            // 
+            this.lopezSosaToolStripMenuItem.Name = "lopezSosaToolStripMenuItem";
+            this.lopezSosaToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.lopezSosaToolStripMenuItem.Text = "Lopez Sosa Sebastian";
+            // 
+            // motzoFrancoToolStripMenuItem
+            // 
+            this.motzoFrancoToolStripMenuItem.Name = "motzoFrancoToolStripMenuItem";
+            this.motzoFrancoToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.motzoFrancoToolStripMenuItem.Text = "Motzo Franco";
             // 
             // dgvProductos
             // 
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.Nombre,
-            this.Precio,
-            this.Stock,
-            this.Categoria});
             this.dgvProductos.Location = new System.Drawing.Point(448, 328);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.RowHeadersWidth = 62;
@@ -124,41 +185,6 @@ namespace tp_plataformas_2
             this.dgvProductos.Size = new System.Drawing.Size(542, 293);
             this.dgvProductos.TabIndex = 13;
             this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID Producto";
-            this.ID.MinimumWidth = 8;
-            this.ID.Name = "ID";
-            this.ID.Width = 150;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.MinimumWidth = 8;
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 150;
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.MinimumWidth = 8;
-            this.Precio.Name = "Precio";
-            this.Precio.Width = 150;
-            // 
-            // Stock
-            // 
-            this.Stock.HeaderText = "Stock";
-            this.Stock.MinimumWidth = 8;
-            this.Stock.Name = "Stock";
-            this.Stock.Width = 150;
-            // 
-            // Categoria
-            // 
-            this.Categoria.HeaderText = "Categoria";
-            this.Categoria.MinimumWidth = 8;
-            this.Categoria.Name = "Categoria";
-            this.Categoria.Width = 150;
             // 
             // pbCarro
             // 
@@ -279,29 +305,12 @@ namespace tp_plataformas_2
             // dgvCategorias
             // 
             this.dgvCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCategorias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
             this.dgvCategorias.Location = new System.Drawing.Point(126, 227);
             this.dgvCategorias.Name = "dgvCategorias";
             this.dgvCategorias.RowHeadersWidth = 62;
             this.dgvCategorias.RowTemplate.Height = 25;
             this.dgvCategorias.Size = new System.Drawing.Size(244, 381);
             this.dgvCategorias.TabIndex = 28;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID Categoria";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 8;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 150;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Nombre";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 8;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 150;
             // 
             // contextMenuStrip1
             // 
@@ -317,7 +326,7 @@ namespace tp_plataformas_2
             this.AGREGAR.Name = "AGREGAR";
             this.AGREGAR.Size = new System.Drawing.Size(81, 60);
             this.AGREGAR.TabIndex = 29;
-            this.AGREGAR.Text = "AGREGAR AL CARRO";
+            this.AGREGAR.Text = "VER MÁS";
             this.AGREGAR.UseVisualStyleBackColor = false;
             this.AGREGAR.Click += new System.EventHandler(this.AGREGAR_Click);
             // 
@@ -364,13 +373,7 @@ namespace tp_plataformas_2
         private System.Windows.Forms.ToolStripMenuItem mnuMenu;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuAcercaDe;
         private System.Windows.Forms.DataGridView dgvProductos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Categoria;
         private System.Windows.Forms.PictureBox pbCarro;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -382,10 +385,18 @@ namespace tp_plataformas_2
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblCantidadProductosEnCarro;
         private System.Windows.Forms.DataGridView dgvCategorias;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.TextBox txtBuscarProductos;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button AGREGAR;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem callejaHoracioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cohenNicolasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kimAnastaciaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kukutchkaMarcosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lopezEmmanuelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lopezSosaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem motzoFrancoToolStripMenuItem;
     }
 }

@@ -134,8 +134,8 @@ namespace tp_plataformas_2
                     productos[i].Precio = Precio;
                     productos[i].Cantidad = Cantidad;
                     productos[i].Id = ID;
-                    productos[i].Cat = productos[ID_Categoria].Cat; // :)
-
+                    //productos[i].Cat = productos[ID_Categoria-1].Cat; // :)
+                    productos[i].Cat = categorias[ID_Categoria - 1];
                     Console.WriteLine("Producto modificado con éxito " + Nombre + Precio + Cantidad + ID);
                 }
             }
@@ -154,7 +154,7 @@ namespace tp_plataformas_2
                 {
 
                     productos.Remove(productos[i]);
-                    Console.WriteLine("Producto " + id + " eliminado con éxito!");
+                    FileManager.SaveListProductos(productos);
                 }
                 else
                     i++;
@@ -596,15 +596,15 @@ namespace tp_plataformas_2
             Usuario usuarioEncontrado;
             if (MercadoHelper.SonMenoresACero(new List<int> { ID_Usuario }))
             {
-                Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
+                throw new Excepciones("Los parametros numericos deben ser mayor o igual a 0");
             }
             else if (!MercadoHelper.ExisteElUsuario(ID_Usuario, usuarios))
             {
-                Console.WriteLine("El usuario con id {0} no se pudo encontrar", ID_Usuario);
+                throw new Excepciones("El usuario con id "+ID_Usuario+" no se pudo encontrar");
             }
             else
             {
-                usuarioEncontrado = usuarios[ID_Usuario];
+                usuarioEncontrado = usuarios[ID_Usuario - 1];
                 foreach(Producto producto in usuarioEncontrado.MiCarro.Productos.Keys)
                 {
                     precioTotal += producto.Precio;
@@ -706,6 +706,12 @@ namespace tp_plataformas_2
             productos.Sort();
 
             return productos;
+        }
+        public List<Compra> mostrarComprasRealizadas()
+        {
+            compras.Sort();
+
+            return compras;
         }
 
 

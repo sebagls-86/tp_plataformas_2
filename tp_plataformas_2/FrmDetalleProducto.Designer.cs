@@ -41,9 +41,18 @@ namespace tp_plataformas_2
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.volverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.callejaHoracioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cohenNicolasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kimAnastaciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kukutchkaMarcosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lopezEmmanuelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lopezSosaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.motzoFrancoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupDetallesProducto.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -122,7 +131,7 @@ namespace tp_plataformas_2
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
-            this.acercaDeToolStripMenuItem});
+            this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1144, 24);
@@ -141,22 +150,16 @@ namespace tp_plataformas_2
             // volverToolStripMenuItem
             // 
             this.volverToolStripMenuItem.Name = "volverToolStripMenuItem";
-            this.volverToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.volverToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.volverToolStripMenuItem.Text = "Volver";
             this.volverToolStripMenuItem.Click += new System.EventHandler(this.volverToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
-            // acercaDeToolStripMenuItem
-            // 
-            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.acercaDeToolStripMenuItem.Text = "Acerca de";
             // 
             // label1
             // 
@@ -176,6 +179,77 @@ namespace tp_plataformas_2
             this.pictureBox1.Size = new System.Drawing.Size(110, 112);
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem2});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(71, 20);
+            this.toolStripMenuItem1.Text = "Acerca de";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Text = "Materia";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.callejaHoracioToolStripMenuItem,
+            this.cohenNicolasToolStripMenuItem,
+            this.kimAnastaciaToolStripMenuItem,
+            this.kukutchkaMarcosToolStripMenuItem,
+            this.lopezEmmanuelToolStripMenuItem,
+            this.lopezSosaToolStripMenuItem,
+            this.motzoFrancoToolStripMenuItem});
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Text = "Integrantes";
+            // 
+            // callejaHoracioToolStripMenuItem
+            // 
+            this.callejaHoracioToolStripMenuItem.Name = "callejaHoracioToolStripMenuItem";
+            this.callejaHoracioToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.callejaHoracioToolStripMenuItem.Text = "Calleja Horacio";
+            // 
+            // cohenNicolasToolStripMenuItem
+            // 
+            this.cohenNicolasToolStripMenuItem.Name = "cohenNicolasToolStripMenuItem";
+            this.cohenNicolasToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.cohenNicolasToolStripMenuItem.Text = "Cohen Nicolas";
+            // 
+            // kimAnastaciaToolStripMenuItem
+            // 
+            this.kimAnastaciaToolStripMenuItem.Name = "kimAnastaciaToolStripMenuItem";
+            this.kimAnastaciaToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.kimAnastaciaToolStripMenuItem.Text = "Kim Anastasia";
+            // 
+            // kukutchkaMarcosToolStripMenuItem
+            // 
+            this.kukutchkaMarcosToolStripMenuItem.Name = "kukutchkaMarcosToolStripMenuItem";
+            this.kukutchkaMarcosToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.kukutchkaMarcosToolStripMenuItem.Text = "Kukutchka Marcos";
+            // 
+            // lopezEmmanuelToolStripMenuItem
+            // 
+            this.lopezEmmanuelToolStripMenuItem.Name = "lopezEmmanuelToolStripMenuItem";
+            this.lopezEmmanuelToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.lopezEmmanuelToolStripMenuItem.Text = "Lopez Emmanuel";
+            // 
+            // lopezSosaToolStripMenuItem
+            // 
+            this.lopezSosaToolStripMenuItem.Name = "lopezSosaToolStripMenuItem";
+            this.lopezSosaToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.lopezSosaToolStripMenuItem.Text = "Lopez Sosa Sebastian";
+            // 
+            // motzoFrancoToolStripMenuItem
+            // 
+            this.motzoFrancoToolStripMenuItem.Name = "motzoFrancoToolStripMenuItem";
+            this.motzoFrancoToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.motzoFrancoToolStripMenuItem.Text = "Motzo Franco";
             // 
             // FrmDetalleProducto
             // 
@@ -217,8 +291,17 @@ namespace tp_plataformas_2
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem volverToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem callejaHoracioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cohenNicolasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kimAnastaciaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kukutchkaMarcosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lopezEmmanuelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lopezSosaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem motzoFrancoToolStripMenuItem;
     }
 }

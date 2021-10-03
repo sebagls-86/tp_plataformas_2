@@ -49,7 +49,6 @@ namespace tp_plataformas_2
         private void pictureBuscar_Click(object sender, EventArgs e)
         {
             string productoBuscar = txtBuscarProductos.Text;
-            MessageBox.Show("Producto ingresado: " + productoBuscar);
             txtBuscarProductos.Text = "";
         }
 

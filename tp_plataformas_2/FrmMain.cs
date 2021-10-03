@@ -66,63 +66,6 @@ namespace tp_plataformas_2
             string password = txtPassword.Text;
 
 
-
-            //int inicio = Mercado.IniciarSesion(idUsuario, password);
-
-
-            //if (inicio != -1)
-            //{
-
-            //    bool Admin = Mercado.esAdmin(inicio);
-
-            //    if (Admin)
-            //    {
-
-            //        MessageBox.Show("Usuario detectado = ADMIN");
-            //        this.Hide();
-
-            //        FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm(Mercado);
-            //        VtnaPrincipal.Show();
-
-            //    }
-            //    else if (Admin == false)
-            //    {
-            //        MessageBox.Show("¡Gracias por su visita!");
-            //        this.Hide();
-
-            //        FrmCliente VtnCliente = new FrmCliente(Mercado);
-            //        VtnCliente.Show();
-
-
-            //if (usuarioLogueado != null)
-            //{
-            //    if (usuarioLogueado.TipoUsuario == 1)
-            //    {
-
-            //        FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm(Mercado, usuarioLogueado);
-            //        MessageBox.Show("Usuario detectado = ADMIN");
-            //        this.Hide();
-            //        VtnaPrincipal.Show();
-
-
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("¡Gracias por su visita!");
-            //        this.Hide();
-
-            //        FrmCliente VtnCliente = new FrmCliente(Mercado, usuarioLogueado);
-            //        VtnCliente.Show();
-            //    }
-
-
-            //}
-            //else
-            //{
-            //    throw new Excepciones("Usuario no encontrado");
-            //}
-
-
             try
             {
 
