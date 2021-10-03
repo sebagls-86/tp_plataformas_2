@@ -98,7 +98,7 @@ namespace tp_plataformas_2
 
             try
             {
-                dgvUsuariosLista.DataSource = mercado.MostrarUsuarios();
+                dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
             }
             catch (Exception ex)
             {
@@ -449,7 +449,7 @@ namespace tp_plataformas_2
                         try
                         {
 
-                            bool Modifica = mercado.ModificarUsuario(ID, nombre, apellido, mail, password, tipoUsuario);
+                            bool Modifica = Mercado.ModificarUsuario(ID, nombre, apellido, mail, password, tipoUsuario);
 
                             if (Modifica == true)
                             {

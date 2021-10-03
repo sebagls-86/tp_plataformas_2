@@ -48,15 +48,6 @@ namespace tp_plataformas_2
             txtBuscarProductos.Text = "";
         }
 
-        private void btnTestDetalleProducto_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Producto producto = dgvProductos.SelectedRows[0].DataBoundItem as Producto;
-            MessageBox.Show("Producto ingresado: " + producto.Nombre);
-            FrmDetalleProducto VtnaDetalleProducto = new FrmDetalleProducto();
-            VtnaDetalleProducto.Show();
-        }
-
         private void pbCarro_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -67,6 +58,16 @@ namespace tp_plataformas_2
         private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void AGREGAR_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Int32 indiceProducto = dgvProductos.Columns.GetColumnCount(DataGridViewElementStates.Selected);
+            Producto producto = dgvProductos.SelectedRows[indiceProducto].DataBoundItem as Producto;
+            MessageBox.Show("Producto ingresado: " + producto.Nombre);
+            FrmDetalleProducto VtnaDetalleProducto = new FrmDetalleProducto(Mercado, producto);
+            VtnaDetalleProducto.Show();
         }
     }
 }

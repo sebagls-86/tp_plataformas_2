@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace tp_plataformas_2.Clases
+namespace tp_plataformas_2
 {
    public class Excepciones: Exception
     {
