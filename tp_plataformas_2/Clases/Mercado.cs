@@ -255,26 +255,33 @@ namespace tp_plataformas_2
             return true;
 
         }
-        public bool ModificarUsuario(int ID, int cuil, String nombre, String apellido, String mail, String password, int tipoUsuario)
+        public bool ModificarUsuario(int ID, String nombre, String apellido, String mail, String password, int tipoUsuario)
         {
 
-
-            if (usuarios[ID] != null)
+            bool encontre = false;
+            int i = 0;
+            int id = ID - 1;
+            while (!encontre && i < usuarios.Count)
             {
-                usuarios[ID].Nombre = nombre;
-                usuarios[ID].Apellido = apellido;
-                usuarios[ID].Cuil = cuil;
-                usuarios[ID].Mail = mail;
-                usuarios[ID].Password = password;
-                
+                encontre = usuarios[i].Id == id;
+                if (encontre)
+                {
+
+                    usuarios[id].Nombre = nombre;
+                    usuarios[id].Apellido = apellido;
+                    usuarios[id].Mail = mail;
+                    usuarios[ID].Password = password;
+                    usuarios[ID].TipoUsuario = tipoUsuario;
+
+                    FileManager.SaveListUsuarios(usuarios);
+                }
+                else
+                    i++;
             }
-            else
-            {
-                return false;
-            }
+            return encontre;
 
 
-            return true;
+            
         }
 
 
