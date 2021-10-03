@@ -543,7 +543,7 @@ namespace tp_plataformas_2
             }
             else
             {
-                usuarioEncontrado = usuarios[Id_Usuario];
+                usuarioEncontrado = usuarios[Id_Usuario - 1];
                 productoEncontrado = productos[Id_Producto];
                 if (!usuarioEncontrado.MiCarro.Productos.ContainsKey(productoEncontrado))
                 {
@@ -580,7 +580,7 @@ namespace tp_plataformas_2
             }
             else
             {
-                usuarios[Id_Usuario].MiCarro.Vaciar();
+                usuarios[Id_Usuario - 1].MiCarro.Vaciar();
                 Console.WriteLine("Se ha vaciado el carro correctamente.");
                 sePudoVaciar = true;
             }
@@ -614,6 +614,7 @@ namespace tp_plataformas_2
                 
                 Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos); 
                 Compra compra = new Compra(compras.Count + 1,usuarioEncontrado,productosCompra,precioTotal);
+                
                 compras.Add(compra);
                 foreach(Producto producto in productosCompra.Keys){
                     productos[producto.Id].Cantidad -= producto.Cantidad;
