@@ -51,6 +51,8 @@ namespace tp_plataformas_2
         private void btnTestDetalleProducto_Click(object sender, EventArgs e)
         {
             this.Hide();
+            Producto producto = dgvProductos.SelectedRows[0].DataBoundItem as Producto;
+            MessageBox.Show("Producto ingresado: " + producto.Nombre);
             FrmDetalleProducto VtnaDetalleProducto = new FrmDetalleProducto();
             VtnaDetalleProducto.Show();
         }
