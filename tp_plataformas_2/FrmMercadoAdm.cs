@@ -89,7 +89,20 @@ namespace tp_plataformas_2
             panelUsuarios.Visible = true;
             lblMainTitle.Text = "Usuarios";
 
-            dgvUsuariosLista.DataSource = mercado.MostrarUsuarios();
+            this.Refresh();
+
+            try
+            {
+                dgvUsuariosLista.DataSource = mercado.MostrarUsuarios();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+
 
         }
 
@@ -159,7 +172,7 @@ namespace tp_plataformas_2
             {
                 MessageBox.Show("El id debe ser numerico");
             }
-
+            this.Refresh();
 
         }
 
@@ -272,12 +285,13 @@ namespace tp_plataformas_2
                             {
 
                                 MessageBox.Show("Usuario creado con exito");
-
+                                this.Refresh();
                                 txtNombre.Text = "";
                                 txtApellido.Text = "";
                                 txtCuil.Text = "";
                                 txtMail.Text = "";
                                 txtPassword.Text = "";
+
 
                             }
                             else
@@ -327,7 +341,7 @@ namespace tp_plataformas_2
                     {
 
                         MessageBox.Show("Usuario eliminado");
-
+                        this.Refresh();
                         txtIdEliminaar.Text = "";
 
 
@@ -382,6 +396,100 @@ namespace tp_plataformas_2
                 }
                 dgvProductos.Refresh();
             }
+
+        private void btnModificaar_Click(object sender, EventArgs e)
+        {
+
+            string id = txtIdUsuarioModificar.Text;
+            string nombre = txtModificarNombre.Text;
+            string apellido = txtModificarApellido.Text;
+            string mail = txtModificarMail.Text;
+            string password = txtModificarClave.Text;
+
+            int tipoUsuario = 0;
+
+
+
+            if (radioModificarEmpresa.Checked)
+            {
+
+                tipoUsuario = 2;
+
+            }
+            else if (radioModificarCliente.Checked)
+            {
+                tipoUsuario = 3;
+            }
+            else
+            {
+                tipoUsuario = 1;
+            }
+
+            try
+            {
+                if (id == "" || nombre == "" || apellido == "" ||  mail == "" || password == "")
+
+                {
+                    throw new Excepciones("Por favor complete todos los campos");
+
+                }
+
+                else
+                {
+
+                    try
+                    {
+                        int ID = Int32.Parse(id);
+
+                        try
+                        {
+
+                            bool Modifica = mercado.ModificarUsuario(ID, nombre, apellido, mail, password, tipoUsuario);
+
+                            if (Modifica == true)
+                            {
+
+                                MessageBox.Show("Usuario modificado con exito");
+                                this.Refresh();
+                                txtIdUsuarioModificar.Text = "";
+                                txtModificarNombre.Text = "";
+                                txtModificarApellido.Text = "";
+                                txtModificarMail.Text = "";
+                                txtModificarClave.Text = "";
+
+                            }
+                            else
+                            {
+                                throw new Excepciones("Usuario no encontrado");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    catch (FormatException)
+                    {
+
+                        MessageBox.Show("El ID debe ser numerico");
+                    }
+
+                }
+
+            }
+            catch (Excepciones ex)
+            {
+
+                MessageBox.Show(ex.Message);
+
+            }
+
+
+
+
+        }
+
+        
     }
 }
 
