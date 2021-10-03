@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using tp_plataformas_2.Clases;
+using tp_plataformas_2;
 
 
 namespace tp_plataformas_2

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using tp_plataformas_2.Clases;
+using tp_plataformas_2;
 
 namespace tp_plataformas_2
 {
@@ -158,6 +158,7 @@ namespace tp_plataformas_2
                     if (Mercado.EliminarCategoria(idEliminado))
                     {
                         txtIdEliminar.Text = "";
+                       
                         this.Refresh();
 
                     }
@@ -290,7 +291,8 @@ namespace tp_plataformas_2
                             {
 
                                 MessageBox.Show("Usuario creado con exito");
-                                this.Refresh();
+                                dgvUsuariosLista.DataSource = null;
+                                dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
                                 txtNombre.Text = "";
                                 txtApellido.Text = "";
                                 txtCuil.Text = "";
@@ -348,6 +350,8 @@ namespace tp_plataformas_2
                         MessageBox.Show("Usuario eliminado");
                         this.Refresh();
                         txtIdEliminaar.Text = "";
+                        dgvUsuariosLista.DataSource = null;
+                        dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
 
 
                     }
@@ -380,27 +384,29 @@ namespace tp_plataformas_2
 
 
 
-            private void btnAgregarProducto_Click(object sender, EventArgs e)
-            {
-                string nombre = txtNombreProductoAgregar.Text;
-                double precio = double.Parse(txtPrecioProductoAgregar.Text);
-                int cantidad = int.Parse(txtCantidadProductoAgregar.Text);
-                int idCategoria = int.Parse(txtIdCategoriaProductoAgregar.Text);
+        private void btnAgregarProducto_Click(object sender, EventArgs e)
+        {
+            string nombre = txtNombreProductoAgregar.Text;
+            double precio = double.Parse(txtPrecioProductoAgregar.Text);
+            int cantidad = int.Parse(txtCantidadProductoAgregar.Text);
+            int idCategoria = int.Parse(txtIdCategoriaProductoAgregar.Text);
 
-                if (Mercado.AgregarProducto(nombre, precio, cantidad, idCategoria))
-                {
-                    txtNombreProductoAgregar.Text = "";
-                    txtPrecioProductoAgregar.Text = "";
-                    txtCantidadProductoAgregar.Text = "";
-                    txtIdCategoriaProductoAgregar.Text = "";
-                    MessageBox.Show("Producto Agregado");
-                }
-                else
-                {
-                    MessageBox.Show("no se agrego");
-                }
-                dgvProductos.Refresh();
+            if (Mercado.AgregarProducto(nombre, precio, cantidad, idCategoria))
+            {
+                txtNombreProductoAgregar.Text = "";
+                txtPrecioProductoAgregar.Text = "";
+                txtCantidadProductoAgregar.Text = "";
+                txtIdCategoriaProductoAgregar.Text = "";
+                MessageBox.Show("Producto Agregado");
+                dgvProductos.DataSource = null;
+                dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
+        }
+            else
+            {
+                MessageBox.Show("no se agrego");
             }
+            dgvProductos.Refresh();
+        }
 
         private void btnModificaar_Click(object sender, EventArgs e)
         {
@@ -455,7 +461,6 @@ namespace tp_plataformas_2
                             {
 
                                 MessageBox.Show("Usuario modificado con exito");
-                                this.Refresh();
                                 txtIdUsuarioModificar.Text = "";
                                 txtModificarNombre.Text = "";
                                 txtModificarApellido.Text = "";
@@ -494,7 +499,7 @@ namespace tp_plataformas_2
 
         }
 
-        
+       
     }
 }
 
