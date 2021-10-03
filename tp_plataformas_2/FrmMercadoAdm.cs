@@ -541,6 +541,19 @@ namespace tp_plataformas_2
                 MessageBox.Show("Producto No Modificado");
             }
         }
+
+        private void btnEliminarCompra_Click(object sender, EventArgs e)
+        {
+            int idCompra = int.Parse(txtEliminarCompraId.Text);
+
+            /*  DESCOMENTAR ESTO  */
+            //if (Mercado.EliminarCompra(idCompra))
+            //{
+            //    txtEliminarCompraId.Text = "";
+            //    MessageBox.Show("Compra Eliminada");
+
+            //}
+        }
     }
 }
 

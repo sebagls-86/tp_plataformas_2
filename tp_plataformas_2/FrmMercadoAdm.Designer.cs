@@ -65,8 +65,8 @@ namespace tp_plataformas_2
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label39 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtEliminarCompraId = new System.Windows.Forms.TextBox();
+            this.btnEliminarCompra = new System.Windows.Forms.Button();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.label37 = new System.Windows.Forms.Label();
             this.dgvComprasRealizadas = new System.Windows.Forms.DataGridView();
@@ -542,8 +542,8 @@ namespace tp_plataformas_2
             // 
             this.groupBox1.Controls.Add(this.label39);
             this.groupBox1.Controls.Add(this.label38);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.txtEliminarCompraId);
+            this.groupBox1.Controls.Add(this.btnEliminarCompra);
             this.groupBox1.Location = new System.Drawing.Point(680, 87);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(304, 260);
@@ -569,21 +569,22 @@ namespace tp_plataformas_2
             this.label38.TabIndex = 19;
             this.label38.Text = "Ingrese ID de la operacion que desea";
             // 
-            // textBox1
+            // txtEliminarCompraId
             // 
-            this.textBox1.Location = new System.Drawing.Point(39, 187);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 29);
-            this.textBox1.TabIndex = 18;
+            this.txtEliminarCompraId.Location = new System.Drawing.Point(39, 187);
+            this.txtEliminarCompraId.Name = "txtEliminarCompraId";
+            this.txtEliminarCompraId.Size = new System.Drawing.Size(100, 29);
+            this.txtEliminarCompraId.TabIndex = 18;
             // 
-            // button1
+            // btnEliminarCompra
             // 
-            this.button1.Location = new System.Drawing.Point(164, 187);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 29);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Confirmar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnEliminarCompra.Location = new System.Drawing.Point(164, 187);
+            this.btnEliminarCompra.Name = "btnEliminarCompra";
+            this.btnEliminarCompra.Size = new System.Drawing.Size(100, 29);
+            this.btnEliminarCompra.TabIndex = 17;
+            this.btnEliminarCompra.Text = "Confirmar";
+            this.btnEliminarCompra.UseVisualStyleBackColor = true;
+            this.btnEliminarCompra.Click += new System.EventHandler(this.btnEliminarCompra_Click);
             // 
             // pictureBox7
             // 
@@ -1858,8 +1859,8 @@ namespace tp_plataformas_2
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtEliminarCompraId;
+        private System.Windows.Forms.Button btnEliminarCompra;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.PictureBox pictureBox9;
