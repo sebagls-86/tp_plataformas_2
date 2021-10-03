@@ -8,7 +8,7 @@ namespace tp_plataformas_2
 
         public static bool SonMenoresACero(List<int> numeros) => numeros.Exists(numero => numero < 0);
 
-        public static bool ExisteElUsuario(int idUsuario, List<Usuario> usuarios) =>  usuarios[idUsuario] != null;
+        public static bool ExisteElUsuario(int idUsuario, List<Usuario> usuarios) =>  usuarios[idUsuario - 1] != null;
 
         public static bool ExisteElProducto(int idProducto, List<Producto> productos)  =>  productos[idProducto] != null;
 

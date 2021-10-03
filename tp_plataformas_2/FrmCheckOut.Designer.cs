@@ -40,10 +40,6 @@ namespace tp_plataformas_2
             this.label37 = new System.Windows.Forms.Label();
             this.btnComprar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTituloTotal = new System.Windows.Forms.Label();
             this.lblTotalPrecio = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -94,11 +90,6 @@ namespace tp_plataformas_2
             // dgvProductos
             // 
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.Nombre,
-            this.Precio,
-            this.Categoria});
             this.dgvProductos.Location = new System.Drawing.Point(284, 223);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.RowTemplate.Height = 25;
@@ -144,26 +135,6 @@ namespace tp_plataformas_2
             this.pictureBox1.Size = new System.Drawing.Size(103, 108);
             this.pictureBox1.TabIndex = 20;
             this.pictureBox1.TabStop = false;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID Producto";
-            this.ID.Name = "ID";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.Name = "Precio";
-            // 
-            // Categoria
-            // 
-            this.Categoria.HeaderText = "Categoria";
-            this.Categoria.Name = "Categoria";
             // 
             // lblTituloTotal
             // 

@@ -74,29 +74,26 @@ namespace tp_plataformas_2
                 int idUsuario = Int32.Parse(usuario);
 
 
-                int inicio = Mercado.IniciarSesion(idUsuario, password);
+                Usuario usuarioLogueado = Mercado.IniciarSesion(idUsuario, password);
 
 
-                if (inicio != -1)
+                if (usuarioLogueado != null)
                 {
-                   
-                    bool Admin = Mercado.esAdmin(inicio);
-
-                    if (Admin) { 
+                    if (usuarioLogueado.TipoUsuario == 1) { 
                     
+                    FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm(Mercado,usuarioLogueado);
                     MessageBox.Show("Usuario detectado = ADMIN");
                     this.Hide();
-
-                    FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm(Mercado);
                     VtnaPrincipal.Show();
 
+
                     }
-                    else if(Admin == false)
+                    else
                     {
                         MessageBox.Show("¡Gracias por su visita!");
                         this.Hide();
 
-                        FrmCliente VtnCliente = new FrmCliente(Mercado);
+                        FrmCliente VtnCliente = new FrmCliente(Mercado, usuarioLogueado);
                         VtnCliente.Show();
                     }
 

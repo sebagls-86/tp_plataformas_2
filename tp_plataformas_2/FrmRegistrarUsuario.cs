@@ -7,24 +7,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using tp_plataformas_2.Clases;
+using tp_plataformas_2;
 
 
 namespace tp_plataformas_2
 {
     public partial class FrmRegistrarUsuario : Form
     {
-        Mercado mercado = new Mercado();
+        Mercado Mercado { get; set; }
 
         public FrmRegistrarUsuario()
         {
             InitializeComponent();
+            Mercado = new Mercado();
+        }
+
+        public FrmRegistrarUsuario(Mercado mercado)
+        {
+            InitializeComponent();
+            Mercado = mercado;
         }
 
         private void mnuSalir_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FrmMain VtnaMain = new FrmMain();
+            FrmMain VtnaMain = new FrmMain(Mercado);
             VtnaMain.Show();
         }
 
@@ -44,8 +51,8 @@ namespace tp_plataformas_2
                 cargandoMain.PerformStep();
             }
 
-            
-           
+
+
             string nombre = txtNombre.Text;
             string apellido = txtApellido.Text;
             string cuil = txtCuil.Text;
@@ -54,11 +61,13 @@ namespace tp_plataformas_2
             int cuilUsuario = 0;
             int tipoUsuario = 0;
 
-            if (radioButton1.Checked) {
+            if (radioButton1.Checked)
+            {
 
                 tipoUsuario = 2;
 
-             }else if (radioButton2.Checked)
+            }
+            else if (radioButton2.Checked)
             {
                 tipoUsuario = 3;
             }
@@ -79,23 +88,25 @@ namespace tp_plataformas_2
                     {
 
                         //int cuitI = Int32.TryParse(cuil out );
-                        try { 
+                        try
+                        {
 
-                        bool esParseable = Int32.TryParse(cuil, out cuilUsuario);
+                            bool esParseable = Int32.TryParse(cuil, out cuilUsuario);
                             if (!esParseable)
                             {
                                 throw new Excepciones("El valor ingresado en CUIL no se pudo parsear a INT.");
                             }
-                        bool Agrega = mercado.AgregarUsuario(cuilUsuario, nombre, apellido, mail, password, tipoUsuario);
+                            bool Agrega = Mercado.AgregarUsuario(cuilUsuario, nombre, apellido, mail, password, tipoUsuario);
 
-                            if (Agrega ==true) { 
-                        
-                        MessageBox.Show("Usuario creado con exito");
+                            if (Agrega == true)
+                            {
 
-                        FrmMain VtnaConfiguracion = new FrmMain();
-                        VtnaConfiguracion.Show();
+                                MessageBox.Show("Usuario creado con exito");
 
-                        this.Hide();
+                                FrmMain VtnaConfiguracion = new FrmMain(Mercado);
+                                VtnaConfiguracion.Show();
+
+                                this.Hide();
 
                             }
                             else
@@ -103,28 +114,30 @@ namespace tp_plataformas_2
                                 throw new Excepciones("CUIT ya ingresado");
                             }
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message);
+
+                            MessageBox.Show(ex.StackTrace);
+                            //MessageBox.Show(ex.Message);
                         }
                     }
-                    catch (FormatException)
+                    catch (Exception ex)
                     {
-
-                        MessageBox.Show("El cuit debe ser numerico");
+                        MessageBox.Show(ex.StackTrace);
+                        //MessageBox.Show("El cuit debe ser numerico");
                     }
 
                 }
 
             }
-            catch (Excepciones ex)
+            catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
-                
+                MessageBox.Show(ex.StackTrace);
+
             }
 
-         }
+        }
 
         private void cargandoMain_Click(object sender, EventArgs e)
         {

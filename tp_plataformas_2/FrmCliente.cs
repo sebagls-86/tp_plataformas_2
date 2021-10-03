@@ -14,17 +14,22 @@ namespace tp_plataformas_2
     {
 
         Mercado Mercado { get; set; }
+        Usuario Usuario { get; set; }
 
-        public FrmCliente()
+        public FrmCliente(Usuario usuario)
         {
+            Usuario = usuario;
             Mercado = new Mercado();
             InitializeComponent();
+            lblCantidadProductosEnCarro.Text = "" + usuario.MiCarro.Productos.Count;
         }
 
-        public FrmCliente(Mercado mercado)
+        public FrmCliente(Mercado mercado, Usuario usuario)
         {
+            Usuario = usuario;
             Mercado = mercado;
             InitializeComponent();
+            lblCantidadProductosEnCarro.Text = ""+ usuario.MiCarro.Productos.Count;
             dgvCategorias.DataSource = Mercado.MostrarCategorias();
             dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
         }
@@ -32,7 +37,7 @@ namespace tp_plataformas_2
         private void cerrarSesionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FrmMain VtnaMain = new FrmMain();
+            FrmMain VtnaMain = new FrmMain(Mercado);
             VtnaMain.Show();
         }
 
@@ -51,7 +56,7 @@ namespace tp_plataformas_2
         private void pbCarro_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FrmCheckOut VtnaFrmCheckOut = new FrmCheckOut();
+            FrmCheckOut VtnaFrmCheckOut = new FrmCheckOut(Mercado,Usuario);
             VtnaFrmCheckOut.Show();
         }
 
@@ -66,7 +71,7 @@ namespace tp_plataformas_2
             Int32 indiceProducto = dgvProductos.Columns.GetColumnCount(DataGridViewElementStates.Selected);
             Producto producto = dgvProductos.SelectedRows[indiceProducto].DataBoundItem as Producto;
             MessageBox.Show("Producto ingresado: " + producto.Nombre);
-            FrmDetalleProducto VtnaDetalleProducto = new FrmDetalleProducto(Mercado, producto);
+            FrmDetalleProducto VtnaDetalleProducto = new FrmDetalleProducto(Mercado, producto, Usuario);
             VtnaDetalleProducto.Show();
         }
     }
