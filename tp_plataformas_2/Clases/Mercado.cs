@@ -683,6 +683,12 @@ namespace tp_plataformas_2
 
             return productos;
         }
+        public List<Compra> mostrarComprasRealizadas()
+        {
+            compras.Sort();
+
+            return compras;
+        }
 
 
         public int IniciarSesion(int cuil, string clave)

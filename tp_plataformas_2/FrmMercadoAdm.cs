@@ -83,6 +83,7 @@ namespace tp_plataformas_2
             panelProductos.Visible = false;
             panelCompras.Visible = true;
             lblMainTitle.Text = "Compras";
+            dgvComprasRealizadas.DataSource = Mercado.mostrarComprasRealizadas();
 
         }
 
