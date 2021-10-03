@@ -39,7 +39,6 @@ namespace tp_plataformas_2
         {
 
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
-            folderDialog.Description = "Selecionar ruta de guardado";
             folderDialog.RootFolder = Environment.SpecialFolder.MyDocuments;
 
             if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -61,6 +60,12 @@ namespace tp_plataformas_2
 
             string rutaDirectorio = txtDirectorio.Text;
             MessageBox.Show("Ruta seleccionada: \n" + rutaDirectorio + "\n¡Guardada con exito!");
+        }
+
+        private void FrmConfiguracion_Load(object sender, EventArgs e)
+        {
+            string rutaDestino = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
+            txtDirectorio.Text = rutaDestino;
         }
     }
 }
