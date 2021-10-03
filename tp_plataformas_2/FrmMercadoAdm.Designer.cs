@@ -77,6 +77,7 @@ namespace tp_plataformas_2
             this.label13 = new System.Windows.Forms.Label();
             this.dgvUsuariosLista = new System.Windows.Forms.DataGridView();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.txtCuilCuit = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.pictureUsuarios = new System.Windows.Forms.PictureBox();
@@ -96,6 +97,7 @@ namespace tp_plataformas_2
             this.txtUsuarioNombre = new System.Windows.Forms.TextBox();
             this.btnAgregarUsuario = new System.Windows.Forms.Button();
             this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.txtModificarDNI = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -180,8 +182,6 @@ namespace tp_plataformas_2
             this.lblMainTitle = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.btnExit = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.panelCategorias.SuspendLayout();
             this.tabUsuarios.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -256,10 +256,10 @@ namespace tp_plataformas_2
             this.tabPage2.Controls.Add(this.label40);
             this.tabPage2.Controls.Add(this.dataTableCategorias);
             this.tabPage2.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.tabPage2.Location = new System.Drawing.Point(4, 41);
+            this.tabPage2.Location = new System.Drawing.Point(4, 30);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(974, 289);
+            this.tabPage2.Size = new System.Drawing.Size(974, 300);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Listado";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -278,7 +278,7 @@ namespace tp_plataformas_2
             this.label40.AutoSize = true;
             this.label40.Location = new System.Drawing.Point(46, 34);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(298, 40);
+            this.label40.Size = new System.Drawing.Size(195, 25);
             this.label40.TabIndex = 7;
             this.label40.Text = "Listado de Categorias";
             // 
@@ -298,10 +298,10 @@ namespace tp_plataformas_2
             this.tabPage1.Controls.Add(this.btnCategoriaAgregar);
             this.tabPage1.Controls.Add(this.txtboxNombreCategoria);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 41);
+            this.tabPage1.Location = new System.Drawing.Point(4, 30);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(974, 289);
+            this.tabPage1.Size = new System.Drawing.Size(974, 300);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Agregar";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -329,7 +329,7 @@ namespace tp_plataformas_2
             // 
             this.txtboxNombreCategoria.Location = new System.Drawing.Point(67, 120);
             this.txtboxNombreCategoria.Name = "txtboxNombreCategoria";
-            this.txtboxNombreCategoria.Size = new System.Drawing.Size(335, 39);
+            this.txtboxNombreCategoria.Size = new System.Drawing.Size(335, 29);
             this.txtboxNombreCategoria.TabIndex = 1;
             // 
             // label1
@@ -337,7 +337,7 @@ namespace tp_plataformas_2
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(67, 72);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(617, 32);
+            this.label1.Size = new System.Drawing.Size(409, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "Ingrese el nombre de la categoria que desea agregar";
             // 
@@ -350,9 +350,9 @@ namespace tp_plataformas_2
             this.tabPage3.Controls.Add(this.txtIDCategoriaModificar);
             this.tabPage3.Controls.Add(this.txtNombreCategoriaModificar);
             this.tabPage3.Controls.Add(this.btnCategoriaModificar);
-            this.tabPage3.Location = new System.Drawing.Point(4, 41);
+            this.tabPage3.Location = new System.Drawing.Point(4, 30);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(974, 289);
+            this.tabPage3.Size = new System.Drawing.Size(974, 300);
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "Modificar";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -372,7 +372,7 @@ namespace tp_plataformas_2
             this.label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.Location = new System.Drawing.Point(46, 29);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(265, 40);
+            this.label4.Size = new System.Drawing.Size(172, 25);
             this.label4.TabIndex = 5;
             this.label4.Text = "Moficar Categoria";
             // 
@@ -381,7 +381,7 @@ namespace tp_plataformas_2
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(48, 158);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 32);
+            this.label3.Size = new System.Drawing.Size(73, 21);
             this.label3.TabIndex = 4;
             this.label3.Text = "Nombre";
             // 
@@ -390,7 +390,7 @@ namespace tp_plataformas_2
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(49, 114);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 32);
+            this.label2.Size = new System.Drawing.Size(27, 21);
             this.label2.TabIndex = 3;
             this.label2.Text = "ID";
             // 
@@ -398,14 +398,14 @@ namespace tp_plataformas_2
             // 
             this.txtIDCategoriaModificar.Location = new System.Drawing.Point(159, 106);
             this.txtIDCategoriaModificar.Name = "txtIDCategoriaModificar";
-            this.txtIDCategoriaModificar.Size = new System.Drawing.Size(100, 39);
+            this.txtIDCategoriaModificar.Size = new System.Drawing.Size(100, 29);
             this.txtIDCategoriaModificar.TabIndex = 2;
             // 
             // txtNombreCategoriaModificar
             // 
             this.txtNombreCategoriaModificar.Location = new System.Drawing.Point(159, 151);
             this.txtNombreCategoriaModificar.Name = "txtNombreCategoriaModificar";
-            this.txtNombreCategoriaModificar.Size = new System.Drawing.Size(273, 39);
+            this.txtNombreCategoriaModificar.Size = new System.Drawing.Size(273, 29);
             this.txtNombreCategoriaModificar.TabIndex = 1;
             // 
             // btnCategoriaModificar
@@ -424,9 +424,9 @@ namespace tp_plataformas_2
             this.tabPage4.Controls.Add(this.groupBox2);
             this.tabPage4.Controls.Add(this.pictureBox11);
             this.tabPage4.Controls.Add(this.dataTableCeliminar);
-            this.tabPage4.Location = new System.Drawing.Point(4, 41);
+            this.tabPage4.Location = new System.Drawing.Point(4, 30);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(974, 289);
+            this.tabPage4.Size = new System.Drawing.Size(974, 300);
             this.tabPage4.TabIndex = 4;
             this.tabPage4.Text = "Eliminar";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -437,7 +437,7 @@ namespace tp_plataformas_2
             this.label5.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label5.Location = new System.Drawing.Point(21, 29);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(270, 40);
+            this.label5.Size = new System.Drawing.Size(175, 25);
             this.label5.TabIndex = 21;
             this.label5.Text = "Eliminar Categoria";
             // 
@@ -459,7 +459,7 @@ namespace tp_plataformas_2
             this.label41.AutoSize = true;
             this.label41.Location = new System.Drawing.Point(14, 92);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(113, 32);
+            this.label41.Size = new System.Drawing.Size(77, 21);
             this.label41.TabIndex = 20;
             this.label41.Text = "eliminar.";
             // 
@@ -468,7 +468,7 @@ namespace tp_plataformas_2
             this.label44.AutoSize = true;
             this.label44.Location = new System.Drawing.Point(14, 71);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(438, 32);
+            this.label44.Size = new System.Drawing.Size(290, 21);
             this.label44.TabIndex = 19;
             this.label44.Text = "Ingrese ID de la operacion que desea";
             // 
@@ -476,7 +476,7 @@ namespace tp_plataformas_2
             // 
             this.txtIdEliminar.Location = new System.Drawing.Point(31, 183);
             this.txtIdEliminar.Name = "txtIdEliminar";
-            this.txtIdEliminar.Size = new System.Drawing.Size(111, 39);
+            this.txtIdEliminar.Size = new System.Drawing.Size(111, 29);
             this.txtIdEliminar.TabIndex = 0;
             // 
             // btnEliminar
@@ -535,10 +535,10 @@ namespace tp_plataformas_2
             this.tabPage13.Controls.Add(this.pictureBox7);
             this.tabPage13.Controls.Add(this.label37);
             this.tabPage13.Controls.Add(this.dataGridView1);
-            this.tabPage13.Location = new System.Drawing.Point(4, 41);
+            this.tabPage13.Location = new System.Drawing.Point(4, 30);
             this.tabPage13.Name = "tabPage13";
             this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage13.Size = new System.Drawing.Size(1005, 381);
+            this.tabPage13.Size = new System.Drawing.Size(1005, 392);
             this.tabPage13.TabIndex = 1;
             this.tabPage13.Text = "Gestionar compras";
             this.tabPage13.UseVisualStyleBackColor = true;
@@ -561,7 +561,7 @@ namespace tp_plataformas_2
             this.label39.AutoSize = true;
             this.label39.Location = new System.Drawing.Point(14, 92);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(106, 32);
+            this.label39.Size = new System.Drawing.Size(71, 21);
             this.label39.TabIndex = 20;
             this.label39.Text = "eliminar.";
             // 
@@ -570,7 +570,7 @@ namespace tp_plataformas_2
             this.label38.AutoSize = true;
             this.label38.Location = new System.Drawing.Point(14, 71);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(418, 32);
+            this.label38.Size = new System.Drawing.Size(281, 21);
             this.label38.TabIndex = 19;
             this.label38.Text = "Ingrese ID de la operacion que desea";
             // 
@@ -578,7 +578,7 @@ namespace tp_plataformas_2
             // 
             this.textBox1.Location = new System.Drawing.Point(39, 187);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 39);
+            this.textBox1.Size = new System.Drawing.Size(100, 29);
             this.textBox1.TabIndex = 18;
             // 
             // button1
@@ -605,7 +605,7 @@ namespace tp_plataformas_2
             this.label37.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label37.Location = new System.Drawing.Point(52, 36);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(290, 40);
+            this.label37.Size = new System.Drawing.Size(187, 25);
             this.label37.TabIndex = 1;
             this.label37.Text = "Compras Realizadas";
             // 
@@ -647,10 +647,10 @@ namespace tp_plataformas_2
             this.tabPage6.Controls.Add(this.pictureCategorias);
             this.tabPage6.Controls.Add(this.label13);
             this.tabPage6.Controls.Add(this.dgvUsuariosLista);
-            this.tabPage6.Location = new System.Drawing.Point(4, 41);
+            this.tabPage6.Location = new System.Drawing.Point(4, 30);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1005, 381);
+            this.tabPage6.Size = new System.Drawing.Size(1005, 392);
             this.tabPage6.TabIndex = 1;
             this.tabPage6.Text = "Lista";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -671,7 +671,7 @@ namespace tp_plataformas_2
             this.label13.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label13.Location = new System.Drawing.Point(46, 30);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(281, 40);
+            this.label13.Size = new System.Drawing.Size(182, 25);
             this.label13.TabIndex = 1;
             this.label13.Text = "Usuarios Existentes";
             // 
@@ -706,18 +706,30 @@ namespace tp_plataformas_2
             this.tabPage7.Controls.Add(this.label6);
             this.tabPage7.Controls.Add(this.txtUsuarioNombre);
             this.tabPage7.Controls.Add(this.btnAgregarUsuario);
-            this.tabPage7.Location = new System.Drawing.Point(4, 41);
+            this.tabPage7.Location = new System.Drawing.Point(4, 30);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1005, 381);
+            this.tabPage7.Size = new System.Drawing.Size(1005, 392);
             this.tabPage7.TabIndex = 2;
             this.tabPage7.Text = "Agregar";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(629, 254);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(133, 25);
+            this.radioButton1.TabIndex = 18;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Administrador";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // txtCuilCuit
             // 
             this.txtCuilCuit.Location = new System.Drawing.Point(179, 239);
             this.txtCuilCuit.Name = "txtCuilCuit";
-            this.txtCuilCuit.Size = new System.Drawing.Size(243, 39);
+            this.txtCuilCuit.Size = new System.Drawing.Size(243, 29);
             this.txtCuilCuit.TabIndex = 17;
             // 
             // label22
@@ -725,7 +737,7 @@ namespace tp_plataformas_2
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(56, 247);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(120, 32);
+            this.label22.Size = new System.Drawing.Size(81, 21);
             this.label22.TabIndex = 16;
             this.label22.Text = "CUIL/CUT";
             // 
@@ -743,7 +755,7 @@ namespace tp_plataformas_2
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(629, 115);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(258, 32);
+            this.label12.Size = new System.Drawing.Size(173, 21);
             this.label12.TabIndex = 14;
             this.label12.Text = "Definir tipo de usuario";
             // 
@@ -753,7 +765,7 @@ namespace tp_plataformas_2
             this.label11.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label11.Location = new System.Drawing.Point(54, 30);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(538, 40);
+            this.label11.Size = new System.Drawing.Size(348, 25);
             this.label11.TabIndex = 13;
             this.label11.Text = "Se deben completar todos los campos";
             // 
@@ -761,28 +773,28 @@ namespace tp_plataformas_2
             // 
             this.txtUsuarioClave.Location = new System.Drawing.Point(177, 347);
             this.txtUsuarioClave.Name = "txtUsuarioClave";
-            this.txtUsuarioClave.Size = new System.Drawing.Size(243, 39);
+            this.txtUsuarioClave.Size = new System.Drawing.Size(243, 29);
             this.txtUsuarioClave.TabIndex = 12;
             // 
             // txtUsuarioMail
             // 
             this.txtUsuarioMail.Location = new System.Drawing.Point(178, 294);
             this.txtUsuarioMail.Name = "txtUsuarioMail";
-            this.txtUsuarioMail.Size = new System.Drawing.Size(243, 39);
+            this.txtUsuarioMail.Size = new System.Drawing.Size(243, 29);
             this.txtUsuarioMail.TabIndex = 11;
             // 
             // txtUsuarioDNI
             // 
             this.txtUsuarioDNI.Location = new System.Drawing.Point(177, 187);
             this.txtUsuarioDNI.Name = "txtUsuarioDNI";
-            this.txtUsuarioDNI.Size = new System.Drawing.Size(243, 39);
+            this.txtUsuarioDNI.Size = new System.Drawing.Size(243, 29);
             this.txtUsuarioDNI.TabIndex = 10;
             // 
             // txtUsuarioApellido
             // 
             this.txtUsuarioApellido.Location = new System.Drawing.Point(177, 131);
             this.txtUsuarioApellido.Name = "txtUsuarioApellido";
-            this.txtUsuarioApellido.Size = new System.Drawing.Size(243, 39);
+            this.txtUsuarioApellido.Size = new System.Drawing.Size(243, 29);
             this.txtUsuarioApellido.TabIndex = 9;
             // 
             // radioClienteFinal
@@ -790,7 +802,7 @@ namespace tp_plataformas_2
             this.radioClienteFinal.AutoSize = true;
             this.radioClienteFinal.Location = new System.Drawing.Point(631, 201);
             this.radioClienteFinal.Name = "radioClienteFinal";
-            this.radioClienteFinal.Size = new System.Drawing.Size(173, 36);
+            this.radioClienteFinal.Size = new System.Drawing.Size(116, 25);
             this.radioClienteFinal.TabIndex = 8;
             this.radioClienteFinal.TabStop = true;
             this.radioClienteFinal.Text = "Cliente Final";
@@ -801,7 +813,7 @@ namespace tp_plataformas_2
             this.radioEmpresa.AutoSize = true;
             this.radioEmpresa.Location = new System.Drawing.Point(631, 153);
             this.radioEmpresa.Name = "radioEmpresa";
-            this.radioEmpresa.Size = new System.Drawing.Size(131, 36);
+            this.radioEmpresa.Size = new System.Drawing.Size(90, 25);
             this.radioEmpresa.TabIndex = 7;
             this.radioEmpresa.TabStop = true;
             this.radioEmpresa.Text = "Empresa";
@@ -812,7 +824,7 @@ namespace tp_plataformas_2
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(41, 349);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(138, 32);
+            this.label10.Size = new System.Drawing.Size(92, 21);
             this.label10.TabIndex = 6;
             this.label10.Text = "Contraseña";
             // 
@@ -821,7 +833,7 @@ namespace tp_plataformas_2
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(55, 302);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(61, 32);
+            this.label9.Size = new System.Drawing.Size(41, 21);
             this.label9.TabIndex = 5;
             this.label9.Text = "Mail";
             // 
@@ -830,7 +842,7 @@ namespace tp_plataformas_2
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(54, 195);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 32);
+            this.label8.Size = new System.Drawing.Size(38, 21);
             this.label8.TabIndex = 4;
             this.label8.Text = "DNI";
             // 
@@ -839,7 +851,7 @@ namespace tp_plataformas_2
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(54, 139);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(103, 32);
+            this.label7.Size = new System.Drawing.Size(72, 21);
             this.label7.TabIndex = 3;
             this.label7.Text = "Apellido";
             // 
@@ -848,7 +860,7 @@ namespace tp_plataformas_2
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(54, 87);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(103, 32);
+            this.label6.Size = new System.Drawing.Size(71, 21);
             this.label6.TabIndex = 2;
             this.label6.Text = "Nombre";
             // 
@@ -856,7 +868,7 @@ namespace tp_plataformas_2
             // 
             this.txtUsuarioNombre.Location = new System.Drawing.Point(177, 84);
             this.txtUsuarioNombre.Name = "txtUsuarioNombre";
-            this.txtUsuarioNombre.Size = new System.Drawing.Size(243, 39);
+            this.txtUsuarioNombre.Size = new System.Drawing.Size(243, 29);
             this.txtUsuarioNombre.TabIndex = 1;
             // 
             // btnAgregarUsuario
@@ -890,18 +902,29 @@ namespace tp_plataformas_2
             this.tabPage8.Controls.Add(this.label20);
             this.tabPage8.Controls.Add(this.txtModificarNombre);
             this.tabPage8.Controls.Add(this.btnModificaar);
-            this.tabPage8.Location = new System.Drawing.Point(4, 41);
+            this.tabPage8.Location = new System.Drawing.Point(4, 30);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(1005, 381);
+            this.tabPage8.Size = new System.Drawing.Size(1005, 392);
             this.tabPage8.TabIndex = 3;
             this.tabPage8.Text = "Modificar";
             this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(611, 265);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(133, 25);
+            this.radioButton2.TabIndex = 36;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Administrador";
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // txtModificarDNI
             // 
             this.txtModificarDNI.Location = new System.Drawing.Point(156, 177);
             this.txtModificarDNI.Name = "txtModificarDNI";
-            this.txtModificarDNI.Size = new System.Drawing.Size(243, 39);
+            this.txtModificarDNI.Size = new System.Drawing.Size(243, 29);
             this.txtModificarDNI.TabIndex = 35;
             // 
             // label15
@@ -909,7 +932,7 @@ namespace tp_plataformas_2
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(33, 185);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(56, 32);
+            this.label15.Size = new System.Drawing.Size(38, 21);
             this.label15.TabIndex = 34;
             this.label15.Text = "DNI";
             // 
@@ -918,7 +941,7 @@ namespace tp_plataformas_2
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(33, 40);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(38, 32);
+            this.label21.Size = new System.Drawing.Size(26, 21);
             this.label21.TabIndex = 33;
             this.label21.Text = "ID";
             // 
@@ -926,7 +949,7 @@ namespace tp_plataformas_2
             // 
             this.txtIdUsuarioModificar.Location = new System.Drawing.Point(156, 37);
             this.txtIdUsuarioModificar.Name = "txtIdUsuarioModificar";
-            this.txtIdUsuarioModificar.Size = new System.Drawing.Size(243, 39);
+            this.txtIdUsuarioModificar.Size = new System.Drawing.Size(243, 29);
             this.txtIdUsuarioModificar.TabIndex = 32;
             // 
             // pictureBox1
@@ -943,7 +966,7 @@ namespace tp_plataformas_2
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(609, 107);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(258, 32);
+            this.label14.Size = new System.Drawing.Size(173, 21);
             this.label14.TabIndex = 30;
             this.label14.Text = "Definir tipo de usuario";
             // 
@@ -951,28 +974,28 @@ namespace tp_plataformas_2
             // 
             this.txtModificarClave.Location = new System.Drawing.Point(156, 336);
             this.txtModificarClave.Name = "txtModificarClave";
-            this.txtModificarClave.Size = new System.Drawing.Size(243, 39);
+            this.txtModificarClave.Size = new System.Drawing.Size(243, 29);
             this.txtModificarClave.TabIndex = 28;
             // 
             // txtModificarMail
             // 
             this.txtModificarMail.Location = new System.Drawing.Point(156, 275);
             this.txtModificarMail.Name = "txtModificarMail";
-            this.txtModificarMail.Size = new System.Drawing.Size(243, 39);
+            this.txtModificarMail.Size = new System.Drawing.Size(243, 29);
             this.txtModificarMail.TabIndex = 27;
             // 
             // txtModificarCuilCuit
             // 
             this.txtModificarCuilCuit.Location = new System.Drawing.Point(156, 222);
             this.txtModificarCuilCuit.Name = "txtModificarCuilCuit";
-            this.txtModificarCuilCuit.Size = new System.Drawing.Size(243, 39);
+            this.txtModificarCuilCuit.Size = new System.Drawing.Size(243, 29);
             this.txtModificarCuilCuit.TabIndex = 26;
             // 
             // txtModificarApellido
             // 
             this.txtModificarApellido.Location = new System.Drawing.Point(156, 135);
             this.txtModificarApellido.Name = "txtModificarApellido";
-            this.txtModificarApellido.Size = new System.Drawing.Size(243, 39);
+            this.txtModificarApellido.Size = new System.Drawing.Size(243, 29);
             this.txtModificarApellido.TabIndex = 25;
             // 
             // radioModificarCliente
@@ -980,7 +1003,7 @@ namespace tp_plataformas_2
             this.radioModificarCliente.AutoSize = true;
             this.radioModificarCliente.Location = new System.Drawing.Point(611, 215);
             this.radioModificarCliente.Name = "radioModificarCliente";
-            this.radioModificarCliente.Size = new System.Drawing.Size(173, 36);
+            this.radioModificarCliente.Size = new System.Drawing.Size(116, 25);
             this.radioModificarCliente.TabIndex = 24;
             this.radioModificarCliente.TabStop = true;
             this.radioModificarCliente.Text = "Cliente Final";
@@ -991,7 +1014,7 @@ namespace tp_plataformas_2
             this.radioModificarEmpresa.AutoSize = true;
             this.radioModificarEmpresa.Location = new System.Drawing.Point(611, 163);
             this.radioModificarEmpresa.Name = "radioModificarEmpresa";
-            this.radioModificarEmpresa.Size = new System.Drawing.Size(131, 36);
+            this.radioModificarEmpresa.Size = new System.Drawing.Size(90, 25);
             this.radioModificarEmpresa.TabIndex = 23;
             this.radioModificarEmpresa.TabStop = true;
             this.radioModificarEmpresa.Text = "Empresa";
@@ -1002,7 +1025,7 @@ namespace tp_plataformas_2
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(23, 339);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(138, 32);
+            this.label16.Size = new System.Drawing.Size(92, 21);
             this.label16.TabIndex = 22;
             this.label16.Text = "Contraseña";
             // 
@@ -1011,7 +1034,7 @@ namespace tp_plataformas_2
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(33, 283);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(61, 32);
+            this.label17.Size = new System.Drawing.Size(41, 21);
             this.label17.TabIndex = 21;
             this.label17.Text = "Mail";
             // 
@@ -1020,7 +1043,7 @@ namespace tp_plataformas_2
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(33, 230);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(120, 32);
+            this.label18.Size = new System.Drawing.Size(81, 21);
             this.label18.TabIndex = 20;
             this.label18.Text = "CUIL/CUT";
             // 
@@ -1029,7 +1052,7 @@ namespace tp_plataformas_2
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(33, 143);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(103, 32);
+            this.label19.Size = new System.Drawing.Size(72, 21);
             this.label19.TabIndex = 19;
             this.label19.Text = "Apellido";
             // 
@@ -1038,7 +1061,7 @@ namespace tp_plataformas_2
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(33, 91);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(103, 32);
+            this.label20.Size = new System.Drawing.Size(71, 21);
             this.label20.TabIndex = 18;
             this.label20.Text = "Nombre";
             // 
@@ -1046,7 +1069,7 @@ namespace tp_plataformas_2
             // 
             this.txtModificarNombre.Location = new System.Drawing.Point(156, 88);
             this.txtModificarNombre.Name = "txtModificarNombre";
-            this.txtModificarNombre.Size = new System.Drawing.Size(243, 39);
+            this.txtModificarNombre.Size = new System.Drawing.Size(243, 29);
             this.txtModificarNombre.TabIndex = 17;
             // 
             // btnModificaar
@@ -1065,9 +1088,9 @@ namespace tp_plataformas_2
             this.tabPage9.Controls.Add(this.label24);
             this.tabPage9.Controls.Add(this.label23);
             this.tabPage9.Controls.Add(this.txtIdEliminaar);
-            this.tabPage9.Location = new System.Drawing.Point(4, 41);
+            this.tabPage9.Location = new System.Drawing.Point(4, 30);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(1005, 381);
+            this.tabPage9.Size = new System.Drawing.Size(1005, 392);
             this.tabPage9.TabIndex = 4;
             this.tabPage9.Text = "Eliminar";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -1096,7 +1119,7 @@ namespace tp_plataformas_2
             this.label24.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label24.Location = new System.Drawing.Point(55, 39);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(243, 40);
+            this.label24.Size = new System.Drawing.Size(158, 25);
             this.label24.TabIndex = 36;
             this.label24.Text = "Eliminar Usuario";
             // 
@@ -1105,7 +1128,7 @@ namespace tp_plataformas_2
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(55, 106);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(38, 32);
+            this.label23.Size = new System.Drawing.Size(26, 21);
             this.label23.TabIndex = 35;
             this.label23.Text = "ID";
             // 
@@ -1113,7 +1136,7 @@ namespace tp_plataformas_2
             // 
             this.txtIdEliminaar.Location = new System.Drawing.Point(178, 106);
             this.txtIdEliminaar.Name = "txtIdEliminaar";
-            this.txtIdEliminaar.Size = new System.Drawing.Size(225, 39);
+            this.txtIdEliminaar.Size = new System.Drawing.Size(225, 29);
             this.txtIdEliminaar.TabIndex = 34;
             // 
             // panelProductos
@@ -1144,10 +1167,10 @@ namespace tp_plataformas_2
             this.tabPage5.Controls.Add(this.pictureBox3);
             this.tabPage5.Controls.Add(this.label25);
             this.tabPage5.Controls.Add(this.dgvProductos);
-            this.tabPage5.Location = new System.Drawing.Point(4, 41);
+            this.tabPage5.Location = new System.Drawing.Point(4, 30);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1005, 381);
+            this.tabPage5.Size = new System.Drawing.Size(1005, 392);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "Lista";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1168,7 +1191,7 @@ namespace tp_plataformas_2
             this.label25.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label25.Location = new System.Drawing.Point(49, 33);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(281, 40);
+            this.label25.Size = new System.Drawing.Size(186, 25);
             this.label25.TabIndex = 1;
             this.label25.Text = "Productos en Stock";
             // 
@@ -1195,9 +1218,9 @@ namespace tp_plataformas_2
             this.tabPage10.Controls.Add(this.label33);
             this.tabPage10.Controls.Add(this.txtNombreProductoAgregar);
             this.tabPage10.Controls.Add(this.btnAgregarProducto);
-            this.tabPage10.Location = new System.Drawing.Point(4, 41);
+            this.tabPage10.Location = new System.Drawing.Point(4, 30);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Size = new System.Drawing.Size(1005, 381);
+            this.tabPage10.Size = new System.Drawing.Size(1005, 392);
             this.tabPage10.TabIndex = 2;
             this.tabPage10.Text = "Agregar";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -1206,7 +1229,7 @@ namespace tp_plataformas_2
             // 
             this.txtIdCategoriaProductoAgregar.Location = new System.Drawing.Point(179, 258);
             this.txtIdCategoriaProductoAgregar.Name = "txtIdCategoriaProductoAgregar";
-            this.txtIdCategoriaProductoAgregar.Size = new System.Drawing.Size(243, 39);
+            this.txtIdCategoriaProductoAgregar.Size = new System.Drawing.Size(243, 29);
             this.txtIdCategoriaProductoAgregar.TabIndex = 17;
             // 
             // label26
@@ -1214,7 +1237,7 @@ namespace tp_plataformas_2
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(56, 266);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(151, 32);
+            this.label26.Size = new System.Drawing.Size(101, 21);
             this.label26.TabIndex = 16;
             this.label26.Text = "ID Categoria";
             // 
@@ -1233,7 +1256,7 @@ namespace tp_plataformas_2
             this.label28.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label28.Location = new System.Drawing.Point(54, 30);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(538, 40);
+            this.label28.Size = new System.Drawing.Size(348, 25);
             this.label28.TabIndex = 13;
             this.label28.Text = "Se deben completar todos los campos";
             // 
@@ -1241,14 +1264,14 @@ namespace tp_plataformas_2
             // 
             this.txtCantidadProductoAgregar.Location = new System.Drawing.Point(177, 206);
             this.txtCantidadProductoAgregar.Name = "txtCantidadProductoAgregar";
-            this.txtCantidadProductoAgregar.Size = new System.Drawing.Size(243, 39);
+            this.txtCantidadProductoAgregar.Size = new System.Drawing.Size(243, 29);
             this.txtCantidadProductoAgregar.TabIndex = 10;
             // 
             // txtPrecioProductoAgregar
             // 
             this.txtPrecioProductoAgregar.Location = new System.Drawing.Point(177, 150);
             this.txtPrecioProductoAgregar.Name = "txtPrecioProductoAgregar";
-            this.txtPrecioProductoAgregar.Size = new System.Drawing.Size(243, 39);
+            this.txtPrecioProductoAgregar.Size = new System.Drawing.Size(243, 29);
             this.txtPrecioProductoAgregar.TabIndex = 9;
             // 
             // label31
@@ -1256,7 +1279,7 @@ namespace tp_plataformas_2
             this.label31.AutoSize = true;
             this.label31.Location = new System.Drawing.Point(54, 214);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(112, 32);
+            this.label31.Size = new System.Drawing.Size(75, 21);
             this.label31.TabIndex = 4;
             this.label31.Text = "Cantidad";
             // 
@@ -1265,7 +1288,7 @@ namespace tp_plataformas_2
             this.label32.AutoSize = true;
             this.label32.Location = new System.Drawing.Point(54, 158);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(81, 32);
+            this.label32.Size = new System.Drawing.Size(56, 21);
             this.label32.TabIndex = 3;
             this.label32.Text = "Precio";
             // 
@@ -1274,7 +1297,7 @@ namespace tp_plataformas_2
             this.label33.AutoSize = true;
             this.label33.Location = new System.Drawing.Point(54, 106);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(103, 32);
+            this.label33.Size = new System.Drawing.Size(71, 21);
             this.label33.TabIndex = 2;
             this.label33.Text = "Nombre";
             // 
@@ -1282,7 +1305,7 @@ namespace tp_plataformas_2
             // 
             this.txtNombreProductoAgregar.Location = new System.Drawing.Point(177, 103);
             this.txtNombreProductoAgregar.Name = "txtNombreProductoAgregar";
-            this.txtNombreProductoAgregar.Size = new System.Drawing.Size(243, 39);
+            this.txtNombreProductoAgregar.Size = new System.Drawing.Size(243, 29);
             this.txtNombreProductoAgregar.TabIndex = 1;
             // 
             // btnAgregarProducto
@@ -1309,9 +1332,9 @@ namespace tp_plataformas_2
             this.tabPage11.Controls.Add(this.txtProductoNombreModificar);
             this.tabPage11.Controls.Add(this.btnProductoModificar);
             this.tabPage11.Controls.Add(this.pictureBox5);
-            this.tabPage11.Location = new System.Drawing.Point(4, 41);
+            this.tabPage11.Location = new System.Drawing.Point(4, 30);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(1005, 381);
+            this.tabPage11.Size = new System.Drawing.Size(1005, 392);
             this.tabPage11.TabIndex = 3;
             this.tabPage11.Text = "Modificar";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -1321,7 +1344,7 @@ namespace tp_plataformas_2
             this.label36.AutoSize = true;
             this.label36.Location = new System.Drawing.Point(44, 78);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(38, 32);
+            this.label36.Size = new System.Drawing.Size(26, 21);
             this.label36.TabIndex = 43;
             this.label36.Text = "ID";
             // 
@@ -1329,14 +1352,14 @@ namespace tp_plataformas_2
             // 
             this.txtIdProductoModificar.Location = new System.Drawing.Point(167, 75);
             this.txtIdProductoModificar.Name = "txtIdProductoModificar";
-            this.txtIdProductoModificar.Size = new System.Drawing.Size(243, 39);
+            this.txtIdProductoModificar.Size = new System.Drawing.Size(243, 29);
             this.txtIdProductoModificar.TabIndex = 42;
             // 
             // txtIdCategoriaProductoModificar
             // 
             this.txtIdCategoriaProductoModificar.Location = new System.Drawing.Point(169, 279);
             this.txtIdCategoriaProductoModificar.Name = "txtIdCategoriaProductoModificar";
-            this.txtIdCategoriaProductoModificar.Size = new System.Drawing.Size(243, 39);
+            this.txtIdCategoriaProductoModificar.Size = new System.Drawing.Size(243, 29);
             this.txtIdCategoriaProductoModificar.TabIndex = 41;
             // 
             // label27
@@ -1344,7 +1367,7 @@ namespace tp_plataformas_2
             this.label27.AutoSize = true;
             this.label27.Location = new System.Drawing.Point(46, 287);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(151, 32);
+            this.label27.Size = new System.Drawing.Size(101, 21);
             this.label27.TabIndex = 40;
             this.label27.Text = "ID Categoria";
             // 
@@ -1354,7 +1377,7 @@ namespace tp_plataformas_2
             this.label29.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label29.Location = new System.Drawing.Point(46, 25);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(285, 40);
+            this.label29.Size = new System.Drawing.Size(187, 25);
             this.label29.TabIndex = 39;
             this.label29.Text = "Modificar Producto";
             // 
@@ -1362,14 +1385,14 @@ namespace tp_plataformas_2
             // 
             this.txtCantidadProductoModificar.Location = new System.Drawing.Point(167, 227);
             this.txtCantidadProductoModificar.Name = "txtCantidadProductoModificar";
-            this.txtCantidadProductoModificar.Size = new System.Drawing.Size(243, 39);
+            this.txtCantidadProductoModificar.Size = new System.Drawing.Size(243, 29);
             this.txtCantidadProductoModificar.TabIndex = 38;
             // 
             // txtPrecioProductoModificar
             // 
             this.txtPrecioProductoModificar.Location = new System.Drawing.Point(167, 171);
             this.txtPrecioProductoModificar.Name = "txtPrecioProductoModificar";
-            this.txtPrecioProductoModificar.Size = new System.Drawing.Size(243, 39);
+            this.txtPrecioProductoModificar.Size = new System.Drawing.Size(243, 29);
             this.txtPrecioProductoModificar.TabIndex = 37;
             // 
             // label30
@@ -1377,7 +1400,7 @@ namespace tp_plataformas_2
             this.label30.AutoSize = true;
             this.label30.Location = new System.Drawing.Point(44, 235);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(112, 32);
+            this.label30.Size = new System.Drawing.Size(75, 21);
             this.label30.TabIndex = 36;
             this.label30.Text = "Cantidad";
             // 
@@ -1386,7 +1409,7 @@ namespace tp_plataformas_2
             this.label34.AutoSize = true;
             this.label34.Location = new System.Drawing.Point(44, 179);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(81, 32);
+            this.label34.Size = new System.Drawing.Size(56, 21);
             this.label34.TabIndex = 35;
             this.label34.Text = "Precio";
             // 
@@ -1395,7 +1418,7 @@ namespace tp_plataformas_2
             this.label35.AutoSize = true;
             this.label35.Location = new System.Drawing.Point(44, 127);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(103, 32);
+            this.label35.Size = new System.Drawing.Size(71, 21);
             this.label35.TabIndex = 34;
             this.label35.Text = "Nombre";
             // 
@@ -1403,7 +1426,7 @@ namespace tp_plataformas_2
             // 
             this.txtProductoNombreModificar.Location = new System.Drawing.Point(167, 124);
             this.txtProductoNombreModificar.Name = "txtProductoNombreModificar";
-            this.txtProductoNombreModificar.Size = new System.Drawing.Size(243, 39);
+            this.txtProductoNombreModificar.Size = new System.Drawing.Size(243, 29);
             this.txtProductoNombreModificar.TabIndex = 33;
             // 
             // btnProductoModificar
@@ -1431,9 +1454,9 @@ namespace tp_plataformas_2
             this.tabPage12.Controls.Add(this.label42);
             this.tabPage12.Controls.Add(this.label43);
             this.tabPage12.Controls.Add(this.textBox14);
-            this.tabPage12.Location = new System.Drawing.Point(4, 41);
+            this.tabPage12.Location = new System.Drawing.Point(4, 30);
             this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Size = new System.Drawing.Size(1005, 381);
+            this.tabPage12.Size = new System.Drawing.Size(1005, 392);
             this.tabPage12.TabIndex = 4;
             this.tabPage12.Text = "Eliminar";
             this.tabPage12.UseVisualStyleBackColor = true;
@@ -1462,7 +1485,7 @@ namespace tp_plataformas_2
             this.label42.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label42.Location = new System.Drawing.Point(55, 39);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(264, 40);
+            this.label42.Size = new System.Drawing.Size(173, 25);
             this.label42.TabIndex = 36;
             this.label42.Text = "Eliminar Producto";
             // 
@@ -1471,7 +1494,7 @@ namespace tp_plataformas_2
             this.label43.AutoSize = true;
             this.label43.Location = new System.Drawing.Point(55, 106);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(38, 32);
+            this.label43.Size = new System.Drawing.Size(26, 21);
             this.label43.TabIndex = 35;
             this.label43.Text = "ID";
             // 
@@ -1479,7 +1502,7 @@ namespace tp_plataformas_2
             // 
             this.textBox14.Location = new System.Drawing.Point(178, 106);
             this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(225, 39);
+            this.textBox14.Size = new System.Drawing.Size(225, 29);
             this.textBox14.TabIndex = 34;
             // 
             // btnProductos
@@ -1512,7 +1535,7 @@ namespace tp_plataformas_2
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1138, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1144, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1521,13 +1544,13 @@ namespace tp_plataformas_2
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.salirToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(73, 29);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menuToolStripMenuItem.Text = "Menu";
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(147, 34);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -1537,13 +1560,13 @@ namespace tp_plataformas_2
             this.toolStripMenuItem3,
             this.toolStripMenuItem2});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(105, 29);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(71, 20);
             this.toolStripMenuItem1.Text = "Acerca de";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(203, 34);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(133, 22);
             this.toolStripMenuItem3.Text = "Materia";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
@@ -1558,51 +1581,51 @@ namespace tp_plataformas_2
             this.lopezSosaToolStripMenuItem,
             this.motzoFrancoToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(203, 34);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
             this.toolStripMenuItem2.Text = "Integrantes";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // callejaHoracioToolStripMenuItem
             // 
             this.callejaHoracioToolStripMenuItem.Name = "callejaHoracioToolStripMenuItem";
-            this.callejaHoracioToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.callejaHoracioToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.callejaHoracioToolStripMenuItem.Text = "Calleja Horacio";
             // 
             // cohenNicolasToolStripMenuItem
             // 
             this.cohenNicolasToolStripMenuItem.Name = "cohenNicolasToolStripMenuItem";
-            this.cohenNicolasToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.cohenNicolasToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.cohenNicolasToolStripMenuItem.Text = "Cohen Nicolas";
             // 
             // kimAnastaciaToolStripMenuItem
             // 
             this.kimAnastaciaToolStripMenuItem.Name = "kimAnastaciaToolStripMenuItem";
-            this.kimAnastaciaToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.kimAnastaciaToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.kimAnastaciaToolStripMenuItem.Text = "Kim Anastasia";
             this.kimAnastaciaToolStripMenuItem.Click += new System.EventHandler(this.kimAnastaciaToolStripMenuItem_Click);
             // 
             // kukutchkaMarcosToolStripMenuItem
             // 
             this.kukutchkaMarcosToolStripMenuItem.Name = "kukutchkaMarcosToolStripMenuItem";
-            this.kukutchkaMarcosToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.kukutchkaMarcosToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.kukutchkaMarcosToolStripMenuItem.Text = "Kukutchka Marcos";
             // 
             // lopezEmmanuelToolStripMenuItem
             // 
             this.lopezEmmanuelToolStripMenuItem.Name = "lopezEmmanuelToolStripMenuItem";
-            this.lopezEmmanuelToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.lopezEmmanuelToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.lopezEmmanuelToolStripMenuItem.Text = "Lopez Emmanuel";
             // 
             // lopezSosaToolStripMenuItem
             // 
             this.lopezSosaToolStripMenuItem.Name = "lopezSosaToolStripMenuItem";
-            this.lopezSosaToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.lopezSosaToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.lopezSosaToolStripMenuItem.Text = "Lopez Sosa Sebastian";
             // 
             // motzoFrancoToolStripMenuItem
             // 
             this.motzoFrancoToolStripMenuItem.Name = "motzoFrancoToolStripMenuItem";
-            this.motzoFrancoToolStripMenuItem.Size = new System.Drawing.Size(285, 34);
+            this.motzoFrancoToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.motzoFrancoToolStripMenuItem.Text = "Motzo Franco";
             // 
             // btnCompras
@@ -1644,7 +1667,7 @@ namespace tp_plataformas_2
             this.lblMainTitle.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblMainTitle.Location = new System.Drawing.Point(41, 54);
             this.lblMainTitle.Name = "lblMainTitle";
-            this.lblMainTitle.Size = new System.Drawing.Size(330, 65);
+            this.lblMainTitle.Size = new System.Drawing.Size(223, 45);
             this.lblMainTitle.TabIndex = 5;
             this.lblMainTitle.Text = "ABM Mercado";
             this.lblMainTitle.Click += new System.EventHandler(this.lblMainTitle_Click);
@@ -1660,39 +1683,16 @@ namespace tp_plataformas_2
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(629, 254);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(194, 36);
-            this.radioButton1.TabIndex = 18;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Administrador";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(611, 265);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(194, 36);
-            this.radioButton2.TabIndex = 36;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Administrador";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
             // FrmMercadoAdm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1138, 674);
+            this.ClientSize = new System.Drawing.Size(1144, 691);
+            this.Controls.Add(this.panelCategorias);
+            this.Controls.Add(this.panelProductos);
             this.Controls.Add(this.panelUsuarios);
             this.Controls.Add(this.panelCompras);
-            this.Controls.Add(this.panelProductos);
-            this.Controls.Add(this.panelCategorias);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnUsuarios);
             this.Controls.Add(this.lblMainTitle);
@@ -1707,7 +1707,6 @@ namespace tp_plataformas_2
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1160, 730);
             this.MinimumSize = new System.Drawing.Size(1160, 730);
-            
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mercado - Administrador";
             this.Load += new System.EventHandler(this.FrmMercadoAdmin_Load);

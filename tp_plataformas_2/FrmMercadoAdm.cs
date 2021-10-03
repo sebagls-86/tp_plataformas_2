@@ -115,7 +115,8 @@ namespace tp_plataformas_2
             {
                 string nuevoNombre = txtNombreCategoriaModificar.Text;
                 mercado.ModificarCategoria(id, nuevoNombre);
-
+                txtNombreCategoriaModificar.Text = "";
+                txtIDCategoriaModificar.Text = "";
             }
             
    
@@ -124,7 +125,8 @@ namespace tp_plataformas_2
         {
             int idEliminado = int.Parse(txtIdEliminar.Text);
             mercado.EliminarCategoria(idEliminado);
-           
+            txtIdEliminar.Text = "";
+            this.Refresh();
 
 
         }

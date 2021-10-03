@@ -279,11 +279,21 @@ namespace tp_plataformas_2
         }
         public bool AgregarCategoria(string nombre) //Agregamos una categoria al array de categorias
         {
+            foreach (Categoria categoria in categorias)
+            {
+                if (categoria != null)
+                {
+                    if (categoria.Nombre.Equals(" "))
+                    {
+                        categoria.Nombre = nombre;
+                        break;
+                    }
+                }
+            }
             if (cantCategorias <= maxCategorias)
 
             {
-                cantCategorias++;
-                int id = cantCategorias;
+                int id = cantCategorias + 1;
                 if (BuscarCategoria(id))
                 {
                     Categoria categoria = new Categoria(id, nombre);
@@ -293,8 +303,9 @@ namespace tp_plataformas_2
 
                     do
                     {
-                        if (categorias[j] == null || categorias[j].Equals(""))
+                        if (categorias[j] == null)
                         {
+                            cantCategorias++;
                             categorias[j] = categoria;
                             auxiliar = 1;
                         }
@@ -303,7 +314,9 @@ namespace tp_plataformas_2
                     } while (auxiliar == 0);
                 }
 
-               
+
+
+
 
                 FileManager.SaveArrayCategorias(categorias);
                 return true;
@@ -320,11 +333,10 @@ namespace tp_plataformas_2
             {
                 categorias[ID].Nombre = Nombre;
                 FileManager.SaveArrayCategorias(categorias);
-                Console.WriteLine("Categoria modificada con exito");
             }
             else
             {
-                Console.WriteLine("Categoria no encontrada");
+                return false;
             }
 
 
@@ -345,13 +357,13 @@ namespace tp_plataformas_2
                 if (encontre)
                 {
 
-                    categorias[i] = null;
+                    categorias[i].Nombre = " ";
                     Console.WriteLine("Categoria " + ID + " eliminada con éxito!");
                     FileManager.SaveArrayCategorias(categorias);
-                    cantCategorias--;
+                    //cantCategorias--;
                 }
-                
-                    i++;
+
+                i++;
             }
             return encontre;
         }
