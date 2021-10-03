@@ -134,8 +134,8 @@ namespace tp_plataformas_2
                     productos[i].Precio = Precio;
                     productos[i].Cantidad = Cantidad;
                     productos[i].Id = ID;
-                    productos[i].Cat = productos[ID_Categoria].Cat; // :)
-
+                    //productos[i].Cat = productos[ID_Categoria-1].Cat; // :)
+                    productos[i].Cat = categorias[ID_Categoria - 1];
                     Console.WriteLine("Producto modificado con éxito " + Nombre + Precio + Cantidad + ID);
                 }
             }
@@ -154,7 +154,7 @@ namespace tp_plataformas_2
                 {
 
                     productos.Remove(productos[i]);
-                    Console.WriteLine("Producto " + id + " eliminado con éxito!");
+                    FileManager.SaveListProductos(productos);
                 }
                 else
                     i++;
