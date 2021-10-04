@@ -23,10 +23,22 @@ namespace tp_plataformas_2
         {
             return Id.CompareTo(other.Id);
         }
+        
+        private string compraRealizada()
+        {
+            string suma = "";
+            foreach(Producto prod in Productos.Keys){
+                int cantComprada = Productos[prod];
+                suma += "*" + cantComprada +"|"+ prod.Id + "|" + prod.Nombre + "|" + prod.Precio +"|" + prod.Cat + "|" + prod.Cantidad;
 
+            }
+            //idcompra idusuario idprod
+            return suma;
+        }
+         
         public override string ToString()
         {
-            return $"{Id}|{Comprador.Id}|{Productos.Keys}|{Productos.Values}|{Total}";
+            return $"{Id}|{Comprador.Id}|{Total}{compraRealizada()}";
         }
     }
 }

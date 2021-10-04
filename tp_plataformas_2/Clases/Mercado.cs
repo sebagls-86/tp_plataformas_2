@@ -42,6 +42,7 @@ namespace tp_plataformas_2
             ObtenerCategorias();
             ReadFileUsuarios();
             ReadFileProductos();
+            ReadFileCompras();
         }
 
         private void ObtenerCategorias()
@@ -106,6 +107,122 @@ namespace tp_plataformas_2
                 }
 
             }
+
+        }
+
+        private void ReadFileCompras()
+        {
+            contenidos = FileManager.ReadFileCompras();
+            char delimiterChars = '|';
+            char delimiterCharsAsterisco = '*';
+
+            //array 1 usuario y compra
+            Usuario usuario = null;
+            int Id = 0;
+            string idUsuario;
+            double totalCompra = 0;
+
+            /*   hasta aca */
+
+            /*PRODUCTOS uno o muchos arrays*/
+            int cantComprada;
+            int idProducto;
+            string nombreProducto;
+            int valorProdUnitario;
+            int idCategoria;
+            string nombreCategoria;
+            int cantidadProducto;
+            /*  hasta aca*/
+
+            string[] linea;
+            foreach (string contenido in contenidos)
+            {
+
+                if (contenido != null && contenido != "")
+                {
+                    Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>();
+
+                    linea = contenido.Split(delimiterCharsAsterisco);
+                    for (int i = 0; i < linea.Length; i++)
+                    {
+                        if(i == 0)
+                        {
+                            string[] datosUsuarios = linea[i].Split(delimiterChars);
+
+                                Id = int.Parse(datosUsuarios[0]);
+                                idUsuario = datosUsuarios[1];
+                                totalCompra = double.Parse(datosUsuarios[2]);
+                                usuario = BuscarUsuarioPorId(idUsuario);
+
+                        }
+                        else
+                        {
+                            string[] datosProductos = linea[i].Split(delimiterChars);
+                            cantComprada = int.Parse(datosProductos[0]);
+                            idProducto = int.Parse(datosProductos[1]);
+                            nombreProducto = datosProductos[2];
+                            valorProdUnitario = int.Parse(datosProductos[3]);
+                            idCategoria = int.Parse(datosProductos[4]);
+                            nombreCategoria = datosProductos[5];
+                            cantidadProducto = int.Parse(datosProductos[6]);
+
+                            //instancias de cat y producto
+                            Categoria cat = new Categoria(idCategoria, nombreCategoria);
+                            Producto producto = new Producto(idProducto, nombreProducto, valorProdUnitario, cantComprada, cat);
+
+                            productosCompra.Add(producto, cantComprada);
+
+                            //usuario.MiCarro.AgregarProducto(producto, cantComprada);
+                        }
+                    }
+                    Compra compra = new Compra(Id,usuario,productosCompra,totalCompra);
+                    compras.Add(compra);
+                }
+
+            }
+                        //Compra compraAgregada = new Compra(compras.Count + 1, usuario, productosCompra, cantidadProducto);
+            
+            //datosUsuarioArray = linea.Split(delimiterChars);
+
+            //if (contenido != null && contenido != "")
+            //{
+            //    string[] propiedades = contenido.Split(delimiterCharsAsterisco);
+            //    for (int i = 0; i < propiedades.Length; i++)
+            //    {
+            //        if (i == 0)
+            //        {
+            //            string[] produtosIndividuales = contenido.Split(delimiterChars);
+            //            for (int j = 0; j < produtosIndividuales.Length; j++)
+            //            {
+            //                Id = int.Parse(produtosIndividuales[0]);
+            //                idUsuario = produtosIndividuales[1];
+            //                totalCompra = double.Parse(produtosIndividuales[2]);
+            //                break;
+            //            }
+            //        }
+            //    }
+            //}
+            //}
+            //string[] produtosIndividuales = contenido.Split(delimiterCharsAsterisco);
+
+
+                //int cantComprada = int.Parse(propiedades[3]);
+                //int idProducto = int.Parse(propiedades[4]);
+                //string nombreProducto = propiedades[5];
+                //int valorProdUnitario = int.Parse(propiedades[6]);
+
+
+
+
+                //AgregarProducto(nombre, precio, cantidad, idCat);
+
+                 //Usuario usuario = BuscarUsuarioPorId(idUsuario);
+
+                //Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos);
+                //Compra compra = new Compra(compras.Count + 1, usuario, productosCompra, totalCompra);
+
+
+
 
         }
         public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)//Creamos producto y lo agregamos al array list de productos
@@ -608,18 +725,19 @@ namespace tp_plataformas_2
                 usuarioEncontrado = usuarios[ID_Usuario - 1];
                 foreach (Producto producto in usuarioEncontrado.MiCarro.Productos.Keys)
                 {
-                    precioTotal += producto.Precio;
+                    precioTotal += producto.Precio * usuarioEncontrado.MiCarro.Productos[producto];
                 }
                
                     precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal,IVA);
                 
                 Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos); 
                 Compra compra = new Compra(compras.Count + 1,usuarioEncontrado,productosCompra,precioTotal);
-                
                 compras.Add(compra);
+                FileManager.SaveListCompras(compras);
                 foreach(Producto producto in productosCompra.Keys){
-                    productos[producto.Id].Cantidad -= producto.Cantidad;
+                    productos[producto.Id].Cantidad -= productosCompra[producto];
                 }
+                FileManager.SaveListProductos(productos);
                 usuarioEncontrado.MiCarro.Vaciar();
                 sePudoComprar = true;
             }
@@ -708,13 +826,47 @@ namespace tp_plataformas_2
         {
             return productos.OrderBy(propiedad => propiedad.Id).ToList();
         }
-        public List<Compra> mostrarComprasRealizadas()
+        
+        public class CompraRealizada
         {
-            compras.Sort();
+            public int Id { get; set; }
+            public string Usuario { get; set; }
+            public Usuario Comprador;
+            public string Productos { get; set; }
+            public Double Total { get; set; }
 
-            return compras;
+            public CompraRealizada(int _Id, Usuario usuario, Double total, Dictionary<Producto, int> productos)
+            {
+                Id = _Id;
+                Comprador = usuario;
+                Total = total;
+                Usuario = usuario.Nombre;
+                Productos = creaProducto(productos);
+            }
+
+            public string creaProducto(Dictionary<Producto, int> productos)
+            {
+                string miString ="";
+                foreach(Producto prod in productos.Keys)
+                {
+                    miString += $" {prod.Nombre} - {productos[prod]}\n ";
+                }
+                return miString;
+            }
         }
+        public List<CompraRealizada> mostrarComprasRealizadas()
+        {
+            List<CompraRealizada> comprado = new List<CompraRealizada>();
+            
+            foreach (Compra compra in compras)
+            {
+                comprado.Add(new CompraRealizada(compra.Id, compra.Comprador, compra.Total, compra.Productos));
+            }
+            
+            
 
+            return comprado;
+        }
 
         public int IniciarSesion(int cuil, string clave)
         {

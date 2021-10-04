@@ -246,6 +246,36 @@ namespace tp_plataformas_2
             }
             return contenido;
         }
+
+        public static string[] ReadFileCompras()
+        {
+            string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
+
+            string fileName = "compras.txt";
+            string sourceFile = Path.Combine(sourcePath, fileName);
+
+            string line;
+
+            string[] contenido = new string[1000];
+
+            if (File.Exists(sourceFile))
+            {
+                StreamReader archivo = new StreamReader(sourceFile);
+                int counter = 0;
+                while ((line = archivo.ReadLine()) != null)
+                {
+                    contenido[counter] = line;
+                    //System.Console.WriteLine(line);
+                    counter++;
+                }
+
+                archivo.Close();
+
+            }
+            return contenido;
+        }
+
+
     }
 
 
