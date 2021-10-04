@@ -172,6 +172,30 @@ namespace tp_plataformas_2
 
         }
 
+        public static void SaveListCompras(List<Compra> compra)
+        {
+            string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
+            string fileName = "compras.txt";
+            string sourceFile = Path.Combine(sourcePath, fileName);
+
+            //List<Producto> contenido = new List<Producto>();
+            string[] contenido = new string[1000];
+            //string datoGuardar ;
+            int i = 0;
+            foreach (Compra compras in compra)
+            {
+                if (compras != null)
+                {
+
+                    contenido[i] = compras.ToString();
+                }
+                i++;
+            }
+
+            File.WriteAllLines(sourceFile, contenido);
+
+        }
+
         public static string[] ReadFileUsuarios()
         {
             string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
@@ -226,6 +250,36 @@ namespace tp_plataformas_2
             }
             return contenido;
         }
+
+        public static string[] ReadFileCompras()
+        {
+            string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
+
+            string fileName = "compras.txt";
+            string sourceFile = Path.Combine(sourcePath, fileName);
+
+            string line;
+
+            string[] contenido = new string[1000];
+
+            if (File.Exists(sourceFile))
+            {
+                StreamReader archivo = new StreamReader(sourceFile);
+                int counter = 0;
+                while ((line = archivo.ReadLine()) != null)
+                {
+                    contenido[counter] = line;
+                    //System.Console.WriteLine(line);
+                    counter++;
+                }
+
+                archivo.Close();
+
+            }
+            return contenido;
+        }
+
+
     }
 
 

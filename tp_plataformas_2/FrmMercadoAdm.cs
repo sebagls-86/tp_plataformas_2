@@ -551,14 +551,23 @@ namespace tp_plataformas_2
             int idCompra = int.Parse(txtEliminarCompraId.Text);
 
             /*  DESCOMENTAR ESTO  */
-            //if (Mercado.EliminarCompra(idCompra))
-            //{
-            //    txtEliminarCompraId.Text = "";
-            //    MessageBox.Show("Compra Eliminada");
+            try
+            {
+                if (Mercado.EliminarCompra(idCompra))
+                {
+                    txtEliminarCompraId.Text = "";
+                    MessageBox.Show("Compra Eliminada");
+                    dgvProductos.DataSource = null;
+                    dgvComprasRealizadas.DataSource = Mercado.mostrarComprasRealizadas();
+                }
 
-            //}
-            
-         }
+            }
+            catch(Excepciones ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
         private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Application.Exit();
