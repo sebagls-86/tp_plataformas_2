@@ -29,7 +29,7 @@ namespace tp_plataformas_2
             productos = new List<Producto>();
             usuarios = new List<Usuario>();
             compras = new List<Compra>();
-            compras.Add(null);
+            //compras.Add(null);
             categorias = new Categoria[maxCategorias];
              
             FileManager.CreateFolder();
@@ -614,8 +614,8 @@ namespace tp_plataformas_2
                 
                 Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos); 
                 Compra compra = new Compra(compras.Count + 1,usuarioEncontrado,productosCompra,precioTotal);
-                
                 compras.Add(compra);
+                FileManager.SaveListCompras(compras);
                 foreach(Producto producto in productosCompra.Keys){
                     productos[producto.Id].Cantidad -= producto.Cantidad;
                 }

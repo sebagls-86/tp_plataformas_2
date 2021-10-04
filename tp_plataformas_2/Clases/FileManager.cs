@@ -172,6 +172,26 @@ namespace tp_plataformas_2
 
         }
 
+        public static void SaveListCompras(List<Compra> compra)
+        {
+            string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
+            string fileName = "compras.txt";
+            string sourceFile = Path.Combine(sourcePath, fileName);
+
+            //List<Producto> contenido = new List<Producto>();
+            string[] contenido = new string[1000];
+            //string datoGuardar ;
+            int i = 0;
+            foreach (Compra compras in compra)
+            {
+                contenido[i] = compras.ToString();
+                i++;
+            }
+
+            File.WriteAllLines(sourceFile, contenido);
+
+        }
+
         public static string[] ReadFileUsuarios()
         {
             string sourcePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Mercado";
