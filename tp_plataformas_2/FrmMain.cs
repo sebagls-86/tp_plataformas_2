@@ -68,50 +68,49 @@ namespace tp_plataformas_2
 
             try
             {
+                
+                    int idUsuario = Int32.Parse(usuario);
 
 
-                int idUsuario = Int32.Parse(usuario);
-
-
+                try
+                {
                 int inicio = Mercado.IniciarSesion(idUsuario, password);
                 string idUsuarioLogueado = "" + inicio;
-                Usuario usuarioLogueado = Mercado.BuscarUsuarioPorId(idUsuarioLogueado);
-
-                if (inicio != -1)
-                {
-
-                    bool Admin = Mercado.esAdmin(inicio);
-
-                    if (Admin)
+                Usuario usuarioLogueado;
+                    if (inicio != -1)
                     {
+                        usuarioLogueado = Mercado.BuscarUsuarioPorId(idUsuarioLogueado);
+                        bool Admin = Mercado.esAdmin(inicio);
+                        if (Admin)
+                        {
 
-                        MessageBox.Show("Usuario detectado = ADMIN");
-                        this.Hide();
+                            MessageBox.Show("Usuario detectado = ADMIN");
+                            this.Hide();
 
-                        FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm(Mercado,usuarioLogueado);
-                        VtnaPrincipal.Show();
+                            FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm(Mercado, usuarioLogueado);
+                            VtnaPrincipal.Show();
 
+                        }
+                        else if (Admin == false)
+                        {
+                            MessageBox.Show("¡Gracias por su visita!");
+                            this.Hide();
+
+                            FrmCliente VtnCliente = new FrmCliente(Mercado, usuarioLogueado);
+                            VtnCliente.Show();
+                        }
                     }
-                    else if (Admin == false)
-                    {
-                        MessageBox.Show("¡Gracias por su visita!");
-                        this.Hide();
-
-                        FrmCliente VtnCliente = new FrmCliente(Mercado, usuarioLogueado);
-                        VtnCliente.Show();
+                    else {
+                        throw new Excepciones("Usuario y/o contraseña incorecto.");
                     }
-
-
                 }
-                else
-                {
-                    throw new Excepciones("Usuario no encontrado");
+                catch (Excepciones ex) {
+                    MessageBox.Show(ex.Message);
                 }
             }
-
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Ingrese valores numericos.");
             }
         }
 
