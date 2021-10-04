@@ -15,7 +15,7 @@ Directorio de almacenamiento por defecto:
 
     \AppData\Local\Mercado
 
-Espesificaciones de uso:
+Especificaciones de uso:
 
     https://docs.google.com/document/d/1AwbDblrVFYZY1SMT11qbKkKAqnTQUCw4iCDbb-rzHoQ/edit?usp=sharing
 
