@@ -48,8 +48,9 @@ namespace tp_plataformas_2
 
         private void pictureBuscar_Click(object sender, EventArgs e)
         {
-            string productoBuscar = txtBuscarProductos.Text;
+            string productoBuscar = txtBuscarProductos.Text.ToUpper();
             txtBuscarProductos.Text = "";
+            dgvProductos.DataSource = Mercado.productos.FindAll(producto => producto.Nombre.ToUpper().Contains(productoBuscar));
         }
 
         private void pbCarro_Click(object sender, EventArgs e)
@@ -66,12 +67,58 @@ namespace tp_plataformas_2
 
         private void AGREGAR_Click(object sender, EventArgs e)
         {
+            //this.Hide();
+            //Int32 indiceProducto = dgvProductos.Columns.GetColumnCount(DataGridViewElementStates.Selected);
+            //Producto producto = dgvProductos.SelectedRows[indiceProducto].DataBoundItem as Producto;
+            //MessageBox.Show("Producto ingresado: " + producto.Nombre);
+            //FrmDetalleProducto VtnaDetalleProducto = new FrmDetalleProducto(Mercado, producto, Usuario);
+            //VtnaDetalleProducto.Show();
+        }
+
+        private void dgvCategorias_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvCategorias_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //String nombre = "" + dgvCategorias.Rows[e.RowIndex].Cells[1].Value.ToString();
+            //Categoria categoria = Mercado.BuscarCategoriaPorNombre(nombre);
+            //dgvProductos.DataSource = Mercado.MostrarProductoEnPantallaPorCategoria(categoria.Id);
+            
+        }
+
+        private void dgvCategorias_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            String nombre = "" + dgvCategorias.Rows[e.RowIndex].Cells[1].Value.ToString();
+            Categoria categoria = Mercado.BuscarCategoriaPorNombre(nombre);
+            dgvProductos.DataSource = Mercado.MostrarProductoEnPantallaPorCategoria(categoria.Id);
+        }
+
+        private void dgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
             this.Hide();
             Int32 indiceProducto = dgvProductos.Columns.GetColumnCount(DataGridViewElementStates.Selected);
             Producto producto = dgvProductos.SelectedRows[indiceProducto].DataBoundItem as Producto;
-            MessageBox.Show("Producto ingresado: " + producto.Nombre);
             FrmDetalleProducto VtnaDetalleProducto = new FrmDetalleProducto(Mercado, producto, Usuario);
             VtnaDetalleProducto.Show();
+        }
+
+        private void comboOrdenarProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnOrdenarProductos_Click(object sender, EventArgs e)
+        {
+            int indiceSeleccionado = comboOrdenarProductos.SelectedIndex;
+            dgvProductos.DataSource = Mercado.MostrarProductosOrdenados(indiceSeleccionado);
+
+        }
+
+        private void FrmCliente_Load(object sender, EventArgs e)
+        {
+            comboOrdenarProductos.SelectedIndex = 0;
         }
     }
 }
