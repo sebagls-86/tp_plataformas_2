@@ -68,5 +68,55 @@ namespace tp_plataformas_2
                     MessageBox.Show(ex.Message);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool seVacio = Mercado.VaciarCarro(Usuario.Id);
+                if (!seVacio)
+                {
+                    MessageBox.Show("No se pudo vaciar el carro, ocurrio un problema");
+                } else
+                {
+                    MessageBox.Show("Se ha vaciado el carro.");
+                    this.Hide();
+                    FrmCliente frmCliente = new FrmCliente(Mercado, Usuario);
+                    frmCliente.Show();
+                }
+            } catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Int32 indiceProducto = dgvProductos.Columns.GetColumnCount(DataGridViewElementStates.Selected);
+            Producto producto = dgvProductos.SelectedRows[indiceProducto].DataBoundItem as Producto;
+            try
+            {
+                bool sePudoQuitar = Mercado.QuitarDelCarro(producto.Id, Usuario.MiCarro.Productos[producto], Usuario.Id);
+                
+                if (!sePudoQuitar)
+                {
+                    MessageBox.Show("No se pudo vaciar el carro, ocurrio un problema");
+                }
+                else
+                {
+                    dgvProductos.DataSource = null;
+                    dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
+                    MessageBox.Show("Se ha removido el producto del carro.");
+                    this.Hide();
+                    FrmCliente frmCliente = new FrmCliente(Mercado, Usuario);
+                    frmCliente.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
