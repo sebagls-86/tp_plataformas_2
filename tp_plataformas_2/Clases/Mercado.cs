@@ -181,12 +181,6 @@ namespace tp_plataformas_2
 
             productos.Sort();
 
-            foreach (Producto p in productos)
-            {
-                Console.WriteLine(p);
-            }
-
-
         }
 
         public Producto BuscarProductoPorId(String Id)
@@ -252,7 +246,31 @@ namespace tp_plataformas_2
 
         }
 
+        public List<Producto> MostrarProductoEnPantallaPorCategoria(int idCategoria)
+        {
+            if (idCategoria < 0 || idCategoria > categorias.Length)
+            {
+                throw new Excepciones("Id de categoria fuera del rango.");
+            }
+            return productos.FindAll(producto => producto.Cat.Id == idCategoria);
+        }
 
+        public List<Producto> MostrarProductosOrdenados(int orden)
+        {
+            List<Producto> productosOrdenados = new List<Producto>();
+            if(orden < 0 || orden > 1)
+            {
+                throw new Excepciones("El numero de orden es incorrecto.");
+            }
+            if(orden == 0)
+            {
+                productosOrdenados = productos.OrderBy(producto => producto.Id).ToList();
+            } else
+            {
+                productosOrdenados = productos.OrderByDescending(producto => producto.Id).ToList();
+            }
+            return productosOrdenados;
+        }
         public bool AgregarUsuario(int cuil, String nombre, String apellido, String mail, String password, int tipoUsuario)
         {
 
@@ -483,6 +501,23 @@ namespace tp_plataformas_2
             return true;
         }
 
+        public Categoria BuscarCategoriaPorNombre(string Nombre)
+        {
+            Categoria categoriaEncontrada = null;
+            foreach (Categoria categoria in categorias)
+            {
+                if (categoria.Nombre.Equals(Nombre))
+                {
+                    categoriaEncontrada = categoria;
+                }
+            }
+            if(categoriaEncontrada == null)
+            {
+                throw new Excepciones("No se encontró la categoria.");
+            }
+            return categoriaEncontrada;
+        }
+
         public Categoria[] MostrarCategorias()
         {
 
@@ -609,13 +644,11 @@ namespace tp_plataformas_2
                 foreach (Producto producto in usuarioEncontrado.MiCarro.Productos.Keys)
                 {
                     precioTotal += producto.Precio;
-                    precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
-
-                    Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos);
-                    Compra compra = new Compra(compras.Count + 1, usuarioEncontrado, productosCompra, precioTotal);
-                    compras.Add(compra);
-                    precioTotal = 0;
                 }
+                precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
+                Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos);
+                Compra compra = new Compra(compras.Count + 1, usuarioEncontrado, productosCompra, precioTotal);
+                compras.Add(compra);
                 foreach (Producto productoCompra in usuarioEncontrado.MiCarro.Productos.Keys)
                 {
                     productos[productoCompra.Id].Cantidad -= usuarioEncontrado.MiCarro.Productos[productoCompra];

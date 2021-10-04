@@ -48,7 +48,6 @@ namespace tp_plataformas_2
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.pbCarro = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.pictureBuscarProductos = new System.Windows.Forms.PictureBox();
             this.comboOrdenarProductos = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -59,7 +58,6 @@ namespace tp_plataformas_2
             this.lblCantidadProductosEnCarro = new System.Windows.Forms.Label();
             this.dgvCategorias = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.AGREGAR = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarro)).BeginInit();
@@ -185,6 +183,7 @@ namespace tp_plataformas_2
             this.dgvProductos.Size = new System.Drawing.Size(542, 293);
             this.dgvProductos.TabIndex = 13;
             this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
+            this.dgvProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellDoubleClick);
             // 
             // pbCarro
             // 
@@ -208,23 +207,13 @@ namespace tp_plataformas_2
             this.label1.TabIndex = 16;
             this.label1.Text = "¡Bienvenido a nuestro Mercado!";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(448, 624);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(202, 25);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Productos Disponibles";
-            // 
             // pictureBuscarProductos
             // 
             this.pictureBuscarProductos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBuscarProductos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBuscarProductos.Image = ((System.Drawing.Image)(resources.GetObject("pictureBuscarProductos.Image")));
             this.pictureBuscarProductos.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBuscarProductos.InitialImage")));
-            this.pictureBuscarProductos.Location = new System.Drawing.Point(6, 90);
+            this.pictureBuscarProductos.Location = new System.Drawing.Point(79, 82);
             this.pictureBuscarProductos.Name = "pictureBuscarProductos";
             this.pictureBuscarProductos.Size = new System.Drawing.Size(31, 29);
             this.pictureBuscarProductos.TabIndex = 20;
@@ -237,10 +226,11 @@ namespace tp_plataformas_2
             this.comboOrdenarProductos.Items.AddRange(new object[] {
             "Ordenar Ascendente",
             "Ordenar Descendente"});
-            this.comboOrdenarProductos.Location = new System.Drawing.Point(0, 28);
+            this.comboOrdenarProductos.Location = new System.Drawing.Point(6, 28);
             this.comboOrdenarProductos.Name = "comboOrdenarProductos";
             this.comboOrdenarProductos.Size = new System.Drawing.Size(188, 29);
             this.comboOrdenarProductos.TabIndex = 21;
+            this.comboOrdenarProductos.SelectedIndexChanged += new System.EventHandler(this.comboOrdenarProductos_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -256,12 +246,13 @@ namespace tp_plataformas_2
             // 
             // btnOrdenarProductos
             // 
-            this.btnOrdenarProductos.Location = new System.Drawing.Point(7, 75);
+            this.btnOrdenarProductos.Location = new System.Drawing.Point(37, 79);
             this.btnOrdenarProductos.Name = "btnOrdenarProductos";
             this.btnOrdenarProductos.Size = new System.Drawing.Size(111, 32);
             this.btnOrdenarProductos.TabIndex = 22;
             this.btnOrdenarProductos.Text = "Aplicar";
             this.btnOrdenarProductos.UseVisualStyleBackColor = true;
+            this.btnOrdenarProductos.Click += new System.EventHandler(this.btnOrdenarProductos_Click);
             // 
             // groupBox2
             // 
@@ -277,7 +268,7 @@ namespace tp_plataformas_2
             // 
             // txtBuscarProductos
             // 
-            this.txtBuscarProductos.Location = new System.Drawing.Point(6, 43);
+            this.txtBuscarProductos.Location = new System.Drawing.Point(6, 28);
             this.txtBuscarProductos.Name = "txtBuscarProductos";
             this.txtBuscarProductos.Size = new System.Drawing.Size(188, 29);
             this.txtBuscarProductos.TabIndex = 19;
@@ -311,6 +302,9 @@ namespace tp_plataformas_2
             this.dgvCategorias.RowTemplate.Height = 25;
             this.dgvCategorias.Size = new System.Drawing.Size(244, 381);
             this.dgvCategorias.TabIndex = 28;
+            this.dgvCategorias.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategorias_CellClick);
+            this.dgvCategorias.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategorias_CellDoubleClick);
+            this.dgvCategorias.DoubleClick += new System.EventHandler(this.dgvCategorias_DoubleClick);
             // 
             // contextMenuStrip1
             // 
@@ -318,31 +312,17 @@ namespace tp_plataformas_2
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // AGREGAR
-            // 
-            this.AGREGAR.BackColor = System.Drawing.Color.PaleGreen;
-            this.AGREGAR.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.AGREGAR.Location = new System.Drawing.Point(1022, 438);
-            this.AGREGAR.Name = "AGREGAR";
-            this.AGREGAR.Size = new System.Drawing.Size(81, 60);
-            this.AGREGAR.TabIndex = 29;
-            this.AGREGAR.Text = "VER MÁS";
-            this.AGREGAR.UseVisualStyleBackColor = false;
-            this.AGREGAR.Click += new System.EventHandler(this.AGREGAR_Click);
-            // 
             // FrmCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1142, 667);
-            this.Controls.Add(this.AGREGAR);
             this.Controls.Add(this.dgvCategorias);
             this.Controls.Add(this.lblCantidadProductosEnCarro);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pbCarro);
             this.Controls.Add(this.dgvProductos);
@@ -353,6 +333,7 @@ namespace tp_plataformas_2
             this.Name = "FrmCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mercado Cliente";
+            this.Load += new System.EventHandler(this.FrmCliente_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
@@ -376,7 +357,6 @@ namespace tp_plataformas_2
         private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.PictureBox pbCarro;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBuscarProductos;
         private System.Windows.Forms.ComboBox comboOrdenarProductos;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -387,7 +367,6 @@ namespace tp_plataformas_2
         private System.Windows.Forms.DataGridView dgvCategorias;
         private System.Windows.Forms.TextBox txtBuscarProductos;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.Button AGREGAR;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
