@@ -777,14 +777,15 @@ namespace tp_plataformas_2
             {
                 Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
             }
-            if (compras[ID] != null)
+            if (compras[ID-1] != null)
             {
-                foreach (Producto producto in compras[ID].Productos.Keys)
+                foreach (Producto producto in compras[ID-1].Productos.Keys)
                 {
                     productos[producto.Id].Cantidad += producto.Cantidad;
                 }
-                compras[ID] = null;
+                compras[ID-1] = null;
                 seElimino = true;
+                FileManager.SaveListCompras(compras);
             }
             else
             {
@@ -860,7 +861,11 @@ namespace tp_plataformas_2
             
             foreach (Compra compra in compras)
             {
-                comprado.Add(new CompraRealizada(compra.Id, compra.Comprador, compra.Total, compra.Productos));
+                if(compra != null)
+                {
+
+                    comprado.Add(new CompraRealizada(compra.Id, compra.Comprador, compra.Total, compra.Productos));
+                }
             }
             
             

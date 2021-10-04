@@ -184,7 +184,11 @@ namespace tp_plataformas_2
             int i = 0;
             foreach (Compra compras in compra)
             {
-                contenido[i] = compras.ToString();
+                if (compras != null)
+                {
+
+                    contenido[i] = compras.ToString();
+                }
                 i++;
             }
 
