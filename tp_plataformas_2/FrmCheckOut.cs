@@ -27,12 +27,15 @@ namespace tp_plataformas_2
             InitializeComponent();
             Mercado = mercado;
             Usuario = usuario;
+            double productoPrecio = 0;
             List<Producto> productos = new List<Producto>();
             foreach(Producto producto in Usuario.MiCarro.Productos.Keys)
             {
                 productos.Add(producto);
+                productoPrecio += producto.Precio * Usuario.MiCarro.Productos[producto];
             }
             dgvProductos.DataSource = productos;
+            lblTotalPrecio.Text = "$" + productoPrecio;
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -83,6 +86,7 @@ namespace tp_plataformas_2
                     this.Hide();
                     FrmCliente frmCliente = new FrmCliente(Mercado, Usuario);
                     frmCliente.Show();
+                    lblTotalPrecio.Text = "$0";
                 }
             } catch(Exception ex)
             {

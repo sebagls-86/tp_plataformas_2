@@ -53,10 +53,10 @@ namespace tp_plataformas_2
             this.label37 = new System.Windows.Forms.Label();
             this.btnComprar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblTituloTotal = new System.Windows.Forms.Label();
-            this.lblTotalPrecio = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.lblTituloTotal = new System.Windows.Forms.Label();
+            this.lblTotalPrecio = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -236,6 +236,26 @@ namespace tp_plataformas_2
             this.pictureBox1.TabIndex = 20;
             this.pictureBox1.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(816, 321);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 46);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "VACIAR";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(927, 321);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 46);
+            this.button3.TabIndex = 25;
+            this.button3.Text = "QUITAR";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // lblTituloTotal
             // 
             this.lblTituloTotal.AutoSize = true;
@@ -257,26 +277,6 @@ namespace tp_plataformas_2
             this.lblTotalPrecio.TabIndex = 22;
             this.lblTotalPrecio.Text = "ARS 1500";
             this.lblTotalPrecio.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(816, 321);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 46);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "VACIAR";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(927, 321);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 46);
-            this.button3.TabIndex = 25;
-            this.button3.Text = "QUITAR";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // FrmCheckOut
             // 
@@ -325,8 +325,6 @@ namespace tp_plataformas_2
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Categoria;
-        private System.Windows.Forms.Label lblTituloTotal;
-        private System.Windows.Forms.Label lblTotalPrecio;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
@@ -339,5 +337,7 @@ namespace tp_plataformas_2
         private System.Windows.Forms.ToolStripMenuItem motzoFrancoToolStripMenuItem;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label lblTituloTotal;
+        private System.Windows.Forms.Label lblTotalPrecio;
     }
 }
