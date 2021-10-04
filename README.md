@@ -22,9 +22,9 @@ Especificaciones de uso:
 ## Alumnos
 
 * **Calleja Horacio**
-* **Nicolas Cohen**
+* **Cohen Nicolas**
 * **Kim Anastasia**
 * **Kukuchka Marcos**
-* **Emmanuel López**
+* **López Emmanuel**
 * **López Sosa Sebastian**
 * **Motzo Franco**
