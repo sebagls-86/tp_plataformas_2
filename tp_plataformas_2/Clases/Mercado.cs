@@ -166,13 +166,11 @@ namespace tp_plataformas_2
                             nombreCategoria = datosProductos[5];
                             cantidadProducto = int.Parse(datosProductos[6]);
 
-                            //instancias de cat y producto
                             Categoria cat = new Categoria(idCategoria, nombreCategoria);
                             Producto producto = new Producto(idProducto, nombreProducto, valorProdUnitario, cantComprada, cat);
 
                             productosCompra.Add(producto, cantComprada);
 
-                            //usuario.MiCarro.AgregarProducto(producto, cantComprada);
                         }
                     }
                     Compra compra = new Compra(Id,usuario,productosCompra,totalCompra);
@@ -180,46 +178,10 @@ namespace tp_plataformas_2
                 }
 
             }
-                        //Compra compraAgregada = new Compra(compras.Count + 1, usuario, productosCompra, cantidadProducto);
-            
-            //datosUsuarioArray = linea.Split(delimiterChars);
-
-            //if (contenido != null && contenido != "")
-            //{
-            //    string[] propiedades = contenido.Split(delimiterCharsAsterisco);
-            //    for (int i = 0; i < propiedades.Length; i++)
-            //    {
-            //        if (i == 0)
-            //        {
-            //            string[] produtosIndividuales = contenido.Split(delimiterChars);
-            //            for (int j = 0; j < produtosIndividuales.Length; j++)
-            //            {
-            //                Id = int.Parse(produtosIndividuales[0]);
-            //                idUsuario = produtosIndividuales[1];
-            //                totalCompra = double.Parse(produtosIndividuales[2]);
-            //                break;
-            //            }
-            //        }
-            //    }
-            //}
-            //}
-            //string[] produtosIndividuales = contenido.Split(delimiterCharsAsterisco);
+                        
 
 
-                //int cantComprada = int.Parse(propiedades[3]);
-                //int idProducto = int.Parse(propiedades[4]);
-                //string nombreProducto = propiedades[5];
-                //int valorProdUnitario = int.Parse(propiedades[6]);
-
-
-
-
-                //AgregarProducto(nombre, precio, cantidad, idCat);
-
-                 //Usuario usuario = BuscarUsuarioPorId(idUsuario);
-
-                //Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos);
-                //Compra compra = new Compra(compras.Count + 1, usuario, productosCompra, totalCompra);
+                
 
 
 
