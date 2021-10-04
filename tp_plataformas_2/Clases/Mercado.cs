@@ -344,11 +344,11 @@ namespace tp_plataformas_2
             bool sePudoParsear = Int32.TryParse(Id, out int idUsuario);
             if (!sePudoParsear)
             {
-                throw new Excepciones("No se pudo parsear el ID del producto buscado.");
+                throw new Excepciones("No se puede parsear.");
             }
             else if (MercadoHelper.SonMenoresACero(new List<int> { idUsuario }))
             {
-                throw new Excepciones("El indice del producto que quiere buscar es menor a 0.");
+                throw new Excepciones("Este usuario no existe");
             }
             else if (!MercadoHelper.ExisteElUsuario(idUsuario, usuarios))
             {
