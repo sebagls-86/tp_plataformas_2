@@ -42,7 +42,8 @@ namespace tp_plataformas_2
             }
             else
             {
-                Productos[p] = cantidad;
+                Productos.Add(p, cantidad);
+                //Productos[p] = cantidad;
                 seAgregoElProducto = true;
             }
             return seAgregoElProducto;
@@ -55,25 +56,23 @@ namespace tp_plataformas_2
             if (p == null)
             {
                 Console.WriteLine("Producto nulo. Debe ir una excepcion aca.");
-                seQuitoElProducto = false;
             }
             else if (cantidad < 0)
             {
                 Console.WriteLine("Cantidad menor a 0. Debe ir una excepcion aca.");
-                seQuitoElProducto = false;
             }
             else if (Productos.ContainsKey(p))
             {
-                if (cantidad > Productos[p] || cantidad == 0)
-                {
+                //if (cantidad > Productos[p] || cantidad == 0)
+                //{
+                //    seQuitoElProducto = true;
+                //}
+                //else
+                //{
                     Productos.Remove(p);
+                //Productos[p] = Productos[p] - cantidad;
                     seQuitoElProducto = true;
-                }
-                else
-                {
-                    Productos[p] = Productos[p] - cantidad;
-                    seQuitoElProducto = true;
-                }
+                //}
 
             }
             else
