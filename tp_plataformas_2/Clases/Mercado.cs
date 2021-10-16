@@ -23,6 +23,7 @@ namespace tp_plataformas_2
 
         private string[] contenidos = new string[10];
 
+        Conexion conexion = new Conexion();   
 
         public Mercado()
         {
@@ -47,14 +48,18 @@ namespace tp_plataformas_2
 
         private void ObtenerCategorias()
         {
-            contenidos = FileManager.ReadFileCategorias();
-            foreach (string contenido in contenidos)
-            {
-                if (contenido != null && contenido != "")
-                {
-                    AgregarCategoria(contenido);
-                }
+            //contenidos = FileManager.ReadFileCategorias();
+            List <Categoria> auxCategoria = conexion.getCategorias();
+            //conexion.getCategorias();
 
+            if (auxCategoria.Count != 0)
+            {
+                int i = 0;
+                foreach (Categoria contenido in auxCategoria)
+                {
+                    categorias[i] = contenido;
+                    i++;
+                }
             }
 
         }
