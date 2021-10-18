@@ -10,12 +10,15 @@ namespace tp_plataformas_2
     class Conexion
     {
         List<Categoria> variableAuxiliarCategorias = new List<Categoria>();
+        List<Producto> variableAuxiliarProductos = new List<Producto>();
+        List<Carro> variableAuxiliarCarros = new List<Carro>();
+        List<Usuario> variableAuxiliarUsuarios = new List<Usuario>();
         //private List<Categoria> variableAuxiliar;
 
         public Conexion()
         {
 
-            getCategorias();
+            //creaCarros();
         }
 
         public List<Categoria> getCategorias()
@@ -58,6 +61,136 @@ namespace tp_plataformas_2
             return variableAuxiliarCategorias;
         }
 
+        public List<Producto> getProductos()
+        {
+            //Cargo la cadena de conexión desde el archivo de properties
+            string connectionString = Properties.Resources.SqlConnect;
+
+            //Defino el string con la consulta que quiero realizar
+            string queryString = "SELECT * from dbo.Producto";
+
+            // Creo una conexión SQL con un Using, de modo que al finalizar, la conexión se cierra y se liberan recursos
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                // Defino el comando a enviar al motor SQL con la consulta y la conexión
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                try
+                {
+                    //Abro la conexión
+                    connection.Open();
+                    //mi objecto DataReader va a obtener los resultados de la consulta, notar que a comando se le pide ExecuteReader()
+                    SqlDataReader reader = command.ExecuteReader();
+                   
+                    //mientras haya registros/filas en mi DataReader, sigo leyendo
+                    while (reader.Read())
+                    {
+                        foreach (Categoria cat in variableAuxiliarCategorias)
+                        {
+                            var aux = reader.GetInt32(4);
+                            if (cat.Id == reader.GetInt32(4))
+                            {
+                                var precio = (Double)reader.GetDecimal(2);
+                                variableAuxiliarProductos.Add(new Producto(reader.GetInt32(0), reader.GetString(1), precio, reader.GetInt32(3), cat));
+                            }
+                        }
+                    }
+                    //En este punto ya recorrí todas las filas del resultado de la query
+                    reader.Close();
+                }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return variableAuxiliarProductos;
+        }
+
+        private void creaCarros()
+        {
+            string connectionString = Properties.Resources.SqlConnect;
+
+
+            string queryString = "SELECT * from dbo.Carro";
+
+
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        foreach (Producto producto in variableAuxiliarProductos)
+                        {
+                            if (producto.Id == reader.GetInt32(1))
+                            {
+
+                                variableAuxiliarCarros.Add(new Carro(reader.GetInt32(0), producto, reader.GetInt32(2)));
+                            }
+                        }
+                    }
+                    //En este punto ya recorrí todas las filas del resultado de la query
+                    reader.Close();
+                }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+        public List<Usuario> getUsuarios()
+        {
+            
+            string connectionString = Properties.Resources.SqlConnect;
+
+            
+            string queryString = "SELECT * from dbo.Usuario";
+
+           
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        creaCarros();
+                        foreach (Carro carro in variableAuxiliarCarros)
+                        {
+                           
+                            if (carro.Id == reader.GetInt32(6))
+                            {
+                                variableAuxiliarUsuarios.Add(new Usuario(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), carro, reader.GetInt32(7)));
+                            }
+                            
+                        }
+                    }
+                    reader.Close();
+                }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return variableAuxiliarUsuarios;
+        }
         //    public List<List<string>> obtenerUsuarios()
         //    {
         //        List<List<string>> salida = new List<List<string>>();

@@ -30,27 +30,25 @@ namespace tp_plataformas_2
             productos = new List<Producto>();
             usuarios = new List<Usuario>();
             compras = new List<Compra>();
-            //compras.Add(null);
             categorias = new Categoria[maxCategorias];
 
             FileManager.CreateFolder();
 
-            FileManager.CreateFile("categorias");
-            FileManager.CreateFile("productos");
+            //FileManager.CreateFile("categorias");
+            //FileManager.CreateFile("productos");
+            //FileManager.CreateFile("usuarios");
             FileManager.CreateFile("compras");
-            FileManager.CreateFile("usuarios");
 
             ObtenerCategorias();
-            ReadFileUsuarios();
-            ReadFileProductos();
+            ObtenerProductos();
+            ObtenerUsuarios();
             ReadFileCompras();
         }
 
         private void ObtenerCategorias()
         {
-            //contenidos = FileManager.ReadFileCategorias();
-            List <Categoria> auxCategoria = conexion.getCategorias();
-            //conexion.getCategorias();
+            
+            List<Categoria> auxCategoria = conexion.getCategorias();
 
             if (auxCategoria.Count != 0)
             {
@@ -63,57 +61,42 @@ namespace tp_plataformas_2
             }
 
         }
-        private void ReadFileUsuarios()
+        private void ObtenerProductos()
         {
-            contenidos = FileManager.ReadFileUsuarios();
-            char delimiterChars = '|';
+            productos = conexion.getProductos();
 
-            foreach (string contenido in contenidos)
-            {
-                if (contenido != null && contenido != "")
-                {
-                    string[] propiedades = contenido.Split(delimiterChars);
-
-
-                    int cuil = int.Parse(propiedades[1]);
-                    string nombre = propiedades[2];
-                    string apellido = propiedades[3];
-                    string mail = propiedades[4];
-                    string password = propiedades[5];
-                    int tipoUsuario = int.Parse(propiedades[6]);
-                    AgregarUsuario(cuil, nombre, apellido, mail, password, tipoUsuario);
-                }
-
-            }
 
         }
-        private void ReadFileProductos()
+        private void ObtenerUsuarios()
         {
-            contenidos = FileManager.ReadFileProductos();
-            char delimiterChars = '|';
+            usuarios = conexion.getUsuarios();
+            //buscar carros 
+            //recorrerlo?
+            //consultar db por usuarios
+            //validad usuario y carro
+            
+            //contenidos = FileManager.ReadFileUsuarios();
+            //char delimiterChars = '|';
 
-            foreach (string contenido in contenidos)
-            {
-                if (contenido != null && contenido != "")
-                {
-                    string[] propiedades = contenido.Split(delimiterChars);
-
-
-                    int Id = int.Parse(propiedades[0]);
-                    string nombre = propiedades[1];
-                    double precio = double.Parse(propiedades[2]);
-                    int cantidad = int.Parse(propiedades[3]);
-                    int idCat = int.Parse(propiedades[4]);
-                    string categoriaNombre = propiedades[5];
-
-                    AgregarProducto(nombre, precio, cantidad, idCat);
+            //foreach (string contenido in contenidos)
+            //{
+            //    if (contenido != null && contenido != "")
+            //    {
+            //        string[] propiedades = contenido.Split(delimiterChars);
 
 
-                }
+            //        int cuil = int.Parse(propiedades[1]);
+            //        string nombre = propiedades[2];
+            //        string apellido = propiedades[3];
+            //        string mail = propiedades[4];
+            //        string password = propiedades[5];
+            //        int tipoUsuario = int.Parse(propiedades[6]);
+            //        AgregarUsuario(cuil, nombre, apellido, mail, password, tipoUsuario);
+            //    }
 
-            }
+            //}
 
-        }
+        }       
 
         private void ReadFileCompras()
         {
