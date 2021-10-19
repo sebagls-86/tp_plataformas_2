@@ -37,12 +37,12 @@ namespace tp_plataformas_2
             //FileManager.CreateFile("categorias");
             //FileManager.CreateFile("productos");
             //FileManager.CreateFile("usuarios");
-            FileManager.CreateFile("compras");
+            //FileManager.CreateFile("compras");
 
             ObtenerCategorias();
             ObtenerProductos();
             ObtenerUsuarios();
-            ReadFileCompras();
+            ObtenerCompras();
         }
 
         private void ObtenerCategorias()
@@ -70,102 +70,79 @@ namespace tp_plataformas_2
         private void ObtenerUsuarios()
         {
             usuarios = conexion.getUsuarios();
-            //buscar carros 
-            //recorrerlo?
-            //consultar db por usuarios
-            //validad usuario y carro
-            
-            //contenidos = FileManager.ReadFileUsuarios();
-            //char delimiterChars = '|';
-
-            //foreach (string contenido in contenidos)
-            //{
-            //    if (contenido != null && contenido != "")
-            //    {
-            //        string[] propiedades = contenido.Split(delimiterChars);
-
-
-            //        int cuil = int.Parse(propiedades[1]);
-            //        string nombre = propiedades[2];
-            //        string apellido = propiedades[3];
-            //        string mail = propiedades[4];
-            //        string password = propiedades[5];
-            //        int tipoUsuario = int.Parse(propiedades[6]);
-            //        AgregarUsuario(cuil, nombre, apellido, mail, password, tipoUsuario);
-            //    }
-
-            //}
 
         }       
 
-        private void ReadFileCompras()
-        {
-            contenidos = FileManager.ReadFileCompras();
-            char delimiterChars = '|';
-            char delimiterCharsAsterisco = '*';
+        private void ObtenerCompras()
+        { 
+             compras = conexion.getCompras();
+        
+            //contenidos = FileManager.ReadFileCompras();
+            //char delimiterChars = '|';
+            //char delimiterCharsAsterisco = '*';
 
-            //array 1 usuario y compra
-            Usuario usuario = null;
-            int Id = 0;
-            string idUsuario;
-            double totalCompra = 0;
+            ////array 1 usuario y compra
+            //Usuario usuario = null;
+            //int Id = 0;
+            //string idUsuario;
+            //double totalCompra = 0;
 
-            /*   hasta aca */
+            ///*   hasta aca */
 
-            /*PRODUCTOS uno o muchos arrays*/
-            int cantComprada;
-            int idProducto;
-            string nombreProducto;
-            int valorProdUnitario;
-            int idCategoria;
-            string nombreCategoria;
-            int cantidadProducto;
-            /*  hasta aca*/
+            ///*PRODUCTOS uno o muchos arrays*/
+            //int cantComprada;
+            //int idProducto;
+            //string nombreProducto;
+            //int valorProdUnitario;
+            //int idCategoria;
+            //string nombreCategoria;
+            //int cantidadProducto;
+            ///*  hasta aca*/
 
-            string[] linea;
-            foreach (string contenido in contenidos)
-            {
+            //string[] linea;
+            //foreach (string contenido in contenidos)
+            //{
 
-                if (contenido != null && contenido != "")
-                {
-                    Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>();
+            //    if (contenido != null && contenido != "")
+            //    {
+            //        Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>();
 
-                    linea = contenido.Split(delimiterCharsAsterisco);
-                    for (int i = 0; i < linea.Length; i++)
-                    {
-                        if(i == 0)
-                        {
-                            string[] datosUsuarios = linea[i].Split(delimiterChars);
+            //        linea = contenido.Split(delimiterCharsAsterisco);
+            //        for (int i = 0; i < linea.Length; i++)
+            //        {
+            //            if(i == 0)
+            //            {
+            //                string[] datosUsuarios = linea[i].Split(delimiterChars);
 
-                                Id = int.Parse(datosUsuarios[0]);
-                                idUsuario = datosUsuarios[1];
-                                totalCompra = double.Parse(datosUsuarios[2]);
-                                usuario = BuscarUsuarioPorId(idUsuario);
+            //                    Id = int.Parse(datosUsuarios[0]);
+            //                    idUsuario = datosUsuarios[1];
+            //                    totalCompra = double.Parse(datosUsuarios[2]);
+            //                    usuario = BuscarUsuarioPorId(idUsuario);
 
-                        }
-                        else
-                        {
-                            string[] datosProductos = linea[i].Split(delimiterChars);
-                            cantComprada = int.Parse(datosProductos[0]);
-                            idProducto = int.Parse(datosProductos[1]);
-                            nombreProducto = datosProductos[2];
-                            valorProdUnitario = int.Parse(datosProductos[3]);
-                            idCategoria = int.Parse(datosProductos[4]);
-                            nombreCategoria = datosProductos[5];
-                            cantidadProducto = int.Parse(datosProductos[6]);
+            //            }
+            //            else
+            //            {
+            //                string[] datosProductos = linea[i].Split(delimiterChars);
+            //                cantComprada = int.Parse(datosProductos[0]);
+            //                idProducto = int.Parse(datosProductos[1]);
+            //                nombreProducto = datosProductos[2];
+            //                valorProdUnitario = int.Parse(datosProductos[3]);
+            //                idCategoria = int.Parse(datosProductos[4]);
+            //                nombreCategoria = datosProductos[5];
+            //                cantidadProducto = int.Parse(datosProductos[6]);
 
-                            Categoria cat = new Categoria(idCategoria, nombreCategoria);
-                            Producto producto = new Producto(idProducto, nombreProducto, valorProdUnitario, cantComprada, cat);
+            //                Categoria cat = new Categoria(idCategoria, nombreCategoria);
+            //                Producto producto = new Producto(idProducto, nombreProducto, valorProdUnitario, cantComprada, cat);
 
-                            productosCompra.Add(producto, cantComprada);
+            //                productosCompra.Add(producto, cantComprada);
 
-                        }
-                    }
-                    Compra compra = new Compra(Id,usuario,productosCompra,totalCompra);
-                    compras.Add(compra);
-                }
+            //            }
+            //        }
+            //        Compra compra = new Compra(Id,usuario,productosCompra,totalCompra);
+            //        compras.Add(compra);
+            //    }
 
-            }
+            //}
                         
 
 

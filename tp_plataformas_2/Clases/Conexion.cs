@@ -13,6 +13,8 @@ namespace tp_plataformas_2
         List<Producto> variableAuxiliarProductos = new List<Producto>();
         List<Carro> variableAuxiliarCarros = new List<Carro>();
         List<Usuario> variableAuxiliarUsuarios = new List<Usuario>();
+        List<Compra> variableAuxiliarCompras = new List<Compra>();
+
         //private List<Categoria> variableAuxiliar;
 
         public Conexion()
@@ -82,7 +84,7 @@ namespace tp_plataformas_2
                     connection.Open();
                     //mi objecto DataReader va a obtener los resultados de la consulta, notar que a comando se le pide ExecuteReader()
                     SqlDataReader reader = command.ExecuteReader();
-                   
+
                     //mientras haya registros/filas en mi DataReader, sigo leyendo
                     while (reader.Read())
                     {
@@ -150,17 +152,17 @@ namespace tp_plataformas_2
         }
         public List<Usuario> getUsuarios()
         {
-            
+
             string connectionString = Properties.Resources.SqlConnect;
 
-            
+
             string queryString = "SELECT * from dbo.Usuario";
 
-           
+
             using (SqlConnection connection =
                 new SqlConnection(connectionString))
             {
-                
+
                 SqlCommand command = new SqlCommand(queryString, connection);
 
                 try
@@ -173,12 +175,12 @@ namespace tp_plataformas_2
                         creaCarros();
                         foreach (Carro carro in variableAuxiliarCarros)
                         {
-                           
+
                             if (carro.Id == reader.GetInt32(6))
                             {
                                 variableAuxiliarUsuarios.Add(new Usuario(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), carro, reader.GetInt32(7)));
                             }
-                            
+
                         }
                     }
                     reader.Close();
@@ -190,6 +192,82 @@ namespace tp_plataformas_2
                 }
             }
             return variableAuxiliarUsuarios;
+        }
+
+
+        public List<Compra> getCompras()
+        {
+
+            string connectionString = Properties.Resources.SqlConnect;
+
+
+            string queryString = "SELECT c.Id, c.Id_usuario, c.Total, p.Id_producto, p.Cantidad_producto from dbo.Compra c INNER JOIN dbo.Productos_compra p on p.Id_compra = c.Id";
+
+            Dictionary<int, Compra> compras = new Dictionary<int, Compra>();
+
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    //Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>();
+                    Usuario auxUsuario;
+
+
+
+                    while (reader.Read())
+                    {
+                        if (!compras.ContainsKey(reader.GetInt32(3)))
+                        {
+                            auxUsuario = variableAuxiliarUsuarios.Find(usuario => usuario.Id == reader.GetInt32(1));
+                            Compra compra = new Compra(reader.GetInt32(0), auxUsuario, new Dictionary<Producto, int>(), 0);
+                            Producto producto = variableAuxiliarProductos.Find(producto => producto.Id == reader.GetInt32(3));
+                            int cantidad = reader.GetInt32(5);
+                            compra.Productos.Add(producto, cantidad);
+
+                            compras.Add(reader.GetInt32(3), compra);
+                        }
+                        else
+                        {
+                            Producto producto = variableAuxiliarProductos.Find(producto => producto.Id == reader.GetInt32(3));
+                            int cantidad = reader.GetInt32(5);
+
+                            compras[reader.GetInt32(3)].Productos.Add(producto, cantidad);
+                            variableAuxiliarCompras.Add(compras[reader.GetInt32(3)]);
+                        }
+
+
+
+                        //if (variableAuxiliarUsuarios.Exists(usuario => usuario.Id == reader.GetInt32(1)))
+                        //{
+                        //    auxUsuario = variableAuxiliarUsuarios.Find(usuario => usuario.Id == reader.GetInt32(1));
+                           
+                        //    if (variableAuxiliarProductos.Exists(producto => producto.Id == reader.GetInt32(3)))
+                        //    {
+
+                        //        productosCompra.Add(variableAuxiliarProductos.Find(producto => producto.Id == reader.GetInt32(3)), reader.GetInt32(4));
+                        //    }
+
+                        //}
+
+                         
+                    }
+                    reader.Close();
+                    //variableAuxiliarCompras.Add(new Compra(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), carro, reader.GetInt32(7)));
+                }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return variableAuxiliarCompras;
         }
         //    public List<List<string>> obtenerUsuarios()
         //    {
