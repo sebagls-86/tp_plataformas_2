@@ -32,12 +32,9 @@ namespace tp_plataformas_2
             compras = new List<Compra>();
             categorias = new Categoria[maxCategorias];
 
-            FileManager.CreateFolder();
+            //FileManager.CreateFolder();
 
-            //FileManager.CreateFile("categorias");
-            //FileManager.CreateFile("productos");
-            //FileManager.CreateFile("usuarios");
-            //FileManager.CreateFile("compras");
+            
 
             ObtenerCategorias();
             ObtenerProductos();
@@ -76,81 +73,7 @@ namespace tp_plataformas_2
         private void ObtenerCompras()
         { 
              compras = conexion.getCompras();
-        
-            //contenidos = FileManager.ReadFileCompras();
-            //char delimiterChars = '|';
-            //char delimiterCharsAsterisco = '*';
-
-            ////array 1 usuario y compra
-            //Usuario usuario = null;
-            //int Id = 0;
-            //string idUsuario;
-            //double totalCompra = 0;
-
-            ///*   hasta aca */
-
-            ///*PRODUCTOS uno o muchos arrays*/
-            //int cantComprada;
-            //int idProducto;
-            //string nombreProducto;
-            //int valorProdUnitario;
-            //int idCategoria;
-            //string nombreCategoria;
-            //int cantidadProducto;
-            ///*  hasta aca*/
-
-            //string[] linea;
-            //foreach (string contenido in contenidos)
-            //{
-
-            //    if (contenido != null && contenido != "")
-            //    {
-            //        Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>();
-
-            //        linea = contenido.Split(delimiterCharsAsterisco);
-            //        for (int i = 0; i < linea.Length; i++)
-            //        {
-            //            if(i == 0)
-            //            {
-            //                string[] datosUsuarios = linea[i].Split(delimiterChars);
-
-            //                    Id = int.Parse(datosUsuarios[0]);
-            //                    idUsuario = datosUsuarios[1];
-            //                    totalCompra = double.Parse(datosUsuarios[2]);
-            //                    usuario = BuscarUsuarioPorId(idUsuario);
-
-            //            }
-            //            else
-            //            {
-            //                string[] datosProductos = linea[i].Split(delimiterChars);
-            //                cantComprada = int.Parse(datosProductos[0]);
-            //                idProducto = int.Parse(datosProductos[1]);
-            //                nombreProducto = datosProductos[2];
-            //                valorProdUnitario = int.Parse(datosProductos[3]);
-            //                idCategoria = int.Parse(datosProductos[4]);
-            //                nombreCategoria = datosProductos[5];
-            //                cantidadProducto = int.Parse(datosProductos[6]);
-
-            //                Categoria cat = new Categoria(idCategoria, nombreCategoria);
-            //                Producto producto = new Producto(idProducto, nombreProducto, valorProdUnitario, cantComprada, cat);
-
-            //                productosCompra.Add(producto, cantComprada);
-
-            //            }
-            //        }
-            //        Compra compra = new Compra(Id,usuario,productosCompra,totalCompra);
-            //        compras.Add(compra);
-            //    }
-
-            //}
-                        
-
-
-                
-
-
-
-
+      
         }
         public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)//Creamos producto y lo agregamos al array list de productos
         {
@@ -158,10 +81,13 @@ namespace tp_plataformas_2
             if (categorias[indice] != null && categorias[indice].Id == idCategoria)
             {
                 Producto producto = new Producto(cantProductos, nombre, precio, Cantidad, categorias[indice]);
-                this.productos.Add(producto);
-                FileManager.SaveListProductos(productos);
-                cantProductos++;
-                return true;
+                if (conexion.agregarProducto(producto))
+                {
+                    this.productos.Add(producto);
+                    cantProductos++;
+                    return true;
+                }
+                
             }
 
             return false;
@@ -333,7 +259,7 @@ namespace tp_plataformas_2
 
             Usuario usuario = new Usuario(id, cuil, nombre, apellido, mail, password, micarro, tipoUsuario);
             usuarios.Add(usuario);
-            FileManager.SaveListUsuarios(usuarios);
+            conexion.agregarUsuario(usuario);
             Console.WriteLine("La empresa fue creada con exito");
 
 

@@ -216,10 +216,7 @@ namespace tp_plataformas_2
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
 
-                    //Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>();
                     Usuario auxUsuario;
-
-
 
                     while (reader.Read())
                     {
@@ -228,38 +225,23 @@ namespace tp_plataformas_2
                             auxUsuario = variableAuxiliarUsuarios.Find(usuario => usuario.Id == reader.GetInt32(1));
                             Compra compra = new Compra(reader.GetInt32(0), auxUsuario, new Dictionary<Producto, int>(), 0);
                             Producto producto = variableAuxiliarProductos.Find(producto => producto.Id == reader.GetInt32(3));
-                            int cantidad = reader.GetInt32(5);
+                            int cantidad = reader.GetInt32(4);
                             compra.Productos.Add(producto, cantidad);
 
                             compras.Add(reader.GetInt32(3), compra);
+                            variableAuxiliarCompras.Add(compras[reader.GetInt32(3)]);
+
                         }
                         else
                         {
                             Producto producto = variableAuxiliarProductos.Find(producto => producto.Id == reader.GetInt32(3));
-                            int cantidad = reader.GetInt32(5);
+                            int cantidad = reader.GetInt32(4);
 
                             compras[reader.GetInt32(3)].Productos.Add(producto, cantidad);
-                            variableAuxiliarCompras.Add(compras[reader.GetInt32(3)]);
                         }
-
-
-
-                        //if (variableAuxiliarUsuarios.Exists(usuario => usuario.Id == reader.GetInt32(1)))
-                        //{
-                        //    auxUsuario = variableAuxiliarUsuarios.Find(usuario => usuario.Id == reader.GetInt32(1));
-                           
-                        //    if (variableAuxiliarProductos.Exists(producto => producto.Id == reader.GetInt32(3)))
-                        //    {
-
-                        //        productosCompra.Add(variableAuxiliarProductos.Find(producto => producto.Id == reader.GetInt32(3)), reader.GetInt32(4));
-                        //    }
-
-                        //}
-
-                         
+  
                     }
                     reader.Close();
-                    //variableAuxiliarCompras.Add(new Compra(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), carro, reader.GetInt32(7)));
                 }
 
                 catch (Exception ex)
@@ -269,6 +251,84 @@ namespace tp_plataformas_2
             }
             return variableAuxiliarCompras;
         }
+
+
+        public bool agregarProducto(Producto producto)
+        {
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            string queryString = "INSERT INTO [dbo].[Producto] ([Nombre],[Precio],[Cantidad],[Cat]) VALUES (@Nombre,@Precio,@Cantidad,@Cat);";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@Nombre", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@Precio", SqlDbType.Decimal));
+                command.Parameters.Add(new SqlParameter("@Cantidad", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@Cat", SqlDbType.Int));
+                command.Parameters["@Nombre"].Value = producto.Nombre;
+                command.Parameters["@Precio"].Value = producto.Precio;
+                command.Parameters["@Cantidad"].Value = producto.Cantidad;
+                command.Parameters["@Cat"].Value = producto.Cat.Id;
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+            
+            return resultadoQuery == 1;
+        }
+
+        public bool agregarUsuario(Usuario usuario)
+        {
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            string queryString = "INSERT INTO [dbo].[Usuario] ([Id],[CUIL],[Nombre],[Apellido],[Mail],[Password],[MiCarro],[TipoUsuario]) VALUES (@Id,@CUIL,@Nombre,@Apellido,@Mail,@Password,@MiCarro,@TipoUsuario);";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@CUIL", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@Nombre", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@Apellido", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@Mail", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@Password", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@MiCarro", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@TipoUsuario", SqlDbType.Int));
+                command.Parameters["@Id"].Value = usuario.Id;
+                command.Parameters["@CUIL"].Value = usuario.Cuil;
+                command.Parameters["@Nombre"].Value = usuario.Nombre;
+                command.Parameters["@Apellido"].Value = usuario.Apellido;
+                command.Parameters["@Mail"].Value = usuario.Mail;
+                command.Parameters["@Password"].Value = usuario.Password;
+                command.Parameters["@MiCarro"].Value = usuario.MiCarro.Id;
+                command.Parameters["@TipoUsuario"].Value = usuario.TipoUsuario;
+
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+
+            return resultadoQuery == 1;
+        }
+        
+
         //    public List<List<string>> obtenerUsuarios()
         //    {
         //        List<List<string>> salida = new List<List<string>>();
