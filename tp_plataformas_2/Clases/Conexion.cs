@@ -285,7 +285,10 @@ namespace tp_plataformas_2
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@tabla", SqlDbType.NVarChar));
+                command.Parameters["@tabla"].Value = tabla;
                 command.Parameters["@id"].Value = itemId;
+
                 try
                 {
                     connection.Open();
