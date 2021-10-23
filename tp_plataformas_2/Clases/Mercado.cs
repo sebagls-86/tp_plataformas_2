@@ -319,10 +319,14 @@ namespace tp_plataformas_2
                 if (encontre)
                 {
 
-                    usuarios.Remove(usuarios[i]);
 
-                    FileManager.SaveListUsuarios(usuarios);
+                    //FileManager.SaveListUsuarios(usuarios);
                     //eliminar usuario y carro del usuario
+                    if (conexion.eliminarRegistro("Carro", usuarios[i].MiCarro.Id))
+                    {
+                        conexion.eliminarRegistro("Usuario", usuarios[i].Id);
+                        usuarios.Remove(usuarios[i]);
+                    }
                 }
                 else
                     i++;
@@ -375,7 +379,7 @@ namespace tp_plataformas_2
             }
             return false;
         }
-        public bool AgregarCategoria(string nombre) //Agregamos una categoria al array de categorias
+        public bool AgregarCategoria(string nombre)
         {
 
             foreach (Categoria categoria in categorias)
