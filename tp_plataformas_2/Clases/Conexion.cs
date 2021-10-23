@@ -239,7 +239,7 @@ namespace tp_plataformas_2
 
                             compras[reader.GetInt32(3)].Productos.Add(producto, cantidad);
                         }
-  
+
                     }
                     reader.Close();
                 }
@@ -257,15 +257,17 @@ namespace tp_plataformas_2
         {
             int resultadoQuery;
             string connectionString = Properties.Resources.SqlConnect;
-            string queryString = "INSERT INTO [dbo].[Producto] ([Nombre],[Precio],[Cantidad],[Cat]) VALUES (@Nombre,@Precio,@Cantidad,@Cat);";
+            string queryString = "INSERT INTO [dbo].[Producto] ([Id],[Nombre],[Precio],[Cantidad],[Cat]) VALUES (@Id,@Nombre,@Precio,@Cantidad,@Cat);";
             using (SqlConnection connection =
                 new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@Nombre", SqlDbType.NVarChar));
                 command.Parameters.Add(new SqlParameter("@Precio", SqlDbType.Decimal));
                 command.Parameters.Add(new SqlParameter("@Cantidad", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@Cat", SqlDbType.Int));
+                command.Parameters["@Id"].Value = producto.Id;
                 command.Parameters["@Nombre"].Value = producto.Nombre;
                 command.Parameters["@Precio"].Value = producto.Precio;
                 command.Parameters["@Cantidad"].Value = producto.Cantidad;
@@ -282,10 +284,38 @@ namespace tp_plataformas_2
                     return false;
                 }
             }
-            
+
             return resultadoQuery == 1;
         }
 
+        public int cuentaRegistros(string tabla)
+        {
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            string queryString = "select MAX(id) from[dbo].[" + tabla + "]";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    //resultadoQuery = command.ExecuteNonQuery();
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    resultadoQuery = reader.GetInt32(0);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -10;
+
+                }
+            }
+            return resultadoQuery;
+        }
         public bool agregarUsuario(Usuario usuario)
         {
             int resultadoQuery;
@@ -327,7 +357,11 @@ namespace tp_plataformas_2
 
             return resultadoQuery == 1;
         }
-        
+
+        public bool agregarCompra(Compra compra)
+        {
+            return false;
+        }
 
         //    public List<List<string>> obtenerUsuarios()
         //    {

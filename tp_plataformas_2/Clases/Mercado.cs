@@ -18,7 +18,7 @@ namespace tp_plataformas_2
         const int maxCategorias = 10;
 
         int cantCategorias = 0;
-        int cantProductos = 0;
+        int cantProductos;
         /* --- Variables auxiliares  ---*/
 
         private string[] contenidos = new string[10];
@@ -77,6 +77,7 @@ namespace tp_plataformas_2
         }
         public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)//Creamos producto y lo agregamos al array list de productos
         {
+            cantProductos = conexion.cuentaRegistros("Producto") + 1;
             int indice = idCategoria - 1;
             if (categorias[indice] != null && categorias[indice].Id == idCategoria)
             {
@@ -84,7 +85,6 @@ namespace tp_plataformas_2
                 if (conexion.agregarProducto(producto))
                 {
                     this.productos.Add(producto);
-                    cantProductos++;
                     return true;
                 }
                 
@@ -619,6 +619,7 @@ namespace tp_plataformas_2
                 Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos);
                 Compra compra = new Compra(compras.Count + 1, usuarioEncontrado, productosCompra, precioTotal);
                 compras.Add(compra);
+                conexion.agregarCompra(compra);
                 foreach (Producto productoCompra in usuarioEncontrado.MiCarro.Productos.Keys)
                 {
                     productos[productoCompra.Id].Cantidad -= usuarioEncontrado.MiCarro.Productos[productoCompra];
