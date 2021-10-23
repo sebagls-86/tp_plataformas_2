@@ -106,6 +106,7 @@ namespace tp_plataformas_2
                     productos[i].Id = ID;
                     //productos[i].Cat = productos[ID_Categoria-1].Cat; // :)
                     productos[i].Cat = categorias[ID_Categoria - 1];
+                    conexion.modificaProducto(productos[i]);
                     Console.WriteLine("Producto modificado con éxito " + Nombre + Precio + Cantidad + ID);
                 }
             }

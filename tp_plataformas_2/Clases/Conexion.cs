@@ -253,6 +253,34 @@ namespace tp_plataformas_2
         }
 
 
+        public int cuentaRegistros(string tabla)
+        {
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            string queryString = "select MAX(id) from[dbo].[" + tabla + "]";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    //resultadoQuery = command.ExecuteNonQuery();
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    resultadoQuery = reader.GetInt32(0);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -10;
+
+                }
+            }
+            return resultadoQuery;
+        }
         public bool agregarProducto(Producto producto)
         {
             int resultadoQuery;
@@ -287,35 +315,41 @@ namespace tp_plataformas_2
 
             return resultadoQuery == 1;
         }
-
-        public int cuentaRegistros(string tabla)
+        public bool modificaProducto(Producto producto)
         {
+            //primero me aseguro que lo pueda agregar a la base
             int resultadoQuery;
             string connectionString = Properties.Resources.SqlConnect;
-            string queryString = "select MAX(id) from[dbo].[" + tabla + "]";
+            string queryString = "UPDATE [dbo].[Producto] SET Nombre=@nombre, Precio=@precio, Cantidad=@cantidad, Cat=@cat WHERE Id=@id;";
             using (SqlConnection connection =
                 new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
-
+                command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@precio", SqlDbType.Decimal));
+                command.Parameters.Add(new SqlParameter("@cantidad", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@cat", SqlDbType.Int));
+                command.Parameters["@id"].Value = producto.Id;
+                command.Parameters["@nombre"].Value = producto.Id;
+                command.Parameters["@precio"].Value = producto.Precio;
+                command.Parameters["@cantidad"].Value = producto.Cantidad;
+                command.Parameters["@cat"].Value = producto.Cat.Id;
                 try
                 {
                     connection.Open();
                     //esta consulta NO espera un resultado para leer, es del tipo NON Query
-                    //resultadoQuery = command.ExecuteNonQuery();
-                    SqlDataReader reader = command.ExecuteReader();
-                    reader.Read();
-                    resultadoQuery = reader.GetInt32(0);
+                    resultadoQuery = command.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    return -10;
-
+                    return false;
                 }
             }
-            return resultadoQuery;
-        }
+            return resultadoQuery == 1;
+        
+    }
         public bool agregarUsuario(Usuario usuario)
         {
             int resultadoQuery;
