@@ -258,11 +258,18 @@ namespace tp_plataformas_2
 
 
             int id = usuarios.Count + 1;
+            
             Carro micarro = new Carro(id);
-
             Usuario usuario = new Usuario(id, cuil, nombre, apellido, mail, password, micarro, tipoUsuario);
-            usuarios.Add(usuario);
-            conexion.agregarUsuario(usuario);
+            if (conexion.agregarUsuario(usuario))
+            {
+                if (conexion.agregarCarroUsuario(micarro))
+                {
+
+                    usuarios.Add(usuario);
+                }
+                
+            }
             Console.WriteLine("La empresa fue creada con exito");
 
 
@@ -286,10 +293,10 @@ namespace tp_plataformas_2
                     usuarios[id].Nombre = nombre;
                     usuarios[id].Apellido = apellido;
                     usuarios[id].Mail = mail;
-                    usuarios[ID].Password = password;
-                    usuarios[ID].TipoUsuario = tipoUsuario;
-
-                    FileManager.SaveListUsuarios(usuarios);
+                    usuarios[id].Password = password;
+                    usuarios[id].TipoUsuario = tipoUsuario;
+                    conexion.modificaUsuario(usuarios[id]);
+                    //FileManager.SaveListUsuarios(usuarios);
                 }
                 else
                     i++;

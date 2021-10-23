@@ -192,7 +192,7 @@ namespace tp_plataformas_2
                 }
             }
             return variableAuxiliarUsuarios;
-        }
+        } //controlar no carga en memoria en proxima apertura solo crea un solo usuario
 
 
         public List<Compra> getCompras()
@@ -376,6 +376,37 @@ namespace tp_plataformas_2
             return resultadoQuery == 1;
         
     }
+
+        public bool agregarCarroUsuario(Carro carro)
+        {
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            //string queryString = "INSERT INTO [dbo].[Carro] ([Id],[Id_productos],[Cantidad_productos]) VALUES (@Id,@id_productos,@cantidad_productos);";
+            string queryString = "INSERT INTO [dbo].[Carro] ([Id]) VALUES (@Id);";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int));
+                
+                command.Parameters["@Id"].Value = carro.Id;
+                
+
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+
+            return resultadoQuery == 1;
+        }
         public bool agregarUsuario(Usuario usuario)
         {
             int resultadoQuery;
@@ -418,6 +449,41 @@ namespace tp_plataformas_2
             return resultadoQuery == 1;
         }
 
+        public bool modificaUsuario(Usuario usuario)
+        {
+
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            string queryString = "UPDATE [dbo].[Usuario] SET Nombre=@nombre, Apellido=@apellido, Mail=@mail, Password=@password WHERE Id=@id;";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@apellido", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@mail", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@password", SqlDbType.NVarChar));
+                command.Parameters["@id"].Value = usuario.Id;
+                command.Parameters["@nombre"].Value = usuario.Nombre;
+                command.Parameters["@apellido"].Value = usuario.Apellido;
+                command.Parameters["@mail"].Value = usuario.Mail;
+                command.Parameters["@password"].Value = usuario.Password;
+
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+            return resultadoQuery == 1;
+
+        }
         public bool agregarCompra(Compra compra)
         {
             return false;
