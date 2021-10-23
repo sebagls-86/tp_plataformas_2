@@ -268,7 +268,7 @@ namespace tp_plataformas_2
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    return -10;
+                    return 0;
 
                 }
             }
@@ -480,6 +480,99 @@ namespace tp_plataformas_2
             return resultadoQuery == 1;
 
         }
+
+        public bool modificarCategoria(Categoria categoria)
+        {
+
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            string queryString = "UPDATE [dbo].[Categoria] SET Nombre=@nombre WHERE Id=@id;";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.NVarChar));
+                command.Parameters["@id"].Value = categoria.Id;
+                command.Parameters["@nombre"].Value = categoria.Nombre;
+                
+
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+            return resultadoQuery == 1;
+
+        }
+        
+        public bool agregarCategoria(Categoria categoria)
+        {
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            string queryString = "INSERT INTO [dbo].[Categoria] ([Id],[Nombre]) VALUES (@id, @nombre);";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.NVarChar));
+                command.Parameters["@Id"].Value = categoria.Id;
+                command.Parameters["@Nombre"].Value = categoria.Nombre;
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+        }
+
+        return resultadoQuery == 1;
+    }
+
+        
+        public bool vaciarCategoria(Categoria categoria)
+        {
+
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            string queryString = "UPDATE [dbo].[Categoria] SET Nombre=@nombre WHERE Id=@id;";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.NVarChar));
+                command.Parameters["@id"].Value = categoria.Id;
+                command.Parameters["@nombre"].Value = categoria.Nombre;
+
+
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+            return resultadoQuery == 1;
+
+        }
+
         public bool agregarCompra(Compra compra)
         {
             return false;

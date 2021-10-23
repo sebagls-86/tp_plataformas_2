@@ -377,6 +377,7 @@ namespace tp_plataformas_2
         }
         public bool AgregarCategoria(string nombre) //Agregamos una categoria al array de categorias
         {
+
             foreach (Categoria categoria in categorias)
             {
                 if (categoria != null)
@@ -384,10 +385,13 @@ namespace tp_plataformas_2
                     if (categoria.Nombre.Equals(" "))
                     {
                         categoria.Nombre = nombre;
+                        conexion.modificarCategoria(categoria);
+                        
                         break;
                     }
                 }
             }
+            cantCategorias = conexion.cuentaRegistros("Categoria");
             if (cantCategorias <= maxCategorias)
 
             {
@@ -395,21 +399,24 @@ namespace tp_plataformas_2
                 if (BuscarCategoria(id))
                 {
                     Categoria categoria = new Categoria(id, nombre);
-
-                    int auxiliar = 0;
-                    int j = 0;
-
-                    do
+                    if (conexion.agregarCategoria(categoria))
                     {
-                        if (categorias[j] == null)
-                        {
-                            cantCategorias++;
-                            categorias[j] = categoria;
-                            auxiliar = 1;
-                        }
-                        j++;
 
-                    } while (auxiliar == 0);
+                        int auxiliar = 0;
+                        int j = 0;
+
+                        do
+                        {
+                            if (categorias[j] == null)
+                            {
+                                cantCategorias++;
+                                categorias[j] = categoria;
+                                auxiliar = 1;
+                            }
+                            j++;
+
+                        } while (auxiliar == 0);
+                    }
                 }
 
 
@@ -430,7 +437,7 @@ namespace tp_plataformas_2
             if (categorias[ID] != null)
             {
                 categorias[ID].Nombre = Nombre;
-                FileManager.SaveArrayCategorias(categorias);
+                conexion.modificarCategoria(categorias[ID]);
             }
             else
             {
@@ -457,7 +464,8 @@ namespace tp_plataformas_2
 
                     categorias[i].Nombre = " ";
                     Console.WriteLine("Categoria " + ID + " eliminada con éxito!");
-                    FileManager.SaveArrayCategorias(categorias);
+                    conexion.vaciarCategoria(categorias[i]);
+                    //FileManager.SaveArrayCategorias(categorias);
                     //cantCategorias--;
                 }
 
@@ -629,8 +637,10 @@ namespace tp_plataformas_2
                 precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
                 Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos);
                 Compra compra = new Compra(compras.Count + 1, usuarioEncontrado, productosCompra, precioTotal);
+                
                 compras.Add(compra);
                 conexion.agregarCompra(compra);
+
                 foreach (Producto productoCompra in usuarioEncontrado.MiCarro.Productos.Keys)
                 {
                     productos[productoCompra.Id].Cantidad -= usuarioEncontrado.MiCarro.Productos[productoCompra];
@@ -644,6 +654,7 @@ namespace tp_plataformas_2
             // guardar compra en Productos_compra
         }
 
+        //guarda que no lo estamos usando!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public bool ModificarCompra(int ID, Double Total)
         {
 
@@ -685,8 +696,8 @@ namespace tp_plataformas_2
                 }
                 compras[ID-1] = null;
                 seElimino = true;
+                //eliminar compra en conexion por id compra
                 FileManager.SaveListCompras(compras);
-                //eliminar compra en conexion
             }
             else
             {
