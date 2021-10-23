@@ -172,16 +172,9 @@ namespace tp_plataformas_2
 
                     while (reader.Read())
                     {
-                        creaCarros();
-                        foreach (Carro carro in variableAuxiliarCarros)
-                        {
-
-                            if (carro.Id == reader.GetInt32(6))
-                            {
-                                variableAuxiliarUsuarios.Add(new Usuario(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), carro, reader.GetInt32(7)));
-                            }
-
-                        }
+                        Carro micarro = new Carro(reader.GetInt32(6));
+                        variableAuxiliarUsuarios.Add(new Usuario(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), micarro, reader.GetInt32(7)));
+                         
                     }
                     reader.Close();
                 }

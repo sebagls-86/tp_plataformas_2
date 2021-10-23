@@ -322,6 +322,7 @@ namespace tp_plataformas_2
                     usuarios.Remove(usuarios[i]);
 
                     FileManager.SaveListUsuarios(usuarios);
+                    //eliminar usuario y carro del usuario
                 }
                 else
                     i++;
@@ -639,6 +640,8 @@ namespace tp_plataformas_2
                 sePudoComprar = true;
             }
             return sePudoComprar;
+
+            // guardar compra en Productos_compra
         }
 
         public bool ModificarCompra(int ID, Double Total)
@@ -664,7 +667,7 @@ namespace tp_plataformas_2
             }
 
             return seModifico;
-
+            //modificar en productos compra
         }
 
         public bool EliminarCompra(int ID)
@@ -683,6 +686,7 @@ namespace tp_plataformas_2
                 compras[ID-1] = null;
                 seElimino = true;
                 FileManager.SaveListCompras(compras);
+                //eliminar compra en conexion
             }
             else
             {
