@@ -281,6 +281,36 @@ namespace tp_plataformas_2
             }
             return resultadoQuery;
         }
+        
+        public bool eliminarRegistro(string tabla, int itemId) //no elimina
+        {
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            string queryString = "DELETE FROM [dbo].[@tabla] WHERE Id=@id;";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@tabla", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                command.Parameters["@tabla"].Value = tabla;
+                command.Parameters["@id"].Value = itemId;
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+
+            return resultadoQuery == 1;
+        }
+
         public bool agregarProducto(Producto producto)
         {
             int resultadoQuery;
@@ -315,9 +345,9 @@ namespace tp_plataformas_2
 
             return resultadoQuery == 1;
         }
-        public bool modificaProducto(Producto producto)
+        public bool modificaProducto(Producto producto) 
         {
-            //primero me aseguro que lo pueda agregar a la base
+            
             int resultadoQuery;
             string connectionString = Properties.Resources.SqlConnect;
             string queryString = "UPDATE [dbo].[Producto] SET Nombre=@nombre, Precio=@precio, Cantidad=@cantidad, Cat=@cat WHERE Id=@id;";
@@ -331,14 +361,13 @@ namespace tp_plataformas_2
                 command.Parameters.Add(new SqlParameter("@cantidad", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@cat", SqlDbType.Int));
                 command.Parameters["@id"].Value = producto.Id;
-                command.Parameters["@nombre"].Value = producto.Id;
+                command.Parameters["@nombre"].Value = producto.Nombre;
                 command.Parameters["@precio"].Value = producto.Precio;
                 command.Parameters["@cantidad"].Value = producto.Cantidad;
                 command.Parameters["@cat"].Value = producto.Cat.Id;
                 try
                 {
                     connection.Open();
-                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
                     resultadoQuery = command.ExecuteNonQuery();
                 }
                 catch (Exception ex)

@@ -124,8 +124,10 @@ namespace tp_plataformas_2
                 if (encontre)
                 {
 
-                    productos.Remove(productos[i]);
-                    FileManager.SaveListProductos(productos);
+                    if (conexion.eliminarRegistro("Producto", productos[i].Id))
+                    {
+                        productos.Remove(productos[i]);
+                    }
                 }
                 else
                     i++;
