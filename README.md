@@ -1,9 +1,10 @@
 # Plataformas de desarrollo
 
-_Migrando proyecto a Windows Form_
+_Migrando proyecto a Windows Form + ADO.NET_
 
 ### Herramientas que utilizamos para correr el proyecto
 * C#
+* Microsoft SQL Server Management Studio
 
 ### Puesta en Marcha 
 
@@ -11,13 +12,14 @@ Descargar o clonar repositorio:
 
     https://github.com/sebagls-86/tp_plataformas_2
 
-Directorio de almacenamiento por defecto:
+Importar base de datos alojada en:
 
-    \AppData\Local\Mercado
+    \tp_plataformas_2\DB\Comercio.sql
 
 Especificaciones de uso:
 
-    https://docs.google.com/document/d/1AwbDblrVFYZY1SMT11qbKkKAqnTQUCw4iCDbb-rzHoQ/edit?usp=sharing
+    https://drive.google.com/file/d/1Ko_IHZEZbjU-hyRYMFG21u0RUrYGX2nM/view?usp=sharing
+    https://drive.google.com/file/d/1j3s1OQ02ld3Xuvpj3aSxjAb0zUaGzV75/view?usp=sharing
 
 ## Alumnos
 
