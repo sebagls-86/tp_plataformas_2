@@ -18,7 +18,7 @@ Importar base de datos alojada en:
 
 Especificaciones de uso:
 
-    https://drive.google.com/file/d/1Ko_IHZEZbjU-hyRYMFG21u0RUrYGX2nM/view?usp=sharing
+    https://docs.google.com/document/d/1J_55aP3YRH4sI2NiPbOz172keT-Hh0JqIfW-9IRB20Y/edit#
     https://drive.google.com/file/d/1j3s1OQ02ld3Xuvpj3aSxjAb0zUaGzV75/view?usp=sharing
 
 ## Alumnos
