@@ -160,6 +160,7 @@ namespace tp_plataformas_2
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -176,7 +177,8 @@ namespace tp_plataformas_2
             this.lblMainTitle = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.btnExit = new System.Windows.Forms.Button();
-            this.salirToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtBoxMonto = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.panelCategorias.SuspendLayout();
             this.tabUsuarios.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -541,6 +543,8 @@ namespace tp_plataformas_2
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.txtBoxMonto);
             this.groupBox1.Controls.Add(this.label39);
             this.groupBox1.Controls.Add(this.label38);
             this.groupBox1.Controls.Add(this.txtEliminarCompraId);
@@ -550,21 +554,21 @@ namespace tp_plataformas_2
             this.groupBox1.Size = new System.Drawing.Size(304, 260);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Eliminar compra";
+            this.groupBox1.Text = "Modificar Compra";
             // 
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(14, 92);
+            this.label39.Location = new System.Drawing.Point(6, 64);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(71, 21);
+            this.label39.Size = new System.Drawing.Size(83, 21);
             this.label39.TabIndex = 20;
-            this.label39.Text = "eliminar.";
+            this.label39.Text = "modificar.";
             // 
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(14, 71);
+            this.label38.Location = new System.Drawing.Point(6, 43);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(281, 21);
             this.label38.TabIndex = 19;
@@ -572,14 +576,14 @@ namespace tp_plataformas_2
             // 
             // txtEliminarCompraId
             // 
-            this.txtEliminarCompraId.Location = new System.Drawing.Point(39, 187);
+            this.txtEliminarCompraId.Location = new System.Drawing.Point(15, 96);
             this.txtEliminarCompraId.Name = "txtEliminarCompraId";
             this.txtEliminarCompraId.Size = new System.Drawing.Size(100, 29);
             this.txtEliminarCompraId.TabIndex = 18;
             // 
             // btnEliminarCompra
             // 
-            this.btnEliminarCompra.Location = new System.Drawing.Point(164, 187);
+            this.btnEliminarCompra.Location = new System.Drawing.Point(101, 225);
             this.btnEliminarCompra.Name = "btnEliminarCompra";
             this.btnEliminarCompra.Size = new System.Drawing.Size(100, 29);
             this.btnEliminarCompra.TabIndex = 17;
@@ -1501,9 +1505,16 @@ namespace tp_plataformas_2
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.salirToolStripMenuItem.Text = "Volver";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            // 
+            // salirToolStripMenuItem1
+            // 
+            this.salirToolStripMenuItem1.Name = "salirToolStripMenuItem1";
+            this.salirToolStripMenuItem1.Size = new System.Drawing.Size(106, 22);
+            this.salirToolStripMenuItem1.Text = "Salir";
+            this.salirToolStripMenuItem1.Click += new System.EventHandler(this.salirToolStripMenuItem1_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -1634,12 +1645,21 @@ namespace tp_plataformas_2
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // salirToolStripMenuItem1
+            // txtBoxMonto
             // 
-            this.salirToolStripMenuItem1.Name = "salirToolStripMenuItem1";
-            this.salirToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.salirToolStripMenuItem1.Text = "Salir";
-            this.salirToolStripMenuItem1.Click += new System.EventHandler(this.salirToolStripMenuItem1_Click);
+            this.txtBoxMonto.Location = new System.Drawing.Point(15, 182);
+            this.txtBoxMonto.Name = "txtBoxMonto";
+            this.txtBoxMonto.Size = new System.Drawing.Size(247, 29);
+            this.txtBoxMonto.TabIndex = 21;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 139);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(181, 21);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "Nuevo monto asignado";
             // 
             // FrmMercadoAdm
             // 
@@ -1665,7 +1685,6 @@ namespace tp_plataformas_2
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1160, 730);
             this.MinimumSize = new System.Drawing.Size(1160, 730);
-            //this.Name = "FrmMercadoAdm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mercado - Administrador";
             this.Load += new System.EventHandler(this.FrmMercadoAdmin_Load);
@@ -1883,5 +1902,7 @@ namespace tp_plataformas_2
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtBoxMonto;
     }
 }

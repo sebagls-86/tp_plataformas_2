@@ -32,10 +32,6 @@ namespace tp_plataformas_2
             compras = new List<Compra>();
             categorias = new Categoria[maxCategorias];
 
-            //FileManager.CreateFolder();
-
-            
-
             ObtenerCategorias();
             ObtenerProductos();
             ObtenerUsuarios();
@@ -75,7 +71,7 @@ namespace tp_plataformas_2
              compras = conexion.getCompras();
       
         }
-        public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)//Creamos producto y lo agregamos al array list de productos
+        public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)
         {
             cantProductos = conexion.cuentaRegistros("Producto") + 1;
             int indice = idCategoria - 1;
@@ -537,7 +533,7 @@ namespace tp_plataformas_2
             else
             {
                 usuarioEncontrado = usuarios[Id_Usuario - 1];
-                productoEncontrado = productos[Id_Producto];
+                productoEncontrado = productos[Id_Producto -1];
                 if (Cantidad > productoEncontrado.Cantidad)
                 {
                     throw new Excepciones("La cantidad que se quiere agregar es mayor al stock disponible.");
@@ -575,7 +571,7 @@ namespace tp_plataformas_2
             else
             {
                 usuarioEncontrado = usuarios[Id_Usuario - 1];
-                productoEncontrado = productos[Id_Producto];
+                productoEncontrado = productos[Id_Producto - 1];
                 if (!usuarioEncontrado.MiCarro.Productos.ContainsKey(productoEncontrado))
                 {
                     throw new Excepciones("El producto "+ productoEncontrado + "no se encuentra en el carro de "+ usuarioEncontrado.Nombre + ".");
@@ -642,14 +638,20 @@ namespace tp_plataformas_2
                 Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos);
                 Compra compra = new Compra(compras.Count + 1, usuarioEncontrado, productosCompra, precioTotal);
                 
-                compras.Add(compra);
-                conexion.agregarCompra(compra);
+                if (conexion.agregarCompra(compra)) { 
+                    
+                    compras.Add(compra);
+                
+                    foreach (Producto productoCompra in usuarioEncontrado.MiCarro.Productos.Keys)
+                    {
+                        conexion.agregarProductosCompra(productoCompra, compra);
 
-                foreach (Producto productoCompra in usuarioEncontrado.MiCarro.Productos.Keys)
-                {
-                    productos[productoCompra.Id].Cantidad -= usuarioEncontrado.MiCarro.Productos[productoCompra];
+                        int cantidad = productos[productoCompra.Id - 1].Cantidad -= usuarioEncontrado.MiCarro.Productos[productoCompra];
+                        conexion.actualizarStockProductos(productoCompra.Id, cantidad);
 
+                    }
                 }
+
                 usuarioEncontrado.MiCarro.Vaciar();
                 sePudoComprar = true;
             }
@@ -744,33 +746,7 @@ namespace tp_plataformas_2
             return productos.OrderBy(propiedad => propiedad.Id).ToList();
         }
         
-        public class CompraRealizada
-        {
-            public int Id { get; set; }
-            public string Usuario { get; set; }
-            public Usuario Comprador;
-            public string Productos { get; set; }
-            public Double Total { get; set; }
-
-            public CompraRealizada(int _Id, Usuario usuario, Double total, Dictionary<Producto, int> productos)
-            {
-                Id = _Id;
-                Comprador = usuario;
-                Total = total;
-                Usuario = usuario.Nombre;
-                Productos = creaProducto(productos);
-            }
-
-            public string creaProducto(Dictionary<Producto, int> productos)
-            {
-                string miString ="";
-                foreach(Producto prod in productos.Keys)
-                {
-                    miString += $" {prod.Nombre} - {productos[prod]}\n ";
-                }
-                return miString;
-            }
-        }
+       
         public List<CompraRealizada> mostrarComprasRealizadas()
         {
             List<CompraRealizada> comprado = new List<CompraRealizada>();
@@ -789,6 +765,18 @@ namespace tp_plataformas_2
             return comprado;
         }
 
+        public bool modificarMonto(int id, double monto)
+        {
+            int ID = id - 1;
+            if (compras[ID] != null)
+            {
+                compras[ID].Total = monto;
+                conexion.modificarMontoCompra(compras[ID]);
+                return true;
+            }
+
+                return false;
+        }
         public int IniciarSesion(int cuil, string clave)
         {
             bool Inicia = false;

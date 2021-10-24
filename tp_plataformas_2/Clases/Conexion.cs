@@ -69,7 +69,7 @@ namespace tp_plataformas_2
             string connectionString = Properties.Resources.SqlConnect;
 
             //Defino el string con la consulta que quiero realizar
-            string queryString = "SELECT * from dbo.Producto";
+            string queryString = "SELECT * from dbo.Producto ORDER BY Id";
 
             // Creo una conexión SQL con un Using, de modo que al finalizar, la conexión se cierra y se liberan recursos
             using (SqlConnection connection =
@@ -156,7 +156,7 @@ namespace tp_plataformas_2
             string connectionString = Properties.Resources.SqlConnect;
 
 
-            string queryString = "SELECT * from dbo.Usuario";
+            string queryString = "SELECT * from dbo.Usuario ORDER BY Id";
 
 
             using (SqlConnection connection =
@@ -213,16 +213,18 @@ namespace tp_plataformas_2
 
                     while (reader.Read())
                     {
-                        if (!compras.ContainsKey(reader.GetInt32(3)))
+                        double precio = Decimal.ToDouble(reader.GetDecimal(2));
+                        int idCompra = reader.GetInt32(0);
+                        if (!compras.ContainsKey(idCompra))
                         {
                             auxUsuario = variableAuxiliarUsuarios.Find(usuario => usuario.Id == reader.GetInt32(1));
-                            Compra compra = new Compra(reader.GetInt32(0), auxUsuario, new Dictionary<Producto, int>(), 0);
+                            Compra compra = new Compra(idCompra, auxUsuario, new Dictionary<Producto, int>(), precio);
                             Producto producto = variableAuxiliarProductos.Find(producto => producto.Id == reader.GetInt32(3));
                             int cantidad = reader.GetInt32(4);
                             compra.Productos.Add(producto, cantidad);
 
-                            compras.Add(reader.GetInt32(3), compra);
-                            variableAuxiliarCompras.Add(compras[reader.GetInt32(3)]);
+                            compras.Add(idCompra, compra);
+                            variableAuxiliarCompras.Add(compra);
 
                         }
                         else
@@ -230,7 +232,16 @@ namespace tp_plataformas_2
                             Producto producto = variableAuxiliarProductos.Find(producto => producto.Id == reader.GetInt32(3));
                             int cantidad = reader.GetInt32(4);
 
-                            compras[reader.GetInt32(3)].Productos.Add(producto, cantidad);
+                            if (compras[idCompra].Productos.ContainsKey(producto))
+                            {
+                                compras[idCompra].Productos[producto] += cantidad;
+                            }
+                            else
+                            {
+
+                                compras[idCompra].Productos.Add(producto, cantidad);
+
+                            }
                         }
 
                     }
@@ -373,6 +384,35 @@ namespace tp_plataformas_2
         
     }
 
+        
+        public bool actualizarStockProductos(int id, int cantidad)
+        {
+
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            string queryString = "UPDATE [dbo].[Producto] SET Cantidad=@cantidad WHERE Id=@id;";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@cantidad", SqlDbType.Int));
+                command.Parameters["@id"].Value = id;
+                command.Parameters["@cantidad"].Value = cantidad;
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+            return resultadoQuery == 1;
+
+        }
         public bool agregarCarroUsuario(Carro carro)
         {
             int resultadoQuery;
@@ -575,9 +615,100 @@ namespace tp_plataformas_2
 
         public bool agregarCompra(Compra compra)
         {
-            return false;
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;          //ver que id va aca
+            string queryString = "INSERT INTO [dbo].[Compra] ([Id],[Id_usuario],[Total]) VALUES (@id,@id_usuario,@total);";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@id_usuario", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@total", SqlDbType.Decimal));
+                command.Parameters["@Id"].Value = cuentaRegistros("Productos_compra") + 1;
+                command.Parameters["@Id_usuario"].Value = compra.Comprador.Id;
+                command.Parameters["@Total"].Value = compra.Total;
+                
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+
+            return resultadoQuery == 1;
+        }
+        public bool agregarProductosCompra(Producto producto,Compra compra)
+        {
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            string queryString = "INSERT INTO [dbo].[Productos_compra] ([Id],[Id_compra],[Id_producto],[Cantidad_producto]) VALUES (@id,@id_compra,@id_producto,@cantidad_producto);";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@id_compra", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@id_producto", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@cantidad_producto", SqlDbType.Int));
+                command.Parameters["@Id"].Value = cuentaRegistros("Productos_compra") + 1;
+                command.Parameters["@Id_compra"].Value = compra.Id;
+                command.Parameters["@Id_producto"].Value = producto.Id;
+                command.Parameters["@Cantidad_producto"].Value = compra.Productos[producto];
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+
+            return resultadoQuery == 1;
         }
 
+
+
+        public bool modificarMontoCompra(Compra compra)
+        {
+
+            int resultadoQuery;
+            string connectionString = Properties.Resources.SqlConnect;
+            string queryString = "UPDATE [dbo].[Compra] SET Total=@total WHERE Id=@id;";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@total", SqlDbType.Decimal));
+                command.Parameters["@id"].Value = compra.Id;
+                command.Parameters["@total"].Value = compra.Total;
+
+
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+            return resultadoQuery == 1;
+
+        }
         //    public List<List<string>> obtenerUsuarios()
         //    {
         //        List<List<string>> salida = new List<List<string>>();
