@@ -549,14 +549,17 @@ namespace tp_plataformas_2
         private void btnEliminarCompra_Click(object sender, EventArgs e)
         {
             int idCompra = int.Parse(txtEliminarCompraId.Text);
+            double nuevoMonto = int.Parse(txtBoxMonto.Text);
 
             /*  DESCOMENTAR ESTO  */
             try
             {
-                if (Mercado.EliminarCompra(idCompra))
+                if (Mercado.modificarMonto(idCompra, nuevoMonto))
                 {
                     txtEliminarCompraId.Text = "";
-                    MessageBox.Show("Compra Eliminada");
+                    txtboxNombreCategoria.Text = "";
+
+                    MessageBox.Show("Compra Actualizada");
                     dgvProductos.DataSource = null;
                     dgvComprasRealizadas.DataSource = Mercado.mostrarComprasRealizadas();
                 }
@@ -573,6 +576,8 @@ namespace tp_plataformas_2
             Application.Exit();
 
         }
+
+        
     }
 }
 

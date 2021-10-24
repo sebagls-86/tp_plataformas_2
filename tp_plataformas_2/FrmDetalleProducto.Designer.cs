@@ -41,8 +41,6 @@ namespace tp_plataformas_2
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.volverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +51,8 @@ namespace tp_plataformas_2
             this.lopezEmmanuelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lopezSosaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.motzoFrancoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupDetallesProducto.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -150,35 +150,16 @@ namespace tp_plataformas_2
             // volverToolStripMenuItem
             // 
             this.volverToolStripMenuItem.Name = "volverToolStripMenuItem";
-            this.volverToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.volverToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.volverToolStripMenuItem.Text = "Volver";
             this.volverToolStripMenuItem.Click += new System.EventHandler(this.volverToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(358, 133);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(387, 37);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "Agregando productos al Carro";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(782, 85);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(110, 112);
-            this.pictureBox1.TabIndex = 27;
-            this.pictureBox1.TabStop = false;
             // 
             // toolStripMenuItem1
             // 
@@ -192,7 +173,7 @@ namespace tp_plataformas_2
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(133, 22);
             this.toolStripMenuItem3.Text = "Materia";
             // 
             // toolStripMenuItem2
@@ -206,7 +187,7 @@ namespace tp_plataformas_2
             this.lopezSosaToolStripMenuItem,
             this.motzoFrancoToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(133, 22);
             this.toolStripMenuItem2.Text = "Integrantes";
             // 
             // callejaHoracioToolStripMenuItem
@@ -250,6 +231,25 @@ namespace tp_plataformas_2
             this.motzoFrancoToolStripMenuItem.Name = "motzoFrancoToolStripMenuItem";
             this.motzoFrancoToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.motzoFrancoToolStripMenuItem.Text = "Motzo Franco";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(358, 133);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(387, 37);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "Agregando productos al Carro";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(782, 85);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(110, 112);
+            this.pictureBox1.TabIndex = 27;
+            this.pictureBox1.TabStop = false;
             // 
             // FrmDetalleProducto
             // 

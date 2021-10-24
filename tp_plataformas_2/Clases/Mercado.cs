@@ -18,185 +18,72 @@ namespace tp_plataformas_2
         const int maxCategorias = 10;
 
         int cantCategorias = 0;
-        int cantProductos = 0;
+        int cantProductos;
         /* --- Variables auxiliares  ---*/
 
         private string[] contenidos = new string[10];
 
+        Conexion conexion = new Conexion();   
 
         public Mercado()
         {
             productos = new List<Producto>();
             usuarios = new List<Usuario>();
             compras = new List<Compra>();
-            //compras.Add(null);
             categorias = new Categoria[maxCategorias];
 
-            FileManager.CreateFolder();
-
-            FileManager.CreateFile("categorias");
-            FileManager.CreateFile("productos");
-            FileManager.CreateFile("compras");
-            FileManager.CreateFile("usuarios");
-
             ObtenerCategorias();
-            ReadFileUsuarios();
-            ReadFileProductos();
-            ReadFileCompras();
+            ObtenerProductos();
+            ObtenerUsuarios();
+            ObtenerCompras();
         }
 
         private void ObtenerCategorias()
         {
-            contenidos = FileManager.ReadFileCategorias();
-            foreach (string contenido in contenidos)
-            {
-                if (contenido != null && contenido != "")
-                {
-                    AgregarCategoria(contenido);
-                }
+            
+            List<Categoria> auxCategoria = conexion.getCategorias();
 
+            if (auxCategoria.Count != 0)
+            {
+                int i = 0;
+                foreach (Categoria contenido in auxCategoria)
+                {
+                    categorias[i] = contenido;
+                    i++;
+                }
             }
 
         }
-        private void ReadFileUsuarios()
+        private void ObtenerProductos()
         {
-            contenidos = FileManager.ReadFileUsuarios();
-            char delimiterChars = '|';
-
-            foreach (string contenido in contenidos)
-            {
-                if (contenido != null && contenido != "")
-                {
-                    string[] propiedades = contenido.Split(delimiterChars);
-
-
-                    int cuil = int.Parse(propiedades[1]);
-                    string nombre = propiedades[2];
-                    string apellido = propiedades[3];
-                    string mail = propiedades[4];
-                    string password = propiedades[5];
-                    int tipoUsuario = int.Parse(propiedades[6]);
-                    AgregarUsuario(cuil, nombre, apellido, mail, password, tipoUsuario);
-                }
-
-            }
-
-        }
-        private void ReadFileProductos()
-        {
-            contenidos = FileManager.ReadFileProductos();
-            char delimiterChars = '|';
-
-            foreach (string contenido in contenidos)
-            {
-                if (contenido != null && contenido != "")
-                {
-                    string[] propiedades = contenido.Split(delimiterChars);
-
-
-                    int Id = int.Parse(propiedades[0]);
-                    string nombre = propiedades[1];
-                    double precio = double.Parse(propiedades[2]);
-                    int cantidad = int.Parse(propiedades[3]);
-                    int idCat = int.Parse(propiedades[4]);
-                    string categoriaNombre = propiedades[5];
-
-                    AgregarProducto(nombre, precio, cantidad, idCat);
-
-
-                }
-
-            }
-
-        }
-
-        private void ReadFileCompras()
-        {
-            contenidos = FileManager.ReadFileCompras();
-            char delimiterChars = '|';
-            char delimiterCharsAsterisco = '*';
-
-            //array 1 usuario y compra
-            Usuario usuario = null;
-            int Id = 0;
-            string idUsuario;
-            double totalCompra = 0;
-
-            /*   hasta aca */
-
-            /*PRODUCTOS uno o muchos arrays*/
-            int cantComprada;
-            int idProducto;
-            string nombreProducto;
-            int valorProdUnitario;
-            int idCategoria;
-            string nombreCategoria;
-            int cantidadProducto;
-            /*  hasta aca*/
-
-            string[] linea;
-            foreach (string contenido in contenidos)
-            {
-
-                if (contenido != null && contenido != "")
-                {
-                    Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>();
-
-                    linea = contenido.Split(delimiterCharsAsterisco);
-                    for (int i = 0; i < linea.Length; i++)
-                    {
-                        if(i == 0)
-                        {
-                            string[] datosUsuarios = linea[i].Split(delimiterChars);
-
-                                Id = int.Parse(datosUsuarios[0]);
-                                idUsuario = datosUsuarios[1];
-                                totalCompra = double.Parse(datosUsuarios[2]);
-                                usuario = BuscarUsuarioPorId(idUsuario);
-
-                        }
-                        else
-                        {
-                            string[] datosProductos = linea[i].Split(delimiterChars);
-                            cantComprada = int.Parse(datosProductos[0]);
-                            idProducto = int.Parse(datosProductos[1]);
-                            nombreProducto = datosProductos[2];
-                            valorProdUnitario = int.Parse(datosProductos[3]);
-                            idCategoria = int.Parse(datosProductos[4]);
-                            nombreCategoria = datosProductos[5];
-                            cantidadProducto = int.Parse(datosProductos[6]);
-
-                            Categoria cat = new Categoria(idCategoria, nombreCategoria);
-                            Producto producto = new Producto(idProducto, nombreProducto, valorProdUnitario, cantComprada, cat);
-
-                            productosCompra.Add(producto, cantComprada);
-
-                        }
-                    }
-                    Compra compra = new Compra(Id,usuario,productosCompra,totalCompra);
-                    compras.Add(compra);
-                }
-
-            }
-                        
-
-
-                
-
-
+            productos = conexion.getProductos();
 
 
         }
-        public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)//Creamos producto y lo agregamos al array list de productos
+        private void ObtenerUsuarios()
         {
+            usuarios = conexion.getUsuarios();
+
+        }       
+
+        private void ObtenerCompras()
+        { 
+             compras = conexion.getCompras();
+      
+        }
+        public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)
+        {
+            cantProductos = conexion.cuentaRegistros("Producto") + 1;
             int indice = idCategoria - 1;
             if (categorias[indice] != null && categorias[indice].Id == idCategoria)
             {
                 Producto producto = new Producto(cantProductos, nombre, precio, Cantidad, categorias[indice]);
-                this.productos.Add(producto);
-                FileManager.SaveListProductos(productos);
-                cantProductos++;
-                return true;
+                if (conexion.agregarProducto(producto))
+                {
+                    this.productos.Add(producto);
+                    return true;
+                }
+                
             }
 
             return false;
@@ -215,6 +102,7 @@ namespace tp_plataformas_2
                     productos[i].Id = ID;
                     //productos[i].Cat = productos[ID_Categoria-1].Cat; // :)
                     productos[i].Cat = categorias[ID_Categoria - 1];
+                    conexion.modificaProducto(productos[i]);
                     Console.WriteLine("Producto modificado con éxito " + Nombre + Precio + Cantidad + ID);
                 }
             }
@@ -232,8 +120,10 @@ namespace tp_plataformas_2
                 if (encontre)
                 {
 
-                    productos.Remove(productos[i]);
-                    FileManager.SaveListProductos(productos);
+                    if (conexion.eliminarRegistro("Producto", productos[i].Id))
+                    {
+                        productos.Remove(productos[i]);
+                    }
                 }
                 else
                     i++;
@@ -364,11 +254,18 @@ namespace tp_plataformas_2
 
 
             int id = usuarios.Count + 1;
+            
             Carro micarro = new Carro(id);
-
             Usuario usuario = new Usuario(id, cuil, nombre, apellido, mail, password, micarro, tipoUsuario);
-            usuarios.Add(usuario);
-            FileManager.SaveListUsuarios(usuarios);
+            if (conexion.agregarUsuario(usuario))
+            {
+                if (conexion.agregarCarroUsuario(micarro))
+                {
+
+                    usuarios.Add(usuario);
+                }
+                
+            }
             Console.WriteLine("La empresa fue creada con exito");
 
 
@@ -392,10 +289,10 @@ namespace tp_plataformas_2
                     usuarios[id].Nombre = nombre;
                     usuarios[id].Apellido = apellido;
                     usuarios[id].Mail = mail;
-                    usuarios[ID].Password = password;
-                    usuarios[ID].TipoUsuario = tipoUsuario;
-
-                    FileManager.SaveListUsuarios(usuarios);
+                    usuarios[id].Password = password;
+                    usuarios[id].TipoUsuario = tipoUsuario;
+                    conexion.modificaUsuario(usuarios[id]);
+                    //FileManager.SaveListUsuarios(usuarios);
                 }
                 else
                     i++;
@@ -418,9 +315,14 @@ namespace tp_plataformas_2
                 if (encontre)
                 {
 
-                    usuarios.Remove(usuarios[i]);
 
-                    FileManager.SaveListUsuarios(usuarios);
+                    //FileManager.SaveListUsuarios(usuarios);
+                    //eliminar usuario y carro del usuario
+                    if (conexion.eliminarRegistro("Carro", usuarios[i].MiCarro.Id))
+                    {
+                        conexion.eliminarRegistro("Usuario", usuarios[i].Id);
+                        usuarios.Remove(usuarios[i]);
+                    }
                 }
                 else
                     i++;
@@ -473,8 +375,9 @@ namespace tp_plataformas_2
             }
             return false;
         }
-        public bool AgregarCategoria(string nombre) //Agregamos una categoria al array de categorias
+        public bool AgregarCategoria(string nombre)
         {
+
             foreach (Categoria categoria in categorias)
             {
                 if (categoria != null)
@@ -482,10 +385,13 @@ namespace tp_plataformas_2
                     if (categoria.Nombre.Equals(" "))
                     {
                         categoria.Nombre = nombre;
+                        conexion.modificarCategoria(categoria);
+                        
                         break;
                     }
                 }
             }
+            cantCategorias = conexion.cuentaRegistros("Categoria");
             if (cantCategorias <= maxCategorias)
 
             {
@@ -493,21 +399,24 @@ namespace tp_plataformas_2
                 if (BuscarCategoria(id))
                 {
                     Categoria categoria = new Categoria(id, nombre);
-
-                    int auxiliar = 0;
-                    int j = 0;
-
-                    do
+                    if (conexion.agregarCategoria(categoria))
                     {
-                        if (categorias[j] == null)
-                        {
-                            cantCategorias++;
-                            categorias[j] = categoria;
-                            auxiliar = 1;
-                        }
-                        j++;
 
-                    } while (auxiliar == 0);
+                        int auxiliar = 0;
+                        int j = 0;
+
+                        do
+                        {
+                            if (categorias[j] == null)
+                            {
+                                cantCategorias++;
+                                categorias[j] = categoria;
+                                auxiliar = 1;
+                            }
+                            j++;
+
+                        } while (auxiliar == 0);
+                    }
                 }
 
 
@@ -528,7 +437,7 @@ namespace tp_plataformas_2
             if (categorias[ID] != null)
             {
                 categorias[ID].Nombre = Nombre;
-                FileManager.SaveArrayCategorias(categorias);
+                conexion.modificarCategoria(categorias[ID]);
             }
             else
             {
@@ -555,7 +464,8 @@ namespace tp_plataformas_2
 
                     categorias[i].Nombre = " ";
                     Console.WriteLine("Categoria " + ID + " eliminada con éxito!");
-                    FileManager.SaveArrayCategorias(categorias);
+                    conexion.vaciarCategoria(categorias[i]);
+                    //FileManager.SaveArrayCategorias(categorias);
                     //cantCategorias--;
                 }
 
@@ -623,7 +533,7 @@ namespace tp_plataformas_2
             else
             {
                 usuarioEncontrado = usuarios[Id_Usuario - 1];
-                productoEncontrado = productos[Id_Producto];
+                productoEncontrado = productos[Id_Producto -1];
                 if (Cantidad > productoEncontrado.Cantidad)
                 {
                     throw new Excepciones("La cantidad que se quiere agregar es mayor al stock disponible.");
@@ -661,7 +571,7 @@ namespace tp_plataformas_2
             else
             {
                 usuarioEncontrado = usuarios[Id_Usuario - 1];
-                productoEncontrado = productos[Id_Producto];
+                productoEncontrado = productos[Id_Producto - 1];
                 if (!usuarioEncontrado.MiCarro.Productos.ContainsKey(productoEncontrado))
                 {
                     throw new Excepciones("El producto "+ productoEncontrado + "no se encuentra en el carro de "+ usuarioEncontrado.Nombre + ".");
@@ -727,18 +637,30 @@ namespace tp_plataformas_2
                 precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
                 Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos);
                 Compra compra = new Compra(compras.Count + 1, usuarioEncontrado, productosCompra, precioTotal);
-                compras.Add(compra);
-                foreach (Producto productoCompra in usuarioEncontrado.MiCarro.Productos.Keys)
-                {
-                    productos[productoCompra.Id].Cantidad -= usuarioEncontrado.MiCarro.Productos[productoCompra];
+                
+                if (conexion.agregarCompra(compra)) { 
+                    
+                    compras.Add(compra);
+                
+                    foreach (Producto productoCompra in usuarioEncontrado.MiCarro.Productos.Keys)
+                    {
+                        conexion.agregarProductosCompra(productoCompra, compra);
 
+                        int cantidad = productos[productoCompra.Id - 1].Cantidad -= usuarioEncontrado.MiCarro.Productos[productoCompra];
+                        conexion.actualizarStockProductos(productoCompra.Id, cantidad);
+
+                    }
                 }
+
                 usuarioEncontrado.MiCarro.Vaciar();
                 sePudoComprar = true;
             }
             return sePudoComprar;
+
+            // guardar compra en Productos_compra
         }
 
+        //guarda que no lo estamos usando!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         public bool ModificarCompra(int ID, Double Total)
         {
 
@@ -762,7 +684,7 @@ namespace tp_plataformas_2
             }
 
             return seModifico;
-
+            //modificar en productos compra
         }
 
         public bool EliminarCompra(int ID)
@@ -780,6 +702,7 @@ namespace tp_plataformas_2
                 }
                 compras[ID-1] = null;
                 seElimino = true;
+                //eliminar compra en conexion por id compra
                 FileManager.SaveListCompras(compras);
             }
             else
@@ -823,33 +746,7 @@ namespace tp_plataformas_2
             return productos.OrderBy(propiedad => propiedad.Id).ToList();
         }
         
-        public class CompraRealizada
-        {
-            public int Id { get; set; }
-            public string Usuario { get; set; }
-            public Usuario Comprador;
-            public string Productos { get; set; }
-            public Double Total { get; set; }
-
-            public CompraRealizada(int _Id, Usuario usuario, Double total, Dictionary<Producto, int> productos)
-            {
-                Id = _Id;
-                Comprador = usuario;
-                Total = total;
-                Usuario = usuario.Nombre;
-                Productos = creaProducto(productos);
-            }
-
-            public string creaProducto(Dictionary<Producto, int> productos)
-            {
-                string miString ="";
-                foreach(Producto prod in productos.Keys)
-                {
-                    miString += $" {prod.Nombre} - {productos[prod]}\n ";
-                }
-                return miString;
-            }
-        }
+       
         public List<CompraRealizada> mostrarComprasRealizadas()
         {
             List<CompraRealizada> comprado = new List<CompraRealizada>();
@@ -868,6 +765,18 @@ namespace tp_plataformas_2
             return comprado;
         }
 
+        public bool modificarMonto(int id, double monto)
+        {
+            int ID = id - 1;
+            if (compras[ID] != null)
+            {
+                compras[ID].Total = monto;
+                conexion.modificarMontoCompra(compras[ID]);
+                return true;
+            }
+
+                return false;
+        }
         public int IniciarSesion(int cuil, string clave)
         {
             bool Inicia = false;
