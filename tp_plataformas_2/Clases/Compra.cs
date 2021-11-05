@@ -10,7 +10,8 @@ namespace tp_plataformas_2
         public Usuario Comprador { get; set; }
         public Dictionary<Producto, int> Productos { get; set; }
         public Double Total { get; set; }
-
+        
+        
         public Compra(int _Id, Usuario usuario, Dictionary<Producto, int> productos, Double total)
         {
             Id = _Id;

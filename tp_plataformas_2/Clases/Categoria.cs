@@ -7,6 +7,8 @@ namespace tp_plataformas_2
         public int Id { get; set; }
         public string Nombre { get; set; }
 
+        public Producto Producto { get; set; }
+
 
 
         public Categoria(int _id, string _nombre)

@@ -423,7 +423,7 @@ namespace tp_plataformas_2
 
 
 
-                FileManager.SaveArrayCategorias(categorias);
+                
                 return true;
 
             }
@@ -703,7 +703,7 @@ namespace tp_plataformas_2
                 compras[ID-1] = null;
                 seElimino = true;
                 //eliminar compra en conexion por id compra
-                FileManager.SaveListCompras(compras);
+               
             }
             else
             {
