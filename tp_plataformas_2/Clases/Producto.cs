@@ -11,6 +11,7 @@ namespace tp_plataformas_2
         public int Cantidad { get; set; }
         public Categoria Cat { get; set; }
 
+        public int Categoria_id { get; set; }
         public Producto(int Id, string Nombre, Double Precio, int Cantidad, Categoria Cat)
         {
             this.Id = Id;
