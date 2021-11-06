@@ -35,7 +35,7 @@ namespace tp_plataformas_2
                     usr.Property(u => u.Apellido).HasColumnType("varchar(50)");
                     usr.Property(u => u.Mail).HasColumnType("varchar(50)");
                     usr.Property(u => u.Password).HasColumnType("varchar(50)");
-                    usr.Property(u => u.MiCarro).HasColumnType("int");
+                    //usr.Property(u => u.MiCarro).HasColumnType("int");
                     usr.Property(u => u.TipoUsuario).HasColumnType("int");
                 });
 
@@ -77,7 +77,8 @@ namespace tp_plataformas_2
                 {
                     usr.Property(u => u.CarroId).HasColumnType("int");
                     usr.Property(u => u.Productos).HasColumnType("varchar(50)");
-                   
+                    usr.Property(u => u.cantidad).HasColumnType("int");
+
                 });
 
 
@@ -85,15 +86,16 @@ namespace tp_plataformas_2
              .HasOne(u => u.Productos)
              .WithMany();
 
-            modelBuilder.Entity<Carro>()
-            .HasOne(u => u.Usuario)
-            .WithOne();
+            modelBuilder.Entity<Usuario>()
+            .HasOne(u => u.MiCarro)
+            .WithOne(x => x.Usuario)
+            .HasForeignKey<Carro>(c => c.UsuarioForeingKey);
 
-            modelBuilder.Entity<Carro>()
-          .HasOne(x => x.Productos)
-          .WithMany();
-          
-          
+            modelBuilder.Entity<Producto>()
+              .HasOne(u => u.Carro)
+              .WithMany(x => x.productos);
+
+
 
 
 
