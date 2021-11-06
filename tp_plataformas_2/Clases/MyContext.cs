@@ -22,7 +22,7 @@ namespace tp_plataformas_2
         {
             //nombre de la tabla
             modelBuilder.Entity<Usuario>()
-                .ToTable("Usuarios")
+                .ToTable("Usuario")
                 .HasKey(u => u.UsuarioId);
             //propiedades de los datos
             modelBuilder.Entity<Usuario>(
@@ -40,7 +40,7 @@ namespace tp_plataformas_2
                 });
 
             modelBuilder.Entity<Producto>()
-               .ToTable("Productos")
+               .ToTable("Producto")
                .HasKey(u => u.ProductoId);
             //propiedades de los datos
             modelBuilder.Entity<Producto>(
@@ -56,7 +56,7 @@ namespace tp_plataformas_2
                 });
 
             modelBuilder.Entity<Categoria>()
-             .ToTable("Categorias")
+             .ToTable("Categoria")
              .HasKey(u => u.CatId);
             
             //propiedades de los datos

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,9 @@ namespace tp_plataformas_2
 
         private string[] contenidos = new string[10];
 
+        private DbSet<Categoria> misCategorias;
+        private MyContext db;
+
         Conexion conexion = new Conexion();   
 
         public Mercado()
@@ -32,6 +36,11 @@ namespace tp_plataformas_2
             compras = new List<Compra>();
             categorias = new Categoria[maxCategorias];
 
+            db = new MyContext();
+            //db.categorias.Load();
+            //misCategorias = db.categorias;
+
+
             ObtenerCategorias();
             ObtenerProductos();
             ObtenerUsuarios();
@@ -40,15 +49,19 @@ namespace tp_plataformas_2
 
         private void ObtenerCategorias()
         {
-            
-            List<Categoria> auxCategoria = conexion.getCategorias();
 
-            if (auxCategoria.Count != 0)
+            //List<Categoria> auxCategoria = conexion.getCategorias();
+            var list = db.categorias;
+            //foreach (Usuario u in contexto.usuarios)
+            //    salida.Add(new List<string> { u.dni.ToString(), u.nombre, u.mail, u.password, u.esADM.ToString(), u.bloqueado.ToString() });
+            //return salida;
+            if (list.Count() != 0)
             {
                 int i = 0;
-                foreach (Categoria contenido in auxCategoria)
+                foreach (var u in list)
                 {
-                    categorias[i] = contenido;
+                    Categoria cat = new Categoria(u.CatId, u.Nombre);
+                    categorias[i] = cat;
                     i++;
                 }
             }
