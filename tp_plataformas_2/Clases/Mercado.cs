@@ -24,7 +24,7 @@ namespace tp_plataformas_2
 
         private string[] contenidos = new string[10];
 
-        private DbSet<Categoria> misCategorias;
+        //private DbSet<Categoria> misCategorias;
         private MyContext db;
 
         Conexion conexion = new Conexion();   
@@ -75,9 +75,19 @@ namespace tp_plataformas_2
         }
         private void ObtenerUsuarios()
         {
-            usuarios = conexion.getUsuarios();
+            //usuarios = conexion.getUsuarios();
+            var list = db.usuarios;
+            if (list.Count() != 0)
+            {
+                foreach (var u in list) { 
+                    Carro micarro = new Carro(u.UsuarioId);
+                    
+                    usuarios.Add(new Usuario(u.UsuarioId, u.Cuil, u.Nombre, u.Apellido, u.Mail, u.Password, micarro, u.TipoUsuario));
+                }
+            
+            }
 
-        }       
+        }
 
         private void ObtenerCompras()
         { 
