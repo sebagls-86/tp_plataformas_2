@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace tp_plataformas_2
 {
@@ -7,6 +8,8 @@ namespace tp_plataformas_2
     {
 
         public int CarroId { get; set; }
+
+        [NotMapped]
         public Dictionary<Producto, int> Productos { get; set; }
 
         public Usuario Usuario { get; set; }
@@ -32,6 +35,13 @@ namespace tp_plataformas_2
             CarroId = id;
             Productos = new Dictionary<Producto, int>();
         }
+
+        public Carro()
+        {
+         
+        }
+
+
 
         public bool AgregarProducto(Producto p, int cantidad)
         {

@@ -658,7 +658,7 @@ namespace tp_plataformas_2
                 command.Parameters.Add(new SqlParameter("@id_producto", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@cantidad_producto", SqlDbType.Int));
                 command.Parameters["@Id"].Value = cuentaRegistros("Productos_compra") + 1;
-                command.Parameters["@Id_compra"].Value = compra.Id;
+                command.Parameters["@Id_compra"].Value = compra.CompraId;
                 command.Parameters["@Id_producto"].Value = producto.ProductoId;
                 command.Parameters["@Cantidad_producto"].Value = compra.Productos[producto];
                 try
@@ -691,7 +691,7 @@ namespace tp_plataformas_2
                 SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@total", SqlDbType.Decimal));
-                command.Parameters["@id"].Value = compra.Id;
+                command.Parameters["@id"].Value = compra.CompraId;
                 command.Parameters["@total"].Value = compra.Total;
 
 

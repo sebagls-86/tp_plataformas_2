@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace tp_plataformas_2
 {
@@ -14,6 +15,8 @@ namespace tp_plataformas_2
         public Carro Carro { get; set; }
         public int CatId { get; set; }
 
+        public ICollection<Compra> CompraProducto { get; set; }
+
         public Producto(int Id, string Nombre, Double Precio, int Cantidad, Categoria Cat)
         {
             this.ProductoId = Id;
@@ -21,6 +24,11 @@ namespace tp_plataformas_2
             this.Precio = Precio;
             this.Cantidad = Cantidad;
             this.Cat = Cat;
+        }
+
+        public Producto()
+        {
+            
         }
 
         public int CompareTo(Producto other)

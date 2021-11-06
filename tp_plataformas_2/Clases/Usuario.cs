@@ -15,8 +15,7 @@ namespace tp_plataformas_2
         public Carro MiCarro { get; set; }
         public int TipoUsuario { get; set; }
 
-        
-
+        public List<Compra> Compra { get; set; }
         public Usuario(int id, int cuil, string nombre, string apellido, string mail, string password, Carro carro, int tipoUsuario)
         {
             UsuarioId = id;
@@ -29,7 +28,10 @@ namespace tp_plataformas_2
             TipoUsuario = tipoUsuario;
         }
 
-       
+        public Usuario()
+        {
+            
+        }
 
         public int CompareTo(Usuario other)
         {

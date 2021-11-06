@@ -756,7 +756,7 @@ namespace tp_plataformas_2
                 if(compra != null)
                 {
 
-                    comprado.Add(new CompraRealizada(compra.Id, compra.Comprador, compra.Total, compra.Productos));
+                    comprado.Add(new CompraRealizada(compra.CompraId, compra.Comprador, compra.Total, compra.Productos));
                 }
             }
             

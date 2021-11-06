@@ -76,15 +76,29 @@ namespace tp_plataformas_2
                 usr =>
                 {
                     usr.Property(u => u.CarroId).HasColumnType("int");
-                    usr.Property(u => u.Productos).HasColumnType("varchar(50)");
+                   // usr.Property(u => u.productos).HasColumnType("varchar(50)");
                     usr.Property(u => u.cantidad).HasColumnType("int");
 
                 });
 
+            modelBuilder.Entity<Compra>()
+            .ToTable("Compra")
+            .HasKey(u => u.CompraId);
+            //propiedades de los datos
+            modelBuilder.Entity<Compra>(
+                usr =>
+                {
+                    usr.Property(u => u.CompraId).HasColumnType("int");
+                   // usr.Property(u => u.Comprador).HasColumnType("varchar(50)");
+                    usr.Property(u => u.IdProducto).HasColumnType("int");
+                    usr.Property(u => u.Total).HasColumnType("double");
 
-            modelBuilder.Entity<Categoria>()
-             .HasOne(u => u.Productos)
-             .WithMany();
+                });
+
+
+            modelBuilder.Entity<Producto>()
+             .HasOne(u => u.Cat)
+             .WithMany(p => p.Productos);
 
             modelBuilder.Entity<Usuario>()
             .HasOne(u => u.MiCarro)
@@ -95,8 +109,13 @@ namespace tp_plataformas_2
               .HasOne(u => u.Carro)
               .WithMany(x => x.productos);
 
+            modelBuilder.Entity<Compra>()
+              .HasOne(u => u.Comprador)
+              .WithMany(x => x.Compra);
 
-
+            modelBuilder.Entity<Compra>()
+              .HasMany(u => u.productosCompra)
+              .WithMany(x => x.CompraProducto);
 
 
             //Ignoro, no agrego UsuarioManager a la base de datos

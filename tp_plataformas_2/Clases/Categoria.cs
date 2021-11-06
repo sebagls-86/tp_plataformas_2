@@ -15,6 +15,11 @@ namespace tp_plataformas_2
             Nombre = nombre;
         }
 
+        public Categoria()
+        {
+           
+        }
+
         public int CompareTo(Categoria other)
         {
             return Nombre.CompareTo(other.Nombre);
