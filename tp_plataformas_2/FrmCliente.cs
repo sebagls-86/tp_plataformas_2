@@ -92,7 +92,7 @@ namespace tp_plataformas_2
         {
             String nombre = "" + dgvCategorias.Rows[e.RowIndex].Cells[1].Value.ToString();
             Categoria categoria = Mercado.BuscarCategoriaPorNombre(nombre);
-            dgvProductos.DataSource = Mercado.MostrarProductoEnPantallaPorCategoria(categoria.Id);
+            dgvProductos.DataSource = Mercado.MostrarProductoEnPantallaPorCategoria(categoria.CatId);
         }
 
         private void dgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

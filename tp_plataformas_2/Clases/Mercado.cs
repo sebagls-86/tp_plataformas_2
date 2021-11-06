@@ -75,7 +75,7 @@ namespace tp_plataformas_2
         {
             cantProductos = conexion.cuentaRegistros("Producto") + 1;
             int indice = idCategoria - 1;
-            if (categorias[indice] != null && categorias[indice].Id == idCategoria)
+            if (categorias[indice] != null && categorias[indice].CatId == idCategoria)
             {
                 Producto producto = new Producto(cantProductos, nombre, precio, Cantidad, categorias[indice]);
                 if (conexion.agregarProducto(producto))
@@ -94,12 +94,12 @@ namespace tp_plataformas_2
         {
             for (int i = 0; i < productos.Count; i++)
             {
-                if (productos[i].Id == ID)
+                if (productos[i].ProductoId == ID)
                 {
                     productos[i].Nombre = Nombre;
                     productos[i].Precio = Precio;
                     productos[i].Cantidad = Cantidad;
-                    productos[i].Id = ID;
+                    productos[i].ProductoId = ID;
                     //productos[i].Cat = productos[ID_Categoria-1].Cat; // :)
                     productos[i].Cat = categorias[ID_Categoria - 1];
                     conexion.modificaProducto(productos[i]);
@@ -116,11 +116,11 @@ namespace tp_plataformas_2
             int i = 0;
             while (!encontre && i < productos.Count)
             {
-                encontre = productos[i].Id == id;
+                encontre = productos[i].ProductoId == id;
                 if (encontre)
                 {
 
-                    if (conexion.eliminarRegistro("Producto", productos[i].Id))
+                    if (conexion.eliminarRegistro("Producto", productos[i].ProductoId))
                     {
                         productos.Remove(productos[i]);
                     }
@@ -205,7 +205,7 @@ namespace tp_plataformas_2
 
             foreach (Producto producto in productos)
             {
-                if (producto.Cat.Id == ID_Categoria)
+                if (producto.Cat.CatId == ID_Categoria)
                 {
                     productos.Sort();
                     Console.WriteLine(producto);
@@ -221,7 +221,7 @@ namespace tp_plataformas_2
             {
                 throw new Excepciones("Id de categoria fuera del rango.");
             }
-            return productos.FindAll(producto => producto.Cat.Id == idCategoria);
+            return productos.FindAll(producto => producto.Cat.CatId == idCategoria);
         }
 
         public List<Producto> MostrarProductosOrdenados(int orden)
@@ -233,10 +233,10 @@ namespace tp_plataformas_2
             }
             if(orden == 0)
             {
-                productosOrdenados = productos.OrderBy(producto => producto.Id).ToList();
+                productosOrdenados = productos.OrderBy(producto => producto.ProductoId).ToList();
             } else
             {
-                productosOrdenados = productos.OrderByDescending(producto => producto.Id).ToList();
+                productosOrdenados = productos.OrderByDescending(producto => producto.ProductoId).ToList();
             }
             return productosOrdenados;
         }
@@ -282,7 +282,7 @@ namespace tp_plataformas_2
             int id = ID - 1;
             while (!encontre && i < usuarios.Count)
             {
-                encontre = usuarios[i].Id == id;
+                encontre = usuarios[i].UsuarioId == id;
                 if (encontre)
                 {
 
@@ -311,16 +311,16 @@ namespace tp_plataformas_2
             int i = 0;
             while (!encontre && i < usuarios.Count)
             {
-                encontre = usuarios[i].Id == id;
+                encontre = usuarios[i].UsuarioId == id;
                 if (encontre)
                 {
 
 
                     //FileManager.SaveListUsuarios(usuarios);
                     //eliminar usuario y carro del usuario
-                    if (conexion.eliminarRegistro("Carro", usuarios[i].MiCarro.Id))
+                    if (conexion.eliminarRegistro("Carro", usuarios[i].MiCarro.CarroId))
                     {
-                        conexion.eliminarRegistro("Usuario", usuarios[i].Id);
+                        conexion.eliminarRegistro("Usuario", usuarios[i].UsuarioId);
                         usuarios.Remove(usuarios[i]);
                     }
                 }
@@ -423,7 +423,7 @@ namespace tp_plataformas_2
 
 
 
-                FileManager.SaveArrayCategorias(categorias);
+                //FileManager.SaveArrayCategorias(categorias);
                 return true;
 
             }
@@ -456,7 +456,7 @@ namespace tp_plataformas_2
             {
                 if (categorias[i] != null)
                 {
-                    encontre = categorias[i].Id == ID;
+                    encontre = categorias[i].CatId == ID;
 
                 }
                 if (encontre)
@@ -646,8 +646,8 @@ namespace tp_plataformas_2
                     {
                         conexion.agregarProductosCompra(productoCompra, compra);
 
-                        int cantidad = productos[productoCompra.Id - 1].Cantidad -= usuarioEncontrado.MiCarro.Productos[productoCompra];
-                        conexion.actualizarStockProductos(productoCompra.Id, cantidad);
+                        int cantidad = productos[productoCompra.ProductoId - 1].Cantidad -= usuarioEncontrado.MiCarro.Productos[productoCompra];
+                        conexion.actualizarStockProductos(productoCompra.ProductoId, cantidad);
 
                     }
                 }
@@ -673,7 +673,7 @@ namespace tp_plataformas_2
             {
                 foreach (Producto producto in compras[ID].Productos.Keys)
                 {
-                    productos[producto.Id].Cantidad += producto.Cantidad;
+                    productos[producto.ProductoId].Cantidad += producto.Cantidad;
                 }
                 compras[ID].Total = Total;
                 seModifico = true;
@@ -698,12 +698,12 @@ namespace tp_plataformas_2
             {
                 foreach (Producto producto in compras[ID-1].Productos.Keys)
                 {
-                    productos[producto.Id].Cantidad += producto.Cantidad;
+                    productos[producto.ProductoId].Cantidad += producto.Cantidad;
                 }
                 compras[ID-1] = null;
                 seElimino = true;
                 //eliminar compra en conexion por id compra
-                FileManager.SaveListCompras(compras);
+                //FileManager.SaveListCompras(compras);
             }
             else
             {
@@ -743,7 +743,7 @@ namespace tp_plataformas_2
 
         public List<Producto> MostrarProductoEnPantalla()
         {
-            return productos.OrderBy(propiedad => propiedad.Id).ToList();
+            return productos.OrderBy(propiedad => propiedad.ProductoId).ToList();
         }
         
        
@@ -787,7 +787,7 @@ namespace tp_plataformas_2
                 Inicia = usuarios[i].Cuil == cuil && usuarios[i].Password == clave;
                 if (Inicia)
                 {
-                    Id = usuarios[i].Id;
+                    Id = usuarios[i].UsuarioId;
                 }
 
                 i++;
@@ -806,11 +806,11 @@ namespace tp_plataformas_2
             while (!esAdmin && i < usuarios.Count)
             {
 
-                if (esAdmin = usuarios[i].Id == id && usuarios[i].TipoUsuario == 1)
+                if (esAdmin = usuarios[i].UsuarioId == id && usuarios[i].TipoUsuario == 1)
                 {
                     esAdmin = true;
                 }
-                else if (esAdmin = usuarios[i].Id == id && usuarios[i].TipoUsuario != 1)
+                else if (esAdmin = usuarios[i].UsuarioId == id && usuarios[i].TipoUsuario != 1)
                 {
                     esAdmin = false;
 

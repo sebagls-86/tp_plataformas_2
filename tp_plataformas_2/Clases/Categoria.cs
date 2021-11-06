@@ -1,18 +1,18 @@
 using System;
+using System.Collections.Generic;
 
 namespace tp_plataformas_2
 {
     public class Categoria : IComparable<Categoria>
     {
-        public int Id { get; set; }
+        public int CatId { get; set; }
         public string Nombre { get; set; }
 
-
-
-        public Categoria(int _id, string _nombre)
+        public List<Producto> Productos { get; set; }
+        public Categoria(int id, string nombre)
         {
-            Id = _id;
-            Nombre = _nombre;
+            CatId = id;
+            Nombre = nombre;
         }
 
         public int CompareTo(Categoria other)
@@ -22,7 +22,7 @@ namespace tp_plataformas_2
 
         public override string ToString()
         {
-            return $"{Id}|{Nombre}";
+            return $"{CatId}|{Nombre}";
         }
     }
 }

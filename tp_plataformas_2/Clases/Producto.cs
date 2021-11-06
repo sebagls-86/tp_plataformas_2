@@ -5,16 +5,18 @@ namespace tp_plataformas_2
     public class Producto : IComparable<Producto>
     {
 
-        public int Id { get; set; }
+        public int ProductoId { get; set; }
         public string Nombre { get; set; }
         public Double Precio { get; set; }
         public int Cantidad { get; set; }
         public Categoria Cat { get; set; }
+        
+        public Carro Carro { get; set; }
+        public int CatId { get; set; }
 
-        public int Categoria_id { get; set; }
         public Producto(int Id, string Nombre, Double Precio, int Cantidad, Categoria Cat)
         {
-            this.Id = Id;
+            this.ProductoId = Id;
             this.Nombre = Nombre;
             this.Precio = Precio;
             this.Cantidad = Cantidad;
@@ -28,7 +30,7 @@ namespace tp_plataformas_2
 
         public override string ToString()
         {
-            return $"{Id}|{Nombre}|{Precio}|{Cantidad}|{Cat.Id}|{Cat.Nombre}";
+            return $"{ProductoId}|{Nombre}|{Precio}|{Cantidad}|{Cat.CatId}|{Cat.Nombre}";
         }
     }
 }

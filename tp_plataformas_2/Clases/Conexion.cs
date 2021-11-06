@@ -91,7 +91,7 @@ namespace tp_plataformas_2
                         foreach (Categoria cat in variableAuxiliarCategorias)
                         {
                             var aux = reader.GetInt32(4);
-                            if (cat.Id == reader.GetInt32(4))
+                            if (cat.CatId == reader.GetInt32(4))
                             {
                                 var precio = (Double)reader.GetDecimal(2);
                                 variableAuxiliarProductos.Add(new Producto(reader.GetInt32(0), reader.GetString(1), precio, reader.GetInt32(3), cat));
@@ -133,7 +133,7 @@ namespace tp_plataformas_2
                     {
                         foreach (Producto producto in variableAuxiliarProductos)
                         {
-                            if (producto.Id == reader.GetInt32(1))
+                            if (producto.ProductoId == reader.GetInt32(1))
                             {
 
                                 variableAuxiliarCarros.Add(new Carro(reader.GetInt32(0), producto, reader.GetInt32(2)));
@@ -217,9 +217,9 @@ namespace tp_plataformas_2
                         int idCompra = reader.GetInt32(0);
                         if (!compras.ContainsKey(idCompra))
                         {
-                            auxUsuario = variableAuxiliarUsuarios.Find(usuario => usuario.Id == reader.GetInt32(1));
+                            auxUsuario = variableAuxiliarUsuarios.Find(usuario => usuario.UsuarioId == reader.GetInt32(1));
                             Compra compra = new Compra(idCompra, auxUsuario, new Dictionary<Producto, int>(), precio);
-                            Producto producto = variableAuxiliarProductos.Find(producto => producto.Id == reader.GetInt32(3));
+                            Producto producto = variableAuxiliarProductos.Find(producto => producto.ProductoId == reader.GetInt32(3));
                             int cantidad = reader.GetInt32(4);
                             compra.Productos.Add(producto, cantidad);
 
@@ -229,7 +229,7 @@ namespace tp_plataformas_2
                         }
                         else
                         {
-                            Producto producto = variableAuxiliarProductos.Find(producto => producto.Id == reader.GetInt32(3));
+                            Producto producto = variableAuxiliarProductos.Find(producto => producto.ProductoId == reader.GetInt32(3));
                             int cantidad = reader.GetInt32(4);
 
                             if (compras[idCompra].Productos.ContainsKey(producto))
@@ -329,11 +329,11 @@ namespace tp_plataformas_2
                 command.Parameters.Add(new SqlParameter("@Precio", SqlDbType.Decimal));
                 command.Parameters.Add(new SqlParameter("@Cantidad", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@Cat", SqlDbType.Int));
-                command.Parameters["@Id"].Value = producto.Id;
+                command.Parameters["@Id"].Value = producto.ProductoId;
                 command.Parameters["@Nombre"].Value = producto.Nombre;
                 command.Parameters["@Precio"].Value = producto.Precio;
                 command.Parameters["@Cantidad"].Value = producto.Cantidad;
-                command.Parameters["@Cat"].Value = producto.Cat.Id;
+                command.Parameters["@Cat"].Value = producto.Cat.CatId;
                 try
                 {
                     connection.Open();
@@ -364,11 +364,11 @@ namespace tp_plataformas_2
                 command.Parameters.Add(new SqlParameter("@precio", SqlDbType.Decimal));
                 command.Parameters.Add(new SqlParameter("@cantidad", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@cat", SqlDbType.Int));
-                command.Parameters["@id"].Value = producto.Id;
+                command.Parameters["@id"].Value = producto.ProductoId;
                 command.Parameters["@nombre"].Value = producto.Nombre;
                 command.Parameters["@precio"].Value = producto.Precio;
                 command.Parameters["@cantidad"].Value = producto.Cantidad;
-                command.Parameters["@cat"].Value = producto.Cat.Id;
+                command.Parameters["@cat"].Value = producto.Cat.CatId;
                 try
                 {
                     connection.Open();
@@ -425,7 +425,7 @@ namespace tp_plataformas_2
                 SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int));
                 
-                command.Parameters["@Id"].Value = carro.Id;
+                command.Parameters["@Id"].Value = carro.CarroId;
                 
 
                 try
@@ -460,13 +460,13 @@ namespace tp_plataformas_2
                 command.Parameters.Add(new SqlParameter("@Password", SqlDbType.NVarChar));
                 command.Parameters.Add(new SqlParameter("@MiCarro", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@TipoUsuario", SqlDbType.Int));
-                command.Parameters["@Id"].Value = usuario.Id;
+                command.Parameters["@Id"].Value = usuario.UsuarioId;
                 command.Parameters["@CUIL"].Value = usuario.Cuil;
                 command.Parameters["@Nombre"].Value = usuario.Nombre;
                 command.Parameters["@Apellido"].Value = usuario.Apellido;
                 command.Parameters["@Mail"].Value = usuario.Mail;
                 command.Parameters["@Password"].Value = usuario.Password;
-                command.Parameters["@MiCarro"].Value = usuario.MiCarro.Id;
+                command.Parameters["@MiCarro"].Value = usuario.MiCarro.CarroId;
                 command.Parameters["@TipoUsuario"].Value = usuario.TipoUsuario;
 
                 try
@@ -500,7 +500,7 @@ namespace tp_plataformas_2
                 command.Parameters.Add(new SqlParameter("@apellido", SqlDbType.NVarChar));
                 command.Parameters.Add(new SqlParameter("@mail", SqlDbType.NVarChar));
                 command.Parameters.Add(new SqlParameter("@password", SqlDbType.NVarChar));
-                command.Parameters["@id"].Value = usuario.Id;
+                command.Parameters["@id"].Value = usuario.UsuarioId;
                 command.Parameters["@nombre"].Value = usuario.Nombre;
                 command.Parameters["@apellido"].Value = usuario.Apellido;
                 command.Parameters["@mail"].Value = usuario.Mail;
@@ -533,7 +533,7 @@ namespace tp_plataformas_2
                 SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.NVarChar));
-                command.Parameters["@id"].Value = categoria.Id;
+                command.Parameters["@id"].Value = categoria.CatId;
                 command.Parameters["@nombre"].Value = categoria.Nombre;
                 
 
@@ -563,7 +563,7 @@ namespace tp_plataformas_2
                 SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.NVarChar));
-                command.Parameters["@Id"].Value = categoria.Id;
+                command.Parameters["@Id"].Value = categoria.CatId;
                 command.Parameters["@Nombre"].Value = categoria.Nombre;
                 try
                 {
@@ -594,7 +594,7 @@ namespace tp_plataformas_2
                 SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@nombre", SqlDbType.NVarChar));
-                command.Parameters["@id"].Value = categoria.Id;
+                command.Parameters["@id"].Value = categoria.CatId;
                 command.Parameters["@nombre"].Value = categoria.Nombre;
 
 
@@ -626,7 +626,7 @@ namespace tp_plataformas_2
                 command.Parameters.Add(new SqlParameter("@id_usuario", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@total", SqlDbType.Decimal));
                 command.Parameters["@Id"].Value = cuentaRegistros("Productos_compra") + 1;
-                command.Parameters["@Id_usuario"].Value = compra.Comprador.Id;
+                command.Parameters["@Id_usuario"].Value = compra.Comprador.UsuarioId;
                 command.Parameters["@Total"].Value = compra.Total;
                 
                 try
@@ -659,7 +659,7 @@ namespace tp_plataformas_2
                 command.Parameters.Add(new SqlParameter("@cantidad_producto", SqlDbType.Int));
                 command.Parameters["@Id"].Value = cuentaRegistros("Productos_compra") + 1;
                 command.Parameters["@Id_compra"].Value = compra.Id;
-                command.Parameters["@Id_producto"].Value = producto.Id;
+                command.Parameters["@Id_producto"].Value = producto.ProductoId;
                 command.Parameters["@Cantidad_producto"].Value = compra.Productos[producto];
                 try
                 {

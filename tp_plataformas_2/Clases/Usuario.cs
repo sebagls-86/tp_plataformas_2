@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace tp_plataformas_2
 {
     public class Usuario : IComparable<Usuario>
     {
 
-        public int Id { get; set; }
+        public int UsuarioId { get; set; }
         public int Cuil { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -14,9 +15,11 @@ namespace tp_plataformas_2
         public Carro MiCarro { get; set; }
         public int TipoUsuario { get; set; }
 
+        
+
         public Usuario(int id, int cuil, string nombre, string apellido, string mail, string password, Carro carro, int tipoUsuario)
         {
-            Id = id;
+            UsuarioId = id;
             Cuil = cuil;
             Nombre = nombre;
             Apellido = apellido;
@@ -26,7 +29,7 @@ namespace tp_plataformas_2
             TipoUsuario = tipoUsuario;
         }
 
-
+       
 
         public int CompareTo(Usuario other)
         {
@@ -35,7 +38,7 @@ namespace tp_plataformas_2
 
         public override string ToString()
         {
-            return $"{Id}|{Cuil}|{Nombre}|{Apellido}|{Mail}|{Password}|{TipoUsuario}";
+            return $"{UsuarioId}|{Cuil}|{Nombre}|{Apellido}|{Mail}|{Password}|{TipoUsuario}";
         }
     }
 }

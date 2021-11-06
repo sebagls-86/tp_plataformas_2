@@ -6,19 +6,25 @@ namespace tp_plataformas_2
     public class Carro
     {
 
-        public int Id { get; set; }
+        public int CarroId { get; set; }
         public Dictionary<Producto, int> Productos { get; set; }
 
-        public Carro(int _id, Producto producto, int cantidad)
+        public Usuario Usuario { get; set; }
+
+        public int UsuarioId { get; set; }
+
+        public Producto Producto { get; set; }
+
+        public Carro(int id, Producto producto, int cantidad)
         {
-            Id = _id;
+            CarroId = id;
             Productos = new Dictionary<Producto, int>();
             Productos.Add(producto, cantidad);
         }
 
         public Carro(int id)
         {
-            Id = id;
+            CarroId = id;
             Productos = new Dictionary<Producto, int>();
         }
 
@@ -101,7 +107,7 @@ namespace tp_plataformas_2
 
         public override string ToString()
         {
-            return $"{Id}|{Productos}";
+            return $"{CarroId}|{Productos}";
         }
     }
 }

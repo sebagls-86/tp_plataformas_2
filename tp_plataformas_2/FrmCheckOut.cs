@@ -54,7 +54,7 @@ namespace tp_plataformas_2
         {
             try
             {
-                bool sePudoComprar = Mercado.Comprar(Usuario.Id);
+                bool sePudoComprar = Mercado.Comprar(Usuario.UsuarioId);
                 if (sePudoComprar)
                 {
                     MessageBox.Show("Se compraron los productos exitosamente.");
@@ -76,7 +76,7 @@ namespace tp_plataformas_2
         {
             try
             {
-                bool seVacio = Mercado.VaciarCarro(Usuario.Id);
+                bool seVacio = Mercado.VaciarCarro(Usuario.UsuarioId);
                 if (!seVacio)
                 {
                     MessageBox.Show("No se pudo vaciar el carro, ocurrio un problema");
@@ -101,7 +101,7 @@ namespace tp_plataformas_2
             Producto producto = dgvProductos.SelectedRows[indiceProducto].DataBoundItem as Producto;
             try
             {
-                bool sePudoQuitar = Mercado.QuitarDelCarro(producto.Id, Usuario.MiCarro.Productos[producto], Usuario.Id);
+                bool sePudoQuitar = Mercado.QuitarDelCarro(producto.ProductoId, Usuario.MiCarro.Productos[producto], Usuario.UsuarioId);
                 
                 if (!sePudoQuitar)
                 {

@@ -42,7 +42,7 @@ namespace tp_plataformas_2
             try
             {
                 cantidad = Int32.Parse(txtCantidadComprar.Text);
-                sePudoAgregar = Mercado.AgregarAlCarro(Producto.Id, cantidad, Comprador.Id);
+                sePudoAgregar = Mercado.AgregarAlCarro(Producto.ProductoId, cantidad, Comprador.UsuarioId);
                 if (sePudoAgregar)
                 {
                     MessageBox.Show("PRODUCTO AGREGADO AL CARRO-> \n" + Producto.ToString());

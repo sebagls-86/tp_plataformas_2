@@ -29,7 +29,7 @@ namespace tp_plataformas_2
             string suma = "";
             foreach(Producto prod in Productos.Keys){
                 int cantComprada = Productos[prod];
-                suma += "*" + cantComprada +"|"+ prod.Id + "|" + prod.Nombre + "|" + prod.Precio +"|" + prod.Cat + "|" + prod.Cantidad;
+                suma += "*" + cantComprada +"|"+ prod.ProductoId + "|" + prod.Nombre + "|" + prod.Precio +"|" + prod.Cat + "|" + prod.Cantidad;
 
             }
             //idcompra idusuario idprod
@@ -38,7 +38,7 @@ namespace tp_plataformas_2
          
         public override string ToString()
         {
-            return $"{Id}|{Comprador.Id}|{Total}{compraRealizada()}";
+            return $"{Id}|{Comprador.UsuarioId}|{Total}{compraRealizada()}";
         }
     }
 }
