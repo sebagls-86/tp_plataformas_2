@@ -9,16 +9,17 @@ namespace tp_plataformas_2
         public string Nombre { get; set; }
 
         public List<Producto> Productos { get; set; }
+
+        public Categoria()
+        {
+           
+        }
         public Categoria(int id, string nombre)
         {
             CatId = id;
             Nombre = nombre;
         }
 
-        public Categoria()
-        {
-           
-        }
 
         public int CompareTo(Categoria other)
         {

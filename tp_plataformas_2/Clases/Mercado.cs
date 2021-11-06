@@ -52,9 +52,7 @@ namespace tp_plataformas_2
 
             //List<Categoria> auxCategoria = conexion.getCategorias();
             var list = db.categorias;
-            //foreach (Usuario u in contexto.usuarios)
-            //    salida.Add(new List<string> { u.dni.ToString(), u.nombre, u.mail, u.password, u.esADM.ToString(), u.bloqueado.ToString() });
-            //return salida;
+            
             if (list.Count() != 0)
             {
                 int i = 0;
@@ -69,8 +67,23 @@ namespace tp_plataformas_2
         }
         private void ObtenerProductos()
         {
-            productos = conexion.getProductos();
+            //productos = conexion.getProductos();
+            var list = db.Productos;
 
+            if (list.Count() != 0)
+            {
+                foreach (var p in list)
+                {
+                    foreach (Categoria cat in categorias)
+                    {
+                        //var aux = reader.GetInt32(4);
+                        if (cat.CatId == p.CatId)
+                        {
+                            productos.Add(new Producto(p.ProductoId, p.Nombre, p.Precio, p.Cantidad, cat));
+                        }
+                    }
+                }
+            }
 
         }
         private void ObtenerUsuarios()

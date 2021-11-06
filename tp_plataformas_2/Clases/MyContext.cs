@@ -76,8 +76,7 @@ namespace tp_plataformas_2
                 usr =>
                 {
                     usr.Property(u => u.CarroId).HasColumnType("int");
-                   // usr.Property(u => u.productos).HasColumnType("varchar(50)");
-                    usr.Property(u => u.cantidad).HasColumnType("int");
+                    
 
                 });
 
@@ -105,9 +104,9 @@ namespace tp_plataformas_2
             .WithOne(x => x.Usuario)
             .HasForeignKey<Carro>(c => c.UsuarioForeingKey);
 
-            modelBuilder.Entity<Producto>()
-              .HasOne(u => u.Carro)
-              .WithMany(x => x.productos);
+            //modelBuilder.Entity<Producto>()
+            //  .HasOne(u => u.Carro)
+            //  .WithMany(x => x.productos);
 
             modelBuilder.Entity<Compra>()
               .HasOne(u => u.Comprador)
@@ -116,7 +115,7 @@ namespace tp_plataformas_2
             modelBuilder.Entity<Compra>()
               .HasMany(u => u.productosCompra)
               .WithMany(x => x.CompraProducto);
-
+            
 
             //Ignoro, no agrego UsuarioManager a la base de datos
             modelBuilder.Ignore<MercadoHelper>();

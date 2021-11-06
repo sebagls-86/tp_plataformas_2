@@ -14,11 +14,13 @@ namespace tp_plataformas_2
 
         public Usuario Usuario { get; set; }
 
+
         public int UsuarioForeingKey { get; set; }
 
+        
         public int cantidad { get; set; }
 
-        public Producto Producto { get; set; }
+        //public Producto Producto { get; set; }
 
         public List<Producto> productos { get; set; }
 
