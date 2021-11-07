@@ -110,9 +110,15 @@ namespace tp_plataformas_2
               .WithMany(x => x.Compra);
 
             modelBuilder.Entity<Compra>()
-              .HasMany(u => u.productosCompra)
-              .WithMany(x => x.CompraProducto);
-            
+              .HasMany(u => u.productos)
+              .WithMany(x => x.CompraProducto)
+              .UsingEntity(z => z.ToTable("Productos_compra"));
+
+            modelBuilder.Entity<Carro>()
+              .HasMany(u => u.ProductosCompra)
+              .WithMany(x => x.CarroProducto)
+              .UsingEntity(z => z.ToTable("Compras_Carro"));
+
 
             //Ignoro, no agrego UsuarioManager a la base de datos
             modelBuilder.Ignore<MercadoHelper>();

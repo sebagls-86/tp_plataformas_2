@@ -12,9 +12,9 @@ namespace tp_plataformas_2
         public int Cantidad { get; set; }
         public Categoria Cat { get; set; }
         
-        //public Carro Carro { get; set; }
-        //public int CarroId { get; set; }
         public int CatId { get; set; }
+
+        public ICollection<Carro> CarroProducto { get; set; }
 
         public ICollection<Compra> CompraProducto { get; set; }
 
