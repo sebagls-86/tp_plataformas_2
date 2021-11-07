@@ -2,12 +2,12 @@
 
 namespace tp_plataformas_2.Migrations
 {
-    public partial class Second : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Categorias",
+                name: "Categoria",
                 columns: table => new
                 {
                     CatId = table.Column<int>(type: "int", nullable: false)
@@ -16,11 +16,11 @@ namespace tp_plataformas_2.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categorias", x => x.CatId);
+                    table.PrimaryKey("PK_Categoria", x => x.CatId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Usuarios",
+                name: "Usuario",
                 columns: table => new
                 {
                     UsuarioId = table.Column<int>(type: "int", nullable: false)
@@ -34,7 +34,27 @@ namespace tp_plataformas_2.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuarios", x => x.UsuarioId);
+                    table.PrimaryKey("PK_Usuario", x => x.UsuarioId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Carro",
+                columns: table => new
+                {
+                    CarroId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UsuarioForeingKey = table.Column<int>(type: "int", nullable: false),
+                    cantidad = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carro", x => x.CarroId);
+                    table.ForeignKey(
+                        name: "FK_Carro_Usuario_UsuarioForeingKey",
+                        column: x => x.UsuarioForeingKey,
+                        principalTable: "Usuario",
+                        principalColumn: "UsuarioId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,15 +71,15 @@ namespace tp_plataformas_2.Migrations
                 {
                     table.PrimaryKey("PK_Compra", x => x.CompraId);
                     table.ForeignKey(
-                        name: "FK_Compra_Usuarios_CompradorUsuarioId",
+                        name: "FK_Compra_Usuario_CompradorUsuarioId",
                         column: x => x.CompradorUsuarioId,
-                        principalTable: "Usuarios",
+                        principalTable: "Usuario",
                         principalColumn: "UsuarioId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Productos",
+                name: "Producto",
                 columns: table => new
                 {
                     ProductoId = table.Column<int>(type: "int", nullable: false)
@@ -67,45 +87,8 @@ namespace tp_plataformas_2.Migrations
                     Nombre = table.Column<string>(type: "varchar(50)", nullable: true),
                     Precio = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
-                    CarroId = table.Column<int>(type: "int", nullable: true),
                     CatId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Productos", x => x.ProductoId);
-                    table.ForeignKey(
-                        name: "FK_Productos_Categorias_CatId",
-                        column: x => x.CatId,
-                        principalTable: "Categorias",
-                        principalColumn: "CatId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Carro",
-                columns: table => new
-                {
-                    CarroId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioForeingKey = table.Column<int>(type: "int", nullable: false),
-                    cantidad = table.Column<int>(type: "int", nullable: false),
-                    ProductoId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Carro", x => x.CarroId);
-                    table.ForeignKey(
-                        name: "FK_Carro_Productos_ProductoId",
-                        column: x => x.ProductoId,
-                        principalTable: "Productos",
-                        principalColumn: "ProductoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Carro_Usuarios_UsuarioForeingKey",
-                        column: x => x.UsuarioForeingKey,
-                        principalTable: "Usuarios",
-                        principalColumn: "UsuarioId",
-                        onDelete: ReferentialAction.Cascade);
+                   
                 });
 
             migrationBuilder.CreateTable(
@@ -125,17 +108,12 @@ namespace tp_plataformas_2.Migrations
                         principalColumn: "CompraId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CompraProducto_Productos_productosCompraProductoId",
+                        name: "FK_CompraProducto_Producto_productosCompraProductoId",
                         column: x => x.productosCompraProductoId,
-                        principalTable: "Productos",
+                        principalTable: "Producto",
                         principalColumn: "ProductoId",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Carro_ProductoId",
-                table: "Carro",
-                column: "ProductoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carro_UsuarioForeingKey",
@@ -153,31 +131,16 @@ namespace tp_plataformas_2.Migrations
                 table: "CompraProducto",
                 column: "productosCompraProductoId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Productos_CarroId",
-                table: "Productos",
-                column: "CarroId");
+           
 
             migrationBuilder.CreateIndex(
-                name: "IX_Productos_CatId",
-                table: "Productos",
+                name: "IX_Producto_CatId",
+                table: "Producto",
                 column: "CatId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Productos_Carro_CarroId",
-                table: "Productos",
-                column: "CarroId",
-                principalTable: "Carro",
-                principalColumn: "CarroId",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Carro_Productos_ProductoId",
-                table: "Carro");
-
             migrationBuilder.DropTable(
                 name: "CompraProducto");
 
@@ -185,16 +148,16 @@ namespace tp_plataformas_2.Migrations
                 name: "Compra");
 
             migrationBuilder.DropTable(
-                name: "Productos");
+                name: "Producto");
 
             migrationBuilder.DropTable(
                 name: "Carro");
 
             migrationBuilder.DropTable(
-                name: "Categorias");
+                name: "Categoria");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Usuario");
         }
     }
 }

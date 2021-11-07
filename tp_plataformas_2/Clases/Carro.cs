@@ -20,10 +20,6 @@ namespace tp_plataformas_2
         
         public int cantidad { get; set; }
 
-        //public Producto Producto { get; set; }
-
-        public List<Producto> productos { get; set; }
-
 
         public Carro(int id, Producto producto, int cantidad)
         {

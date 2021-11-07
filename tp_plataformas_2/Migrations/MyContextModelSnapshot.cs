@@ -103,9 +103,6 @@ namespace tp_plataformas_2.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("CarroId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CatId")
                         .HasColumnType("int");
 
@@ -116,8 +113,6 @@ namespace tp_plataformas_2.Migrations
                         .HasColumnType("decimal(18,0)");
 
                     b.HasKey("ProductoId");
-
-                    b.HasIndex("CarroId");
 
                     b.HasIndex("CatId");
 
@@ -191,26 +186,13 @@ namespace tp_plataformas_2.Migrations
 
             modelBuilder.Entity("tp_plataformas_2.Producto", b =>
                 {
-                    b.HasOne("tp_plataformas_2.Carro", "Carro")
-                        .WithMany("productos")
-                        .HasForeignKey("CarroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("tp_plataformas_2.Categoria", "Cat")
                         .WithMany("Productos")
                         .HasForeignKey("CatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Carro");
-
                     b.Navigation("Cat");
-                });
-
-            modelBuilder.Entity("tp_plataformas_2.Carro", b =>
-                {
-                    b.Navigation("productos");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Categoria", b =>
