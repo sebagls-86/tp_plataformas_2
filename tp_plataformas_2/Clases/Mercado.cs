@@ -52,7 +52,6 @@ namespace tp_plataformas_2
         private void ObtenerCategorias()
         {
 
-            //List<Categoria> auxCategoria = conexion.getCategorias();
             var list = db.categorias;
             
             if (list.Count() != 0)
@@ -112,12 +111,14 @@ namespace tp_plataformas_2
         }
         public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)
         {
-            cantProductos = conexion.cuentaRegistros("Producto") + 1;
+            cantProductos = db.Productos.Count() + 1;
             int indice = idCategoria - 1;
             if (categorias[indice] != null && categorias[indice].CatId == idCategoria)
             {
                 Producto producto = new Producto(cantProductos, nombre, precio, Cantidad, categorias[indice]);
-                if (conexion.agregarProducto(producto))
+
+                db.Productos.Add(producto);
+                if (db.SaveChanges() != 0)
                 {
                     this.productos.Add(producto);
                     return true;
@@ -430,7 +431,6 @@ namespace tp_plataformas_2
                         cat.Nombre = nombre;
                        var respuesta = db.SaveChanges();
                    
-                        //conexion.modificarCategoria(categoria);
                         
                         break;
                     }
@@ -483,17 +483,8 @@ namespace tp_plataformas_2
 
                 var cat = db.categorias.Where(c => c.CatId == ID).FirstOrDefault();
                 cat.Nombre = Nombre;
-                db.SaveChanges();
-                //var cat = from cate in db.categorias where cate.CatId == ID select cate;
-                
-                //foreach(Categoria c in cat)
-                //{
-                //    c.Nombre = Nombre;
-                //}
-                
-                
-              
-                   
+                db.SaveChanges();          
+
             }
             else
             {
@@ -541,7 +532,6 @@ namespace tp_plataformas_2
                 {
                     Console.WriteLine(categoria.Nombre);
                 }
-
 
             }
             return true;
