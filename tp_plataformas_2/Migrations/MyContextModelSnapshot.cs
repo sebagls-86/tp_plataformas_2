@@ -41,7 +41,7 @@ namespace tp_plataformas_2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("UsuarioForeingKey")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.Property<int>("cantidad")
@@ -49,7 +49,7 @@ namespace tp_plataformas_2.Migrations
 
                     b.HasKey("CarroId");
 
-                    b.HasIndex("UsuarioForeingKey")
+                    b.HasIndex("UsuarioId")
                         .IsUnique();
 
                     b.ToTable("Carro");
@@ -103,7 +103,7 @@ namespace tp_plataformas_2.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("CarroId")
+                    b.Property<int?>("CarroId")
                         .HasColumnType("int");
 
                     b.Property<int>("CatId")
@@ -173,7 +173,7 @@ namespace tp_plataformas_2.Migrations
                 {
                     b.HasOne("tp_plataformas_2.Usuario", "Usuario")
                         .WithOne("MiCarro")
-                        .HasForeignKey("tp_plataformas_2.Carro", "UsuarioForeingKey")
+                        .HasForeignKey("tp_plataformas_2.Carro", "UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -191,19 +191,15 @@ namespace tp_plataformas_2.Migrations
 
             modelBuilder.Entity("tp_plataformas_2.Producto", b =>
                 {
-                    b.HasOne("tp_plataformas_2.Carro", "Carro")
+                    b.HasOne("tp_plataformas_2.Carro", null)
                         .WithMany("productos")
-                        .HasForeignKey("CarroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CarroId");
 
                     b.HasOne("tp_plataformas_2.Categoria", "Cat")
                         .WithMany("Productos")
                         .HasForeignKey("CatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Carro");
 
                     b.Navigation("Cat");
                 });

@@ -74,14 +74,15 @@ namespace tp_plataformas_2
             {
                 foreach (var p in list)
                 {
+                    Categoria aux = null;
                     foreach (Categoria cat in categorias)
                     {
-                        //var aux = reader.GetInt32(4);
                         if (cat.CatId == p.CatId)
                         {
-                            productos.Add(new Producto(p.ProductoId, p.Nombre, p.Precio, p.Cantidad, cat));
+                            aux = cat;  
                         }
                     }
+                    productos.Add(new Producto(p.ProductoId, p.Nombre, p.Precio, p.Cantidad, aux));
                 }
             }
 
