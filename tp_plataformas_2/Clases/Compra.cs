@@ -16,7 +16,9 @@ namespace tp_plataformas_2
         [NotMapped]
         public List<Producto> productos { get; set; }
 
-       
+        public List<Productos_compra> productos_Compras { get; set; }
+
+
         public int IdProducto { get; set; }
 
 

@@ -18,6 +18,10 @@ namespace tp_plataformas_2
 
         public ICollection<Compra> CompraProducto { get; set; }
 
+        public List<Productos_compra> productos_compras { get; set; }
+
+        public List<Carro_productos> carro_productos { get; set; }
+
         public Producto(int Id, string Nombre, Double Precio, int Cantidad, Categoria Cat)
         {
             this.ProductoId = Id;

@@ -12,6 +12,10 @@ namespace tp_plataformas_2
         public DbSet<Categoria> categorias { get; set; }
         public DbSet<Carro> carros { get; set; }
 
+        public DbSet<Carro_productos> Carro_productos { get; set; }
+
+        public DbSet<Productos_compra> Productos_compra { get; set; }
+
         public MyContext() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -94,6 +98,28 @@ namespace tp_plataformas_2
 
                 });
 
+            modelBuilder.Entity<Carro_productos>()
+          .ToTable("Carro_productos")
+          .HasKey(u => u.Carro_productos_Id);
+            //propiedades de los datos
+            modelBuilder.Entity<Carro_productos>(
+                usr =>
+                {
+                    usr.Property(u => u.Carro_productos_Id).HasColumnType("int");
+                    
+                });
+
+
+            modelBuilder.Entity<Productos_compra>()
+         .ToTable("Productos_compra")
+         .HasKey(u => u.Productos_compra_Id);
+            //propiedades de los datos
+            modelBuilder.Entity<Productos_compra>(
+                usr =>
+                {
+                    usr.Property(u => u.Productos_compra_Id).HasColumnType("int");
+
+                });
 
             modelBuilder.Entity<Producto>()
              .HasOne(u => u.Cat)
@@ -111,13 +137,33 @@ namespace tp_plataformas_2
 
             modelBuilder.Entity<Compra>()
               .HasMany(u => u.productos)
-              .WithMany(x => x.CompraProducto)
-              .UsingEntity(z => z.ToTable("Productos_compra"));
+              .WithMany(x => x.CompraProducto);
 
             modelBuilder.Entity<Carro>()
               .HasMany(u => u.ProductosCompra)
               .WithMany(x => x.CarroProducto)
               .UsingEntity(z => z.ToTable("Compras_Carro"));
+
+            modelBuilder.Entity<Productos_compra>()
+             .HasOne(u => u.Producto)
+             .WithMany(x => x.productos_compras)
+             .HasForeignKey(c => c.Id_Producto);
+
+            modelBuilder.Entity<Productos_compra>()
+             .HasOne(u => u.Compra)
+             .WithMany(x => x.productos_Compras)
+             .HasForeignKey(c => c.Id_Compra);
+
+            modelBuilder.Entity<Carro_productos>()
+             .HasOne(u => u.Carro)
+             .WithMany(x => x.carro_productos)
+             .HasForeignKey(c => c.Id_Carro);
+
+            modelBuilder.Entity<Carro_productos>()
+            .HasOne(u => u.Producto)
+            .WithMany(x => x.carro_productos)
+            .HasForeignKey(c => c.Id_Producto);
+
 
 
             //Ignoro, no agrego UsuarioManager a la base de datos

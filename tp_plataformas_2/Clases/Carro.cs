@@ -21,7 +21,7 @@ namespace tp_plataformas_2
 
         public ICollection<Producto> ProductosCompra { get; set; }
 
-        
+        public List<Carro_productos> carro_productos { get; set; }
 
 
         public Carro(int id, Producto producto, int cantidad)

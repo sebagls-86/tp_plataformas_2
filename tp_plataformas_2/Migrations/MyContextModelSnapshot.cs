@@ -19,17 +19,32 @@ namespace tp_plataformas_2.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CarroProducto", b =>
+                {
+                    b.Property<int>("CarroProductoCarroId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductosCompraProductoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CarroProductoCarroId", "ProductosCompraProductoId");
+
+                    b.HasIndex("ProductosCompraProductoId");
+
+                    b.ToTable("Compras_Carro");
+                });
+
             modelBuilder.Entity("CompraProducto", b =>
                 {
                     b.Property<int>("CompraProductoCompraId")
                         .HasColumnType("int");
 
-                    b.Property<int>("productosCompraProductoId")
+                    b.Property<int>("productosProductoId")
                         .HasColumnType("int");
 
-                    b.HasKey("CompraProductoCompraId", "productosCompraProductoId");
+                    b.HasKey("CompraProductoCompraId", "productosProductoId");
 
-                    b.HasIndex("productosCompraProductoId");
+                    b.HasIndex("productosProductoId");
 
                     b.ToTable("CompraProducto");
                 });
@@ -53,6 +68,31 @@ namespace tp_plataformas_2.Migrations
                         .IsUnique();
 
                     b.ToTable("Carro");
+                });
+
+            modelBuilder.Entity("tp_plataformas_2.Carro_productos", b =>
+                {
+                    b.Property<int>("Carro_productos_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id_Carro")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id_Producto")
+                        .HasColumnType("int");
+
+                    b.HasKey("Carro_productos_Id");
+
+                    b.HasIndex("Id_Carro");
+
+                    b.HasIndex("Id_Producto");
+
+                    b.ToTable("Carro_productos");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Categoria", b =>
@@ -103,9 +143,6 @@ namespace tp_plataformas_2.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CarroId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CatId")
                         .HasColumnType("int");
 
@@ -117,11 +154,34 @@ namespace tp_plataformas_2.Migrations
 
                     b.HasKey("ProductoId");
 
-                    b.HasIndex("CarroId");
-
                     b.HasIndex("CatId");
 
                     b.ToTable("Producto");
+                });
+
+            modelBuilder.Entity("tp_plataformas_2.Productos_compra", b =>
+                {
+                    b.Property<int>("Productos_compra_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id_Compra")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id_Producto")
+                        .HasColumnType("int");
+
+                    b.HasKey("Productos_compra_Id");
+
+                    b.HasIndex("Id_Compra");
+
+                    b.HasIndex("Id_Producto");
+
+                    b.ToTable("Productos_compra");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Usuario", b =>
@@ -154,6 +214,21 @@ namespace tp_plataformas_2.Migrations
                     b.ToTable("Usuario");
                 });
 
+            modelBuilder.Entity("CarroProducto", b =>
+                {
+                    b.HasOne("tp_plataformas_2.Carro", null)
+                        .WithMany()
+                        .HasForeignKey("CarroProductoCarroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("tp_plataformas_2.Producto", null)
+                        .WithMany()
+                        .HasForeignKey("ProductosCompraProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CompraProducto", b =>
                 {
                     b.HasOne("tp_plataformas_2.Compra", null)
@@ -164,7 +239,7 @@ namespace tp_plataformas_2.Migrations
 
                     b.HasOne("tp_plataformas_2.Producto", null)
                         .WithMany()
-                        .HasForeignKey("productosCompraProductoId")
+                        .HasForeignKey("productosProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -180,6 +255,25 @@ namespace tp_plataformas_2.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("tp_plataformas_2.Carro_productos", b =>
+                {
+                    b.HasOne("tp_plataformas_2.Carro", "Carro")
+                        .WithMany("carro_productos")
+                        .HasForeignKey("Id_Carro")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("tp_plataformas_2.Producto", "Producto")
+                        .WithMany("carro_productos")
+                        .HasForeignKey("Id_Producto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Carro");
+
+                    b.Navigation("Producto");
+                });
+
             modelBuilder.Entity("tp_plataformas_2.Compra", b =>
                 {
                     b.HasOne("tp_plataformas_2.Usuario", "Comprador")
@@ -191,10 +285,6 @@ namespace tp_plataformas_2.Migrations
 
             modelBuilder.Entity("tp_plataformas_2.Producto", b =>
                 {
-                    b.HasOne("tp_plataformas_2.Carro", null)
-                        .WithMany("productos")
-                        .HasForeignKey("CarroId");
-
                     b.HasOne("tp_plataformas_2.Categoria", "Cat")
                         .WithMany("Productos")
                         .HasForeignKey("CatId")
@@ -204,14 +294,45 @@ namespace tp_plataformas_2.Migrations
                     b.Navigation("Cat");
                 });
 
+            modelBuilder.Entity("tp_plataformas_2.Productos_compra", b =>
+                {
+                    b.HasOne("tp_plataformas_2.Compra", "Compra")
+                        .WithMany("productos_Compras")
+                        .HasForeignKey("Id_Compra")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("tp_plataformas_2.Producto", "Producto")
+                        .WithMany("productos_compras")
+                        .HasForeignKey("Id_Producto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Compra");
+
+                    b.Navigation("Producto");
+                });
+
             modelBuilder.Entity("tp_plataformas_2.Carro", b =>
                 {
-                    b.Navigation("productos");
+                    b.Navigation("carro_productos");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Categoria", b =>
                 {
                     b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("tp_plataformas_2.Compra", b =>
+                {
+                    b.Navigation("productos_Compras");
+                });
+
+            modelBuilder.Entity("tp_plataformas_2.Producto", b =>
+                {
+                    b.Navigation("carro_productos");
+
+                    b.Navigation("productos_compras");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Usuario", b =>
