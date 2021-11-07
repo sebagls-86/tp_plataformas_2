@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+
+
 namespace tp_plataformas_2
 {
 
@@ -422,13 +424,19 @@ namespace tp_plataformas_2
                     if (categoria.Nombre.Equals(" "))
                     {
                         categoria.Nombre = nombre;
-                        conexion.modificarCategoria(categoria);
+
+
+                        var cat = db.categorias.Where(c => c.Nombre == " ").FirstOrDefault();
+                        cat.Nombre = nombre;
+                       var respuesta = db.SaveChanges();
+                   
+                        //conexion.modificarCategoria(categoria);
                         
                         break;
                     }
                 }
             }
-            cantCategorias = conexion.cuentaRegistros("Categoria");
+            cantCategorias = db.categorias.Count();
             if (cantCategorias <= maxCategorias)
 
             {
@@ -436,7 +444,10 @@ namespace tp_plataformas_2
                 if (BuscarCategoria(id))
                 {
                     Categoria categoria = new Categoria(id, nombre);
-                    if (conexion.agregarCategoria(categoria))
+                    db.categorias.Add(categoria);
+                    var seGuardo = db.SaveChanges();
+
+                    if (seGuardo > 0)
                     {
 
                         int auxiliar = 0;
@@ -456,11 +467,6 @@ namespace tp_plataformas_2
                     }
                 }
 
-
-
-
-
-                //FileManager.SaveArrayCategorias(categorias);
                 return true;
 
             }
@@ -470,11 +476,24 @@ namespace tp_plataformas_2
 
         public bool ModificarCategoria(int ID, string Nombre)
         {
-            ID = ID - 1;
-            if (categorias[ID] != null)
+            
+            if (categorias[ID-1] != null)
             {
-                categorias[ID].Nombre = Nombre;
-                conexion.modificarCategoria(categorias[ID]);
+                categorias[ID-1].Nombre = Nombre; 
+
+                var cat = db.categorias.Where(c => c.CatId == ID).FirstOrDefault();
+                cat.Nombre = Nombre;
+                db.SaveChanges();
+                //var cat = from cate in db.categorias where cate.CatId == ID select cate;
+                
+                //foreach(Categoria c in cat)
+                //{
+                //    c.Nombre = Nombre;
+                //}
+                
+                
+              
+                   
             }
             else
             {
@@ -500,10 +519,11 @@ namespace tp_plataformas_2
                 {
 
                     categorias[i].Nombre = " ";
-                    Console.WriteLine("Categoria " + ID + " eliminada con éxito!");
-                    conexion.vaciarCategoria(categorias[i]);
-                    //FileManager.SaveArrayCategorias(categorias);
-                    //cantCategorias--;
+
+                    var cat = db.categorias.Where(c => c.CatId == ID).FirstOrDefault();
+                    cat.Nombre = " ";
+                    db.SaveChanges();
+
                 }
 
                 i++;
