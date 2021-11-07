@@ -104,9 +104,6 @@ namespace tp_plataformas_2
             .WithOne(x => x.Usuario)
             .HasForeignKey<Carro>(c => c.UsuarioId);
 
-            //modelBuilder.Entity<Producto>()
-            //  .HasOne(u => u.Carro)
-            //  .WithMany(x => x.productos);
 
             modelBuilder.Entity<Compra>()
               .HasOne(u => u.Comprador)
