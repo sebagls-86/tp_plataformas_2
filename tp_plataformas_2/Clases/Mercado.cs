@@ -48,9 +48,9 @@ namespace tp_plataformas_2
                 int i = 0;
                 foreach (Categoria contenido in auxCategoria)
                 {
-                    categorias[i] = contenido;
-                    i++;
+                    categorias[i++] = contenido;
                 }
+                cantCategorias = i;
             }
 
         }
@@ -292,7 +292,6 @@ namespace tp_plataformas_2
                     usuarios[id].Password = password;
                     usuarios[id].TipoUsuario = tipoUsuario;
                     conexion.modificaUsuario(usuarios[id]);
-                    //FileManager.SaveListUsuarios(usuarios);
                 }
                 else
                     i++;
@@ -316,8 +315,7 @@ namespace tp_plataformas_2
                 {
 
 
-                    //FileManager.SaveListUsuarios(usuarios);
-                    //eliminar usuario y carro del usuario
+
                     if (conexion.eliminarRegistro("Carro", usuarios[i].MiCarro.Id))
                     {
                         conexion.eliminarRegistro("Usuario", usuarios[i].Id);
@@ -423,7 +421,6 @@ namespace tp_plataformas_2
 
 
 
-                FileManager.SaveArrayCategorias(categorias);
                 return true;
 
             }
@@ -465,8 +462,6 @@ namespace tp_plataformas_2
                     categorias[i].Nombre = " ";
                     Console.WriteLine("Categoria " + ID + " eliminada con éxito!");
                     conexion.vaciarCategoria(categorias[i]);
-                    //FileManager.SaveArrayCategorias(categorias);
-                    //cantCategorias--;
                 }
 
                 i++;
@@ -475,20 +470,6 @@ namespace tp_plataformas_2
         }
 
 
-
-        public bool BuscarCategoria(string Nombre)
-        {
-            foreach (Categoria categoria in categorias)
-            {
-                if (categoria.Nombre.Equals(Nombre))
-                {
-                    Console.WriteLine(categoria.Nombre);
-                }
-
-
-            }
-            return true;
-        }
 
         public Categoria BuscarCategoriaPorNombre(string Nombre)
         {
@@ -632,7 +613,8 @@ namespace tp_plataformas_2
                 usuarioEncontrado = usuarios[ID_Usuario - 1];
                 foreach (Producto producto in usuarioEncontrado.MiCarro.Productos.Keys)
                 {
-                    precioTotal += producto.Precio;
+                    
+                    precioTotal += producto.Precio ;
                 }
                 precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
                 Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos);
@@ -661,57 +643,7 @@ namespace tp_plataformas_2
         }
 
         //guarda que no lo estamos usando!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        public bool ModificarCompra(int ID, Double Total)
-        {
-
-            bool seModifico = false;
-            if (MercadoHelper.SonMenoresACero(new List<int> { ID }))
-            {
-                Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
-            }
-            if (compras[ID] != null)
-            {
-                foreach (Producto producto in compras[ID].Productos.Keys)
-                {
-                    productos[producto.Id].Cantidad += producto.Cantidad;
-                }
-                compras[ID].Total = Total;
-                seModifico = true;
-            }
-            else
-            {
-                Console.WriteLine("La compra con Id {0} no existe.", ID);
-            }
-
-            return seModifico;
-            //modificar en productos compra
-        }
-
-        public bool EliminarCompra(int ID)
-        {
-            bool seElimino = false;
-            if (MercadoHelper.SonMenoresACero(new List<int> { ID }))
-            {
-                Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
-            }
-            if (compras[ID-1] != null)
-            {
-                foreach (Producto producto in compras[ID-1].Productos.Keys)
-                {
-                    productos[producto.Id].Cantidad += producto.Cantidad;
-                }
-                compras[ID-1] = null;
-                seElimino = true;
-                //eliminar compra en conexion por id compra
-                FileManager.SaveListCompras(compras);
-            }
-            else
-            {
-                Console.WriteLine("La compra con Id {0} no existe.", ID);
-            }
-
-            return seElimino;
-        }
+      
         public void MostrarTodosLosProductosPorPrecio()
         {
             var productoPorPrecio = productos.OrderBy(producto => producto.Precio);
