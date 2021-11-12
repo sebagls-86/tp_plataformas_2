@@ -825,23 +825,11 @@ namespace tp_plataformas_2
         }
 
 
-        //public List<CompraRealizada> mostrarComprasRealizadas()
-        //{
-        //    List<CompraRealizada> comprado = new List<CompraRealizada>();
+        public List<Compra> mostrarComprasRealizadas()
+        {
 
-        //    foreach (Compra compra in compras)
-        //    {
-        //        if(compra != null)
-        //        {
-
-        //            comprado.Add(new CompraRealizada(compra.CompraId, compra.UsuarioId, compra.Total, compra.));
-        //        }
-        //    }
-
-
-
-        //    return comprado;
-        //}
+            return db.compras.OrderBy(propiedad => propiedad.CompraId).ToList();
+        }
 
         public bool modificarMonto(int id, double monto)
         {
