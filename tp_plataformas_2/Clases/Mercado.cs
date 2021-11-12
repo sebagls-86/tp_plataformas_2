@@ -217,7 +217,29 @@ namespace tp_plataformas_2
             productos.Sort();
 
         }
+        public Producto BuscarProductoPorId2(int Id)
+        {
+            Producto producto;
+            //bool sePudoParsear = Int32.TryParse(Id, out int idProducto);
+            //if (!sePudoParsear)
+            //{
+            //    throw new Excepciones("No se pudo parsear el ID del producto buscado.");
+            //}
+            //else if (MercadoHelper.SonMenoresACero(new List<int> { idProducto }))
+            //{
+            //    throw new Excepciones("El indice del producto que quiere buscar es menor a 0.");
+            //}
+            //else if (!MercadoHelper.ExisteElProducto(idProducto, productos))
+            //{
+            //    throw new Excepciones("No existe el producto con ID " + idProducto);
+            //}
+            //else
+            //{
+                producto = productos[Id];
+            //}
 
+            return producto;
+        }
         public Producto BuscarProductoPorId(String Id)
         {
             Producto producto;
@@ -618,8 +640,15 @@ namespace tp_plataformas_2
                 }
                 else
                 {
-                    usuarioEncontrado.Carro.AgregarProducto(productoEncontrado, Cantidad);
-
+                    int carro_productos_Id = db.Carro_productos.Count() + 1;
+                    int id_carro = Id_Usuario - 1;
+                    Carro carro = new Carro(id_carro, Id_Usuario - 1);
+                    Producto producto = BuscarProductoPorId2(Id_Producto);
+   
+                    Carro_productos carroProductos = new Carro_productos(id_carro, Id_Producto, Cantidad);
+                    db.Carro_productos.Add(carroProductos);
+               
+                    db.SaveChanges();
                     sePudoAgregar = true;
 
                     Console.WriteLine("El producto {0} con cantidad {1} se ha añadido al carro del usuario {2}.", productoEncontrado.Nombre, Cantidad, usuarioEncontrado.Nombre);

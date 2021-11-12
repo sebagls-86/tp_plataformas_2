@@ -44,18 +44,11 @@ namespace tp_plataformas_2
             bool seAgregoElProducto;
             if (p == null)
             {
-                Console.WriteLine("Producto nulo. Debe ir una excepcion aca.");
                 seAgregoElProducto = false;
             }
             else if (cantidad <= 0)
             {
-                Console.WriteLine("Cantidad menor o igual a 0. Debe ir una excepcion aca.");
                 seAgregoElProducto = false;
-            }
-            else if (Productos.ContainsKey(p))
-            {
-                Productos[p] += 1;
-                seAgregoElProducto = true;
             }
             else
             {

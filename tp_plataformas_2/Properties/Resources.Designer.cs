@@ -61,7 +61,7 @@ namespace tp_plataformas_2.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Data Source=SEBA\SQLEXPRESS02;Initial Catalog=comercio;Integrated Security=True.
+        ///   Busca una cadena traducida similar a Data Source=DESKTOP-ETLU83T\SQLEXPRESS;Initial Catalog=comercio;Integrated Security=True.
         /// </summary>
         internal static string SqlConnect {
             get {

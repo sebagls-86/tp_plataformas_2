@@ -29,13 +29,14 @@ namespace tp_plataformas_2
             Usuario = usuario;
             double productoPrecio = 0;
             List<Producto> productos = new List<Producto>();
-            foreach(Producto producto in Usuario.Carro.Productos.Keys)
-            {
-                productos.Add(producto);
-                productoPrecio += producto.Precio * Usuario.Carro.Productos[producto];
-            }
-            dgvProductos.DataSource = productos;
-            lblTotalPrecio.Text = "$" + productoPrecio;
+            dgvProductos.DataSource = mercado.MostrarCategorias();
+            //foreach(Producto producto in Usuario.Carro.Productos.Keys)
+            //{
+            //    productos.Add(producto);
+            ////    productoPrecio += producto.Precio * Usuario.Carro.Productos[producto];
+            //}
+            //dgvProductos.DataSource = productos;
+            //lblTotalPrecio.Text = "$" + productoPrecio;
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)

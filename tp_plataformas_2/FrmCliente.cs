@@ -29,7 +29,7 @@ namespace tp_plataformas_2
             Usuario = usuario;
             Mercado = mercado;
             InitializeComponent();
-            lblCantidadProductosEnCarro.Text = ""+ usuario.Carro.Productos.Count;
+            lblCantidadProductosEnCarro.Text = ""+ usuario.Carro.Productos;
             // lblCantidadProductosEnCarro.Text = ""+ usuario.Carro.Productos.Count; rompe acá
             dgvCategorias.DataSource = Mercado.MostrarCategorias();
             dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
