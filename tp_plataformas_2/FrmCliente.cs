@@ -21,7 +21,7 @@ namespace tp_plataformas_2
             Usuario = usuario;
             Mercado = new Mercado();
             InitializeComponent();
-            lblCantidadProductosEnCarro.Text = "" + usuario.MiCarro.Productos.Count;
+            lblCantidadProductosEnCarro.Text = "" + usuario.Carro.Productos.Count;
         }
 
         public FrmCliente(Mercado mercado, Usuario usuario)
@@ -29,7 +29,7 @@ namespace tp_plataformas_2
             Usuario = usuario;
             Mercado = mercado;
             InitializeComponent();
-            lblCantidadProductosEnCarro.Text = ""+ usuario.MiCarro.Productos.Count;
+            lblCantidadProductosEnCarro.Text = ""+ usuario.Carro.Productos.Count;
             dgvCategorias.DataSource = Mercado.MostrarCategorias();
             dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
         }

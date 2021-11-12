@@ -1,60 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace tp_plataformas_2
 {
     public class Compra : IComparable<Compra>
     {
         public int CompraId { get; set; }
-        public Usuario Comprador { get; set; }
-
-        [NotMapped]
-        public Dictionary<Producto, int> Productos { get; set; }
+        public Usuario Usuario { get; set; }
+        public int idUsuario { get; set; }
         public Double Total { get; set; }
-
-        [NotMapped]
-        public List<Producto> productos { get; set; }
-
-        public List<Productos_compra> productos_Compras { get; set; }
+        public List<Productos_compra> Productos_compra { get; set; }
 
 
-        public int IdProducto { get; set; }
-
-
-        public Compra(int _Id, Usuario usuario, Dictionary<Producto, int> productos, Double total)
+        public Compra(int _Id, Usuario usuario, Double total)
         {
             CompraId = _Id;
-            Comprador = usuario;
-            Productos = productos;
+            Usuario = usuario;
             Total = total;
         }
 
-        public Compra()
-        {
-            
-        }
+        public Compra() { }
 
         public int CompareTo(Compra other)
         {
             return CompraId.CompareTo(other.CompraId);
         }
-        
-        private string compraRealizada()
-        {
-            string suma = "";
-            foreach(Producto prod in Productos.Keys){
-                int cantComprada = Productos[prod];
-                suma += "*" + cantComprada +"|"+ prod.ProductoId + "|" + prod.Nombre + "|" + prod.Precio +"|" + prod.Cat + "|" + prod.Cantidad;
 
-            }
-            //idcompra idusuario idprod
-            return suma;
-        }
-         
+        //private string CompraRealizada()
+        //{
+        //    string suma = "";
+        //    foreach (Producto prod in Productos.Keys)
+        //    {
+        //        int cantComprada = Productos[prod];
+        //        suma += "*" + cantComprada + "|" + prod.ProductoId + "|" + prod.Nombre + "|" + prod.Precio + "|" + prod.Cat + "|" + prod.Cantidad;
+
+        //    }
+        //    //idcompra idusuario idprod
+        //    return suma;
+        //}
+
         public override string ToString()
         {
-            return $"{CompraId}|{Comprador.UsuarioId}|{Total}{compraRealizada()}";
+            return $"{CompraId}|{Usuario.UsuarioId}|{Total}";
         }
     }
 }

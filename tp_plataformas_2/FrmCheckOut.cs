@@ -29,10 +29,10 @@ namespace tp_plataformas_2
             Usuario = usuario;
             double productoPrecio = 0;
             List<Producto> productos = new List<Producto>();
-            foreach(Producto producto in Usuario.MiCarro.Productos.Keys)
+            foreach(Producto producto in Usuario.Carro.Productos.Keys)
             {
                 productos.Add(producto);
-                productoPrecio += producto.Precio * Usuario.MiCarro.Productos[producto];
+                productoPrecio += producto.Precio * Usuario.Carro.Productos[producto];
             }
             dgvProductos.DataSource = productos;
             lblTotalPrecio.Text = "$" + productoPrecio;
@@ -101,7 +101,7 @@ namespace tp_plataformas_2
             Producto producto = dgvProductos.SelectedRows[indiceProducto].DataBoundItem as Producto;
             try
             {
-                bool sePudoQuitar = Mercado.QuitarDelCarro(producto.ProductoId, Usuario.MiCarro.Productos[producto], Usuario.UsuarioId);
+                bool sePudoQuitar = Mercado.QuitarDelCarro(producto.ProductoId, Usuario.Carro.Productos[producto], Usuario.UsuarioId);
                 
                 if (!sePudoQuitar)
                 {

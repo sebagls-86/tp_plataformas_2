@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace tp_plataformas_2
 {
@@ -8,45 +8,40 @@ namespace tp_plataformas_2
     {
 
         public int CarroId { get; set; }
-
-        [NotMapped]
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
         public Dictionary<Producto, int> Productos { get; set; }
-
         public Usuario Usuario { get; set; }
-
         public int UsuarioId { get; set; }
-
-        
-        public int cantidad { get; set; }
-
         public ICollection<Producto> ProductosCompra { get; set; }
-
-        public List<Carro_productos> carro_productos { get; set; }
-
-
+        public List<Carro_productos> Carro_productos { get; set; }
+        
         public Carro(int id, Producto producto, int cantidad)
         {
             CarroId = id;
-            Productos = new Dictionary<Producto, int>();
-            Productos.Add(producto, cantidad);
+            Productos = new Dictionary<Producto, int>
+            {
+                { producto, cantidad }
+            };
         }
 
         public Carro(int id)
         {
             CarroId = id;
-            Productos = new Dictionary<Producto, int>();
+
         }
 
-        public Carro()
+        public Carro(int id, int usuarioId)
         {
-         
+            CarroId = id;
+            UsuarioId = usuarioId;
+
         }
 
-
+        public Carro() { }
 
         public bool AgregarProducto(Producto p, int cantidad)
         {
-            bool seAgregoElProducto = false;
+            bool seAgregoElProducto;
             if (p == null)
             {
                 Console.WriteLine("Producto nulo. Debe ir una excepcion aca.");
@@ -91,9 +86,9 @@ namespace tp_plataformas_2
                 //}
                 //else
                 //{
-                    Productos.Remove(p);
+                Productos.Remove(p);
                 //Productos[p] = Productos[p] - cantidad;
-                    seQuitoElProducto = true;
+                seQuitoElProducto = true;
                 //}
 
             }

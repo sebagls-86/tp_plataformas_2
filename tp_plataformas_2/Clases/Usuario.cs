@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace tp_plataformas_2
 {
     public class Usuario : IComparable<Usuario>
@@ -12,10 +13,12 @@ namespace tp_plataformas_2
         public string Apellido { get; set; }
         public string Mail { get; set; }
         public string Password { get; set; }
-        public Carro MiCarro { get; set; }
+        public Carro Carro { get; set; }
         public int TipoUsuario { get; set; }
-
+        public int MiCarro { get; set; }
         public List<Compra> Compra { get; set; }
+
+
         public Usuario(int id, int cuil, string nombre, string apellido, string mail, string password, Carro carro, int tipoUsuario)
         {
             UsuarioId = id;
@@ -24,14 +27,11 @@ namespace tp_plataformas_2
             Apellido = apellido;
             Mail = mail;
             Password = password;
-            MiCarro = carro;
+            Carro = carro;
             TipoUsuario = tipoUsuario;
         }
 
-        public Usuario()
-        {
-            
-        }
+        public Usuario() {}
 
         public int CompareTo(Usuario other)
         {

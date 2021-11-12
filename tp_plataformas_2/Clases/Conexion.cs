@@ -188,73 +188,73 @@ namespace tp_plataformas_2
         } //controlar no carga en memoria en proxima apertura solo crea un solo usuario
 
 
-        public List<Compra> getCompras()
-        {
+        //public List<Compra> getCompras()
+        //{
 
-            string connectionString = Properties.Resources.SqlConnect;
+        //    string connectionString = Properties.Resources.SqlConnect;
 
 
-            string queryString = "SELECT c.Id, c.Id_usuario, c.Total, p.Id_producto, p.Cantidad_producto from dbo.Compra c INNER JOIN dbo.Productos_compra p on p.Id_compra = c.Id";
+        //    string queryString = "SELECT c.Id, c.Id_usuario, c.Total, p.Id_producto, p.Cantidad_producto from dbo.Compra c INNER JOIN dbo.Productos_compra p on p.Id_compra = c.Id";
 
-            Dictionary<int, Compra> compras = new Dictionary<int, Compra>();
+        //    Dictionary<int, Compra> compras = new Dictionary<int, Compra>();
 
-            using (SqlConnection connection =
-                new SqlConnection(connectionString))
-            {
+        //    using (SqlConnection connection =
+        //        new SqlConnection(connectionString))
+        //    {
 
-                SqlCommand command = new SqlCommand(queryString, connection);
+        //        SqlCommand command = new SqlCommand(queryString, connection);
 
-                try
-                {
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
+        //        try
+        //        {
+        //            connection.Open();
+        //            SqlDataReader reader = command.ExecuteReader();
 
-                    Usuario auxUsuario;
+        //            Usuario auxUsuario;
 
-                    while (reader.Read())
-                    {
-                        double precio = Decimal.ToDouble(reader.GetDecimal(2));
-                        int idCompra = reader.GetInt32(0);
-                        if (!compras.ContainsKey(idCompra))
-                        {
-                            auxUsuario = variableAuxiliarUsuarios.Find(usuario => usuario.UsuarioId == reader.GetInt32(1));
-                            Compra compra = new Compra(idCompra, auxUsuario, new Dictionary<Producto, int>(), precio);
-                            Producto producto = variableAuxiliarProductos.Find(producto => producto.ProductoId == reader.GetInt32(3));
-                            int cantidad = reader.GetInt32(4);
-                            compra.Productos.Add(producto, cantidad);
+        //            while (reader.Read())
+        //            {
+        //                double precio = Decimal.ToDouble(reader.GetDecimal(2));
+        //                int idCompra = reader.GetInt32(0);
+        //                if (!compras.ContainsKey(idCompra))
+        //                {
+        //                    auxUsuario = variableAuxiliarUsuarios.Find(usuario => usuario.UsuarioId == reader.GetInt32(1));
+        //                    Compra compra = new Compra(idCompra, auxUsuario, precio);
+        //                    Producto producto = variableAuxiliarProductos.Find(producto => producto.ProductoId == reader.GetInt32(3));
+        //                    int cantidad = reader.GetInt32(4);
+        //                   // compra.Productos.Add(producto, cantidad);
 
-                            compras.Add(idCompra, compra);
-                            variableAuxiliarCompras.Add(compra);
+        //                    compras.Add(idCompra, compra);
+        //                    variableAuxiliarCompras.Add(compra);
 
-                        }
-                        else
-                        {
-                            Producto producto = variableAuxiliarProductos.Find(producto => producto.ProductoId == reader.GetInt32(3));
-                            int cantidad = reader.GetInt32(4);
+        //                }
+        //                else
+        //                {
+        //                    Producto producto = variableAuxiliarProductos.Find(producto => producto.ProductoId == reader.GetInt32(3));
+        //                    int cantidad = reader.GetInt32(4);
 
-                            if (compras[idCompra].Productos.ContainsKey(producto))
-                            {
-                                compras[idCompra].Productos[producto] += cantidad;
-                            }
-                            else
-                            {
+        //                    if (compras[idCompra].Productos.ContainsKey(producto))
+        //                    {
+        //                        compras[idCompra].Productos[producto] += cantidad;
+        //                    }
+        //                    else
+        //                    {
 
-                                compras[idCompra].Productos.Add(producto, cantidad);
+        //                        compras[idCompra].Productos.Add(producto, cantidad);
 
-                            }
-                        }
+        //                    }
+        //                }
 
-                    }
-                    reader.Close();
-                }
+        //            }
+        //            reader.Close();
+        //        }
 
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-            return variableAuxiliarCompras;
-        }
+        //        catch (Exception ex)
+        //        {
+        //            Console.WriteLine(ex.Message);
+        //        }
+        //    }
+        //    return variableAuxiliarCompras;
+        //}
 
 
         public int cuentaRegistros(string tabla)
@@ -466,7 +466,7 @@ namespace tp_plataformas_2
                 command.Parameters["@Apellido"].Value = usuario.Apellido;
                 command.Parameters["@Mail"].Value = usuario.Mail;
                 command.Parameters["@Password"].Value = usuario.Password;
-                command.Parameters["@MiCarro"].Value = usuario.MiCarro.CarroId;
+                command.Parameters["@MiCarro"].Value = usuario.Carro.CarroId;
                 command.Parameters["@TipoUsuario"].Value = usuario.TipoUsuario;
 
                 try
@@ -626,7 +626,7 @@ namespace tp_plataformas_2
                 command.Parameters.Add(new SqlParameter("@id_usuario", SqlDbType.Int));
                 command.Parameters.Add(new SqlParameter("@total", SqlDbType.Decimal));
                 command.Parameters["@Id"].Value = cuentaRegistros("Productos_compra") + 1;
-                command.Parameters["@Id_usuario"].Value = compra.Comprador.UsuarioId;
+                command.Parameters["@Id_usuario"].Value = compra.Usuario.UsuarioId;
                 command.Parameters["@Total"].Value = compra.Total;
                 
                 try
@@ -660,7 +660,7 @@ namespace tp_plataformas_2
                 command.Parameters["@Id"].Value = cuentaRegistros("Productos_compra") + 1;
                 command.Parameters["@Id_compra"].Value = compra.CompraId;
                 command.Parameters["@Id_producto"].Value = producto.ProductoId;
-                command.Parameters["@Cantidad_producto"].Value = compra.Productos[producto];
+              //  command.Parameters["@Cantidad_producto"].Value = compra.Productos[producto];
                 try
                 {
                     connection.Open();

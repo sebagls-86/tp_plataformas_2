@@ -71,9 +71,10 @@ namespace tp_plataformas_2
             panelProductos.Visible = true;
             lblMainTitle.Text = "Productos";
 
+            dgvProductos.DataSource = null;
             dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
-            //dgvProductos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            //dgvProductos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvProductos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvProductos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
         }
 
@@ -84,7 +85,7 @@ namespace tp_plataformas_2
             panelProductos.Visible = false;
             panelCompras.Visible = true;
             lblMainTitle.Text = "Compras";
-            dgvComprasRealizadas.DataSource = Mercado.mostrarComprasRealizadas();
+       //     dgvComprasRealizadas.DataSource = Mercado.mostrarComprasRealizadas();
 
         }
 
@@ -409,7 +410,7 @@ namespace tp_plataformas_2
             {
                 MessageBox.Show("no se agrego");
             }
-            //dgvProductos.Refresh();
+            dgvProductos.Refresh();
         }
 
         private void btnModificaar_Click(object sender, EventArgs e)
@@ -561,7 +562,7 @@ namespace tp_plataformas_2
 
                     MessageBox.Show("Compra Actualizada");
                     dgvProductos.DataSource = null;
-                    dgvComprasRealizadas.DataSource = Mercado.mostrarComprasRealizadas();
+                 //   dgvComprasRealizadas.DataSource = Mercado.mostrarComprasRealizadas();
                 }
 
             }

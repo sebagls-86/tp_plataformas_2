@@ -8,12 +8,11 @@ namespace tp_plataformas_2
     class MyContext : DbContext
     {
         public DbSet<Usuario> usuarios { get; set; }
-        public DbSet<Producto> Productos { get; set; }
+        public DbSet<Producto> productos { get; set; }
         public DbSet<Categoria> categorias { get; set; }
-        public DbSet<Carro> carros { get; set; }
-
+        public DbSet<Carro> carro { get; set; }
+        public DbSet<Compra> compras { get; set; }
         public DbSet<Carro_productos> Carro_productos { get; set; }
-
         public DbSet<Productos_compra> Productos_compra { get; set; }
 
         public MyContext() { }
@@ -24,146 +23,71 @@ namespace tp_plataformas_2
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //nombre de la tabla
             modelBuilder.Entity<Usuario>()
-                .ToTable("Usuario")
-                .HasKey(u => u.UsuarioId);
-            //propiedades de los datos
-            modelBuilder.Entity<Usuario>(
-                usr =>
-                {
+          .HasKey(pk => new { pk.UsuarioId });
 
-                    usr.Property(u => u.UsuarioId).HasColumnType("int");
-                    usr.Property(u => u.Cuil).HasColumnType("int");
-                    usr.Property(u => u.Nombre).HasColumnType("varchar(50)");
-                    usr.Property(u => u.Apellido).HasColumnType("varchar(50)");
-                    usr.Property(u => u.Mail).HasColumnType("varchar(50)");
-                    usr.Property(u => u.Password).HasColumnType("varchar(50)");
-                    //usr.Property(u => u.MiCarro).HasColumnType("int");
-                    usr.Property(u => u.TipoUsuario).HasColumnType("int");
-                });
-
-            modelBuilder.Entity<Producto>()
-               .ToTable("Producto")
-               .HasKey(u => u.ProductoId);
-            //propiedades de los datos
-            modelBuilder.Entity<Producto>(
-                usr =>
-                {
-
-                    usr.Property(u => u.ProductoId).HasColumnType("int");
-                    usr.Property(u => u.Nombre).HasColumnType("varchar(50)");
-                    usr.Property(u => u.Precio).HasColumnType("decimal(18,0)");
-                    usr.Property(u => u.Cantidad).HasColumnType("int");
-                    usr.Property(u => u.CatId).HasColumnType("int");
-                    
-                });
-
-            modelBuilder.Entity<Categoria>()
-             .ToTable("Categoria")
-             .HasKey(u => u.CatId);
-            
-            //propiedades de los datos
-            modelBuilder.Entity<Categoria>(
-                usr =>
-                {
-                    usr.Property(u => u.CatId).HasColumnType("int");
-                    usr.Property(u => u.Nombre).HasColumnType("varchar(50)");
-
-                });
+            modelBuilder.Entity<Usuario>()
+           .HasOne(u => u.Carro)
+           .WithOne(x => x.Usuario)
+           .HasForeignKey<Carro>(c => c.UsuarioId)
+           .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Carro>()
-              .ToTable("Carro")
-              .HasKey(u => u.CarroId);
-            //propiedades de los datos
-            modelBuilder.Entity<Carro>(
-                usr =>
-                {
-                    usr.Property(u => u.CarroId).HasColumnType("int");
-                    
+            .HasKey(pk => pk.CarroId);
 
-                });
-
-            modelBuilder.Entity<Compra>()
-            .ToTable("Compra")
-            .HasKey(u => u.CompraId);
-            //propiedades de los datos
-            modelBuilder.Entity<Compra>(
-                usr =>
-                {
-                    usr.Property(u => u.CompraId).HasColumnType("int");
-                   // usr.Property(u => u.Comprador).HasColumnType("varchar(50)");
-                    usr.Property(u => u.IdProducto).HasColumnType("int");
-                    usr.Property(u => u.Total).HasColumnType("double");
-
-                });
-
-            modelBuilder.Entity<Carro_productos>()
-          .ToTable("Carro_productos")
-          .HasKey(u => u.Carro_productos_Id);
-            //propiedades de los datos
-            modelBuilder.Entity<Carro_productos>(
-                usr =>
-                {
-                    usr.Property(u => u.Carro_productos_Id).HasColumnType("int");
-                    
-                });
+            modelBuilder.Entity<Carro>()
+           .HasOne(u => u.Usuario)
+           .WithOne(x => x.Carro)
+           .HasForeignKey<Usuario>(c => c.MiCarro)
+           .OnDelete(DeleteBehavior.Cascade);
 
 
-            modelBuilder.Entity<Productos_compra>()
-         .ToTable("Productos_compra")
-         .HasKey(u => u.Productos_compra_Id);
-            //propiedades de los datos
-            modelBuilder.Entity<Productos_compra>(
-                usr =>
-                {
-                    usr.Property(u => u.Productos_compra_Id).HasColumnType("int");
+            modelBuilder.Entity<Categoria>()
+          .HasKey(pk =>pk.CatId);
 
-                });
+            modelBuilder.Entity<Producto>()
+          .HasKey(pk => pk.ProductoId);
 
             modelBuilder.Entity<Producto>()
              .HasOne(u => u.Cat)
-             .WithMany(p => p.Productos);
-
-            modelBuilder.Entity<Usuario>()
-            .HasOne(u => u.MiCarro)
-            .WithOne(x => x.Usuario)
-            .HasForeignKey<Carro>(c => c.UsuarioId);
+             .WithMany(p => p.Productos)
+             .HasForeignKey(u => u.CatId);
 
 
             modelBuilder.Entity<Compra>()
-              .HasOne(u => u.Comprador)
-              .WithMany(x => x.Compra);
+         .HasKey(pk => pk.CompraId);
 
             modelBuilder.Entity<Compra>()
-              .HasMany(u => u.productos)
-              .WithMany(x => x.CompraProducto);
+              .HasOne(u => u.Usuario)
+              .WithMany(x => x.Compra)
+              .HasForeignKey(u => u.idUsuario);
 
-            modelBuilder.Entity<Carro>()
-              .HasMany(u => u.ProductosCompra)
-              .WithMany(x => x.CarroProducto)
-              .UsingEntity(z => z.ToTable("Compras_Carro"));
+
+            modelBuilder.Entity<Productos_compra>()
+             .HasKey(pk => new { pk.Id_producto, pk.Id_compra });
 
             modelBuilder.Entity<Productos_compra>()
              .HasOne(u => u.Producto)
-             .WithMany(x => x.productos_compras)
-             .HasForeignKey(c => c.Id_Producto);
+             .WithMany(x => x.Productos_compras)
+             .HasForeignKey(c => c.Id_producto);
 
             modelBuilder.Entity<Productos_compra>()
              .HasOne(u => u.Compra)
-             .WithMany(x => x.productos_Compras)
-             .HasForeignKey(c => c.Id_Compra);
+             .WithMany(x => x.Productos_compra)
+             .HasForeignKey(c => c.Id_compra);
+
+            modelBuilder.Entity<Carro_productos>()
+             .HasKey(pk => new { pk.Carro_productos_Id });
 
             modelBuilder.Entity<Carro_productos>()
              .HasOne(u => u.Carro)
-             .WithMany(x => x.carro_productos)
+             .WithMany(x => x.Carro_productos)
              .HasForeignKey(c => c.Id_Carro);
 
             modelBuilder.Entity<Carro_productos>()
             .HasOne(u => u.Producto)
-            .WithMany(x => x.carro_productos)
+            .WithMany(x => x.Carro_productos)
             .HasForeignKey(c => c.Id_Producto);
-
 
 
             //Ignoro, no agrego UsuarioManager a la base de datos

@@ -10,10 +10,7 @@ namespace tp_plataformas_2
 
         public List<Producto> Productos { get; set; }
 
-        public Categoria()
-        {
-           
-        }
+        public Categoria() {}
         public Categoria(int id, string nombre)
         {
             CatId = id;

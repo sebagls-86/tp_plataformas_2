@@ -10,8 +10,8 @@ using tp_plataformas_2;
 namespace tp_plataformas_2.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20211107200240_Initial")]
-    partial class Initial
+    [Migration("20211112213819_second")]
+    partial class second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,22 +33,7 @@ namespace tp_plataformas_2.Migrations
 
                     b.HasIndex("ProductosCompraProductoId");
 
-                    b.ToTable("Compras_Carro");
-                });
-
-            modelBuilder.Entity("CompraProducto", b =>
-                {
-                    b.Property<int>("CompraProductoCompraId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("productosProductoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CompraProductoCompraId", "productosProductoId");
-
-                    b.HasIndex("productosProductoId");
-
-                    b.ToTable("CompraProducto");
+                    b.ToTable("CarroProducto");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Carro", b =>
@@ -61,15 +46,9 @@ namespace tp_plataformas_2.Migrations
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.Property<int>("cantidad")
-                        .HasColumnType("int");
-
                     b.HasKey("CarroId");
 
-                    b.HasIndex("UsuarioId")
-                        .IsUnique();
-
-                    b.ToTable("Carro");
+                    b.ToTable("carro");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Carro_productos", b =>
@@ -105,11 +84,11 @@ namespace tp_plataformas_2.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CatId");
 
-                    b.ToTable("Categoria");
+                    b.ToTable("categorias");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Compra", b =>
@@ -119,20 +98,22 @@ namespace tp_plataformas_2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CompradorUsuarioId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdProducto")
+                    b.Property<int?>("ProductoId")
                         .HasColumnType("int");
 
                     b.Property<double>("Total")
-                        .HasColumnType("double");
+                        .HasColumnType("float");
+
+                    b.Property<int>("idUsuario")
+                        .HasColumnType("int");
 
                     b.HasKey("CompraId");
 
-                    b.HasIndex("CompradorUsuarioId");
+                    b.HasIndex("ProductoId");
 
-                    b.ToTable("Compra");
+                    b.HasIndex("idUsuario");
+
+                    b.ToTable("compras");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Producto", b =>
@@ -149,39 +130,35 @@ namespace tp_plataformas_2.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Precio")
-                        .HasColumnType("decimal(18,0)");
+                    b.Property<double>("Precio")
+                        .HasColumnType("float");
 
                     b.HasKey("ProductoId");
 
                     b.HasIndex("CatId");
 
-                    b.ToTable("Producto");
+                    b.ToTable("productos");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Productos_compra", b =>
                 {
-                    b.Property<int>("Productos_compra_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Cantidad")
+                    b.Property<int>("Id_producto")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id_Compra")
+                    b.Property<int>("Id_compra")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id_Producto")
+                    b.Property<int>("Cantidad_producto")
                         .HasColumnType("int");
 
-                    b.HasKey("Productos_compra_Id");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.HasIndex("Id_Compra");
+                    b.HasKey("Id_producto", "Id_compra");
 
-                    b.HasIndex("Id_Producto");
+                    b.HasIndex("Id_compra");
 
                     b.ToTable("Productos_compra");
                 });
@@ -194,26 +171,32 @@ namespace tp_plataformas_2.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Apellido")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Cuil")
                         .HasColumnType("int");
 
                     b.Property<string>("Mail")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MiCarro")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TipoUsuario")
                         .HasColumnType("int");
 
                     b.HasKey("UsuarioId");
 
-                    b.ToTable("Usuario");
+                    b.HasIndex("MiCarro")
+                        .IsUnique();
+
+                    b.ToTable("usuarios");
                 });
 
             modelBuilder.Entity("CarroProducto", b =>
@@ -231,42 +214,16 @@ namespace tp_plataformas_2.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CompraProducto", b =>
-                {
-                    b.HasOne("tp_plataformas_2.Compra", null)
-                        .WithMany()
-                        .HasForeignKey("CompraProductoCompraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("tp_plataformas_2.Producto", null)
-                        .WithMany()
-                        .HasForeignKey("productosProductoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("tp_plataformas_2.Carro", b =>
-                {
-                    b.HasOne("tp_plataformas_2.Usuario", "Usuario")
-                        .WithOne("MiCarro")
-                        .HasForeignKey("tp_plataformas_2.Carro", "UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("tp_plataformas_2.Carro_productos", b =>
                 {
                     b.HasOne("tp_plataformas_2.Carro", "Carro")
-                        .WithMany("carro_productos")
+                        .WithMany("Carro_productos")
                         .HasForeignKey("Id_Carro")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("tp_plataformas_2.Producto", "Producto")
-                        .WithMany("carro_productos")
+                        .WithMany("Carro_productos")
                         .HasForeignKey("Id_Producto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -278,11 +235,17 @@ namespace tp_plataformas_2.Migrations
 
             modelBuilder.Entity("tp_plataformas_2.Compra", b =>
                 {
-                    b.HasOne("tp_plataformas_2.Usuario", "Comprador")
-                        .WithMany("Compra")
-                        .HasForeignKey("CompradorUsuarioId");
+                    b.HasOne("tp_plataformas_2.Producto", null)
+                        .WithMany("CompraProducto")
+                        .HasForeignKey("ProductoId");
 
-                    b.Navigation("Comprador");
+                    b.HasOne("tp_plataformas_2.Usuario", "Usuario")
+                        .WithMany("Compra")
+                        .HasForeignKey("idUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Producto", b =>
@@ -299,14 +262,14 @@ namespace tp_plataformas_2.Migrations
             modelBuilder.Entity("tp_plataformas_2.Productos_compra", b =>
                 {
                     b.HasOne("tp_plataformas_2.Compra", "Compra")
-                        .WithMany("productos_Compras")
-                        .HasForeignKey("Id_Compra")
+                        .WithMany("Productos_compra")
+                        .HasForeignKey("Id_compra")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("tp_plataformas_2.Producto", "Producto")
-                        .WithMany("productos_compras")
-                        .HasForeignKey("Id_Producto")
+                        .WithMany("Productos_compras")
+                        .HasForeignKey("Id_producto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -315,9 +278,22 @@ namespace tp_plataformas_2.Migrations
                     b.Navigation("Producto");
                 });
 
+            modelBuilder.Entity("tp_plataformas_2.Usuario", b =>
+                {
+                    b.HasOne("tp_plataformas_2.Carro", "Carro")
+                        .WithOne("Usuario")
+                        .HasForeignKey("tp_plataformas_2.Usuario", "MiCarro")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Carro");
+                });
+
             modelBuilder.Entity("tp_plataformas_2.Carro", b =>
                 {
-                    b.Navigation("carro_productos");
+                    b.Navigation("Carro_productos");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Categoria", b =>
@@ -327,21 +303,21 @@ namespace tp_plataformas_2.Migrations
 
             modelBuilder.Entity("tp_plataformas_2.Compra", b =>
                 {
-                    b.Navigation("productos_Compras");
+                    b.Navigation("Productos_compra");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Producto", b =>
                 {
-                    b.Navigation("carro_productos");
+                    b.Navigation("Carro_productos");
 
-                    b.Navigation("productos_compras");
+                    b.Navigation("CompraProducto");
+
+                    b.Navigation("Productos_compras");
                 });
 
             modelBuilder.Entity("tp_plataformas_2.Usuario", b =>
                 {
                     b.Navigation("Compra");
-
-                    b.Navigation("MiCarro");
                 });
 #pragma warning restore 612, 618
         }
