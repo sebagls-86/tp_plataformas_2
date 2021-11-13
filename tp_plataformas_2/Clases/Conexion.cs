@@ -387,7 +387,6 @@ namespace tp_plataformas_2
         
         public bool actualizarStockProductos(int id, int cantidad)
         {
-
             int resultadoQuery;
             string connectionString = Properties.Resources.SqlConnect;
             string queryString = "UPDATE [dbo].[Producto] SET Cantidad=@cantidad WHERE Id=@id;";

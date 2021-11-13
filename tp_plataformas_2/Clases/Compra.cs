@@ -11,7 +11,9 @@ namespace tp_plataformas_2
         public int idUsuario { get; set; }
         public Double Total { get; set; }
         public List<Productos_compra> Productos_compra { get; set; }
-
+        
+       
+        public Compra() { }
 
         public Compra(int _Id, Usuario usuario, Double total)
         {
@@ -20,7 +22,11 @@ namespace tp_plataformas_2
             Total = total;
         }
 
-        public Compra() { }
+        public Compra (int usuarioId, double total)
+        {
+            this.idUsuario = usuarioId;
+            this.Total = total;
+        }
 
         public int CompareTo(Compra other)
         {

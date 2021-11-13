@@ -15,5 +15,13 @@ namespace tp_plataformas_2
 
         public Productos_compra() {}
                
+        public Productos_compra(int idCompra, int idProducto, int cantidadProducto)
+        {
+            Id_compra = idCompra;
+            Id_producto = idProducto;
+            Cantidad_producto = cantidadProducto;
+        }
+
+
     }
 }

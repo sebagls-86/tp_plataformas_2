@@ -29,7 +29,7 @@ namespace tp_plataformas_2
         //private DbSet<Categoria> misCategorias;
         MyContext db;
 
-        Conexion conexion = new Conexion();   
+        Conexion conexion = new Conexion();
 
         public Mercado()
         {
@@ -44,20 +44,21 @@ namespace tp_plataformas_2
             db.productos.Load();
             db.compras.Load();
             db.carro.Load();
-            
+
 
 
             ObtenerCategorias();
             ObtenerProductos();
             ObtenerUsuarios();
             ObtenerCompras();
+            ObtenerCarro();
         }
 
         private void ObtenerCategorias()
         {
 
             var list = db.categorias;
-            
+
             if (list.Count() != 0)
             {
                 int i = 0;
@@ -79,7 +80,7 @@ namespace tp_plataformas_2
             {
                 foreach (var p in list)
                 {
-                    Categoria aux= null;
+                    Categoria aux = null;
                     foreach (Categoria cat in categorias)
                     {
                         if (cat.CatId == p.CatId)
@@ -98,12 +99,13 @@ namespace tp_plataformas_2
             var list = db.usuarios;
             if (list.Count() != 0)
             {
-                foreach (var u in list) { 
+                foreach (var u in list)
+                {
                     Carro micarro = new Carro(u.UsuarioId);
-                    
+
                     usuarios.Add(new Usuario(u.UsuarioId, u.Cuil, u.Nombre, u.Apellido, u.Mail, u.Password, micarro, u.TipoUsuario));
                 }
-            
+
             }
 
         }
@@ -111,7 +113,7 @@ namespace tp_plataformas_2
         private void ObtenerCompras()
         {
 
-            
+
             var list = db.compras;
             if (list.Count() != 0)
             {
@@ -142,8 +144,8 @@ namespace tp_plataformas_2
                 {
                     if (cat.Productos == null)
                         cat.Productos = new List<Producto>();
-                   
-                    Producto prod = new Producto { ProductoId = cantProductos, Nombre = nombre, Precio = precio, Cantidad = Cantidad, Cat = cat};
+
+                    Producto prod = new Producto { ProductoId = cantProductos, Nombre = nombre, Precio = precio, Cantidad = Cantidad, Cat = cat };
                     cat.Productos.Add(prod);
                     db.productos.Add(prod);
                     db.SaveChanges();
@@ -157,7 +159,7 @@ namespace tp_plataformas_2
                 return false;
             }
         }
-        
+
 
         public bool ModificarProducto(int ID, string Nombre, double Precio, int Cantidad, int ID_Categoria)
         {
@@ -198,7 +200,7 @@ namespace tp_plataformas_2
             }
         }
 
-        
+
 
         public void BuscarProductos(String Query)
         {
@@ -219,7 +221,7 @@ namespace tp_plataformas_2
         }
         public Producto BuscarProductoPorId2(int Id)
         {
-            
+
             //bool sePudoParsear = Int32.TryParse(Id, out int idProducto);
             //if (!sePudoParsear)
             //{
@@ -235,7 +237,7 @@ namespace tp_plataformas_2
             //}
             //else
             //{
-                Producto producto = db.productos.Where(u => u.ProductoId == Id).FirstOrDefault();
+            Producto producto = db.productos.Where(u => u.ProductoId == Id).FirstOrDefault();
             //}
 
             return producto;
@@ -315,14 +317,15 @@ namespace tp_plataformas_2
         public List<Producto> MostrarProductosOrdenados(int orden)
         {
             List<Producto> productosOrdenados = new List<Producto>();
-            if(orden < 0 || orden > 1)
+            if (orden < 0 || orden > 1)
             {
                 throw new Excepciones("El numero de orden es incorrecto.");
             }
-            if(orden == 0)
+            if (orden == 0)
             {
                 productosOrdenados = productos.OrderBy(producto => producto.ProductoId).ToList();
-            } else
+            }
+            else
             {
                 productosOrdenados = productos.OrderByDescending(producto => producto.ProductoId).ToList();
             }
@@ -342,7 +345,7 @@ namespace tp_plataformas_2
 
 
         //    int id = usuarios.Count + 1;
-            
+
         //    Carro micarro = new Carro(id);
         //    Usuario usuario = new Usuario(id, cuil, nombre, apellido, mail, password, micarro, tipoUsuario);
         //    if (conexion.agregarUsuario(usuario))
@@ -352,7 +355,7 @@ namespace tp_plataformas_2
 
         //            usuarios.Add(usuario);
         //        }
-                
+
         //    }
         //    Console.WriteLine("La empresa fue creada con exito");
 
@@ -379,13 +382,13 @@ namespace tp_plataformas_2
 
                 int cantCarros = db.usuarios.Count() + 1;
                 Carro carro = new Carro(cantCarros, cantCarros);
-                Usuario nuevo = new Usuario { UsuarioId = cantCarros, Cuil = cuil, Nombre = nombre, Apellido = apellido, Mail= mail, Password = password, Carro = carro, TipoUsuario = tipoUsuario };
+                Usuario nuevo = new Usuario { UsuarioId = cantCarros, Cuil = cuil, Nombre = nombre, Apellido = apellido, Mail = mail, Password = password, Carro = carro, TipoUsuario = tipoUsuario };
 
                 carro.Usuario = nuevo;
 
                 db.usuarios.Add(nuevo);
                 db.carro.Add(carro);
-                
+
 
                 db.SaveChanges();
                 return true;
@@ -439,11 +442,11 @@ namespace tp_plataformas_2
             }
         }
 
-        
+
         public List<Usuario> MostrarUsuarios()
         {
             return db.usuarios.OrderBy(propiedad => propiedad.UsuarioId).ToList();
-                      
+
         }
 
         public Usuario BuscarUsuarioPorId(String Id)
@@ -495,9 +498,9 @@ namespace tp_plataformas_2
 
                         var cat = db.categorias.Where(c => c.Nombre == " ").FirstOrDefault();
                         cat.Nombre = nombre;
-                       var respuesta = db.SaveChanges();
-                   
-                        
+                        var respuesta = db.SaveChanges();
+
+
                         break;
                     }
                 }
@@ -542,14 +545,14 @@ namespace tp_plataformas_2
 
         public bool ModificarCategoria(int ID, string Nombre)
         {
-            
-            if (categorias[ID-1] != null)
+
+            if (categorias[ID - 1] != null)
             {
-                categorias[ID-1].Nombre = Nombre; 
+                categorias[ID - 1].Nombre = Nombre;
 
                 var cat = db.categorias.Where(c => c.CatId == ID).FirstOrDefault();
                 cat.Nombre = Nombre;
-                db.SaveChanges();          
+                db.SaveChanges();
 
             }
             else
@@ -600,7 +603,7 @@ namespace tp_plataformas_2
                     categoriaEncontrada = categoria;
                 }
             }
-            if(categoriaEncontrada == null)
+            if (categoriaEncontrada == null)
             {
                 throw new Excepciones("No se encontró la categoria.");
             }
@@ -633,7 +636,7 @@ namespace tp_plataformas_2
             else
             {
                 usuarioEncontrado = usuarios[Id_Usuario - 1];
-                productoEncontrado = productos[Id_Producto -1];
+                productoEncontrado = productos[Id_Producto - 1];
                 if (Cantidad > productoEncontrado.Cantidad)
                 {
                     throw new Excepciones("La cantidad que se quiere agregar es mayor al stock disponible.");
@@ -644,11 +647,14 @@ namespace tp_plataformas_2
                     int id_carro = Id_Usuario - 1;
                     Carro carro = new Carro(id_carro, Id_Usuario - 1);
                     Producto producto = BuscarProductoPorId2(Id_Producto);
-   
+
                     Carro_productos carroProductos = new Carro_productos(id_carro, Id_Producto, Cantidad, producto);
                     db.Carro_productos.Add(carroProductos);
-               
+
                     db.SaveChanges();
+
+                    usuarioEncontrado.Carro.AgregarProducto(producto, Cantidad);
+
                     sePudoAgregar = true;
 
                     Console.WriteLine("El producto {0} con cantidad {1} se ha añadido al carro del usuario {2}.", productoEncontrado.Nombre, Cantidad, usuarioEncontrado.Nombre);
@@ -657,6 +663,39 @@ namespace tp_plataformas_2
             }
             return sePudoAgregar;
         }
+
+        public void ObtenerCarro()
+        {
+            var carroProductos = db.Carro_productos;
+            if (carroProductos.Count() != 0)
+            //Armar un mapa <Usuario,List<Producto>> donde va a guardar 
+            {
+                //Dictionary<Usuario, Dictionary<Producto,int>> productosPorUsuario = new Dictionary<Usuario, Dictionary<Producto, int>>();
+                foreach (var carroProducto in carroProductos)
+                {
+
+                    //Buscar el usuario a partir del id de carro (es igual)
+                    //Buscar todos los productos que tenga el carro y agregarlos al carro (Usuario.Carro.AgregarProducto)
+
+
+
+                    Usuario usuarioEncontrado = usuarios.Find(usuario => usuario.UsuarioId == carroProducto.Id_Carro); ;
+                    if (usuarioEncontrado != null)
+                    {
+                        Producto productoCarro = productos.Find(prod => prod.ProductoId == carroProducto.Id_Producto);
+                        if (productoCarro != null)
+                        {
+                            int cantidadProductoCarro = carroProducto.Cantidad;
+                            usuarioEncontrado.Carro = new Carro(usuarioEncontrado.UsuarioId, productoCarro, cantidadProductoCarro);
+                            usuarioEncontrado.Carro.AgregarProducto(productoCarro, cantidadProductoCarro);
+                        }
+                    }
+
+                }
+            }
+        }
+
+
 
         public bool QuitarDelCarro(int Id_Producto, int Cantidad, int Id_Usuario)
         {
@@ -681,7 +720,7 @@ namespace tp_plataformas_2
                 productoEncontrado = productos[Id_Producto - 1];
                 if (!usuarioEncontrado.Carro.Productos.ContainsKey(productoEncontrado))
                 {
-                    throw new Excepciones("El producto "+ productoEncontrado + "no se encuentra en el carro de "+ usuarioEncontrado.Nombre + ".");
+                    throw new Excepciones("El producto " + productoEncontrado + "no se encuentra en el carro de " + usuarioEncontrado.Nombre + ".");
                 }
                 //else if (usuarioEncontrado.MiCarro.Productos[productoEncontrado] > Cantidad || Cantidad == 0)
                 //{
@@ -741,31 +780,80 @@ namespace tp_plataformas_2
                 {
                     precioTotal += producto.Precio;
                 }
+
+                foreach (Producto producto in usuarioEncontrado.Carro.Productos.Keys)
+                {
+                    precioTotal += producto.Precio;
+                }
+
                 precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
                 Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.Carro.Productos);
                 Compra compra = new Compra(compras.Count + 1, usuarioEncontrado, precioTotal);
-                
-                if (conexion.agregarCompra(compra)) { 
-                    
+
+                if (conexion.agregarCompra(compra))
+                {
+
                     compras.Add(compra);
-                
+
                     foreach (Producto productoCompra in usuarioEncontrado.Carro.Productos.Keys)
                     {
                         conexion.agregarProductosCompra(productoCompra, compra);
 
                         int cantidad = productos[productoCompra.ProductoId - 1].Cantidad -= usuarioEncontrado.Carro.Productos[productoCompra];
-                        conexion.actualizarStockProductos(productoCompra.ProductoId, cantidad);
-
+                        //bool seActualizoStock = ActualizarStockProducto(productoCompra.ProductoId, cantidad);
+                        //bool seActualizoCarro = ActualizarCarro(ID_Usuario);
+                        //sePudoComprar = seActualizoStock && seActualizoCarro;
                     }
-                }
 
-                usuarioEncontrado.Carro.Vaciar();
+                }
                 sePudoComprar = true;
+                usuarioEncontrado.Carro.Vaciar();
+             
             }
             return sePudoComprar;
 
             // guardar compra en Productos_compra
         }
+
+       
+
+
+        public bool ActualizarStockProducto(int idProducto, int cantidad)
+        {
+
+            var productoEncontrado = db.productos.FirstOrDefault(producto => producto.ProductoId == idProducto);
+
+            if (productoEncontrado != null)
+            {
+                productoEncontrado.Cantidad -= cantidad;
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+
+        public bool ActualizarCarro(int idCarro)
+        {
+
+            var carrosProductos = db.Carro_productos.Where(carroProd => carroProd.Id_Carro == idCarro);
+            if (carrosProductos != null)
+            {
+                foreach (var carroProducto in carrosProductos)
+                {
+                    db.Carro_productos.Remove(carroProducto);
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            return false;
+
+
+
+        }
+
+
+
 
         //guarda que no lo estamos usando!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //public bool ModificarCompra(int ID, Double Total)
@@ -867,7 +955,7 @@ namespace tp_plataformas_2
             //agregar el if null y un for para recorrer mas de un item
             if (aux != null)
             {
-                foreach(var u in aux)
+                foreach (var u in aux)
                 {
                     micarro.Id_Carro = u.Id_Carro;
                     micarro.Id_Producto = u.Id_Producto;
@@ -895,7 +983,7 @@ namespace tp_plataformas_2
             return salida;
         }
 
-        
+
         public int IniciarSesion(int cuil, string clave)
         {
             bool Inicia = false;
