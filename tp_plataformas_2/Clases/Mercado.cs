@@ -219,7 +219,7 @@ namespace tp_plataformas_2
         }
         public Producto BuscarProductoPorId2(int Id)
         {
-            Producto producto;
+            
             //bool sePudoParsear = Int32.TryParse(Id, out int idProducto);
             //if (!sePudoParsear)
             //{
@@ -235,7 +235,7 @@ namespace tp_plataformas_2
             //}
             //else
             //{
-                producto = productos[Id];
+                Producto producto = db.productos.Where(u => u.ProductoId == Id).FirstOrDefault();
             //}
 
             return producto;
@@ -645,7 +645,7 @@ namespace tp_plataformas_2
                     Carro carro = new Carro(id_carro, Id_Usuario - 1);
                     Producto producto = BuscarProductoPorId2(Id_Producto);
    
-                    Carro_productos carroProductos = new Carro_productos(id_carro, Id_Producto, Cantidad);
+                    Carro_productos carroProductos = new Carro_productos(id_carro, Id_Producto, Cantidad, producto);
                     db.Carro_productos.Add(carroProductos);
                
                     db.SaveChanges();
@@ -858,6 +858,26 @@ namespace tp_plataformas_2
         {
 
             return db.compras.OrderBy(propiedad => propiedad.CompraId).ToList();
+        }
+        public List<Carro_productos> mostrarCarroPantalla(int id_usuario)
+        {
+            List<Carro_productos> carro = new List<Carro_productos>();
+            Carro_productos micarro = new Carro_productos();
+            var aux = db.Carro_productos.Where(c => c.Id_Carro == id_usuario);
+            //agregar el if null y un for para recorrer mas de un item
+            if (aux != null)
+            {
+                foreach(var u in aux)
+                {
+                    micarro.Id_Carro = u.Id_Carro;
+                    micarro.Id_Producto = u.Id_Producto;
+                    micarro.Cantidad = u.Cantidad;
+                    micarro.Producto = BuscarProductoPorId2(u.Id_Producto);
+
+                }
+            }
+            return db.Carro_productos.OrderBy(propiedad => propiedad.Id_Producto).ToList();
+            //return carro;
         }
 
         public bool modificarMonto(int id, double monto)

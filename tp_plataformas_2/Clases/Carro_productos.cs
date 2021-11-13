@@ -12,12 +12,13 @@ namespace tp_plataformas_2
         public int Cantidad { get; set; }
         public Carro_productos() { }
 
-        public Carro_productos(int id_Carro, int id_producto, int cantidad)
+        public Carro_productos(int id_Carro, int id_producto, int cantidad, Producto producto)
         {
             
             Id_Carro = id_Carro;
             Id_Producto = id_producto;
             Cantidad = cantidad;
+            Producto = producto;
             
         }
     }

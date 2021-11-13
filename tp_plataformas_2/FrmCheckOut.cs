@@ -29,7 +29,7 @@ namespace tp_plataformas_2
             Usuario = usuario;
             double productoPrecio = 0;
             List<Producto> productos = new List<Producto>();
-            dgvProductos.DataSource = mercado.MostrarCategorias();
+            dgvProductos.DataSource = mercado.mostrarCarroPantalla(usuario.Carro.CarroId);
             //foreach(Producto producto in Usuario.Carro.Productos.Keys)
             //{
             //    productos.Add(producto);
