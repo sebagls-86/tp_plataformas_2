@@ -50,11 +50,12 @@ namespace tp_plataformas_2
             {
                 seAgregoElProducto = false;
             }
-            else if(Productos.ContainsKey(p))
+            else if (Productos.ContainsKey(p))
             {
                 Productos[p] += cantidad;
                 seAgregoElProducto = true;
-            } else
+            }
+            else
             {
                 Productos.Add(p, cantidad);
                 seAgregoElProducto = true;

@@ -229,52 +229,36 @@ namespace tp_plataformas_2
             productos.Sort();
 
         }
-        public Producto BuscarProductoPorId2(int Id)
+        public Producto BuscarProductoPorId(int Id)
         {
-
-            //bool sePudoParsear = Int32.TryParse(Id, out int idProducto);
-            //if (!sePudoParsear)
-            //{
-            //    throw new Excepciones("No se pudo parsear el ID del producto buscado.");
-            //}
-            //else if (MercadoHelper.SonMenoresACero(new List<int> { idProducto }))
-            //{
-            //    throw new Excepciones("El indice del producto que quiere buscar es menor a 0.");
-            //}
-            //else if (!MercadoHelper.ExisteElProducto(idProducto, productos))
-            //{
-            //    throw new Excepciones("No existe el producto con ID " + idProducto);
-            //}
-            //else
-            //{
+                       
             Producto producto = db.productos.Where(u => u.ProductoId == Id).FirstOrDefault();
-            //}
-
+            
             return producto;
         }
-        public Producto BuscarProductoPorId(String Id)
-        {
-            Producto producto;
-            bool sePudoParsear = Int32.TryParse(Id, out int idProducto);
-            if (!sePudoParsear)
-            {
-                throw new Excepciones("No se pudo parsear el ID del producto buscado.");
-            }
-            else if (MercadoHelper.SonMenoresACero(new List<int> { idProducto }))
-            {
-                throw new Excepciones("El indice del producto que quiere buscar es menor a 0.");
-            }
-            else if (!MercadoHelper.ExisteElProducto(idProducto, productos))
-            {
-                throw new Excepciones("No existe el producto con ID " + idProducto);
-            }
-            else
-            {
-                producto = productos[idProducto];
-            }
+        //public Producto BuscarProductoPorId(String Id)
+        //{
+        //    Producto producto;
+        //    bool sePudoParsear = Int32.TryParse(Id, out int idProducto);
+        //    if (!sePudoParsear)
+        //    {
+        //        throw new Excepciones("No se pudo parsear el ID del producto buscado.");
+        //    }
+        //    else if (MercadoHelper.SonMenoresACero(new List<int> { idProducto }))
+        //    {
+        //        throw new Excepciones("El indice del producto que quiere buscar es menor a 0.");
+        //    }
+        //    else if (!MercadoHelper.ExisteElProducto(idProducto, productos))
+        //    {
+        //        throw new Excepciones("No existe el producto con ID " + idProducto);
+        //    }
+        //    else
+        //    {
+        //        producto = productos[idProducto];
+        //    }
 
-            return producto;
-        }
+        //    return producto;
+        //}
 
 
         public void BuscarProductosPorPrecio(String Query)
@@ -341,40 +325,7 @@ namespace tp_plataformas_2
             }
             return productosOrdenados;
         }
-        //public bool AgregarUsuario(int cuil, String nombre, String apellido, String mail, String password, int tipoUsuario)
-        //{
-
-        //    foreach (Usuario persona in usuarios)
-        //    {
-        //        if (persona.Cuil == cuil)
-        //        {
-        //            return false;
-        //        }
-
-        //    }
-
-
-        //    int id = usuarios.Count + 1;
-
-        //    Carro micarro = new Carro(id);
-        //    Usuario usuario = new Usuario(id, cuil, nombre, apellido, mail, password, micarro, tipoUsuario);
-        //    if (conexion.agregarUsuario(usuario))
-        //    {
-        //        if (conexion.agregarCarroUsuario(micarro))
-        //        {
-
-        //            usuarios.Add(usuario);
-        //        }
-
-        //    }
-        //    Console.WriteLine("La empresa fue creada con exito");
-
-
-
-
-        //    return true;
-
-        //}
+        
 
         public bool AgregarUsuario(int cuil, String nombre, String apellido, String mail, String password, int tipoUsuario)
         {
@@ -664,7 +615,7 @@ namespace tp_plataformas_2
                     int carro_productos_Id = db.Carro_productos.Count() + 1;
                     int id_carro = Id_Usuario - 1;
                     Carro carro = new Carro(id_carro, Id_Usuario - 1);
-                    Producto producto = BuscarProductoPorId2(Id_Producto);
+                    Producto producto = BuscarProductoPorId(Id_Producto);
 
                     Carro_productos carroProductos = new Carro_productos(id_carro, Id_Producto, Cantidad, producto);
                     db.Carro_productos.Add(carroProductos);
@@ -793,27 +744,29 @@ namespace tp_plataformas_2
             }
             else
             {
-                usuarioEncontrado = usuarios[ID_Usuario - 1];
-                foreach (Producto producto in usuarioEncontrado.Carro.Productos.Keys)
-                {
-                    precioTotal += producto.Precio;
-                }
-
-                foreach (Producto producto in usuarioEncontrado.Carro.Productos.Keys)
+                Usuario usuario = db.usuarios.Where(u => u.UsuarioId == ID_Usuario).FirstOrDefault();
+                foreach (Producto producto in usuario.Carro.Productos.Keys)
                 {
                     precioTotal += producto.Precio;
                 }
 
                 precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
-                Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.Carro.Productos);
-                Compra compra = new Compra(compras.Count + 1, usuarioEncontrado, precioTotal);
+                
+                Compra compra = new Compra(usuario.UsuarioId, precioTotal);
 
-                if (conexion.agregarCompra(compra))
+                Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuario.Carro.Productos);
+
+                db.compras.Add(compra);
+                db.SaveChanges();
+
+                int comprado = db.SaveChanges();
+
+                if (comprado == 1)
                 {
 
                     compras.Add(compra);
 
-                    foreach (Producto productoCompra in usuarioEncontrado.Carro.Productos.Keys)
+                    foreach (Producto productoCompra in usuario.Carro.Productos.Keys)
                     {
                         conexion.agregarProductosCompra(productoCompra, compra);
 
@@ -954,11 +907,6 @@ namespace tp_plataformas_2
         }
 
 
-        //public List<Producto> MostrarProductoEnPantalla()
-        //{
-        //    return db.productos.OrderBy(propiedad => propiedad.ProductoId).ToList();
-        //}
-
         public List<Producto> MostrarProductoEnPantalla()
         {
 
@@ -989,7 +937,7 @@ namespace tp_plataformas_2
                     micarro.Id_Carro = u.Id_Carro;
                     micarro.Id_Producto = u.Id_Producto;
                     micarro.Cantidad = u.Cantidad;
-                    micarro.Producto = BuscarProductoPorId2(u.Id_Producto);
+                    micarro.Producto = BuscarProductoPorId(u.Id_Producto);
 
                 }
             }
