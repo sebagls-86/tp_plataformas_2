@@ -71,7 +71,7 @@ namespace tp_plataformas_2
             }
 
         }
-        private void ObtenerProductos()
+        public void ObtenerProductos()
         {
             //productos = conexion.getProductos();
             var list = db.productos;
@@ -93,6 +93,16 @@ namespace tp_plataformas_2
             }
 
         }
+
+
+
+        public List<Producto> todosProductos()
+        {
+            return db.productos.OrderBy(propiedad => propiedad.ProductoId).ToList(); ;
+        }
+
+
+
         private void ObtenerUsuarios()
         {
             //usuarios = conexion.getUsuarios();
@@ -443,6 +453,14 @@ namespace tp_plataformas_2
         }
 
 
+        public List<Usuario> MostrarUsuarioEnPantalla()
+        {
+
+            List<Usuario> salida = new List<Usuario>();
+            foreach (Usuario u in db.usuarios)
+                salida.Add(u);
+            return salida;
+        }
         public List<Usuario> MostrarUsuarios()
         {
             return db.usuarios.OrderBy(propiedad => propiedad.UsuarioId).ToList();
@@ -936,16 +954,27 @@ namespace tp_plataformas_2
         }
 
 
+        //public List<Producto> MostrarProductoEnPantalla()
+        //{
+        //    return db.productos.OrderBy(propiedad => propiedad.ProductoId).ToList();
+        //}
+
         public List<Producto> MostrarProductoEnPantalla()
         {
-            return db.productos.OrderBy(propiedad => propiedad.ProductoId).ToList();
+
+            List<Producto> salida = new List<Producto>();
+            foreach (Producto p in db.productos)
+                salida.Add(p);
+            return salida;
         }
 
 
         public List<Compra> mostrarComprasRealizadas()
         {
-
-            return db.compras.OrderBy(propiedad => propiedad.CompraId).ToList();
+            List<Compra> salida = new List<Compra>();
+            foreach (Compra c in db.compras)
+                salida.Add(c);
+            return salida;
         }
         public List<Carro_productos> mostrarCarroPantalla(int id_usuario)
         {

@@ -13,6 +13,7 @@ namespace tp_plataformas_2
         public int CatId { get; set; }
 
         public ICollection<Carro> CarroProducto { get; set; }
+
         public ICollection<Compra> CompraProducto { get; set; }
         public List<Productos_compra> Productos_compras { get; set; }
         public List<Carro_productos> Carro_productos { get; set; }
@@ -39,6 +40,11 @@ namespace tp_plataformas_2
         public override string ToString()
         {
             return $"{ProductoId}|{Nombre}|{Precio}|{Cantidad}|{Cat.CatId}|{Cat.Nombre}";
+        }
+
+        public string[] toArray()
+        {
+            return new string[] { ProductoId.ToString(), Nombre.ToString(), Precio.ToString(), Cantidad.ToString(), CatId.ToString() };
         }
     }
 }

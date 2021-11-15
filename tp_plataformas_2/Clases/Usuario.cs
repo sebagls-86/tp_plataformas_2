@@ -42,5 +42,11 @@ namespace tp_plataformas_2
         {
             return $"{UsuarioId}|{Cuil}|{Nombre}|{Apellido}|{Mail}|{Password}|{TipoUsuario}";
         }
+
+        public string[] toArray()
+        {
+            return new string[] { UsuarioId.ToString(), Cuil.ToString(), Nombre.ToString(), Apellido.ToString(), Mail.ToString(),
+                MiCarro.ToString(),TipoUsuario.ToString() };
+        }
     }
 }

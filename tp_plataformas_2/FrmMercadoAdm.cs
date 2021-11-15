@@ -71,8 +71,12 @@ namespace tp_plataformas_2
             panelProductos.Visible = true;
             lblMainTitle.Text = "Productos";
 
-            dgvProductos.DataSource = null;
-            dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
+            dgvProductos.Rows.Clear();
+                        
+            foreach (Producto prod in Mercado.todosProductos())
+                dgvProductos.Rows.Add(prod.toArray());
+             
+
             dgvProductos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dgvProductos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
@@ -85,7 +89,11 @@ namespace tp_plataformas_2
             panelProductos.Visible = false;
             panelCompras.Visible = true;
             lblMainTitle.Text = "Compras";
-            dgvComprasRealizadas.DataSource = Mercado.mostrarComprasRealizadas();
+           
+            dgvComprasRealizadas.Rows.Clear();
+
+            foreach (Compra comp in Mercado.mostrarComprasRealizadas())
+                dgvComprasRealizadas.Rows.Add(comp.toArray());
 
         }
 
@@ -97,21 +105,12 @@ namespace tp_plataformas_2
             panelUsuarios.Visible = true;
             lblMainTitle.Text = "Usuarios";
 
-            this.Refresh();
+            
+            dgvUsuariosLista.Rows.Clear();
 
-            try
-            {
-                dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-
-
-
-
+            foreach (Usuario us in Mercado.MostrarUsuarioEnPantalla())
+                dgvUsuariosLista.Rows.Add(us.toArray());
+            
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -562,7 +561,7 @@ namespace tp_plataformas_2
 
                     MessageBox.Show("Compra Actualizada");
                     dgvProductos.DataSource = null;
-                 //   dgvComprasRealizadas.DataSource = Mercado.mostrarComprasRealizadas();
+                 
                 }
 
             }
