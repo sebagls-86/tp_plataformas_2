@@ -51,7 +51,7 @@ namespace tp_plataformas_2
             ObtenerProductos();
             ObtenerUsuarios();
             ObtenerCompras();
-            ObtenerCarro();
+            ObtenerCarros();
         }
 
         private void ObtenerCategorias()
@@ -231,9 +231,9 @@ namespace tp_plataformas_2
         }
         public Producto BuscarProductoPorId(int Id)
         {
-                       
+
             Producto producto = db.productos.Where(u => u.ProductoId == Id).FirstOrDefault();
-            
+
             return producto;
         }
         //public Producto BuscarProductoPorId(String Id)
@@ -325,7 +325,7 @@ namespace tp_plataformas_2
             }
             return productosOrdenados;
         }
-        
+
 
         public bool AgregarUsuario(int cuil, String nombre, String apellido, String mail, String password, int tipoUsuario)
         {
@@ -633,7 +633,7 @@ namespace tp_plataformas_2
             return sePudoAgregar;
         }
 
-        public void ObtenerCarro()
+        public void ObtenerCarros()
         {
             var carroProductos = db.Carro_productos;
             if (carroProductos.Count() != 0)
@@ -651,12 +651,17 @@ namespace tp_plataformas_2
                     Usuario usuarioEncontrado = usuarios.Find(usuario => usuario.UsuarioId == carroProducto.Id_Carro); ;
                     if (usuarioEncontrado != null)
                     {
-                        Producto productoCarro = productos.Find(prod => prod.ProductoId == carroProducto.Id_Producto);
-                        if (productoCarro != null)
+                        Producto producto = productos.Find(prod => prod.ProductoId == carroProducto.Id_Producto);
+                        if (producto != null)
                         {
                             int cantidadProductoCarro = carroProducto.Cantidad;
-                            usuarioEncontrado.Carro = new Carro(usuarioEncontrado.UsuarioId, productoCarro, cantidadProductoCarro);
-                            usuarioEncontrado.Carro.AgregarProducto(productoCarro, cantidadProductoCarro);
+                            if (usuarioEncontrado.Carro == null)
+                            {
+                                usuarioEncontrado.Carro = new Carro(usuarioEncontrado.UsuarioId, producto, cantidadProductoCarro);
+
+                            }
+
+                            usuarioEncontrado.Carro.AgregarProducto(producto, cantidadProductoCarro);
                         }
                     }
 
@@ -744,49 +749,72 @@ namespace tp_plataformas_2
             }
             else
             {
-                Usuario usuario = db.usuarios.Where(u => u.UsuarioId == ID_Usuario).FirstOrDefault();
-                foreach (Producto producto in usuario.Carro.Productos.Keys)
+
+                ObtenerUsuarios();
+                ObtenerCarros();
+
+                Usuario usuario = usuarios.Find(usuario => usuario.UsuarioId == ID_Usuario - 1);
+
+                var carrosProductos = db.Carro_productos.Where(cp => cp.Id_Carro == ID_Usuario - 1);
+
+                foreach (var productoCompra in carrosProductos)
                 {
-                    precioTotal += producto.Precio;
+                    Producto producto = db.productos.Where(p => p.ProductoId == productoCompra.Id_Producto).FirstOrDefault();
+                    precioTotal += producto.Precio * productoCompra.Cantidad;
                 }
 
+
                 precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
-                
+
                 Compra compra = new Compra(usuario.UsuarioId, precioTotal);
 
-                Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuario.Carro.Productos);
-
                 db.compras.Add(compra);
-                db.SaveChanges();
-
                 int comprado = db.SaveChanges();
-
+                
                 if (comprado == 1)
                 {
 
                     compras.Add(compra);
+                    Compra ultimaCompra = db.compras.OrderByDescending(c => c.CompraId).FirstOrDefault();
+                    int idCompra = ultimaCompra.CompraId;
 
                     foreach (Producto productoCompra in usuario.Carro.Productos.Keys)
                     {
-                        conexion.agregarProductosCompra(productoCompra, compra);
-
-                        int cantidad = productos[productoCompra.ProductoId - 1].Cantidad -= usuarioEncontrado.Carro.Productos[productoCompra];
-                        //bool seActualizoStock = ActualizarStockProducto(productoCompra.ProductoId, cantidad);
-                        //bool seActualizoCarro = ActualizarCarro(ID_Usuario);
-                        //sePudoComprar = seActualizoStock && seActualizoCarro;
+                        int cantidad = usuario.Carro.Productos[productoCompra];
+                        bool seAgrego = agregarProductoCompra(productoCompra, cantidad, idCompra);
+                        bool seActualizoStock = ActualizarStockProducto(productoCompra.ProductoId, cantidad);
+                        bool seActualizoCarro = ActualizarCarro(ID_Usuario);
+                        if(seActualizoStock && seActualizoCarro && seAgrego)
+                        {
+                            usuario.Carro.Vaciar();
+                            sePudoComprar = true;
+                        } else
+                        {
+                            sePudoComprar = false;
+                            break;
+                        }
                     }
 
                 }
-                sePudoComprar = true;
-                usuarioEncontrado.Carro.Vaciar();
-             
+                //sePudoComprar = true;
+               
+
             }
             return sePudoComprar;
 
             // guardar compra en Productos_compra
         }
 
-       
+
+
+        public bool agregarProductoCompra(Producto producto, int cantidad, int idCompra)
+        {
+            Productos_compra productoCompra = new Productos_compra(idCompra, producto.ProductoId, cantidad);
+            db.Productos_compra.Add(productoCompra);
+            return db.SaveChanges() > 0;
+
+        }
+
 
 
         public bool ActualizarStockProducto(int idProducto, int cantidad)
@@ -822,6 +850,7 @@ namespace tp_plataformas_2
 
 
         }
+
 
 
 

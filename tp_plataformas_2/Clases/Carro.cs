@@ -27,6 +27,7 @@ namespace tp_plataformas_2
         public Carro(int id)
         {
             CarroId = id;
+            Productos = new Dictionary<Producto, int>();
 
         }
 
@@ -34,6 +35,7 @@ namespace tp_plataformas_2
         {
             CarroId = id;
             UsuarioId = usuarioId;
+            Productos = new Dictionary<Producto, int>();
 
         }
 
