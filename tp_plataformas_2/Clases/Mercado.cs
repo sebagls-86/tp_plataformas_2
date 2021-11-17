@@ -750,17 +750,17 @@ namespace tp_plataformas_2
             else
             {
 
-                ObtenerUsuarios();
-                ObtenerCarros();
+                //ObtenerUsuarios();
+                //ObtenerCarros();
 
                 Usuario usuario = usuarios.Find(usuario => usuario.UsuarioId == ID_Usuario - 1);
 
-                var carrosProductos = db.Carro_productos.Where(cp => cp.Id_Carro == ID_Usuario - 1);
+                Carro carrosProductos = usuario.Carro;
 
-                foreach (var productoCompra in carrosProductos)
+                foreach (var producto in carrosProductos.ProductosCompra)
                 {
-                    Producto producto = db.productos.Where(p => p.ProductoId == productoCompra.Id_Producto).FirstOrDefault();
-                    precioTotal += producto.Precio * productoCompra.Cantidad;
+                    
+                    precioTotal += producto.Precio * producto.Cantidad;
                 }
 
 
@@ -768,36 +768,57 @@ namespace tp_plataformas_2
 
                 Compra compra = new Compra(usuario.UsuarioId, precioTotal);
 
+                compra.CompraProducto = new List<Producto>();
+
+                foreach (Producto prod in usuario.Carro.ProductosCompra)
+                    compra.CompraProducto.Add(prod);
+
+
                 db.compras.Add(compra);
-                int comprado = db.SaveChanges();
-                
-                if (comprado == 1)
-                {
+                db.SaveChanges();
 
-                    compras.Add(compra);
-                    Compra ultimaCompra = db.compras.OrderByDescending(c => c.CompraId).FirstOrDefault();
-                    int idCompra = ultimaCompra.CompraId;
-
-                    foreach (Producto productoCompra in usuario.Carro.Productos.Keys)
-                    {
-                        int cantidad = usuario.Carro.Productos[productoCompra];
-                        bool seAgrego = agregarProductoCompra(productoCompra, cantidad, idCompra);
-                        bool seActualizoStock = ActualizarStockProducto(productoCompra.ProductoId, cantidad);
-                        bool seActualizoCarro = ActualizarCarro(ID_Usuario);
-                        if(seActualizoStock && seActualizoCarro && seAgrego)
-                        {
-                            usuario.Carro.Vaciar();
-                            sePudoComprar = true;
-                        } else
-                        {
-                            sePudoComprar = false;
-                            break;
-                        }
-                    }
-
-                }
-                //sePudoComprar = true;
                
+                   foreach(Productos_compra pc in compra.Productos_compra)
+                        if (pc.Id_compra == compra.CompraId)
+                           
+                           foreach (Carro_productos p in usuario.Carro.Carro_productos)
+                                p.Cantidad -= pc.Cantidad_producto;
+
+
+                usuario.Carro.Vaciar();
+                db.SaveChanges();
+
+                //if (comprado == 1)
+                //{
+
+
+
+
+
+                //    db.compras.Add(compra);
+                //    Compra ultimaCompra = db.compras.OrderByDescending(c => c.CompraId).FirstOrDefault();
+                //    int idCompra = ultimaCompra.CompraId;
+
+                //    foreach (Producto productoCompra in usuario.Carro.Productos.Keys)
+                //    {
+                //        int cantidad = usuario.Carro.Productos[productoCompra];
+                //        bool seAgrego = agregarProductoCompra(productoCompra, cantidad, idCompra);
+                //        bool seActualizoStock = ActualizarStockProducto(productoCompra.ProductoId, cantidad);
+                //        bool seActualizoCarro = ActualizarCarro(ID_Usuario);
+                //        if(seActualizoStock && seActualizoCarro && seAgrego)
+                //        {
+                //            usuario.Carro.Vaciar();
+                //            sePudoComprar = true;
+                //        } else
+                //        {
+                //            sePudoComprar = false;
+                //            break;
+                //        }
+                //    }
+
+                //}
+                //sePudoComprar = true;
+
 
             }
             return sePudoComprar;
