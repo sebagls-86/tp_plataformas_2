@@ -311,21 +311,15 @@ namespace tp_plataformas_2
 
         public Usuario BuscarUsuarioPorId(String Id)
         {
-            Usuario usuario;
+            
             bool sePudoParsear = Int32.TryParse(Id, out int idUsuario);
+            Usuario usuario = db.usuarios.Where(u => u.UsuarioId == idUsuario).FirstOrDefault();
             if (!sePudoParsear)
             {
                 throw new Excepciones("No se puede parsear.");
-            }
-            else if (MercadoHelper.SonMenoresACero(new List<int> { idUsuario }))
-            {
+            } else if (usuario == null) {
                 throw new Excepciones("Este usuario no existe");
-            }
-            else if (!MercadoHelper.ExisteElUsuario(idUsuario, usuarios))
-            {
-                throw new Excepciones("No existe el producto con ID " + idUsuario);
-            }
-            else
+            }else
             {
                 usuario = db.usuarios.Where(u => u.UsuarioId == idUsuario).FirstOrDefault(); ;
             }
@@ -559,6 +553,33 @@ namespace tp_plataformas_2
         //}
 
 
+        public bool QuitarDelCarro(int Id_Producto, int Id_Usuario)
+        {
+            bool seQuito = false;
+
+            Usuario usuario = db.usuarios.Where(u => u.UsuarioId == Id_Usuario).FirstOrDefault();
+            Producto productoEncontrado = db.productos.Where(p => p.ProductoId == Id_Producto).FirstOrDefault();
+
+            Carro carrito = usuario.Carro;
+          
+            Carro_productos prodABorrar = db.Carro_productos.Where(carro => carro.Id_Carro == Id_Usuario && carro.Id_Producto == Id_Producto).FirstOrDefault();
+
+
+          //  prodABorrar = Id_Producto adentro del carro del usuario
+
+
+            db.Carro_productos.Remove(prodABorrar);
+
+            
+            db.SaveChanges();
+
+           
+            return seQuito;
+
+        }
+
+
+
 
         //public bool QuitarDelCarro(int Id_Producto, int Cantidad, int Id_Usuario)
         //{
@@ -600,116 +621,149 @@ namespace tp_plataformas_2
         //    return sePudoDisminuir;
         //}
 
-        //public bool VaciarCarro(int Id_Usuario)
-        //{
+        public void Vaciar(int Id_Usuario)
+        {
 
-        //    bool sePudoVaciar = false;
-        //    if (MercadoHelper.SonMenoresACero(new List<int> { Id_Usuario }))
+           var carroABorrar = db.Carro_productos.Where(carro => carro.Id_Carro == Id_Usuario);
+
+           db.Carro_productos.RemoveRange(carroABorrar);
+           
+           db.SaveChanges();
+
+
+            }
+
+      
+
+        //public bool Comprar(int ID_Usuario)
+        //{
+        //    Double precioTotal = 0;
+        //    bool sePudoComprar = false;
+        //    Usuario usuario = db.usuarios.Where(usuario => usuario.UsuarioId == ID_Usuario).FirstOrDefault();
+
+        //    if (MercadoHelper.SonMenoresACero(new List<int> { ID_Usuario }))
         //    {
-        //        Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
+        //        throw new Excepciones("Los parametros numericos deben ser mayor o igual a 0");
         //    }
-        //    else if (!MercadoHelper.ExisteElUsuario(Id_Usuario, usuarios))
+        //    else if (!MercadoHelper.ExisteElUsuario(ID_Usuario, usuarios))
         //    {
-        //        Console.WriteLine("El usuario con id {0} no se pudo encontrar", Id_Usuario);
+        //        throw new Excepciones("El usuario con id " + ID_Usuario + " no se pudo encontrar");
         //    }
         //    else
         //    {
-        //        usuarios[Id_Usuario - 1].Carro.Vaciar();
-        //        Console.WriteLine("Se ha vaciado el carro correctamente.");
-        //        sePudoVaciar = true;
+
+
+        //        Carro carrosProductos = usuario.Carro;
+
+        //        foreach (Producto producto in carrosProductos.ProductosCompra)
+        //        {
+                    
+        //            precioTotal += producto.Precio * producto.Cantidad;
+        //        }
+
+
+        //        precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
+
+        //        Compra compra = new Compra(usuario.UsuarioId, precioTotal);
+
+        //        compra.CompraProducto = new List<Producto>();
+
+        //        foreach (Producto prod in usuario.Carro.ProductosCompra)
+        //            compra.CompraProducto.Add(prod);
+
+
+        //        db.compras.Add(compra);
+        //        db.SaveChanges();
+
+               
+        //           foreach(Productos_compra pc in compra.Productos_compra)
+        //                if (pc.Id_compra == compra.CompraId)
+                           
+        //                   foreach (Carro_productos p in usuario.Carro.Carro_productos)
+        //                        p.Cantidad -= pc.Cantidad_producto;
+
+
+        //       // usuario.Carro.Vaciar();
+        //        db.SaveChanges();
+
+        //        //if (comprado == 1)
+        //        //{
+
+
+
+
+
+        //        //    db.compras.Add(compra);
+        //        //    Compra ultimaCompra = db.compras.OrderByDescending(c => c.CompraId).FirstOrDefault();
+        //        //    int idCompra = ultimaCompra.CompraId;
+
+        //        //    foreach (Producto productoCompra in usuario.Carro.Productos.Keys)
+        //        //    {
+        //        //        int cantidad = usuario.Carro.Productos[productoCompra];
+        //        //        bool seAgrego = agregarProductoCompra(productoCompra, cantidad, idCompra);
+        //        //        bool seActualizoStock = ActualizarStockProducto(productoCompra.ProductoId, cantidad);
+        //        //        bool seActualizoCarro = ActualizarCarro(ID_Usuario);
+        //        //        if(seActualizoStock && seActualizoCarro && seAgrego)
+        //        //        {
+        //        //            usuario.Carro.Vaciar();
+        //        //            sePudoComprar = true;
+        //        //        } else
+        //        //        {
+        //        //            sePudoComprar = false;
+        //        //            break;
+        //        //        }
+        //        //    }
+
+        //        //}
+        //        //sePudoComprar = true;
+
+
         //    }
-        //    return sePudoVaciar;
+        //    return sePudoComprar;
 
+        //    // guardar compra en Productos_compra
         //}
-
 
         public bool Comprar(int ID_Usuario)
         {
             Double precioTotal = 0;
             bool sePudoComprar = false;
             Usuario usuario = db.usuarios.Where(usuario => usuario.UsuarioId == ID_Usuario).FirstOrDefault();
+                       
+            Carro_productos carrosProductos = db.Carro_productos.Where(carro => carro.Id_Carro == ID_Usuario).FirstOrDefault();
 
-            if (MercadoHelper.SonMenoresACero(new List<int> { ID_Usuario }))
-            {
-                throw new Excepciones("Los parametros numericos deben ser mayor o igual a 0");
-            }
-            else if (!MercadoHelper.ExisteElUsuario(ID_Usuario, usuarios))
-            {
-                throw new Excepciones("El usuario con id " + ID_Usuario + " no se pudo encontrar");
-            }
-            else
-            {
-
-
-                Carro carrosProductos = usuario.Carro;
-
-                foreach (Producto producto in carrosProductos.ProductosCompra)
-                {
-                    
-                    precioTotal += producto.Precio * producto.Cantidad;
-                }
-
-
-                precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
-
-                Compra compra = new Compra(usuario.UsuarioId, precioTotal);
-
-                compra.CompraProducto = new List<Producto>();
-
-                foreach (Producto prod in usuario.Carro.ProductosCompra)
-                    compra.CompraProducto.Add(prod);
-
-
-                db.compras.Add(compra);
-                db.SaveChanges();
-
-               
-                   foreach(Productos_compra pc in compra.Productos_compra)
-                        if (pc.Id_compra == compra.CompraId)
-                           
-                           foreach (Carro_productos p in usuario.Carro.Carro_productos)
-                                p.Cantidad -= pc.Cantidad_producto;
-
-
-               // usuario.Carro.Vaciar();
-                db.SaveChanges();
-
-                //if (comprado == 1)
-                //{
+            foreach (Carro_productos producto in mostrarCarroPantalla(ID_Usuario))
+                       precioTotal += producto.Cantidad * producto.Producto.Precio;
 
 
 
+            precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
+
+            Compra compra = new Compra(usuario.UsuarioId, precioTotal);
+
+            compra.CompraProducto = new List<Producto>();
+
+          
+             foreach (Producto prod in usuario.Carro.ProductosCompra)
+                     compra.CompraProducto.Add(prod);
+
+                   
+            db.compras.Add(compra);
+            
+
+            foreach (Producto p in compra.CompraProducto)
+                p.Cantidad -= carrosProductos.Cantidad;
 
 
-                //    db.compras.Add(compra);
-                //    Compra ultimaCompra = db.compras.OrderByDescending(c => c.CompraId).FirstOrDefault();
-                //    int idCompra = ultimaCompra.CompraId;
+            db.SaveChanges();
 
-                //    foreach (Producto productoCompra in usuario.Carro.Productos.Keys)
-                //    {
-                //        int cantidad = usuario.Carro.Productos[productoCompra];
-                //        bool seAgrego = agregarProductoCompra(productoCompra, cantidad, idCompra);
-                //        bool seActualizoStock = ActualizarStockProducto(productoCompra.ProductoId, cantidad);
-                //        bool seActualizoCarro = ActualizarCarro(ID_Usuario);
-                //        if(seActualizoStock && seActualizoCarro && seAgrego)
-                //        {
-                //            usuario.Carro.Vaciar();
-                //            sePudoComprar = true;
-                //        } else
-                //        {
-                //            sePudoComprar = false;
-                //            break;
-                //        }
-                //    }
+           
+            sePudoComprar = true;
 
-                //}
-                //sePudoComprar = true;
-
-
-            }
+                        
             return sePudoComprar;
 
-            // guardar compra en Productos_compra
+           
         }
 
 
@@ -843,22 +897,13 @@ namespace tp_plataformas_2
         public List<Carro_productos> mostrarCarroPantalla(int id_usuario)
         {
             List<Carro_productos> carro = new List<Carro_productos>();
-            Carro_productos micarro = new Carro_productos();
-            var aux = db.Carro_productos.Where(c => c.Id_Carro == id_usuario);
-            //agregar el if null y un for para recorrer mas de un item
-            if (aux != null)
-            {
-                foreach (var u in aux)
-                {
-                    micarro.Id_Carro = u.Id_Carro;
-                    micarro.Id_Producto = u.Id_Producto;
-                    micarro.Cantidad = u.Cantidad;
-                    micarro.Producto = BuscarProductoPorId(u.Id_Producto);
 
-                }
-            }
-            return db.Carro_productos.OrderBy(propiedad => propiedad.Id_Producto).ToList();
-            //return carro;
+
+            foreach (Carro_productos c in db.Carro_productos.Where(c => c.Id_Carro == id_usuario))
+                carro.Add(c);
+
+                return carro;
+            
         }
 
         public bool modificarMonto(int id, double monto)
