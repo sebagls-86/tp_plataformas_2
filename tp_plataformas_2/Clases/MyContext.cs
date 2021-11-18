@@ -64,7 +64,7 @@ namespace tp_plataformas_2
 
 
             modelBuilder.Entity<Productos_compra>()
-             .HasKey(pk => new { pk.Id_producto, pk.Id_compra });
+             .HasKey(pk => new { pk.Id });
 
             modelBuilder.Entity<Productos_compra>()
              .HasOne(u => u.Producto)

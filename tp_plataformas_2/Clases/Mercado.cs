@@ -751,28 +751,22 @@ namespace tp_plataformas_2
             db.compras.Add(compra);
             db.SaveChanges();
 
-           // int idUltimaCompra = db.compras.Count();
-
 
            var datosCarrito = db.Carro_productos.Where(us => us.Id_Carro == ID_Usuario);
 
-            compra.CompraProducto = new List<Producto>();
+
 
             foreach(var p in datosCarrito.ToList())
             {
-                
-                compra.CompraProducto.Add(p.Producto);
+             Productos_compra comprado = new Productos_compra(compra.CompraId, p.Id_Producto, p.Cantidad);
+                db.Productos_compra.Add(comprado);
                 db.SaveChanges();
 
             }
 
 
-
-
-
-            foreach (Producto p in compra.CompraProducto)
-                p.Cantidad -= carrosProductos.Cantidad;
-
+            //foreach (Producto p in compra.CompraProducto)
+            //    p.Cantidad -= carrosProductos.Cantidad;
 
 
            
