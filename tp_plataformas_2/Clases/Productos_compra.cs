@@ -22,6 +22,13 @@ namespace tp_plataformas_2
             Cantidad_producto = cantidadProducto;
         }
 
+        public Productos_compra(Producto producto, Compra compra, int cantidadProducto)
+        {
+            Producto = producto;
+            Compra = compra;
+            Cantidad_producto = cantidadProducto;
+        }
+
 
     }
 }
