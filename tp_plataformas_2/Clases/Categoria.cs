@@ -27,5 +27,10 @@ namespace tp_plataformas_2
         {
             return $"{CatId}|{Nombre}";
         }
+
+        public string[] toArray()
+        {
+            return new string[] { CatId.ToString(), Nombre.ToString() };
+        }
     }
 }

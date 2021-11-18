@@ -79,7 +79,7 @@ namespace tp_plataformas_2
                 Usuario usuarioLogueado;
                     if (inicio != -1)
                     {
-                        usuarioLogueado = Mercado.BuscarUsuarioPorId(idUsuarioLogueado);
+                        usuarioLogueado = Mercado.usuarios.Where(u => u.UsuarioId == idUsuario).FirstOrDefault();
                         bool Admin = Mercado.esAdmin(inicio);
                         if (Admin)
                         {

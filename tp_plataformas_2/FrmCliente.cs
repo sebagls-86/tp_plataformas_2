@@ -21,7 +21,7 @@ namespace tp_plataformas_2
             Usuario = usuario;
             Mercado = new Mercado();
             InitializeComponent();
-            lblCantidadProductosEnCarro.Text = "" + usuario.Carro.Productos.Count;
+            lblCantidadProductosEnCarro.Text = "" + usuario.Carro.Carro_productos.Count;
         }
 
         public FrmCliente(Mercado mercado, Usuario usuario)
@@ -29,10 +29,28 @@ namespace tp_plataformas_2
             Usuario = usuario;
             Mercado = mercado;
             InitializeComponent();
-            lblCantidadProductosEnCarro.Text = ""+ usuario.Carro.Productos;
-            // lblCantidadProductosEnCarro.Text = ""+ usuario.Carro.Productos.Count; rompe acá
-            dgvCategorias.DataSource = Mercado.MostrarCategorias();
-            dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
+
+            lblCantidadProductosEnCarro.Text = ""+ usuario.Carro.Carro_productos.Count;
+            
+
+            dgvCategorias.Rows.Clear();
+
+            foreach (Categoria cat in Mercado.todasCategorias())
+                dgvCategorias.Rows.Add(cat.toArray());
+
+            dgvCategorias.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvCategorias.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+
+
+            dgvProductos.Rows.Clear();
+
+            foreach (Producto prod in Mercado.todosProductos())
+                dgvProductos.Rows.Add(prod.ProductoId, prod.Nombre, prod.Precio, prod.Cantidad, prod.CatId);
+
+            dgvProductos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvProductos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
         }
 
         private void cerrarSesionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -120,6 +138,11 @@ namespace tp_plataformas_2
         private void FrmCliente_Load(object sender, EventArgs e)
         {
             comboOrdenarProductos.SelectedIndex = 0;
+        }
+
+        private void dgvCategorias_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
