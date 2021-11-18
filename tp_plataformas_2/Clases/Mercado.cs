@@ -747,15 +747,39 @@ namespace tp_plataformas_2
              foreach (Producto prod in usuario.Carro.ProductosCompra)
                      compra.CompraProducto.Add(prod);
 
-                   
+             
             db.compras.Add(compra);
-            
+            db.SaveChanges();
+             
+
+            Compra ultimaCompra = db.compras.OrderByDescending(u => u.idUsuario == ID_Usuario).FirstOrDefault();
+
+
+            var datosCarrito = db.Carro_productos.Where(us => us.Id_Carro == ID_Usuario);
+
+
+            foreach(var p in datosCarrito)
+            {
+             Productos_compra comprado = new Productos_compra(ultimaCompra.CompraId, p.Id_Producto, p.Cantidad);
+                db.Productos_compra.Add(comprado);
+                db.SaveChanges();
+
+            }
+
+
+
+
+
+               
+
+
+
+
 
             foreach (Producto p in compra.CompraProducto)
                 p.Cantidad -= carrosProductos.Cantidad;
 
 
-            db.SaveChanges();
 
            
             sePudoComprar = true;
