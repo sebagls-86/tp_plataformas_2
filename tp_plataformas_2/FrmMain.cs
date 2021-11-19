@@ -59,18 +59,12 @@ namespace tp_plataformas_2
                 cargandoMain.PerformStep();
             }
 
-
-            //Mercado.AgregarUsuario(123, "seba", "sosa", "seba@sosa", "seba", 1234, false, true);
-            //Mercado.AgregarUsuario(1234, "seba", "sosa", "seba@sosa", "seba1", 1234, false, false);
             string usuario = txtUsuario.Text;
             string password = txtPassword.Text;
 
-
             try
             {
-                
                     int idUsuario = Int32.Parse(usuario);
-
 
                 try
                 {
@@ -79,7 +73,6 @@ namespace tp_plataformas_2
                 Usuario usuarioLogueado = Mercado.BuscarUsuarioPorId(usuario);
                     if (inicio != -1)
                     {
-                       
                         bool Admin = Mercado.esAdmin(inicio);
                         if (Admin)
                         {
@@ -89,7 +82,6 @@ namespace tp_plataformas_2
 
                             FrmMercadoAdm VtnaPrincipal = new FrmMercadoAdm(Mercado, usuarioLogueado);
                             VtnaPrincipal.Show();
-
                         }
                         else if (Admin == false)
                         {
@@ -116,9 +108,7 @@ namespace tp_plataformas_2
 
         private void btnConfiguracion_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            FrmConfiguracion VtnaConfiguracion = new FrmConfiguracion();
-            VtnaConfiguracion.Show();
+          
         }
 
         private void btnRegistrarse_Click(object sender, EventArgs e)

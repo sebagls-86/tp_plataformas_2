@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
-
 namespace tp_plataformas_2
 {
 
@@ -25,8 +23,7 @@ namespace tp_plataformas_2
         private string[] contenidos = new string[10];
 
         MyContext db;
-
-        Conexion conexion = new Conexion();
+              
 
         public Mercado()
         {
