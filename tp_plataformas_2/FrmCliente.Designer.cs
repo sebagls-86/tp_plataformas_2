@@ -46,6 +46,11 @@ namespace tp_plataformas_2
             this.lopezSosaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.motzoFrancoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.Prod_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.catProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pbCarro = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBuscarProductos = new System.Windows.Forms.PictureBox();
@@ -60,11 +65,6 @@ namespace tp_plataformas_2
             this.Id_Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre_Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.Prod_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.catProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarro)).BeginInit();
@@ -199,6 +199,41 @@ namespace tp_plataformas_2
             this.dgvProductos.TabIndex = 13;
             this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
             this.dgvProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellDoubleClick);
+            // 
+            // Prod_Id
+            // 
+            this.Prod_Id.HeaderText = "Id de Producto";
+            this.Prod_Id.MinimumWidth = 8;
+            this.Prod_Id.Name = "Prod_Id";
+            this.Prod_Id.Width = 150;
+            // 
+            // nombre_producto
+            // 
+            this.nombre_producto.HeaderText = "Nombre";
+            this.nombre_producto.MinimumWidth = 8;
+            this.nombre_producto.Name = "nombre_producto";
+            this.nombre_producto.Width = 150;
+            // 
+            // precioProd
+            // 
+            this.precioProd.HeaderText = "Precio";
+            this.precioProd.MinimumWidth = 8;
+            this.precioProd.Name = "precioProd";
+            this.precioProd.Width = 150;
+            // 
+            // cantProducto
+            // 
+            this.cantProducto.HeaderText = "Cantidad Disponible";
+            this.cantProducto.MinimumWidth = 8;
+            this.cantProducto.Name = "cantProducto";
+            this.cantProducto.Width = 150;
+            // 
+            // catProducto
+            // 
+            this.catProducto.HeaderText = "Categoria";
+            this.catProducto.MinimumWidth = 8;
+            this.catProducto.Name = "catProducto";
+            this.catProducto.Width = 150;
             // 
             // pbCarro
             // 
@@ -357,41 +392,6 @@ namespace tp_plataformas_2
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // Prod_Id
-            // 
-            this.Prod_Id.HeaderText = "Id de Producto";
-            this.Prod_Id.MinimumWidth = 8;
-            this.Prod_Id.Name = "Prod_Id";
-            this.Prod_Id.Width = 150;
-            // 
-            // nombre_producto
-            // 
-            this.nombre_producto.HeaderText = "Nombre";
-            this.nombre_producto.MinimumWidth = 8;
-            this.nombre_producto.Name = "nombre_producto";
-            this.nombre_producto.Width = 150;
-            // 
-            // precioProd
-            // 
-            this.precioProd.HeaderText = "Precio";
-            this.precioProd.MinimumWidth = 8;
-            this.precioProd.Name = "precioProd";
-            this.precioProd.Width = 150;
-            // 
-            // cantProducto
-            // 
-            this.cantProducto.HeaderText = "Cantidad Disponible";
-            this.cantProducto.MinimumWidth = 8;
-            this.cantProducto.Name = "cantProducto";
-            this.cantProducto.Width = 150;
-            // 
-            // catProducto
-            // 
-            this.catProducto.HeaderText = "Categoria";
-            this.catProducto.MinimumWidth = 8;
-            this.catProducto.Name = "catProducto";
-            this.catProducto.Width = 150;
             // 
             // FrmCliente
             // 

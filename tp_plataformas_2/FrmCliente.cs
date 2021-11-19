@@ -62,22 +62,11 @@ namespace tp_plataformas_2
         {
             string productoBuscar = txtBuscarProductos.Text.ToUpper();
             txtBuscarProductos.Text = "";
-            // dgvProductos.DataSource = Mercado.productos.FindAll(producto => producto.Nombre.ToUpper().Contains(productoBuscar));
-
-
+            
             dgvProductos.Rows.Clear();
 
-            Producto prod = Mercado.BuscarProductoPorNombre(productoBuscar);
-
-
-            dgvProductos.Rows.Add(prod.ProductoId, prod.Nombre, prod.Precio, prod.Cantidad, prod.CatId);
-
-            //dgvProductos.Rows.Clear();
-
-            //foreach (Producto produc in Mercado.BuscarProductoPorNombre(productoBuscar))
-            //    dgvProductos.Rows.Add(prod.ProductoId, prod.Nombre, prod.Precio, prod.Cantidad, prod.CatId);
-
-
+            foreach (Producto prod in Mercado.BusquedaProductos(productoBuscar))
+                dgvProductos.Rows.Add(prod.ProductoId, prod.Nombre, prod.Precio, prod.Cantidad, prod.CatId);
 
         }
 
@@ -95,12 +84,7 @@ namespace tp_plataformas_2
 
         private void AGREGAR_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //Int32 indiceProducto = dgvProductos.Columns.GetColumnCount(DataGridViewElementStates.Selected);
-            //Producto producto = dgvProductos.SelectedRows[indiceProducto].DataBoundItem as Producto;
-            //MessageBox.Show("Producto ingresado: " + producto.Nombre);
-            //FrmDetalleProducto VtnaDetalleProducto = new FrmDetalleProducto(Mercado, producto, Usuario);
-            //VtnaDetalleProducto.Show();
+           
         }
 
         private void dgvCategorias_DoubleClick(object sender, EventArgs e)
@@ -110,9 +94,6 @@ namespace tp_plataformas_2
 
         private void dgvCategorias_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //String nombre = "" + dgvCategorias.Rows[e.RowIndex].Cells[1].Value.ToString();
-            //Categoria categoria = Mercado.BuscarCategoriaPorNombre(nombre);
-            //dgvProductos.DataSource = Mercado.MostrarProductoEnPantallaPorCategoria(categoria.Id);
             
         }
 
@@ -121,13 +102,10 @@ namespace tp_plataformas_2
             String nombre = "" + dgvCategorias.Rows[e.RowIndex].Cells[1].Value.ToString();
             Categoria categoria = Mercado.BuscarCategoriaPorNombre(nombre);
            
-
             dgvProductos.Rows.Clear();
 
             foreach (Producto prod in Mercado.MostrarProductoEnPantallaPorCategoria(categoria.CatId))
                 dgvProductos.Rows.Add(prod.ProductoId, prod.Nombre, prod.Precio, prod.Cantidad, prod.CatId);
-
-
 
         }
 
