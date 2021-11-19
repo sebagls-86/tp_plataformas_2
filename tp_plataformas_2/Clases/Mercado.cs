@@ -480,14 +480,7 @@ namespace tp_plataformas_2
             {
                 throw new Excepciones("Los parametros numericos deben ser mayor o igual a 0");
             }
-            else if (!MercadoHelper.ExisteElUsuario(Id_Usuario, usuarios))
-            {
-                throw new Excepciones("El usuario con id " + Id_Usuario + " no se pudo encontrar");
-            }
-            else if (!MercadoHelper.ExisteElProducto(Id_Producto, productos))
-            {
-                throw new Excepciones("El producto con id " + Id_Producto + " no se pudo encontrar");
-            }
+           
             else
             {
                 
@@ -844,7 +837,7 @@ namespace tp_plataformas_2
         public Producto BuscarProductoPorNombre(string busca)
         {
 
-            Producto producto = db.productos.Where(u => busca.Contains(u.Nombre)).FirstOrDefault();
+            Producto producto = db.productos.Where(u => u.Nombre.Contains(busca)).FirstOrDefault();
 
             return producto;
         }

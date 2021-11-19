@@ -134,8 +134,10 @@ namespace tp_plataformas_2
         private void dgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             this.Hide();
-            Int32 indiceProducto = dgvProductos.Columns.GetColumnCount(DataGridViewElementStates.Selected);
-            Producto producto = dgvProductos.SelectedRows[indiceProducto].DataBoundItem as Producto;
+           
+            String nombre = "" + dgvProductos.Rows[e.RowIndex].Cells[1].Value.ToString();
+            Producto producto = Mercado.BuscarProductoPorNombre(nombre);
+
             FrmDetalleProducto VtnaDetalleProducto = new FrmDetalleProducto(Mercado, producto, Usuario);
             VtnaDetalleProducto.Show();
         }

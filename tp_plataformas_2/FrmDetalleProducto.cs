@@ -21,14 +21,14 @@ namespace tp_plataformas_2
                         
             Mercado = mercado;
             Comprador = comprador;
-            Producto productoSeleccionado= Mercado.BuscarProductoPorId(1);
+            Producto = producto;
             InitializeComponent();
 
 
 
-            lblProductoNombre.Text = "PRODUCTO: "; //+ producto.Nombre;
-            lblPrecioProducto.Text = "PRECIO: $"; //+ producto.Precio;
-            lblCategoriaProducto.Text = "CATEGORIA: "; //+ producto.Cat.Nombre;
+            lblProductoNombre.Text = "PRODUCTO: " + producto.Nombre;
+            lblPrecioProducto.Text = "PRECIO: $" + producto.Precio;
+            lblCategoriaProducto.Text = "CATEGORIA: " + producto.Cat.Nombre;
         }
 
         private void button1_Click(object sender, EventArgs e)
