@@ -729,7 +729,9 @@ namespace tp_plataformas_2
             Double precioTotal = 0;
             bool sePudoComprar = false;
             Usuario usuario = db.usuarios.Where(usuario => usuario.UsuarioId == ID_Usuario).FirstOrDefault();
-                       
+
+            Carro carro = db.carro.Where(c => c.CarroId == ID_Usuario).FirstOrDefault();
+
             Carro_productos carrosProductos = db.Carro_productos.Where(carro => carro.Id_Carro == ID_Usuario).FirstOrDefault();
 
             foreach (Carro_productos producto in mostrarCarroPantalla(ID_Usuario))
@@ -749,25 +751,28 @@ namespace tp_plataformas_2
 
              
             db.compras.Add(compra);
+            db.compras.Update(compra);
             db.SaveChanges();
 
            // int idUltimaCompra = db.compras.Count();
 
 
-           var datosCarrito = db.Carro_productos.Where(us => us.Id_Carro == ID_Usuario);
+           //var datosCarrito = db.Carro_productos.Where(us => us.Id_Carro == ID_Usuario);
 
-            compra.CompraProducto = new List<Producto>();
+           // compra.CompraProducto = new List<Producto>();
 
-            foreach(var p in datosCarrito.ToList())
-            {
+           // foreach(var p in datosCarrito.ToList())
+           // {
                 
-                compra.CompraProducto.Add(p.Producto);
-                db.SaveChanges();
+           //     compra.CompraProducto.Add(p.Producto);
+           //     db.SaveChanges();
 
-            }
+           // }
 
-
-
+            int cantidad = 0;
+            carro.Carro_productos.Last<Carro_productos>().Cantidad = cantidad;
+            db.carro.Update(carro);
+            db.SaveChanges();
 
 
             foreach (Producto p in compra.CompraProducto)

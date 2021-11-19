@@ -12,9 +12,8 @@ namespace tp_plataformas_2
         public Categoria Cat { get; set; }
         public int CatId { get; set; }
 
-        public ICollection<Carro> CarroProducto { get; set; }
-
-        public ICollection<Compra> CompraProducto { get; set; }
+        public ICollection<Carro> CarroProducto { get; set; } = new List<Carro>();
+        public ICollection<Compra> CompraProducto { get; set; } = new List<Compra>();
         public List<Productos_compra> Productos_compras { get; set; }
         public List<Carro_productos> Carro_productos { get; set; }
 
