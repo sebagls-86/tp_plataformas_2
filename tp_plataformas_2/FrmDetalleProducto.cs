@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace tp_plataformas_2
@@ -25,13 +18,17 @@ namespace tp_plataformas_2
 
         public FrmDetalleProducto(Mercado mercado, Producto producto, Usuario comprador)
         {
+                        
             Mercado = mercado;
             Comprador = comprador;
-            Producto = producto;
+            Producto productoSeleccionado= Mercado.BuscarProductoPorId(1);
             InitializeComponent();
-            lblProductoNombre.Text = "PRODUCTO: " + producto.Nombre;
-            lblPrecioProducto.Text = "PRECIO: $" + producto.Precio;
-            lblCategoriaProducto.Text = "CATEGORIA: " + producto.Cat.Nombre;
+
+
+
+            lblProductoNombre.Text = "PRODUCTO: "; //+ producto.Nombre;
+            lblPrecioProducto.Text = "PRECIO: $"; //+ producto.Precio;
+            lblCategoriaProducto.Text = "CATEGORIA: "; //+ producto.Cat.Nombre;
         }
 
         private void button1_Click(object sender, EventArgs e)

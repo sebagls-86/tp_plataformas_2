@@ -449,20 +449,19 @@ namespace tp_plataformas_2
 
         public Categoria BuscarCategoriaPorNombre(string Nombre)
         {
-            Categoria categoriaEncontrada = null;
-            foreach (Categoria categoria in categorias)
-            {
-                if (categoria.Nombre.Equals(Nombre))
-                {
-                    categoriaEncontrada = categoria;
-                }
-            }
-            if (categoriaEncontrada == null)
-            {
-                throw new Excepciones("No se encontró la categoria.");
-            }
-            return categoriaEncontrada;
+
+            Categoria categoria = db.categorias.Where(cat => cat.Nombre == Nombre).FirstOrDefault();
+                        
+            return categoria;
         }
+
+
+
+
+
+
+
+
 
         public Categoria[] MostrarCategorias()
         {
@@ -741,28 +740,21 @@ namespace tp_plataformas_2
 
             Compra compra = new Compra(usuario.UsuarioId, precioTotal);
 
-            // compra.CompraProducto = new List<Producto>();
-
-          
-             //foreach (Carro_productos carroprod in usuario.Carro.Carro_productos)
-             //   compra.CompraProducto.Add(carroprod., precioTotal);
-
-             
             db.compras.Add(compra);
             db.SaveChanges();
 
-
            var datosCarrito = db.Carro_productos.Where(us => us.Id_Carro == ID_Usuario);
-
-
 
             foreach(var p in datosCarrito.ToList())
             {
              Productos_compra comprado = new Productos_compra(compra.CompraId, p.Id_Producto, p.Cantidad);
                 db.Productos_compra.Add(comprado);
+                ActualizarStockProducto(p.Id_Producto, p.Cantidad);
                 db.SaveChanges();
 
             }
+
+            
 
 
             //foreach (Producto p in compra.CompraProducto)
@@ -771,11 +763,9 @@ namespace tp_plataformas_2
 
            
             sePudoComprar = true;
-
-                        
+                                    
             return sePudoComprar;
-
-           
+                       
         }
 
 
@@ -849,6 +839,19 @@ namespace tp_plataformas_2
 
             return producto;
         }
+
+
+        public Producto BuscarProductoPorNombre(string busca)
+        {
+
+            Producto producto = db.productos.Where(u => busca.Contains(u.Nombre)).FirstOrDefault();
+
+            return producto;
+        }
+
+
+
+
 
         public Producto BuscarProductosPorPrecio(int Id)
         {

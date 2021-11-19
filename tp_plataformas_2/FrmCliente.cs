@@ -62,7 +62,23 @@ namespace tp_plataformas_2
         {
             string productoBuscar = txtBuscarProductos.Text.ToUpper();
             txtBuscarProductos.Text = "";
-            dgvProductos.DataSource = Mercado.productos.FindAll(producto => producto.Nombre.ToUpper().Contains(productoBuscar));
+            // dgvProductos.DataSource = Mercado.productos.FindAll(producto => producto.Nombre.ToUpper().Contains(productoBuscar));
+
+
+            dgvProductos.Rows.Clear();
+
+            Producto prod = Mercado.BuscarProductoPorNombre(productoBuscar);
+
+
+            dgvProductos.Rows.Add(prod.ProductoId, prod.Nombre, prod.Precio, prod.Cantidad, prod.CatId);
+
+            //dgvProductos.Rows.Clear();
+
+            //foreach (Producto produc in Mercado.BuscarProductoPorNombre(productoBuscar))
+            //    dgvProductos.Rows.Add(prod.ProductoId, prod.Nombre, prod.Precio, prod.Cantidad, prod.CatId);
+
+
+
         }
 
         private void pbCarro_Click(object sender, EventArgs e)
@@ -104,7 +120,15 @@ namespace tp_plataformas_2
         {
             String nombre = "" + dgvCategorias.Rows[e.RowIndex].Cells[1].Value.ToString();
             Categoria categoria = Mercado.BuscarCategoriaPorNombre(nombre);
-            dgvProductos.DataSource = Mercado.MostrarProductoEnPantallaPorCategoria(categoria.CatId);
+           
+
+            dgvProductos.Rows.Clear();
+
+            foreach (Producto prod in Mercado.MostrarProductoEnPantallaPorCategoria(categoria.CatId))
+                dgvProductos.Rows.Add(prod.ProductoId, prod.Nombre, prod.Precio, prod.Cantidad, prod.CatId);
+
+
+
         }
 
         private void dgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -124,7 +148,11 @@ namespace tp_plataformas_2
         private void btnOrdenarProductos_Click(object sender, EventArgs e)
         {
             int indiceSeleccionado = comboOrdenarProductos.SelectedIndex;
-            dgvProductos.DataSource = Mercado.MostrarProductosOrdenados(indiceSeleccionado);
+           
+            dgvProductos.Rows.Clear();
+
+            foreach (Producto prod in Mercado.MostrarProductosOrdenados(indiceSeleccionado))
+                dgvProductos.Rows.Add(prod.ProductoId, prod.Nombre, prod.Precio, prod.Cantidad, prod.CatId);
 
         }
 

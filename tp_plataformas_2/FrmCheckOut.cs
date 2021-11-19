@@ -28,8 +28,7 @@ namespace tp_plataformas_2
             Mercado = mercado;
             Usuario = usuario;
             double productoPrecio = 0;
-            List<Producto> productos = new List<Producto>();
-            
+                       
             dgvProductos.Rows.Clear();
 
            
