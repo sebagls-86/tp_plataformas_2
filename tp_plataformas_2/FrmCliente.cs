@@ -12,7 +12,7 @@ namespace tp_plataformas_2
         public FrmCliente(Usuario usuario)
         {
             Usuario = usuario;
-            Mercado = new Mercado();
+            //Mercado = new Mercado();
             InitializeComponent();
             lblCantidadProductosEnCarro.Text = "" + usuario.Carro.Carro_productos.Count;
         }
@@ -99,14 +99,19 @@ namespace tp_plataformas_2
 
         private void dgvCategorias_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            String nombre = "" + dgvCategorias.Rows[e.RowIndex].Cells[1].Value.ToString();
+            try {  
+                String nombre = "" + dgvCategorias.Rows[e.RowIndex].Cells[1].Value.ToString();
             Categoria categoria = Mercado.BuscarCategoriaPorNombre(nombre);
            
             dgvProductos.Rows.Clear();
 
             foreach (Producto prod in Mercado.MostrarProductoEnPantallaPorCategoria(categoria.CatId))
                 dgvProductos.Rows.Add(prod.ProductoId, prod.Nombre, prod.Precio, prod.Cantidad, prod.CatId);
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void dgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

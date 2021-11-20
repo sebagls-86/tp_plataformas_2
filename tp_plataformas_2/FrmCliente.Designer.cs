@@ -62,9 +62,9 @@ namespace tp_plataformas_2
             this.label3 = new System.Windows.Forms.Label();
             this.lblCantidadProductosEnCarro = new System.Windows.Forms.Label();
             this.dgvCategorias = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Id_Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre_Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarro)).BeginInit();
@@ -373,11 +373,18 @@ namespace tp_plataformas_2
             this.dgvCategorias.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategorias_CellDoubleClick);
             this.dgvCategorias.DoubleClick += new System.EventHandler(this.dgvCategorias_DoubleClick);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // Id_Categoria
             // 
             this.Id_Categoria.HeaderText = "Codigo de Categoria";
             this.Id_Categoria.MinimumWidth = 8;
             this.Id_Categoria.Name = "Id_Categoria";
+            this.Id_Categoria.ReadOnly = true;
             this.Id_Categoria.Width = 150;
             // 
             // Nombre_Categoria
@@ -385,13 +392,8 @@ namespace tp_plataformas_2
             this.Nombre_Categoria.HeaderText = "Nombre";
             this.Nombre_Categoria.MinimumWidth = 8;
             this.Nombre_Categoria.Name = "Nombre_Categoria";
+            this.Nombre_Categoria.ReadOnly = true;
             this.Nombre_Categoria.Width = 150;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // FrmCliente
             // 
@@ -459,12 +461,12 @@ namespace tp_plataformas_2
         private System.Windows.Forms.ToolStripMenuItem lopezEmmanuelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lopezSosaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem motzoFrancoToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id_Categoria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_Categoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn Prod_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre_producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn precioProd;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn catProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_Categoria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_Categoria;
     }
 }

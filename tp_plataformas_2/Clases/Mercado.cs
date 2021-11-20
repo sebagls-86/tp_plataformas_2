@@ -38,7 +38,6 @@ namespace tp_plataformas_2
             db.productos.Load();
             db.compras.Load();
             db.carro.Load();
-
         }
 
         public List<Producto> todosProductos()
@@ -163,28 +162,23 @@ namespace tp_plataformas_2
         {
             try
             {
+                Usuario usuario = db.usuarios.Where(u => u.Cuil == cuil).FirstOrDefault();
 
-                foreach (Usuario persona in usuarios)
+                if (usuario != null)
                 {
-                    if (persona.Cuil == cuil)
-                    {
-                        return false;
-                    }
-
+                    return false;
                 }
 
                 int cantCarros = db.usuarios.Count() + 1;
-                Carro carro = new Carro(cantCarros, cantCarros);
+                Carro carro = new Carro { CarroId = cantCarros, UsuarioId = cantCarros };
                 Usuario nuevo = new Usuario { UsuarioId = cantCarros, Cuil = cuil, Nombre = nombre, Apellido = apellido, Mail = mail, Password = password, Carro = carro, TipoUsuario = tipoUsuario };
 
-                carro.Usuario = nuevo;
-
+               
                 db.usuarios.Add(nuevo);
                 db.carro.Add(carro);
-
-
                 db.SaveChanges();
                 return true;
+
             }
             catch (Exception)
             {
@@ -290,11 +284,9 @@ namespace tp_plataformas_2
                     {
                         categoria.Nombre = nombre;
 
-
                         var cat = db.categorias.Where(c => c.Nombre == " ").FirstOrDefault();
                         cat.Nombre = nombre;
                         var respuesta = db.SaveChanges();
-
 
                         break;
                     }
@@ -313,7 +305,6 @@ namespace tp_plataformas_2
 
                     if (seGuardo > 0)
                     {
-
                         int auxiliar = 0;
                         int j = 0;
 
@@ -330,9 +321,7 @@ namespace tp_plataformas_2
                         } while (auxiliar == 0);
                     }
                 }
-
                 return true;
-
             }
 
             return false;
@@ -355,7 +344,6 @@ namespace tp_plataformas_2
                 return false;
             }
 
-
             return true;
         }
 
@@ -372,13 +360,11 @@ namespace tp_plataformas_2
                 }
                 if (encontre)
                 {
-
                     categorias[i].Nombre = " ";
 
                     var cat = db.categorias.Where(c => c.CatId == ID).FirstOrDefault();
                     cat.Nombre = " ";
                     db.SaveChanges();
-
                 }
 
                 i++;
@@ -386,13 +372,9 @@ namespace tp_plataformas_2
             return encontre;
         }
 
-
-
         public Categoria BuscarCategoriaPorNombre(string Nombre)
         {
-
             Categoria categoria = db.categorias.Where(cat => cat.Nombre == Nombre).FirstOrDefault();
-                        
             return categoria;
         }
 
@@ -400,7 +382,6 @@ namespace tp_plataformas_2
         {
             return categorias;
         }
-
 
         public bool AgregarAlCarro(int Id_Producto, int Cantidad, int Id_Usuario)
         {
@@ -433,7 +414,6 @@ namespace tp_plataformas_2
                     db.SaveChanges();
 
                     sePudoAgregar = true;
-
                 }
             }
             return sePudoAgregar;
@@ -459,11 +439,9 @@ namespace tp_plataformas_2
 
         public void Vaciar(int Id_Usuario)
         {
-
            var carroABorrar = db.Carro_productos.Where(carro => carro.Id_Carro == Id_Usuario);
            db.Carro_productos.RemoveRange(carroABorrar);
            db.SaveChanges();
-
         }
 
 
@@ -477,8 +455,6 @@ namespace tp_plataformas_2
 
             foreach (Carro_productos producto in mostrarCarroPantalla(ID_Usuario))
                        precioTotal += producto.Cantidad * producto.Producto.Precio;
-
-
 
             precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
 
@@ -499,7 +475,6 @@ namespace tp_plataformas_2
             }
                                    
             sePudoComprar = true;
-                                    
             return sePudoComprar;
                        
         }

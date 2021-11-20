@@ -19,7 +19,7 @@ namespace tp_plataformas_2
         public FrmRegistrarUsuario()
         {
             InitializeComponent();
-            Mercado = new Mercado();
+            //Mercado = new Mercado();
         }
 
         public FrmRegistrarUsuario(Mercado mercado)

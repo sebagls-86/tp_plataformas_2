@@ -38,10 +38,10 @@ namespace tp_plataformas_2
             modelBuilder.Entity<Carro>()
            .HasOne(u => u.Usuario)
            .WithOne(x => x.Carro)
-           .HasForeignKey<Usuario>(c => c.MiCarro)
+           .HasForeignKey<Carro>(c => c.UsuarioId)
            .OnDelete(DeleteBehavior.Cascade);
 
-
+          
             modelBuilder.Entity<Categoria>()
           .HasKey(pk =>pk.CatId);
 

@@ -12,7 +12,7 @@ namespace tp_plataformas_2
         public FrmDetalleProducto(Producto producto, Usuario comprador)
         {
             Comprador = comprador;
-            Mercado = new Mercado();
+            //Mercado = new Mercado();
             InitializeComponent();
         }
 
