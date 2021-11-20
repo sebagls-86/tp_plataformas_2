@@ -18,6 +18,7 @@ namespace tp_plataformas_2
             {
                 components.Dispose();
             }
+            Mercado.cerrar();
             base.Dispose(disposing);
         }
 
@@ -45,6 +46,11 @@ namespace tp_plataformas_2
             this.lopezSosaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.motzoFrancoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.idProdCarro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCarro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantCarro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio_unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalCarro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,11 +63,6 @@ namespace tp_plataformas_2
             this.button3 = new System.Windows.Forms.Button();
             this.lblTituloTotal = new System.Windows.Forms.Label();
             this.lblTotalPrecio = new System.Windows.Forms.Label();
-            this.idProdCarro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCarro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantCarro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio_unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalCarro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -192,6 +193,41 @@ namespace tp_plataformas_2
             this.dgvProductos.TabIndex = 14;
             this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
             // 
+            // idProdCarro
+            // 
+            this.idProdCarro.HeaderText = "Id Producto";
+            this.idProdCarro.MinimumWidth = 8;
+            this.idProdCarro.Name = "idProdCarro";
+            this.idProdCarro.Width = 150;
+            // 
+            // ProdCarro
+            // 
+            this.ProdCarro.HeaderText = "Producto";
+            this.ProdCarro.MinimumWidth = 8;
+            this.ProdCarro.Name = "ProdCarro";
+            this.ProdCarro.Width = 150;
+            // 
+            // cantCarro
+            // 
+            this.cantCarro.HeaderText = "Cantidad";
+            this.cantCarro.MinimumWidth = 8;
+            this.cantCarro.Name = "cantCarro";
+            this.cantCarro.Width = 150;
+            // 
+            // precio_unidad
+            // 
+            this.precio_unidad.HeaderText = "Precio por unidad";
+            this.precio_unidad.MinimumWidth = 8;
+            this.precio_unidad.Name = "precio_unidad";
+            this.precio_unidad.Width = 150;
+            // 
+            // totalCarro
+            // 
+            this.totalCarro.HeaderText = "Total";
+            this.totalCarro.MinimumWidth = 8;
+            this.totalCarro.Name = "totalCarro";
+            this.totalCarro.Width = 150;
+            // 
             // ID
             // 
             this.ID.HeaderText = "ID Producto";
@@ -310,41 +346,6 @@ namespace tp_plataformas_2
             this.lblTotalPrecio.Text = "ARS 1500";
             this.lblTotalPrecio.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // idProdCarro
-            // 
-            this.idProdCarro.HeaderText = "Id Producto";
-            this.idProdCarro.MinimumWidth = 8;
-            this.idProdCarro.Name = "idProdCarro";
-            this.idProdCarro.Width = 150;
-            // 
-            // ProdCarro
-            // 
-            this.ProdCarro.HeaderText = "Producto";
-            this.ProdCarro.MinimumWidth = 8;
-            this.ProdCarro.Name = "ProdCarro";
-            this.ProdCarro.Width = 150;
-            // 
-            // cantCarro
-            // 
-            this.cantCarro.HeaderText = "Cantidad";
-            this.cantCarro.MinimumWidth = 8;
-            this.cantCarro.Name = "cantCarro";
-            this.cantCarro.Width = 150;
-            // 
-            // precio_unidad
-            // 
-            this.precio_unidad.HeaderText = "Precio por unidad";
-            this.precio_unidad.MinimumWidth = 8;
-            this.precio_unidad.Name = "precio_unidad";
-            this.precio_unidad.Width = 150;
-            // 
-            // totalCarro
-            // 
-            this.totalCarro.HeaderText = "Total";
-            this.totalCarro.MinimumWidth = 8;
-            this.totalCarro.Name = "totalCarro";
-            this.totalCarro.Width = 150;
-            // 
             // FrmCheckOut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -369,6 +370,7 @@ namespace tp_plataformas_2
             this.Name = "FrmCheckOut";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carro de compras";
+            
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();

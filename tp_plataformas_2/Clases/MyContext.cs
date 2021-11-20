@@ -24,16 +24,16 @@ namespace tp_plataformas_2
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>()
-          .HasKey(pk => new { pk.UsuarioId });
+          .HasKey(pk => pk.UsuarioId);
 
             modelBuilder.Entity<Usuario>()
            .HasOne(u => u.Carro)
            .WithOne(x => x.Usuario)
-           .HasForeignKey<Carro>(c => c.UsuarioId)
+           .HasForeignKey<Carro>(x => x.UsuarioId)
            .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Carro>()
-            .HasKey(pk => pk.CarroId);
+            .HasKey(pk => pk.id);
 
             modelBuilder.Entity<Carro>()
            .HasOne(u => u.Usuario)
@@ -64,7 +64,7 @@ namespace tp_plataformas_2
 
 
             modelBuilder.Entity<Productos_compra>()
-             .HasKey(pk => new { pk.Id });
+             .HasKey(pk => pk.Id);
 
             modelBuilder.Entity<Productos_compra>()
              .HasOne(u => u.Producto)
@@ -77,7 +77,7 @@ namespace tp_plataformas_2
              .HasForeignKey(c => c.Id_compra);
 
             modelBuilder.Entity<Carro_productos>()
-             .HasKey(pk => new { pk.Carro_productos_Id });
+             .HasKey(pk => pk.Carro_productos_Id);
 
             modelBuilder.Entity<Carro_productos>()
              .HasOne(u => u.Carro)

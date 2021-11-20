@@ -7,19 +7,6 @@ namespace tp_plataformas_2.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "carro",
-                columns: table => new
-                {
-                    CarroId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_carro", x => x.CarroId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "categorias",
                 columns: table => new
                 {
@@ -49,12 +36,6 @@ namespace tp_plataformas_2.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_usuarios", x => x.UsuarioId);
-                    table.ForeignKey(
-                        name: "FK_usuarios_carro_MiCarro",
-                        column: x => x.MiCarro,
-                        principalTable: "carro",
-                        principalColumn: "CarroId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,6 +57,25 @@ namespace tp_plataformas_2.Migrations
                         column: x => x.CatId,
                         principalTable: "categorias",
                         principalColumn: "CatId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "carro",
+                columns: table => new
+                {
+                    CarroId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_carro", x => x.CarroId);
+                    table.ForeignKey(
+                        name: "FK_carro_usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "usuarios",
+                        principalColumn: "UsuarioId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -178,14 +178,15 @@ namespace tp_plataformas_2.Migrations
                 name: "Productos_compra",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Id_compra = table.Column<int>(type: "int", nullable: false),
                     Id_producto = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     Cantidad_producto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Productos_compra", x => new { x.Id_producto, x.Id_compra });
+                    table.PrimaryKey("PK_Productos_compra", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Productos_compra_compras_Id_compra",
                         column: x => x.Id_compra,
@@ -199,6 +200,12 @@ namespace tp_plataformas_2.Migrations
                         principalColumn: "ProductoId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_carro_UsuarioId",
+                table: "carro",
+                column: "UsuarioId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carro_productos_Id_Carro",
@@ -236,10 +243,9 @@ namespace tp_plataformas_2.Migrations
                 column: "Id_compra");
 
             migrationBuilder.CreateIndex(
-                name: "IX_usuarios_MiCarro",
-                table: "usuarios",
-                column: "MiCarro",
-                unique: true);
+                name: "IX_Productos_compra_Id_producto",
+                table: "Productos_compra",
+                column: "Id_producto");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -257,6 +263,9 @@ namespace tp_plataformas_2.Migrations
                 name: "Productos_compra");
 
             migrationBuilder.DropTable(
+                name: "carro");
+
+            migrationBuilder.DropTable(
                 name: "compras");
 
             migrationBuilder.DropTable(
@@ -267,9 +276,6 @@ namespace tp_plataformas_2.Migrations
 
             migrationBuilder.DropTable(
                 name: "categorias");
-
-            migrationBuilder.DropTable(
-                name: "carro");
         }
     }
 }

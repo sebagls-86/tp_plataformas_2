@@ -18,6 +18,7 @@ namespace tp_plataformas_2
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 

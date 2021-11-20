@@ -582,5 +582,10 @@ namespace tp_plataformas_2
             return esAdmin;
         }
 
+        public void cerrar()
+        {
+            db.Dispose();
+        }
+
     }
 }

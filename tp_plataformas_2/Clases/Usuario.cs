@@ -14,8 +14,8 @@ namespace tp_plataformas_2
         public string Mail { get; set; }
         public string Password { get; set; }
         public Carro Carro { get; set; }
-        public int TipoUsuario { get; set; }
         public int MiCarro { get; set; }
+        public int TipoUsuario { get; set; }
         public List<Compra> Compra { get; set; }
 
 

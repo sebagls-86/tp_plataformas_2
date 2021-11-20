@@ -9,8 +9,8 @@ using tp_plataformas_2;
 namespace tp_plataformas_2.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20211120025506_sexta")]
-    partial class sexta
+    [Migration("20211120125830_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

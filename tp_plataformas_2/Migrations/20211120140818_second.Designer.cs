@@ -9,8 +9,8 @@ using tp_plataformas_2;
 namespace tp_plataformas_2.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20211120010853_cuarta")]
-    partial class cuarta
+    [Migration("20211120140818_second")]
+    partial class second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,13 +22,13 @@ namespace tp_plataformas_2.Migrations
 
             modelBuilder.Entity("CarroProducto", b =>
                 {
-                    b.Property<int>("CarroProductoCarroId")
+                    b.Property<int>("CarroProductoid")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductosCompraProductoId")
                         .HasColumnType("int");
 
-                    b.HasKey("CarroProductoCarroId", "ProductosCompraProductoId");
+                    b.HasKey("CarroProductoid", "ProductosCompraProductoId");
 
                     b.HasIndex("ProductosCompraProductoId");
 
@@ -52,15 +52,18 @@ namespace tp_plataformas_2.Migrations
 
             modelBuilder.Entity("tp_plataformas_2.Carro", b =>
                 {
-                    b.Property<int>("CarroId")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CarroId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.HasKey("CarroId");
+                    b.HasKey("id");
 
                     b.HasIndex("UsuarioId")
                         .IsUnique();
@@ -216,7 +219,7 @@ namespace tp_plataformas_2.Migrations
                 {
                     b.HasOne("tp_plataformas_2.Carro", null)
                         .WithMany()
-                        .HasForeignKey("CarroProductoCarroId")
+                        .HasForeignKey("CarroProductoid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

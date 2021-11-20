@@ -18,6 +18,7 @@ namespace tp_plataformas_2
             {
                 components.Dispose();
             }
+            Mercado.cerrar();
             base.Dispose(disposing);
         }
 

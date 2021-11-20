@@ -7,6 +7,7 @@ namespace tp_plataformas_2
     public class Carro
     {
 
+        public int id { get; set; }
         public int CarroId { get; set; }
         public Usuario Usuario { get; set; }
         public int UsuarioId { get; set; }
