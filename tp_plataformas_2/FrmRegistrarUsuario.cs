@@ -24,8 +24,9 @@ namespace tp_plataformas_2
 
         public FrmRegistrarUsuario(Mercado mercado)
         {
-            InitializeComponent();
             Mercado = mercado;
+            InitializeComponent();
+            
         }
 
         private void mnuSalir_Click(object sender, EventArgs e)
@@ -78,63 +79,43 @@ namespace tp_plataformas_2
 
                 {
                     throw new Excepciones("Por favor complete todos los campos");
-
                 }
 
                 else
                 {
-
                     try
                     {
-
-                        //int cuitI = Int32.TryParse(cuil out );
-                        try
+                        bool esParseable = Int32.TryParse(cuil, out cuilUsuario);
+                        if (!esParseable)
                         {
-
-                            bool esParseable = Int32.TryParse(cuil, out cuilUsuario);
-                            if (!esParseable)
-                            {
-                                throw new Excepciones("El valor ingresado en CUIL no se pudo parsear a INT.");
-                            }
-                            bool Agrega = Mercado.AgregarUsuario(cuilUsuario, nombre, apellido, mail, password, tipoUsuario);
-
-                            if (Agrega == true)
-                            {
-
-                                MessageBox.Show("Usuario creado con exito");
-
-                                FrmMain VtnaConfiguracion = new FrmMain(Mercado);
-                                VtnaConfiguracion.Show();
-
-                                this.Hide();
-
-                            }
-                            else
-                            {
-                                throw new Excepciones("CUIT ya ingresado");
-                            }
+                            throw new Excepciones("El valor ingresado en CUIL no se pudo parsear a INT.");
                         }
-                        catch (Exception ex)
-                        {
+                        bool Agrega = Mercado.AgregarUsuario(cuilUsuario, nombre, apellido, mail, password, tipoUsuario);
 
-                            MessageBox.Show(ex.StackTrace);
-                            //MessageBox.Show(ex.Message);
+                        if (Agrega == true)
+                        {
+                            MessageBox.Show("Usuario creado con exito");
+
+                            FrmMain VtnaConfiguracion = new FrmMain(Mercado);
+                            VtnaConfiguracion.Show();
+
+                            this.Hide();
+
+                        }
+                        else
+                        {
+                            throw new Excepciones("CUIT ya ingresado");
                         }
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.StackTrace);
-                        //MessageBox.Show("El cuit debe ser numerico");
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.StackTrace);
-
             }
 
         }

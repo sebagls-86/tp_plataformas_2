@@ -33,18 +33,12 @@ namespace tp_plataformas_2
            
             lblMainTitle.Text = "Categorias";
 
-            dataTableCategorias.DataSource = Mercado.MostrarCategorias();
-            dataTableCategorias.Width = 300;
+            dataTableCategorias.Rows.Clear();
 
-            dataTableCategorias.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataTableCategorias.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            foreach (Categoria cat in Mercado.todasCategorias())
+                dataTableCategorias.Rows.Add(cat.toArray());
 
-            dataTableCeliminar.DataSource = Mercado.MostrarCategorias();
-            dataTableCeliminar.Width = 300;
-
-            dataTableCeliminar.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataTableCeliminar.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
+           
         }
 
         private void btnProductos_Click(object sender, EventArgs e)
@@ -511,7 +505,15 @@ namespace tp_plataformas_2
             Application.Exit();
         }
 
-        
+        private void dgvUsuariosLista_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataTableCategorias_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
 

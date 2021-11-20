@@ -34,9 +34,11 @@ namespace tp_plataformas_2
             this.panelCategorias = new System.Windows.Forms.Panel();
             this.tabUsuarios = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataTableCategorias = new System.Windows.Forms.DataGridView();
+            this.CatId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NomCat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.label40 = new System.Windows.Forms.Label();
-            this.dataTableCategorias = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.btnCategoriaAgregar = new System.Windows.Forms.Button();
@@ -81,6 +83,12 @@ namespace tp_plataformas_2
             this.pictureCategorias = new System.Windows.Forms.PictureBox();
             this.label13 = new System.Windows.Forms.Label();
             this.dgvUsuariosLista = new System.Windows.Forms.DataGridView();
+            this.ID_Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CUIL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CarroId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.txtCuil = new System.Windows.Forms.TextBox();
@@ -187,17 +195,11 @@ namespace tp_plataformas_2
             this.lblMainTitle = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.btnExit = new System.Windows.Forms.Button();
-            this.ID_Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CUIL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CarroId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelCategorias.SuspendLayout();
             this.tabUsuarios.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableCategorias)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.tabPage3.SuspendLayout();
@@ -264,9 +266,9 @@ namespace tp_plataformas_2
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.dataTableCategorias);
             this.tabPage2.Controls.Add(this.pictureBox8);
             this.tabPage2.Controls.Add(this.label40);
-            this.tabPage2.Controls.Add(this.dataTableCategorias);
             this.tabPage2.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.tabPage2.Location = new System.Drawing.Point(4, 41);
             this.tabPage2.Name = "tabPage2";
@@ -275,6 +277,34 @@ namespace tp_plataformas_2
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Listado";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dataTableCategorias
+            // 
+            this.dataTableCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataTableCategorias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CatId,
+            this.NomCat});
+            this.dataTableCategorias.Location = new System.Drawing.Point(46, 75);
+            this.dataTableCategorias.Name = "dataTableCategorias";
+            this.dataTableCategorias.RowHeadersWidth = 62;
+            this.dataTableCategorias.RowTemplate.Height = 25;
+            this.dataTableCategorias.Size = new System.Drawing.Size(535, 193);
+            this.dataTableCategorias.TabIndex = 6;
+            this.dataTableCategorias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTableCategorias_CellContentClick);
+            // 
+            // CatId
+            // 
+            this.CatId.HeaderText = "Id Categoria";
+            this.CatId.MinimumWidth = 8;
+            this.CatId.Name = "CatId";
+            this.CatId.Width = 150;
+            // 
+            // NomCat
+            // 
+            this.NomCat.HeaderText = "Nombre";
+            this.NomCat.MinimumWidth = 8;
+            this.NomCat.Name = "NomCat";
+            this.NomCat.Width = 150;
             // 
             // pictureBox8
             // 
@@ -293,16 +323,6 @@ namespace tp_plataformas_2
             this.label40.Size = new System.Drawing.Size(298, 40);
             this.label40.TabIndex = 7;
             this.label40.Text = "Listado de Categorias";
-            // 
-            // dataTableCategorias
-            // 
-            this.dataTableCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataTableCategorias.Location = new System.Drawing.Point(46, 75);
-            this.dataTableCategorias.Name = "dataTableCategorias";
-            this.dataTableCategorias.RowHeadersWidth = 62;
-            this.dataTableCategorias.RowTemplate.Height = 25;
-            this.dataTableCategorias.Size = new System.Drawing.Size(535, 193);
-            this.dataTableCategorias.TabIndex = 6;
             // 
             // tabPage1
             // 
@@ -747,6 +767,49 @@ namespace tp_plataformas_2
             this.dgvUsuariosLista.RowTemplate.Height = 25;
             this.dgvUsuariosLista.Size = new System.Drawing.Size(667, 260);
             this.dgvUsuariosLista.TabIndex = 0;
+            this.dgvUsuariosLista.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuariosLista_CellContentClick);
+            // 
+            // ID_Usuario
+            // 
+            this.ID_Usuario.HeaderText = "ID";
+            this.ID_Usuario.MinimumWidth = 8;
+            this.ID_Usuario.Name = "ID_Usuario";
+            this.ID_Usuario.Width = 150;
+            // 
+            // CUIL
+            // 
+            this.CUIL.HeaderText = "CUIL";
+            this.CUIL.MinimumWidth = 8;
+            this.CUIL.Name = "CUIL";
+            this.CUIL.Width = 150;
+            // 
+            // Apellido
+            // 
+            this.Apellido.HeaderText = "Apellido";
+            this.Apellido.MinimumWidth = 8;
+            this.Apellido.Name = "Apellido";
+            this.Apellido.Width = 150;
+            // 
+            // Mail
+            // 
+            this.Mail.HeaderText = "Mail";
+            this.Mail.MinimumWidth = 8;
+            this.Mail.Name = "Mail";
+            this.Mail.Width = 150;
+            // 
+            // CarroId
+            // 
+            this.CarroId.HeaderText = "Carro";
+            this.CarroId.MinimumWidth = 8;
+            this.CarroId.Name = "CarroId";
+            this.CarroId.Width = 150;
+            // 
+            // TipoUsuario
+            // 
+            this.TipoUsuario.HeaderText = "Cod Usuario";
+            this.TipoUsuario.MinimumWidth = 8;
+            this.TipoUsuario.Name = "TipoUsuario";
+            this.TipoUsuario.Width = 150;
             // 
             // tabPage7
             // 
@@ -1748,58 +1811,16 @@ namespace tp_plataformas_2
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // ID_Usuario
-            // 
-            this.ID_Usuario.HeaderText = "ID";
-            this.ID_Usuario.MinimumWidth = 8;
-            this.ID_Usuario.Name = "ID_Usuario";
-            this.ID_Usuario.Width = 150;
-            // 
-            // CUIL
-            // 
-            this.CUIL.HeaderText = "CUIL";
-            this.CUIL.MinimumWidth = 8;
-            this.CUIL.Name = "CUIL";
-            this.CUIL.Width = 150;
-            // 
-            // Apellido
-            // 
-            this.Apellido.HeaderText = "Apellido";
-            this.Apellido.MinimumWidth = 8;
-            this.Apellido.Name = "Apellido";
-            this.Apellido.Width = 150;
-            // 
-            // Mail
-            // 
-            this.Mail.HeaderText = "Mail";
-            this.Mail.MinimumWidth = 8;
-            this.Mail.Name = "Mail";
-            this.Mail.Width = 150;
-            // 
-            // CarroId
-            // 
-            this.CarroId.HeaderText = "Carro";
-            this.CarroId.MinimumWidth = 8;
-            this.CarroId.Name = "CarroId";
-            this.CarroId.Width = 150;
-            // 
-            // TipoUsuario
-            // 
-            this.TipoUsuario.HeaderText = "Cod Usuario";
-            this.TipoUsuario.MinimumWidth = 8;
-            this.TipoUsuario.Name = "TipoUsuario";
-            this.TipoUsuario.Width = 150;
-            // 
             // FrmMercadoAdm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1138, 674);
+            this.Controls.Add(this.panelCategorias);
             this.Controls.Add(this.panelUsuarios);
             this.Controls.Add(this.panelCompras);
             this.Controls.Add(this.panelProductos);
-            this.Controls.Add(this.panelCategorias);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnUsuarios);
             this.Controls.Add(this.lblMainTitle);
@@ -1814,7 +1835,6 @@ namespace tp_plataformas_2
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1160, 730);
             this.MinimumSize = new System.Drawing.Size(1160, 730);
-            
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mercado - Administrador";
             this.Load += new System.EventHandler(this.FrmMercadoAdmin_Load);
@@ -1822,8 +1842,8 @@ namespace tp_plataformas_2
             this.tabUsuarios.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableCategorias)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
@@ -2048,5 +2068,7 @@ namespace tp_plataformas_2
         private System.Windows.Forms.DataGridViewTextBoxColumn Mail;
         private System.Windows.Forms.DataGridViewTextBoxColumn CarroId;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoUsuario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CatId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NomCat;
     }
 }

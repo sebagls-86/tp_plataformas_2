@@ -572,25 +572,13 @@ namespace tp_plataformas_2
 
         public bool esAdmin(int id)
         {
-
             bool esAdmin = false;
 
-            int i = 0;
-            while (!esAdmin && i < usuarios.Count)
-            {
+            Usuario usuario = db.usuarios.Where(u => u.UsuarioId == id).FirstOrDefault();
 
-                if (esAdmin = usuarios[i].UsuarioId == id && usuarios[i].TipoUsuario == 1)
-                {
-                    esAdmin = true;
-                }
-                else if (esAdmin = usuarios[i].UsuarioId == id && usuarios[i].TipoUsuario != 1)
-                {
-                    esAdmin = false;
-                }
-
-                i++;
-
-            }
+            if(usuario.TipoUsuario == 1)
+                 esAdmin = true;
+            
             return esAdmin;
         }
 

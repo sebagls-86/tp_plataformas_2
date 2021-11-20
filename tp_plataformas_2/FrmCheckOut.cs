@@ -18,7 +18,7 @@ namespace tp_plataformas_2
         public FrmCheckOut( Usuario usuario)
         {
             InitializeComponent();
-            Mercado = new Mercado();
+           // Mercado = new Mercado();
             Usuario = usuario;
         }
 

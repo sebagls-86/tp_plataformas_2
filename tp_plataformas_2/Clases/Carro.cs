@@ -12,23 +12,11 @@ namespace tp_plataformas_2
         public int UsuarioId { get; set; }
         public ICollection<Producto> ProductosCompra { get; set; }
         public List<Carro_productos> Carro_productos { get; set; }
-        public Carro(int id, Producto producto, int cantidad)
-        {
-            CarroId = id;
-            
-        }
-
-        public Carro(int id)
-        {
-            CarroId = id;
-           
-        }
-
+        
         public Carro(int id, int usuarioId)
         {
             CarroId = id;
             UsuarioId = usuarioId;
-           
         }
 
         public Carro() { }
