@@ -1,6 +1,6 @@
 # Plataformas de desarrollo
 
-_Migrando proyecto a Windows Form + ADO.NET_
+_Windows Form + EF_CORE_
 
 ### Herramientas que utilizamos para correr el proyecto
 * C#
@@ -11,6 +11,8 @@ _Migrando proyecto a Windows Form + ADO.NET_
 Descargar o clonar repositorio:
 
     https://github.com/sebagls-86/tp_plataformas_2
+    
+Hacer un pull de la rama "ef_core"
 
 Importar base de datos alojada en:
 
