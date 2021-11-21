@@ -6,6 +6,10 @@ _Windows Form + EF_CORE_
 * C#
 * Microsoft SQL Server Management Studio
 
+### Paquetes NuGet necesarios
+* Microsoft.EntityFrameworkCore.SqlServer
+* 
+
 ### Puesta en Marcha 
 
 Descargar o clonar repositorio:
