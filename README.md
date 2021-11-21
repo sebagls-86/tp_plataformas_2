@@ -8,7 +8,9 @@ _Windows Form + EF_CORE_
 
 ### Paquetes NuGet necesarios
 * Microsoft.EntityFrameworkCore.SqlServer
-* 
+* Microsoft.EntityFrameworkCore
+* Microsoft.EntityFrameworkCore.Tools
+* System.Data.SqlClient
 
 ### Puesta en Marcha 
 
