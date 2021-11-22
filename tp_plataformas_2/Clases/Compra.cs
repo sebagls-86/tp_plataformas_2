@@ -6,39 +6,44 @@ namespace tp_plataformas_2
 {
     public class Compra : IComparable<Compra>
     {
-        public int Id { get; set; }
-        public Usuario Comprador { get; set; }
-        public Dictionary<Producto, int> Productos { get; set; }
+        public int CompraId { get; set; }
+        public Usuario Usuario { get; set; }
+        public int idUsuario { get; set; }
         public Double Total { get; set; }
+        public List<Productos_compra> Productos_compra { get; set; }
+        public ICollection<Producto> CompraProducto { get; set; } = new List<Producto>();
 
-        public Compra(int _Id, Usuario usuario, Dictionary<Producto, int> productos, Double total)
+
+        public Compra() { }
+
+        public Compra(int _Id, Usuario usuario, Double total)
         {
-            Id = _Id;
-            Comprador = usuario;
-            Productos = productos;
+            CompraId = _Id;
+            Usuario = usuario;
             Total = total;
+        }
+
+        public Compra (int usuarioId, double total)
+        {
+            this.idUsuario = usuarioId;
+            this.Total = total;
         }
 
         public int CompareTo(Compra other)
         {
-            return Id.CompareTo(other.Id);
+            return CompraId.CompareTo(other.CompraId);
         }
-        
-        private string compraRealizada()
-        {
-            string suma = "";
-            foreach(Producto prod in Productos.Keys){
-                int cantComprada = Productos[prod];
-                suma += "*" + cantComprada +"|"+ prod.Id + "|" + prod.Nombre + "|" + prod.Precio +"|" + prod.Cat + "|" + prod.Cantidad;
 
-            }
-            //idcompra idusuario idprod
-            return suma;
-        }
-         
+        
+
         public override string ToString()
         {
-            return $"{Id}|{Comprador.Id}|{Total}{compraRealizada()}";
+            return $"{CompraId}|{Usuario.UsuarioId}|{Total}";
+        }
+
+        public string[] toArray()
+        {
+            return new string[] { CompraId.ToString(), Usuario.UsuarioId.ToString(), Total.ToString() };
         }
     }
 }

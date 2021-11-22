@@ -1,10 +1,10 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace tp_plataformas_2
 {
-
 
     public class Mercado
     {
@@ -19,11 +19,11 @@ namespace tp_plataformas_2
 
         int cantCategorias = 0;
         int cantProductos;
-        /* --- Variables auxiliares  ---*/
-
+      
         private string[] contenidos = new string[10];
 
-        Conexion conexion = new Conexion();   
+        MyContext db;
+              
 
         public Mercado()
         {
@@ -32,333 +32,232 @@ namespace tp_plataformas_2
             compras = new List<Compra>();
             categorias = new Categoria[maxCategorias];
 
-            ObtenerCategorias();
-            ObtenerProductos();
-            ObtenerUsuarios();
-            ObtenerCompras();
+            db = new MyContext();
+            db.categorias.Load();
+            db.usuarios.Load();
+            db.productos.Include(u => u.CarroProducto).Include(u => u.CompraProducto).Load();
+            db.compras.Include(u => u.CompraProducto).Load();
+            db.carro.Include(u => u.ProductosCompra).Load();
+
         }
 
-        private void ObtenerCategorias()
+        public List<Producto> todosProductos()
         {
-            
-            List<Categoria> auxCategoria = conexion.getCategorias();
-
-            if (auxCategoria.Count != 0)
-            {
-                int i = 0;
-                foreach (Categoria contenido in auxCategoria)
-                {
-                    categorias[i] = contenido;
-                    i++;
-                }
-            }
-
+            return db.productos.OrderBy(propiedad => propiedad.ProductoId).ToList(); ;
         }
-        private void ObtenerProductos()
+
+        public List<Categoria> todasCategorias()
         {
-            productos = conexion.getProductos();
-
-
+            return db.categorias.OrderBy(propiedad => propiedad.CatId).ToList(); ;
         }
-        private void ObtenerUsuarios()
-        {
-            usuarios = conexion.getUsuarios();
 
-        }       
-
-        private void ObtenerCompras()
-        { 
-             compras = conexion.getCompras();
-      
-        }
         public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)
         {
-            cantProductos = conexion.cuentaRegistros("Producto") + 1;
-            int indice = idCategoria - 1;
-            if (categorias[indice] != null && categorias[indice].Id == idCategoria)
+            try
             {
-                Producto producto = new Producto(cantProductos, nombre, precio, Cantidad, categorias[indice]);
-                if (conexion.agregarProducto(producto))
+                Categoria cat = db.categorias.Where(u => u.CatId == idCategoria).FirstOrDefault();
+
+                cantProductos = db.productos.Count() + 1;
+
+                if (cat != null)
                 {
-                    this.productos.Add(producto);
+                    if (cat.Productos == null)
+                        cat.Productos = new List<Producto>();
+
+                    Producto prod = new Producto { ProductoId = cantProductos, Nombre = nombre, Precio = precio, Cantidad = Cantidad, Cat = cat };
+                    cat.Productos.Add(prod);
+                    db.productos.Add(prod);
+                    db.SaveChanges();
                     return true;
                 }
-                
+                else
+                    return false;
             }
-
-            return false;
-
+            catch (Exception e)
+            {
+                return false;
+            }
         }
+
 
         public bool ModificarProducto(int ID, string Nombre, double Precio, int Cantidad, int ID_Categoria)
         {
-            for (int i = 0; i < productos.Count; i++)
-            {
-                if (productos[i].Id == ID)
+            bool salida = false;
+            foreach (Producto u in db.productos)
+                if (u.ProductoId == ID)
                 {
-                    productos[i].Nombre = Nombre;
-                    productos[i].Precio = Precio;
-                    productos[i].Cantidad = Cantidad;
-                    productos[i].Id = ID;
-                    //productos[i].Cat = productos[ID_Categoria-1].Cat; // :)
-                    productos[i].Cat = categorias[ID_Categoria - 1];
-                    conexion.modificaProducto(productos[i]);
-                    Console.WriteLine("Producto modificado con Ã©xito " + Nombre + Precio + Cantidad + ID);
+                    u.Nombre = Nombre;
+                    u.Precio = Precio;
+                    u.Cantidad = Cantidad;
+                    u.CatId = ID_Categoria;
+                    db.productos.Update(u);
+                    salida = true;
                 }
-            }
-
-            return true;
+            if (salida)
+                db.SaveChanges();
+            return salida;
         }
 
         public bool EliminarProducto(int id)
         {
-            bool encontre = false;
-            int i = 0;
-            while (!encontre && i < productos.Count)
+            try
             {
-                encontre = productos[i].Id == id;
-                if (encontre)
-                {
-
-                    if (conexion.eliminarRegistro("Producto", productos[i].Id))
+                bool salida = false;
+                foreach (Producto u in db.productos)
+                    if (u.ProductoId == id)
                     {
-                        productos.Remove(productos[i]);
+                        db.productos.Remove(u);
+                        salida = true;
                     }
-                }
-                else
-                    i++;
+                if (salida)
+                    db.SaveChanges();
+                return salida;
             }
-            return encontre;
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-
-
-
-        public void BuscarProductos(String Query)
-        {
-            List<Producto> productosBuscados = new List<Producto>();
-
-            foreach (Producto producto in productos)
-            {
-                if (producto.Nombre.Contains(Query))
-                {
-
-                    productosBuscados.Add(producto);
-                }
-
-            }
-
-            productos.Sort();
-
-        }
-
-        public Producto BuscarProductoPorId(String Id)
-        {
-            Producto producto;
-            bool sePudoParsear = Int32.TryParse(Id, out int idProducto);
-            if (!sePudoParsear)
-            {
-                throw new Excepciones("No se pudo parsear el ID del producto buscado.");
-            }
-            else if (MercadoHelper.SonMenoresACero(new List<int> { idProducto }))
-            {
-                throw new Excepciones("El indice del producto que quiere buscar es menor a 0.");
-            }
-            else if (!MercadoHelper.ExisteElProducto(idProducto, productos))
-            {
-                throw new Excepciones("No existe el producto con ID " + idProducto);
-            }
-            else
-            {
-                producto = productos[idProducto];
-            }
-
-            return producto;
-        }
-
-
-        public void BuscarProductosPorPrecio(String Query)
-        {
-            List<Producto> productosBuscados = new List<Producto>();
-
-            foreach (Producto producto in productos)
-            {
-                if (producto.Nombre.Contains(Query))
-                {
-
-                    productosBuscados.Add(producto);
-                }
-
-            }
-            var ordenada = productosBuscados.OrderByDescending(producto => producto.Precio);
-            foreach (Producto p in ordenada)
-            {
-
-                Console.WriteLine("{0} - {1}", p.Nombre, p.Precio);
-
-            }
-
-        }
 
         public void BuscarProductosPorCategoria(int ID_Categoria)
         {
-
-            foreach (Producto producto in productos)
+            foreach (Producto producto in db.productos)
             {
-                if (producto.Cat.Id == ID_Categoria)
+                if (producto.Cat.CatId == ID_Categoria)
                 {
                     productos.Sort();
                     Console.WriteLine(producto);
                 }
-
             }
-
         }
 
         public List<Producto> MostrarProductoEnPantallaPorCategoria(int idCategoria)
         {
-            if (idCategoria < 0 || idCategoria > categorias.Length)
-            {
-                throw new Excepciones("Id de categoria fuera del rango.");
-            }
-            return productos.FindAll(producto => producto.Cat.Id == idCategoria);
+            List<Producto> salida = new List<Producto>();
+            foreach (Producto p in db.productos.Where(p => p.Cat.CatId == idCategoria))
+                salida.Add(p);
+            return salida;
         }
 
         public List<Producto> MostrarProductosOrdenados(int orden)
         {
             List<Producto> productosOrdenados = new List<Producto>();
-            if(orden < 0 || orden > 1)
+            if (orden < 0 || orden > 1)
             {
                 throw new Excepciones("El numero de orden es incorrecto.");
             }
-            if(orden == 0)
+            if (orden == 0)
             {
-                productosOrdenados = productos.OrderBy(producto => producto.Id).ToList();
-            } else
+                productosOrdenados = db.productos.OrderBy(producto => producto.ProductoId).ToList();
+            }
+            else
             {
-                productosOrdenados = productos.OrderByDescending(producto => producto.Id).ToList();
+                productosOrdenados = db.productos.OrderByDescending(producto => producto.ProductoId).ToList();
             }
             return productosOrdenados;
         }
+
+
         public bool AgregarUsuario(int cuil, String nombre, String apellido, String mail, String password, int tipoUsuario)
         {
-
-            foreach (Usuario persona in usuarios)
+            try
             {
-                if (persona.Cuil == cuil)
+                Usuario usuario = db.usuarios.Where(u => u.Cuil == cuil).FirstOrDefault();
+
+                if (usuario != null)
                 {
                     return false;
                 }
 
+                int cantCarros = db.usuarios.Count() + 1;
+                Carro carro = new Carro { CarroId = cantCarros, UsuarioId = cantCarros };
+                Usuario nuevo = new Usuario { UsuarioId = cantCarros, Cuil = cuil, Nombre = nombre, Apellido = apellido, Mail = mail, Password = password, Carro = carro, TipoUsuario = tipoUsuario };
+
+               
+                db.usuarios.Add(nuevo);
+                db.carro.Add(carro);
+                db.SaveChanges();
+                return true;
+
             }
-
-
-            int id = usuarios.Count + 1;
-            
-            Carro micarro = new Carro(id);
-            Usuario usuario = new Usuario(id, cuil, nombre, apellido, mail, password, micarro, tipoUsuario);
-            if (conexion.agregarUsuario(usuario))
+            catch (Exception)
             {
-                if (conexion.agregarCarroUsuario(micarro))
-                {
-
-                    usuarios.Add(usuario);
-                }
-                
+                return false;
             }
-            Console.WriteLine("La empresa fue creada con exito");
-
-
-
-
-            return true;
-
         }
+
+
+
         public bool ModificarUsuario(int ID, String nombre, String apellido, String mail, String password, int tipoUsuario)
         {
-
-            bool encontre = false;
-            int i = 0;
-            int id = ID - 1;
-            while (!encontre && i < usuarios.Count)
-            {
-                encontre = usuarios[i].Id == id;
-                if (encontre)
+            bool salida = false;
+            foreach (Usuario u in db.usuarios)
+                if (u.UsuarioId == ID)
                 {
-
-                    usuarios[id].Nombre = nombre;
-                    usuarios[id].Apellido = apellido;
-                    usuarios[id].Mail = mail;
-                    usuarios[id].Password = password;
-                    usuarios[id].TipoUsuario = tipoUsuario;
-                    conexion.modificaUsuario(usuarios[id]);
-                    //FileManager.SaveListUsuarios(usuarios);
+                    u.Nombre = nombre;
+                    u.Apellido = apellido;
+                    u.Mail = mail;
+                    u.Password = password;
+                    u.TipoUsuario = tipoUsuario;
+                    db.usuarios.Update(u);
+                    salida = true;
                 }
-                else
-                    i++;
-            }
-            return encontre;
-
-
-
+            if (salida)
+                db.SaveChanges();
+            return salida;
         }
-
 
 
         public bool EliminarUsuario(int id)
         {
-            bool encontre = false;
-            int i = 0;
-            while (!encontre && i < usuarios.Count)
+            try
             {
-                encontre = usuarios[i].Id == id;
-                if (encontre)
-                {
-
-
-                    //FileManager.SaveListUsuarios(usuarios);
-                    //eliminar usuario y carro del usuario
-                    if (conexion.eliminarRegistro("Carro", usuarios[i].MiCarro.Id))
+                bool salida = false;
+                foreach (Usuario u in db.usuarios)
+                    if (u.UsuarioId == id)
                     {
-                        conexion.eliminarRegistro("Usuario", usuarios[i].Id);
-                        usuarios.Remove(usuarios[i]);
+                        db.usuarios.Remove(u);
+                        salida = true;
                     }
-                }
-                else
-                    i++;
+                if (salida)
+                    db.SaveChanges();
+                return salida;
             }
-            return encontre;
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
 
-        public List<Usuario> MostrarUsuarios()
+        public List<Usuario> MostrarUsuarioEnPantalla()
         {
 
-            usuarios.Sort();
+            List<Usuario> salida = new List<Usuario>();
+            foreach (Usuario u in db.usuarios)
+                salida.Add(u);
+            return salida;
+        }
+        public List<Usuario> MostrarUsuarios()
+        {
+            return db.usuarios.OrderBy(propiedad => propiedad.UsuarioId).ToList();
 
-
-            return usuarios;
         }
 
         public Usuario BuscarUsuarioPorId(String Id)
         {
-            Usuario usuario;
+            
             bool sePudoParsear = Int32.TryParse(Id, out int idUsuario);
+            Usuario usuario = db.usuarios.Where(u => u.UsuarioId == idUsuario).FirstOrDefault();
             if (!sePudoParsear)
             {
                 throw new Excepciones("No se puede parsear.");
-            }
-            else if (MercadoHelper.SonMenoresACero(new List<int> { idUsuario }))
-            {
+            } else if (usuario == null) {
                 throw new Excepciones("Este usuario no existe");
-            }
-            else if (!MercadoHelper.ExisteElUsuario(idUsuario, usuarios))
+            }else
             {
-                throw new Excepciones("No existe el producto con ID " + idUsuario);
-            }
-            else
-            {
-                usuario = usuarios[idUsuario - 1];
+                usuario = db.usuarios.Where(u => u.UsuarioId == idUsuario).FirstOrDefault(); ;
             }
 
             return usuario;
@@ -385,13 +284,16 @@ namespace tp_plataformas_2
                     if (categoria.Nombre.Equals(" "))
                     {
                         categoria.Nombre = nombre;
-                        conexion.modificarCategoria(categoria);
-                        
+
+                        var cat = db.categorias.Where(c => c.Nombre == " ").FirstOrDefault();
+                        cat.Nombre = nombre;
+                        var respuesta = db.SaveChanges();
+
                         break;
                     }
                 }
             }
-            cantCategorias = conexion.cuentaRegistros("Categoria");
+            cantCategorias = db.categorias.Count();
             if (cantCategorias <= maxCategorias)
 
             {
@@ -399,9 +301,11 @@ namespace tp_plataformas_2
                 if (BuscarCategoria(id))
                 {
                     Categoria categoria = new Categoria(id, nombre);
-                    if (conexion.agregarCategoria(categoria))
-                    {
+                    db.categorias.Add(categoria);
+                    var seGuardo = db.SaveChanges();
 
+                    if (seGuardo > 0)
+                    {
                         int auxiliar = 0;
                         int j = 0;
 
@@ -418,14 +322,7 @@ namespace tp_plataformas_2
                         } while (auxiliar == 0);
                     }
                 }
-
-
-
-
-
-                FileManager.SaveArrayCategorias(categorias);
                 return true;
-
             }
 
             return false;
@@ -433,17 +330,20 @@ namespace tp_plataformas_2
 
         public bool ModificarCategoria(int ID, string Nombre)
         {
-            ID = ID - 1;
-            if (categorias[ID] != null)
+
+            if (categorias[ID - 1] != null)
             {
-                categorias[ID].Nombre = Nombre;
-                conexion.modificarCategoria(categorias[ID]);
+                categorias[ID - 1].Nombre = Nombre;
+
+                var cat = db.categorias.Where(c => c.CatId == ID).FirstOrDefault();
+                cat.Nombre = Nombre;
+                db.SaveChanges();
+
             }
             else
             {
                 return false;
             }
-
 
             return true;
         }
@@ -456,17 +356,16 @@ namespace tp_plataformas_2
             {
                 if (categorias[i] != null)
                 {
-                    encontre = categorias[i].Id == ID;
+                    encontre = categorias[i].CatId == ID;
 
                 }
                 if (encontre)
                 {
-
                     categorias[i].Nombre = " ";
-                    Console.WriteLine("Categoria " + ID + " eliminada con Ã©xito!");
-                    conexion.vaciarCategoria(categorias[i]);
-                    //FileManager.SaveArrayCategorias(categorias);
-                    //cantCategorias--;
+
+                    var cat = db.categorias.Where(c => c.CatId == ID).FirstOrDefault();
+                    cat.Nombre = " ";
+                    db.SaveChanges();
                 }
 
                 i++;
@@ -474,143 +373,77 @@ namespace tp_plataformas_2
             return encontre;
         }
 
-
-
-        public bool BuscarCategoria(string Nombre)
-        {
-            foreach (Categoria categoria in categorias)
-            {
-                if (categoria.Nombre.Equals(Nombre))
-                {
-                    Console.WriteLine(categoria.Nombre);
-                }
-
-
-            }
-            return true;
-        }
-
         public Categoria BuscarCategoriaPorNombre(string Nombre)
         {
-            Categoria categoriaEncontrada = null;
-            foreach (Categoria categoria in categorias)
-            {
-                if (categoria.Nombre.Equals(Nombre))
-                {
-                    categoriaEncontrada = categoria;
-                }
-            }
-            if(categoriaEncontrada == null)
-            {
-                throw new Excepciones("No se encontrÃ³ la categoria.");
-            }
-            return categoriaEncontrada;
+            Categoria categoria = db.categorias.Where(cat => cat.Nombre == Nombre).FirstOrDefault();
+            return categoria;
         }
 
         public Categoria[] MostrarCategorias()
         {
-
             return categorias;
         }
 
         public bool AgregarAlCarro(int Id_Producto, int Cantidad, int Id_Usuario)
         {
             bool sePudoAgregar = false;
-            Usuario usuarioEncontrado;
-            Producto productoEncontrado;
+            Usuario usuarioEncontrado = db.usuarios.Where(u => u.UsuarioId == Id_Usuario).FirstOrDefault();
+            Producto productoEncontrado = db.productos.Where(p => p.ProductoId == Id_Producto).FirstOrDefault();
+
             if (MercadoHelper.SonMenoresACero(new List<int> { Id_Producto, Cantidad, Id_Usuario }))
             {
                 throw new Excepciones("Los parametros numericos deben ser mayor o igual a 0");
             }
-            else if (!MercadoHelper.ExisteElUsuario(Id_Usuario, usuarios))
-            {
-                throw new Excepciones("El usuario con id " + Id_Usuario + " no se pudo encontrar");
-            }
-            else if (!MercadoHelper.ExisteElProducto(Id_Producto, productos))
-            {
-                throw new Excepciones("El producto con id " + Id_Producto + " no se pudo encontrar");
-            }
             else
             {
-                usuarioEncontrado = usuarios[Id_Usuario - 1];
-                productoEncontrado = productos[Id_Producto -1];
                 if (Cantidad > productoEncontrado.Cantidad)
                 {
                     throw new Excepciones("La cantidad que se quiere agregar es mayor al stock disponible.");
                 }
                 else
                 {
-                    usuarioEncontrado.MiCarro.AgregarProducto(productoEncontrado, Cantidad);
+                    //La relación está en el carro, ese es el objeto que tengo que modificar
+                    Carro cart = usuarioEncontrado.Carro;
+                    //agrego a la ICollection
+                    cart.ProductosCompra.Add(productoEncontrado);
+                    //UPDATE de la entidad, MUY importante
+                    db.carro.Update(cart);
+                    db.SaveChanges();
+                    //En este punto se creó el registro en la tabla intermedia, solo falta buscarlo para setear la cantidad
+                    cart.Carro_productos.Last<Carro_productos>().Cantidad = Cantidad;
+                    //Listo, ahora guardo del todo.
+                    db.carro.Update(cart);
+                    db.SaveChanges();
 
                     sePudoAgregar = true;
-
-                    Console.WriteLine("El producto {0} con cantidad {1} se ha aÃ±adido al carro del usuario {2}.", productoEncontrado.Nombre, Cantidad, usuarioEncontrado.Nombre);
-
                 }
             }
             return sePudoAgregar;
         }
 
-        public bool QuitarDelCarro(int Id_Producto, int Cantidad, int Id_Usuario)
+        public bool QuitarDelCarro(int Id_Producto, int Id_Usuario)
         {
-            bool sePudoDisminuir = false;
-            Usuario usuarioEncontrado;
-            Producto productoEncontrado;
-            if (MercadoHelper.SonMenoresACero(new List<int> { Id_Producto, Cantidad, Id_Usuario }))
-            {
-                throw new Excepciones("Los parametros numericos deben ser mayor o igual a 0");
-            }
-            else if (!MercadoHelper.ExisteElUsuario(Id_Usuario, usuarios))
-            {
-                throw new Excepciones("El usuario con id " + Id_Usuario + " no se pudo encontrar");
-            }
-            else if (!MercadoHelper.ExisteElProducto(Id_Producto, productos))
-            {
-                throw new Excepciones("El producto con id " + Id_Producto + " no se pudo encontrar");
-            }
-            else
-            {
-                usuarioEncontrado = usuarios[Id_Usuario - 1];
-                productoEncontrado = productos[Id_Producto - 1];
-                if (!usuarioEncontrado.MiCarro.Productos.ContainsKey(productoEncontrado))
-                {
-                    throw new Excepciones("El producto "+ productoEncontrado + "no se encuentra en el carro de "+ usuarioEncontrado.Nombre + ".");
-                }
-                //else if (usuarioEncontrado.MiCarro.Productos[productoEncontrado] > Cantidad || Cantidad == 0)
-                //{
-                //    usuarioEncontrado.MiCarro.RemoverProducto(productoEncontrado, Cantidad);
-                //    //("El producto "+ productoEncontrado.Nombre + " ha sido removido en su totalidad del carro del usuario "+ usuarioEncontrado.Nombre + ".");
-                //}
-                else
-                {
-                    usuarioEncontrado.MiCarro.RemoverProducto(productoEncontrado, Cantidad);
-                    sePudoDisminuir = true;
+            bool seQuito = false;
 
-                }
-            }
-            return sePudoDisminuir;
+            Usuario usuario = db.usuarios.Where(u => u.UsuarioId == Id_Usuario).FirstOrDefault();
+            Producto productoEncontrado = db.productos.Where(p => p.ProductoId == Id_Producto).FirstOrDefault();
+
+            Carro carrito = usuario.Carro;
+          
+            Carro_productos prodABorrar = db.Carro_productos.Where(carro => carro.Id_Carro == Id_Usuario && carro.Id_Producto == Id_Producto).FirstOrDefault();
+
+            db.Carro_productos.Remove(prodABorrar);
+                        
+            db.SaveChanges();
+                       
+            return seQuito;
         }
 
-        public bool VaciarCarro(int Id_Usuario)
+        public void Vaciar(int Id_Usuario)
         {
-
-            bool sePudoVaciar = false;
-            if (MercadoHelper.SonMenoresACero(new List<int> { Id_Usuario }))
-            {
-                Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
-            }
-            else if (!MercadoHelper.ExisteElUsuario(Id_Usuario, usuarios))
-            {
-                Console.WriteLine("El usuario con id {0} no se pudo encontrar", Id_Usuario);
-            }
-            else
-            {
-                usuarios[Id_Usuario - 1].MiCarro.Vaciar();
-                Console.WriteLine("Se ha vaciado el carro correctamente.");
-                sePudoVaciar = true;
-            }
-            return sePudoVaciar;
-
+           var carroABorrar = db.Carro_productos.Where(carro => carro.Id_Carro == Id_Usuario);
+           db.Carro_productos.RemoveRange(carroABorrar);
+           db.SaveChanges();
         }
 
 
@@ -618,210 +451,149 @@ namespace tp_plataformas_2
         {
             Double precioTotal = 0;
             bool sePudoComprar = false;
-            Usuario usuarioEncontrado;
-            if (MercadoHelper.SonMenoresACero(new List<int> { ID_Usuario }))
-            {
-                throw new Excepciones("Los parametros numericos deben ser mayor o igual a 0");
-            }
-            else if (!MercadoHelper.ExisteElUsuario(ID_Usuario, usuarios))
-            {
-                throw new Excepciones("El usuario con id " + ID_Usuario + " no se pudo encontrar");
-            }
-            else
-            {
-                usuarioEncontrado = usuarios[ID_Usuario - 1];
-                foreach (Producto producto in usuarioEncontrado.MiCarro.Productos.Keys)
-                {
-                    precioTotal += producto.Precio;
-                }
-                precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
-                Dictionary<Producto, int> productosCompra = new Dictionary<Producto, int>(usuarioEncontrado.MiCarro.Productos);
-                Compra compra = new Compra(compras.Count + 1, usuarioEncontrado, productosCompra, precioTotal);
+            Usuario usuario = db.usuarios.Where(usuario => usuario.UsuarioId == ID_Usuario).FirstOrDefault();
+            Carro carro = usuario.Carro;
+            
+
+            foreach (Producto prod in carro.ProductosCompra) { 
                 
-                if (conexion.agregarCompra(compra)) { 
-                    
-                    compras.Add(compra);
-                
-                    foreach (Producto productoCompra in usuarioEncontrado.MiCarro.Productos.Keys)
-                    {
-                        conexion.agregarProductosCompra(productoCompra, compra);
-
-                        int cantidad = productos[productoCompra.Id - 1].Cantidad -= usuarioEncontrado.MiCarro.Productos[productoCompra];
-                        conexion.actualizarStockProductos(productoCompra.Id, cantidad);
-
-                    }
-                }
-
-                usuarioEncontrado.MiCarro.Vaciar();
-                sePudoComprar = true;
+                foreach (Carro_productos cp in carro.Carro_productos)
+                    if(cp.Id_Carro == carro.CarroId && cp.Id_Producto ==  prod.ProductoId)
+                        precioTotal += cp.Cantidad * prod.Precio;
             }
+
+            precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
+            Compra compra = new Compra(usuario.UsuarioId, precioTotal);
+            db.compras.Add(compra);
+            db.SaveChanges();
+
+
+            foreach(Producto prod in carro.ProductosCompra) {
+                
+                compra.CompraProducto.Add(prod);
+                
+                db.compras.Update(compra);
+                db.SaveChanges();
+                foreach (Carro_productos cp in carro.Carro_productos) { 
+                    if (cp.Id_Carro == carro.CarroId && cp.Id_Producto == prod.ProductoId)
+                        compra.Productos_compra.Last<Productos_compra>().Cantidad_producto = cp.Cantidad;
+                        ActualizarStockProducto(cp.Id_Producto, cp.Cantidad);
+                        db.compras.Update(compra);
+                        db.SaveChanges();
+                }
+            }
+
+            sePudoComprar = true;
             return sePudoComprar;
-
-            // guardar compra en Productos_compra
+                       
         }
 
-        //guarda que no lo estamos usando!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        public bool ModificarCompra(int ID, Double Total)
+        public bool ActualizarStockProducto(int idProducto, int cantidad)
         {
 
-            bool seModifico = false;
-            if (MercadoHelper.SonMenoresACero(new List<int> { ID }))
-            {
-                Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
-            }
-            if (compras[ID] != null)
-            {
-                foreach (Producto producto in compras[ID].Productos.Keys)
-                {
-                    productos[producto.Id].Cantidad += producto.Cantidad;
-                }
-                compras[ID].Total = Total;
-                seModifico = true;
-            }
-            else
-            {
-                Console.WriteLine("La compra con Id {0} no existe.", ID);
-            }
+            var productoEncontrado = db.productos.FirstOrDefault(producto => producto.ProductoId == idProducto);
 
-            return seModifico;
-            //modificar en productos compra
+            if (productoEncontrado != null)
+            {
+                productoEncontrado.Cantidad -= cantidad;
+                db.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
-        public bool EliminarCompra(int ID)
+
+        public Producto BuscarProductoPorId(int Id)
         {
-            bool seElimino = false;
-            if (MercadoHelper.SonMenoresACero(new List<int> { ID }))
-            {
-                Console.WriteLine("Los parametros numericos deben ser mayor o igual a 0");
-            }
-            if (compras[ID-1] != null)
-            {
-                foreach (Producto producto in compras[ID-1].Productos.Keys)
-                {
-                    productos[producto.Id].Cantidad += producto.Cantidad;
-                }
-                compras[ID-1] = null;
-                seElimino = true;
-                //eliminar compra en conexion por id compra
-                FileManager.SaveListCompras(compras);
-            }
-            else
-            {
-                Console.WriteLine("La compra con Id {0} no existe.", ID);
-            }
-
-            return seElimino;
+            Producto producto = db.productos.Where(u => u.ProductoId == Id).FirstOrDefault();
+            return producto;
         }
-        public void MostrarTodosLosProductosPorPrecio()
+
+        public Producto BuscarProductoPorNombre(string busca)
         {
-            var productoPorPrecio = productos.OrderBy(producto => producto.Precio);
-            foreach (Producto p in productoPorPrecio)
-            {
-                Console.WriteLine(p);
-            }
-
+            Producto producto = db.productos.Where(u => u.Nombre.Contains(busca)).FirstOrDefault();
+            return producto;
         }
 
-        public void MostrarTodosLosProductosPorCategoria()
+        public List<Producto> BusquedaProductos(string busca)
         {
-
-            for (int i = 0; i < categorias.Length; i++)
-            {
-                Console.WriteLine(categorias[i]);
-
-                foreach (Producto producto in productos)
-                {
-                    if (producto.Cat.Equals(categorias[i]))
-                    {
-                        Console.WriteLine(producto.Nombre);
-                    }
-                }
-            }
-
+            List<Producto> producto = db.productos.Where(u => u.Nombre.Contains(busca)).ToList();
+            return producto;
         }
-
-
+     
         public List<Producto> MostrarProductoEnPantalla()
         {
-            return productos.OrderBy(propiedad => propiedad.Id).ToList();
+            List<Producto> salida = new List<Producto>();
+            foreach (Producto p in db.productos)
+                salida.Add(p);
+            return salida;
         }
-        
-       
-        public List<CompraRealizada> mostrarComprasRealizadas()
+
+        public List<Compra> mostrarComprasRealizadas()
         {
-            List<CompraRealizada> comprado = new List<CompraRealizada>();
-            
-            foreach (Compra compra in compras)
-            {
-                if(compra != null)
-                {
+            List<Compra> salida = new List<Compra>();
+            foreach (Compra c in db.compras)
+                salida.Add(c);
+            return salida;
+        }
+        public List<Carro_productos> mostrarCarroPantalla(int id_usuario)
+        {
+            List<Carro_productos> carro = new List<Carro_productos>();
 
-                    comprado.Add(new CompraRealizada(compra.Id, compra.Comprador, compra.Total, compra.Productos));
-                }
-            }
-            
-            
+            foreach (Carro_productos c in db.Carro_productos.Where(c => c.Id_Carro == id_usuario))
+                carro.Add(c);
 
-            return comprado;
+            return carro;
         }
 
         public bool modificarMonto(int id, double monto)
         {
-            int ID = id - 1;
-            if (compras[ID] != null)
-            {
-                compras[ID].Total = monto;
-                conexion.modificarMontoCompra(compras[ID]);
-                return true;
-            }
-
-                return false;
+            bool salida = false;
+            foreach (Compra u in db.compras)
+                if (u.CompraId == id)
+                {
+                    u.Total = monto;
+                    db.compras.Update(u);
+                    salida = true;
+                }
+            if (salida)
+                db.SaveChanges();
+            return salida;
         }
+
         public int IniciarSesion(int cuil, string clave)
         {
-            bool Inicia = false;
             int Id = -1;
-            int i = 0;
-            while (!Inicia && i < usuarios.Count)
+
+            Usuario usuario = db.usuarios.Where(u => u.Cuil == cuil).FirstOrDefault();
+
+            if (usuario != null)
             {
-                Inicia = usuarios[i].Cuil == cuil && usuarios[i].Password == clave;
-                if (Inicia)
+                if (usuario.Password == clave)
                 {
-                    Id = usuarios[i].Id;
+                    Id = usuario.UsuarioId;
                 }
-
-                i++;
+                return Id;
             }
+
             return Id;
-
-
         }
 
         public bool esAdmin(int id)
         {
-
             bool esAdmin = false;
 
-            int i = 0;
-            while (!esAdmin && i < usuarios.Count)
-            {
+            Usuario usuario = db.usuarios.Where(u => u.UsuarioId == id).FirstOrDefault();
 
-                if (esAdmin = usuarios[i].Id == id && usuarios[i].TipoUsuario == 1)
-                {
-                    esAdmin = true;
-                }
-                else if (esAdmin = usuarios[i].Id == id && usuarios[i].TipoUsuario != 1)
-                {
-                    esAdmin = false;
-
-                }
-
-                i++;
-
-            }
+            if(usuario.TipoUsuario == 1)
+                 esAdmin = true;
+            
             return esAdmin;
+        }
 
-
+        public void cerrar()
+        {
+            db.Dispose();
         }
 
     }

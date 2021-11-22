@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace tp_plataformas_2
@@ -19,16 +12,20 @@ namespace tp_plataformas_2
         public FrmDetalleProducto(Producto producto, Usuario comprador)
         {
             Comprador = comprador;
-            Mercado = new Mercado();
+            //Mercado = new Mercado();
             InitializeComponent();
         }
 
         public FrmDetalleProducto(Mercado mercado, Producto producto, Usuario comprador)
         {
+                        
             Mercado = mercado;
             Comprador = comprador;
             Producto = producto;
             InitializeComponent();
+
+
+
             lblProductoNombre.Text = "PRODUCTO: " + producto.Nombre;
             lblPrecioProducto.Text = "PRECIO: $" + producto.Precio;
             lblCategoriaProducto.Text = "CATEGORIA: " + producto.Cat.Nombre;
@@ -42,7 +39,7 @@ namespace tp_plataformas_2
             try
             {
                 cantidad = Int32.Parse(txtCantidadComprar.Text);
-                sePudoAgregar = Mercado.AgregarAlCarro(Producto.Id, cantidad, Comprador.Id);
+                sePudoAgregar = Mercado.AgregarAlCarro(Producto.ProductoId, cantidad, Comprador.UsuarioId);
                 if (sePudoAgregar)
                 {
                     MessageBox.Show("PRODUCTO AGREGADO AL CARRO-> \n" + Producto.ToString());

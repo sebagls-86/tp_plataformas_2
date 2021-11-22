@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="SqlConnect" xml:space="preserve">
-    <value>Data Source=DESKTOP-ETLU83T\SQLEXPRESS;Initial Catalog=comercio;Integrated Security=True</value>
+    <value>Data Source=SEBA\SQLEXPRESS02;Initial Catalog=comercio;Integrated Security=True</value>
     <comment>Variable de conexion</comment>
   </data>
 </root>

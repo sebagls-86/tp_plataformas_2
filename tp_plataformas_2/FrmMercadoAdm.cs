@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using tp_plataformas_2;
 
 namespace tp_plataformas_2
 {
@@ -19,22 +11,18 @@ namespace tp_plataformas_2
         {
             InitializeComponent();
             Usuario = usuario;
-
         }
         public FrmMercadoAdm(Mercado mercado,Usuario usuario)
         {
             InitializeComponent();
             Usuario = usuario;
             Mercado = mercado;
-
         }
-
 
         private void FrmMercadoAdmin_Load(object sender, EventArgs e)
         {
             lblMainTitle.Text = "AMB Mercado";
         }
-
 
         private void btnCategorias_Click(object sender, EventArgs e)
         {
@@ -42,26 +30,16 @@ namespace tp_plataformas_2
             panelUsuarios.Visible = false;
             panelProductos.Visible = false;
             panelCategorias.Visible = true;
-            //panelMuestraCategoria.Visible = true;
-
-            /* --- Titulo Principal ---*/
+           
             lblMainTitle.Text = "Categorias";
 
-            /* --- DataTableGrid ---*/
-            dataTableCategorias.DataSource = Mercado.MostrarCategorias();
-            dataTableCategorias.Width = 300;
+            dataTableCategorias.Rows.Clear();
 
-            dataTableCategorias.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataTableCategorias.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            foreach (Categoria cat in Mercado.todasCategorias())
+                dataTableCategorias.Rows.Add(cat.toArray());
 
-            dataTableCeliminar.DataSource = Mercado.MostrarCategorias();
-            dataTableCeliminar.Width = 300;
-
-            dataTableCeliminar.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataTableCeliminar.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
+           
         }
-
 
         private void btnProductos_Click(object sender, EventArgs e)
         {
@@ -71,9 +49,13 @@ namespace tp_plataformas_2
             panelProductos.Visible = true;
             lblMainTitle.Text = "Productos";
 
-            dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
-            //dgvProductos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            //dgvProductos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvProductos.Rows.Clear();
+                        
+            foreach (Producto prod in Mercado.todosProductos())
+                dgvProductos.Rows.Add(prod.toArray());
+
+            dgvProductos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvProductos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
         }
 
@@ -84,7 +66,11 @@ namespace tp_plataformas_2
             panelProductos.Visible = false;
             panelCompras.Visible = true;
             lblMainTitle.Text = "Compras";
-            dgvComprasRealizadas.DataSource = Mercado.mostrarComprasRealizadas();
+           
+            dgvComprasRealizadas.Rows.Clear();
+
+            foreach (Compra comp in Mercado.mostrarComprasRealizadas())
+                dgvComprasRealizadas.Rows.Add(comp.toArray());
 
         }
 
@@ -96,21 +82,11 @@ namespace tp_plataformas_2
             panelUsuarios.Visible = true;
             lblMainTitle.Text = "Usuarios";
 
-            this.Refresh();
+            dgvUsuariosLista.Rows.Clear();
 
-            try
-            {
-                dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-
-
-
-
+            foreach (Usuario us in Mercado.MostrarUsuarioEnPantalla())
+                dgvUsuariosLista.Rows.Add(us.toArray());
+            
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -119,7 +95,6 @@ namespace tp_plataformas_2
             FrmMain FrmMain = new FrmMain(Mercado);
             FrmMain.Show();
         }
-
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -144,8 +119,6 @@ namespace tp_plataformas_2
                 txtNombreCategoriaModificar.Text = "";
                 txtIDCategoriaModificar.Text = "";
             }
-
-
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -160,15 +133,12 @@ namespace tp_plataformas_2
                     if (Mercado.EliminarCategoria(idEliminado))
                     {
                         txtIdEliminar.Text = "";
-                       
                         this.Refresh();
-
                     }
                     else
                     {
                         throw new Excepciones("Categoria no encontrada");
                     }
-
                 }
                 catch (Excepciones ex)
                 {
@@ -244,10 +214,6 @@ namespace tp_plataformas_2
 
         private void btnAgregarUsuario_Click(object sender, EventArgs e)
         {
-
-
-
-
             string nombre = txtNombre.Text;
             string apellido = txtApellido.Text;
             string cuil = txtCuil.Text;
@@ -258,9 +224,7 @@ namespace tp_plataformas_2
 
             if (radioEmpresa.Checked)
             {
-
                 tipoUsuario = 2;
-
             }
             else if (radioCliente.Checked)
             {
@@ -277,23 +241,19 @@ namespace tp_plataformas_2
 
                 {
                     throw new Excepciones("Por favor complete todos los campos");
-
                 }
 
                 else
                 {
-
                     try
                     {
                         int cuitI = Int32.Parse(cuil);
                         try
                         {
-
                             bool Agrega = Mercado.AgregarUsuario(cuitI, nombre, apellido, mail, password, tipoUsuario);
 
                             if (Agrega == true)
                             {
-
                                 MessageBox.Show("Usuario creado con exito");
                                 dgvUsuariosLista.DataSource = null;
                                 dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
@@ -302,7 +262,6 @@ namespace tp_plataformas_2
                                 txtCuil.Text = "";
                                 txtMail.Text = "";
                                 txtPassword.Text = "";
-
 
                             }
                             else
@@ -320,24 +279,16 @@ namespace tp_plataformas_2
 
                         MessageBox.Show("El cuit debe ser numerico");
                     }
-
                 }
-
             }
             catch (Excepciones ex)
             {
-
                 MessageBox.Show(ex.Message);
-
             }
-
-
         }
 
         private void btnEliminarUsuario_Click(object sender, EventArgs e)
         {
-
-
             string id = txtIdEliminaar.Text;
 
             try
@@ -345,19 +296,15 @@ namespace tp_plataformas_2
                 int idEliminar = Int32.Parse(id);
                 try
                 {
-
                     bool Elimina = Mercado.EliminarUsuario(idEliminar);
 
                     if (Elimina == true)
                     {
-
                         MessageBox.Show("Usuario eliminado");
-                        //this.Refresh();
+                        
                         txtIdEliminaar.Text = "";
                         dgvUsuariosLista.DataSource = null;
                         dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
-
-
                     }
                     else
                     {
@@ -369,11 +316,9 @@ namespace tp_plataformas_2
                     MessageBox.Show(ex.Message);
                 }
 
-
             }
             catch (FormatException)
             {
-
                 MessageBox.Show("El id debe ser numerico");
             }
 
@@ -384,9 +329,6 @@ namespace tp_plataformas_2
         {
 
         }
-
-
-
 
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
@@ -409,7 +351,7 @@ namespace tp_plataformas_2
             {
                 MessageBox.Show("no se agrego");
             }
-            //dgvProductos.Refresh();
+            dgvProductos.Refresh();
         }
 
         private void btnModificaar_Click(object sender, EventArgs e)
@@ -420,10 +362,7 @@ namespace tp_plataformas_2
             string apellido = txtModificarApellido.Text;
             string mail = txtModificarMail.Text;
             string password = txtModificarClave.Text;
-
             int tipoUsuario = 0;
-
-
 
             if (radioModificarEmpresa.Checked)
             {
@@ -446,31 +385,26 @@ namespace tp_plataformas_2
 
                 {
                     throw new Excepciones("Por favor complete todos los campos");
-
                 }
 
                 else
                 {
-
                     try
                     {
                         int ID = Int32.Parse(id);
 
                         try
                         {
-
                             bool Modifica = Mercado.ModificarUsuario(ID, nombre, apellido, mail, password, tipoUsuario);
 
                             if (Modifica == true)
                             {
-
                                 MessageBox.Show("Usuario modificado con exito");
                                 txtIdUsuarioModificar.Text = "";
                                 txtModificarNombre.Text = "";
                                 txtModificarApellido.Text = "";
                                 txtModificarMail.Text = "";
                                 txtModificarClave.Text = "";
-
                             }
                             else
                             {
@@ -497,9 +431,6 @@ namespace tp_plataformas_2
                 MessageBox.Show(ex.Message);
 
             }
-
-
-
 
         }
 
@@ -551,7 +482,6 @@ namespace tp_plataformas_2
             int idCompra = int.Parse(txtEliminarCompraId.Text);
             double nuevoMonto = int.Parse(txtBoxMonto.Text);
 
-            /*  DESCOMENTAR ESTO  */
             try
             {
                 if (Mercado.modificarMonto(idCompra, nuevoMonto))
@@ -561,7 +491,6 @@ namespace tp_plataformas_2
 
                     MessageBox.Show("Compra Actualizada");
                     dgvProductos.DataSource = null;
-                    dgvComprasRealizadas.DataSource = Mercado.mostrarComprasRealizadas();
                 }
 
             }
@@ -574,10 +503,17 @@ namespace tp_plataformas_2
         private void salirToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void dgvUsuariosLista_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
 
-        
+        private void dataTableCategorias_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
 
