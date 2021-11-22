@@ -12,7 +12,6 @@ namespace tp_plataformas_2
         public List<Usuario> usuarios { get; set; }
         public Categoria[] categorias { get; set; }
         public readonly double IVA = 21;
-
         public List<Compra> compras { get; set; }
 
         const int maxCategorias = 10;
@@ -402,19 +401,13 @@ namespace tp_plataformas_2
                 }
                 else
                 {
-                    //La relación está en el carro, ese es el objeto que tengo que modificar
                     Carro cart = usuarioEncontrado.Carro;
-                    //agrego a la ICollection
                     cart.ProductosCompra.Add(productoEncontrado);
-                    //UPDATE de la entidad, MUY importante
                     db.carro.Update(cart);
                     db.SaveChanges();
-                    //En este punto se creó el registro en la tabla intermedia, solo falta buscarlo para setear la cantidad
                     cart.Carro_productos.Last<Carro_productos>().Cantidad = Cantidad;
-                    //Listo, ahora guardo del todo.
                     db.carro.Update(cart);
                     db.SaveChanges();
-
                     sePudoAgregar = true;
                 }
             }
@@ -424,16 +417,12 @@ namespace tp_plataformas_2
         public bool QuitarDelCarro(int Id_Producto, int Id_Usuario)
         {
             bool seQuito = false;
-
             Usuario usuario = db.usuarios.Where(u => u.UsuarioId == Id_Usuario).FirstOrDefault();
             Producto productoEncontrado = db.productos.Where(p => p.ProductoId == Id_Producto).FirstOrDefault();
-
             Carro carrito = usuario.Carro;
-          
             Carro_productos prodABorrar = db.Carro_productos.Where(carro => carro.Id_Carro == Id_Usuario && carro.Id_Producto == Id_Producto).FirstOrDefault();
 
             db.Carro_productos.Remove(prodABorrar);
-                        
             db.SaveChanges();
                        
             return seQuito;
@@ -453,7 +442,6 @@ namespace tp_plataformas_2
             bool sePudoComprar = false;
             Usuario usuario = db.usuarios.Where(usuario => usuario.UsuarioId == ID_Usuario).FirstOrDefault();
             Carro carro = usuario.Carro;
-            
 
             foreach (Producto prod in carro.ProductosCompra) { 
                 
@@ -466,7 +454,6 @@ namespace tp_plataformas_2
             Compra compra = new Compra(usuario.UsuarioId, precioTotal);
             db.compras.Add(compra);
             db.SaveChanges();
-
 
             foreach(Producto prod in carro.ProductosCompra) {
                 
@@ -490,7 +477,6 @@ namespace tp_plataformas_2
 
         public bool ActualizarStockProducto(int idProducto, int cantidad)
         {
-
             var productoEncontrado = db.productos.FirstOrDefault(producto => producto.ProductoId == idProducto);
 
             if (productoEncontrado != null)
