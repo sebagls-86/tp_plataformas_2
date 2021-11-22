@@ -1,14 +1,21 @@
 # Plataformas de desarrollo
 
-_Migrando proyecto a Windows Form + ADO.NET_
+_Implementando tecnologia Entity Framework en reemplazo de ADO.NET_
 
 ### Herramientas que utilizamos para correr el proyecto
 * C#
 * Microsoft SQL Server Management Studio
 
+
+### NuGets requeridos
+* Microsoft Entity Framework Core
+* Microsoft Entity FrameworkCore - SqlServer
+* System Data Sql Client
+* Microsoft Entity Framework Tools
+
 ### Puesta en Marcha 
 
-Descargar o clonar repositorio:
+Descargar o clonar repositorio, rama MASTER:
 
     https://github.com/sebagls-86/tp_plataformas_2
 
@@ -18,8 +25,7 @@ Importar base de datos alojada en:
 
 Especificaciones de uso:
 
-    https://docs.google.com/document/d/1J_55aP3YRH4sI2NiPbOz172keT-Hh0JqIfW-9IRB20Y/edit#
-    https://drive.google.com/file/d/1j3s1OQ02ld3Xuvpj3aSxjAb0zUaGzV75/view?usp=sharing
+    https://drive.google.com/drive/folders/1vvXR2UCuJaBgIDPZLltqol9AZkeSKPIy?usp=sharing
 
 ## Alumnos
 
