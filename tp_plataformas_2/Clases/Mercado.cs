@@ -35,9 +35,10 @@ namespace tp_plataformas_2
             db = new MyContext();
             db.categorias.Load();
             db.usuarios.Load();
-            db.productos.Load();
-            db.compras.Load();
-            db.carro.Load();
+            db.productos.Include(u => u.CarroProducto).Include(u => u.CompraProducto).Load();
+            db.compras.Include(u => u.CompraProducto).Load();
+            db.carro.Include(u => u.ProductosCompra).Load();
+
         }
 
         public List<Producto> todosProductos()
@@ -388,29 +389,30 @@ namespace tp_plataformas_2
             bool sePudoAgregar = false;
             Usuario usuarioEncontrado = db.usuarios.Where(u => u.UsuarioId == Id_Usuario).FirstOrDefault();
             Producto productoEncontrado = db.productos.Where(p => p.ProductoId == Id_Producto).FirstOrDefault();
+
             if (MercadoHelper.SonMenoresACero(new List<int> { Id_Producto, Cantidad, Id_Usuario }))
             {
                 throw new Excepciones("Los parametros numericos deben ser mayor o igual a 0");
             }
-           
             else
             {
-                
                 if (Cantidad > productoEncontrado.Cantidad)
                 {
                     throw new Excepciones("La cantidad que se quiere agregar es mayor al stock disponible.");
                 }
                 else
                 {
-                    int carro_productos_Id = db.Carro_productos.Count() + 1;
-                    int id_carro = usuarioEncontrado.MiCarro;
-                    
-                
-                    Producto producto = BuscarProductoPorId(Id_Producto);
-
-                    Carro_productos carroProductos = new Carro_productos(id_carro, Id_Producto, Cantidad, producto);
-                    db.Carro_productos.Add(carroProductos);
-
+                    //La relación está en el carro, ese es el objeto que tengo que modificar
+                    Carro cart = usuarioEncontrado.Carro;
+                    //agrego a la ICollection
+                    cart.ProductosCompra.Add(productoEncontrado);
+                    //UPDATE de la entidad, MUY importante
+                    db.carro.Update(cart);
+                    db.SaveChanges();
+                    //En este punto se creó el registro en la tabla intermedia, solo falta buscarlo para setear la cantidad
+                    cart.Carro_productos.Last<Carro_productos>().Cantidad = Cantidad;
+                    //Listo, ahora guardo del todo.
+                    db.carro.Update(cart);
                     db.SaveChanges();
 
                     sePudoAgregar = true;
@@ -450,30 +452,37 @@ namespace tp_plataformas_2
             Double precioTotal = 0;
             bool sePudoComprar = false;
             Usuario usuario = db.usuarios.Where(usuario => usuario.UsuarioId == ID_Usuario).FirstOrDefault();
-                       
-            Carro_productos carrosProductos = db.Carro_productos.Where(carro => carro.Id_Carro == ID_Usuario).FirstOrDefault();
+            Carro carro = usuario.Carro;
+            
 
-            foreach (Carro_productos producto in mostrarCarroPantalla(ID_Usuario))
-                       precioTotal += producto.Cantidad * producto.Producto.Precio;
+            foreach (Producto prod in carro.ProductosCompra) { 
+                
+                foreach (Carro_productos cp in carro.Carro_productos)
+                    if(cp.Id_Carro == carro.CarroId && cp.Id_Producto ==  prod.ProductoId)
+                        precioTotal += cp.Cantidad * prod.Precio;
+            }
 
             precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
-
             Compra compra = new Compra(usuario.UsuarioId, precioTotal);
-
             db.compras.Add(compra);
             db.SaveChanges();
 
-           var datosCarrito = db.Carro_productos.Where(us => us.Id_Carro == ID_Usuario);
 
-            foreach(var p in datosCarrito.ToList())
-            {
-             Productos_compra comprado = new Productos_compra(compra.CompraId, p.Id_Producto, p.Cantidad);
-                db.Productos_compra.Add(comprado);
-                ActualizarStockProducto(p.Id_Producto, p.Cantidad);
+            foreach(Producto prod in carro.ProductosCompra) {
+                
+                compra.CompraProducto.Add(prod);
+                
+                db.compras.Update(compra);
                 db.SaveChanges();
-
+                foreach (Carro_productos cp in carro.Carro_productos) { 
+                    if (cp.Id_Carro == carro.CarroId && cp.Id_Producto == prod.ProductoId)
+                        compra.Productos_compra.Last<Productos_compra>().Cantidad_producto = cp.Cantidad;
+                        ActualizarStockProducto(cp.Id_Producto, cp.Cantidad);
+                        db.compras.Update(compra);
+                        db.SaveChanges();
+                }
             }
-                                   
+
             sePudoComprar = true;
             return sePudoComprar;
                        

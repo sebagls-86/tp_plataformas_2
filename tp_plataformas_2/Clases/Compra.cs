@@ -11,7 +11,7 @@ namespace tp_plataformas_2
         public int idUsuario { get; set; }
         public Double Total { get; set; }
         public List<Productos_compra> Productos_compra { get; set; }
-        public ICollection<Producto> CompraProducto { get; set; }
+        public ICollection<Producto> CompraProducto { get; set; } = new List<Producto>();
 
 
         public Compra() { }

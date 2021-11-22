@@ -63,31 +63,24 @@ namespace tp_plataformas_2
               .HasForeignKey(u => u.idUsuario);
 
 
-            modelBuilder.Entity<Productos_compra>()
-             .HasKey(pk => pk.Id);
+            modelBuilder.Entity<Producto>()
+                .HasMany(U => U.CompraProducto)
+                .WithMany(P => P.CompraProducto)
+                .UsingEntity<Productos_compra>(
+                    eup => eup.HasOne(up => up.Compra).WithMany(p => p.Productos_compra).HasForeignKey(u => u.Id_compra),
+                    eup => eup.HasOne(up => up.Producto).WithMany(u => u.Productos_compras).HasForeignKey(u => u.Id_producto),
+                    eup => eup.HasKey(k => new { k.Id_producto, k.Id_compra })
+                );
 
-            modelBuilder.Entity<Productos_compra>()
-             .HasOne(u => u.Producto)
-             .WithMany(x => x.Productos_compras)
-             .HasForeignKey(c => c.Id_producto);
 
-            modelBuilder.Entity<Productos_compra>()
-             .HasOne(u => u.Compra)
-             .WithMany(x => x.Productos_compra)
-             .HasForeignKey(c => c.Id_compra);
-
-            modelBuilder.Entity<Carro_productos>()
-             .HasKey(pk => pk.Carro_productos_Id);
-
-            modelBuilder.Entity<Carro_productos>()
-             .HasOne(u => u.Carro)
-             .WithMany(x => x.Carro_productos)
-             .HasForeignKey(c => c.Id_Carro);
-
-            modelBuilder.Entity<Carro_productos>()
-            .HasOne(u => u.Producto)
-            .WithMany(x => x.Carro_productos)
-            .HasForeignKey(c => c.Id_Producto);
+            modelBuilder.Entity<Carro>()
+                .HasMany(U => U.ProductosCompra)
+                .WithMany(P => P.CarroProducto)
+                .UsingEntity<Carro_productos>(
+                    eup => eup.HasOne(up => up.Producto).WithMany(p => p.Carro_productos).HasForeignKey(u => u.Id_Producto),
+                    eup => eup.HasOne(up => up.Carro).WithMany(u => u.Carro_productos).HasForeignKey(u => u.Id_Carro),
+                    eup => eup.HasKey(k => new { k.Id_Producto, k.Id_Carro })
+                );
 
 
             //Ignoro, no agrego UsuarioManager a la base de datos
