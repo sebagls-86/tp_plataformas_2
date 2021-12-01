@@ -8,12 +8,12 @@ namespace tp_plataformas_2
         public int CatId { get; set; }
         public string Nombre { get; set; }
 
-        public List<Producto> Productos { get; set; }
+        public List<Producto> Productos { get; set; } = new List<Producto>();
 
         public Categoria() {}
-        public Categoria(int id, string nombre)
+        public Categoria(string nombre)
         {
-            CatId = id;
+            
             Nombre = nombre;
         }
 

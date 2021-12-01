@@ -10,26 +10,19 @@ namespace tp_plataformas_2
     {
         public List<Producto> productos { get; set; }
         public List<Usuario> usuarios { get; set; }
-        public Categoria[] categorias { get; set; }
+        public List<Categoria> categorias { get; set; }
+
         public readonly double IVA = 21;
         public List<Compra> compras { get; set; }
 
-        const int maxCategorias = 10;
-
-        int cantCategorias = 0;
-        int cantProductos;
-      
-        private string[] contenidos = new string[10];
-
         MyContext db;
-              
 
         public Mercado()
         {
             productos = new List<Producto>();
             usuarios = new List<Usuario>();
             compras = new List<Compra>();
-            categorias = new Categoria[maxCategorias];
+            categorias = new List<Categoria>();
 
             db = new MyContext();
             db.categorias.Load();
@@ -42,12 +35,12 @@ namespace tp_plataformas_2
 
         public List<Producto> todosProductos()
         {
-            return db.productos.OrderBy(propiedad => propiedad.ProductoId).ToList(); ;
+            return db.productos.OrderBy(propiedad => propiedad.ProductoId).ToList();
         }
 
         public List<Categoria> todasCategorias()
         {
-            return db.categorias.OrderBy(propiedad => propiedad.CatId).ToList(); ;
+            return db.categorias.OrderBy(propiedad => propiedad.CatId).ToList();
         }
 
         public bool AgregarProducto(string nombre, double precio, int Cantidad, int idCategoria)
@@ -56,15 +49,10 @@ namespace tp_plataformas_2
             {
                 Categoria cat = db.categorias.Where(u => u.CatId == idCategoria).FirstOrDefault();
 
-                cantProductos = db.productos.Count() + 1;
-
                 if (cat != null)
                 {
-                    if (cat.Productos == null)
-                        cat.Productos = new List<Producto>();
-
-                    Producto prod = new Producto { ProductoId = cantProductos, Nombre = nombre, Precio = precio, Cantidad = Cantidad, Cat = cat };
-                    cat.Productos.Add(prod);
+                    Producto prod = new Producto { Nombre = nombre, Precio = precio, Cantidad = Cantidad, Cat = cat };
+                   
                     db.productos.Add(prod);
                     db.SaveChanges();
                     return true;
@@ -72,7 +60,7 @@ namespace tp_plataformas_2
                 else
                     return false;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -82,61 +70,49 @@ namespace tp_plataformas_2
         public bool ModificarProducto(int ID, string Nombre, double Precio, int Cantidad, int ID_Categoria)
         {
             bool salida = false;
-            foreach (Producto u in db.productos)
-                if (u.ProductoId == ID)
-                {
-                    u.Nombre = Nombre;
-                    u.Precio = Precio;
-                    u.Cantidad = Cantidad;
-                    u.CatId = ID_Categoria;
-                    db.productos.Update(u);
-                    salida = true;
-                }
-            if (salida)
+            Producto prod = db.productos.Where(p => p.ProductoId == ID).FirstOrDefault();
+
+            try
+            {
+                prod.Nombre = Nombre;
+                prod.Precio = Precio;
+                prod.Cantidad = Cantidad;
+                prod.CatId = ID_Categoria;
+                db.productos.Update(prod);
                 db.SaveChanges();
+                salida = true;
+            }
+            catch (Exception)
+            {
+                salida = false;
+            }
+
             return salida;
         }
 
         public bool EliminarProducto(int id)
         {
+            bool salida = false;
+            Producto prod = db.productos.Where(p => p.ProductoId == id).FirstOrDefault();
+
             try
             {
-                bool salida = false;
-                foreach (Producto u in db.productos)
-                    if (u.ProductoId == id)
-                    {
-                        db.productos.Remove(u);
-                        salida = true;
-                    }
-                if (salida)
-                    db.SaveChanges();
-                return salida;
+                db.productos.Remove(prod);
+                db.SaveChanges();
+                salida = true;
             }
             catch (Exception)
             {
                 return false;
             }
+
+            return salida;
         }
 
-
-        public void BuscarProductosPorCategoria(int ID_Categoria)
-        {
-            foreach (Producto producto in db.productos)
-            {
-                if (producto.Cat.CatId == ID_Categoria)
-                {
-                    productos.Sort();
-                    Console.WriteLine(producto);
-                }
-            }
-        }
 
         public List<Producto> MostrarProductoEnPantallaPorCategoria(int idCategoria)
         {
-            List<Producto> salida = new List<Producto>();
-            foreach (Producto p in db.productos.Where(p => p.Cat.CatId == idCategoria))
-                salida.Add(p);
-            return salida;
+            return db.productos.Where(p => p.Cat.CatId == idCategoria).ToList();
         }
 
         public List<Producto> MostrarProductosOrdenados(int orden)
@@ -160,105 +136,98 @@ namespace tp_plataformas_2
 
         public bool AgregarUsuario(int cuil, String nombre, String apellido, String mail, String password, int tipoUsuario)
         {
+
+            bool agregado = false;
             try
             {
                 Usuario usuario = db.usuarios.Where(u => u.Cuil == cuil).FirstOrDefault();
 
                 if (usuario != null)
                 {
-                    return false;
+                    agregado = false;
                 }
 
-                int cantCarros = db.usuarios.Count() + 1;
-                Carro carro = new Carro { CarroId = cantCarros, UsuarioId = cantCarros };
-                Usuario nuevo = new Usuario { UsuarioId = cantCarros, Cuil = cuil, Nombre = nombre, Apellido = apellido, Mail = mail, Password = password, Carro = carro, TipoUsuario = tipoUsuario };
+                Carro carro = new Carro();
+                Usuario nuevo = new Usuario { Cuil = cuil, Nombre = nombre, Apellido = apellido, Mail = mail, Password = password, Carro = carro, TipoUsuario = tipoUsuario };
 
-               
                 db.usuarios.Add(nuevo);
                 db.carro.Add(carro);
                 db.SaveChanges();
-                return true;
+
+                Carro lastCarro = db.carro.OrderBy(c => c.CarroId).Last();
+                int MiCarro = lastCarro.CarroId;
+                nuevo.MiCarro = MiCarro;
+                db.usuarios.Update(nuevo);
+                db.SaveChanges();
+
+                agregado = true;
 
             }
             catch (Exception)
             {
                 return false;
             }
+
+            return agregado;
         }
-
-
 
         public bool ModificarUsuario(int ID, String nombre, String apellido, String mail, String password, int tipoUsuario)
         {
             bool salida = false;
-            foreach (Usuario u in db.usuarios)
-                if (u.UsuarioId == ID)
-                {
-                    u.Nombre = nombre;
-                    u.Apellido = apellido;
-                    u.Mail = mail;
-                    u.Password = password;
-                    u.TipoUsuario = tipoUsuario;
-                    db.usuarios.Update(u);
-                    salida = true;
-                }
-            if (salida)
+            Usuario usu = db.usuarios.Where(p => p.UsuarioId == ID).FirstOrDefault();
+            try
+            {
+                usu.Nombre = nombre;
+                usu.Apellido = apellido;
+                usu.Mail = mail;
+                usu.Password = password;
+                usu.TipoUsuario = tipoUsuario;
+                db.usuarios.Update(usu);
                 db.SaveChanges();
+                salida = true;
+
+            }
+            catch (Exception)
+            {
+                salida = false;
+            }
+
             return salida;
         }
 
 
         public bool EliminarUsuario(int id)
         {
+            bool salida = false;
+            Usuario usu = db.usuarios.Where(p => p.UsuarioId == id).FirstOrDefault();
+
             try
             {
-                bool salida = false;
-                foreach (Usuario u in db.usuarios)
-                    if (u.UsuarioId == id)
-                    {
-                        db.usuarios.Remove(u);
-                        salida = true;
-                    }
-                if (salida)
-                    db.SaveChanges();
-                return salida;
+                db.usuarios.Remove(usu);
+                db.SaveChanges();
+                salida = true;
             }
             catch (Exception)
             {
                 return false;
             }
-        }
 
+            return salida;
+        }
 
         public List<Usuario> MostrarUsuarioEnPantalla()
         {
-
-            List<Usuario> salida = new List<Usuario>();
-            foreach (Usuario u in db.usuarios)
-                salida.Add(u);
-            return salida;
+            return db.usuarios.ToList();
         }
         public List<Usuario> MostrarUsuarios()
         {
             return db.usuarios.OrderBy(propiedad => propiedad.UsuarioId).ToList();
-
         }
 
-        public Usuario BuscarUsuarioPorId(String Id)
+        public Usuario BuscarUsuarioPorId(int Id)
         {
-            
-            bool sePudoParsear = Int32.TryParse(Id, out int idUsuario);
-            Usuario usuario = db.usuarios.Where(u => u.UsuarioId == idUsuario).FirstOrDefault();
-            if (!sePudoParsear)
-            {
-                throw new Excepciones("No se puede parsear.");
-            } else if (usuario == null) {
-                throw new Excepciones("Este usuario no existe");
-            }else
-            {
-                usuario = db.usuarios.Where(u => u.UsuarioId == idUsuario).FirstOrDefault(); ;
-            }
-
+            Usuario usuario = db.usuarios.Where(u => u.UsuarioId == Id).FirstOrDefault();
+            usuario = db.usuarios.Where(u => u.UsuarioId == Id).FirstOrDefault(); ;
             return usuario;
         }
 
@@ -273,114 +242,84 @@ namespace tp_plataformas_2
             }
             return false;
         }
+
+
         public bool AgregarCategoria(string nombre)
         {
-
-            foreach (Categoria categoria in categorias)
+            bool salida = false;
+            try
             {
-                if (categoria != null)
+                Categoria cat = db.categorias.Where(u => u.Nombre.ToLower() == nombre.ToLower()).FirstOrDefault();
+
+                if (cat == null)
                 {
-                    if (categoria.Nombre.Equals(" "))
-                    {
-                        categoria.Nombre = nombre;
-
-                        var cat = db.categorias.Where(c => c.Nombre == " ").FirstOrDefault();
-                        cat.Nombre = nombre;
-                        var respuesta = db.SaveChanges();
-
-                        break;
-                    }
+                    Categoria nuevaCat = new Categoria(nombre);
+                    db.categorias.Add(nuevaCat);
+                    db.SaveChanges();
+                    salida = true;
+                }
+                else
+                {
+                    salida = false;
                 }
             }
-            cantCategorias = db.categorias.Count();
-            if (cantCategorias <= maxCategorias)
-
+            catch (Exception)
             {
-                int id = cantCategorias + 1;
-                if (BuscarCategoria(id))
-                {
-                    Categoria categoria = new Categoria(id, nombre);
-                    db.categorias.Add(categoria);
-                    var seGuardo = db.SaveChanges();
-
-                    if (seGuardo > 0)
-                    {
-                        int auxiliar = 0;
-                        int j = 0;
-
-                        do
-                        {
-                            if (categorias[j] == null)
-                            {
-                                cantCategorias++;
-                                categorias[j] = categoria;
-                                auxiliar = 1;
-                            }
-                            j++;
-
-                        } while (auxiliar == 0);
-                    }
-                }
-                return true;
+                salida = false;
             }
 
-            return false;
+            return salida;
         }
+
 
         public bool ModificarCategoria(int ID, string Nombre)
         {
 
-            if (categorias[ID - 1] != null)
-            {
-                categorias[ID - 1].Nombre = Nombre;
+            bool salida = false;
+            Categoria cat = db.categorias.Where(p => p.CatId == ID).FirstOrDefault();
 
-                var cat = db.categorias.Where(c => c.CatId == ID).FirstOrDefault();
+            try
+            {
                 cat.Nombre = Nombre;
+                db.categorias.Update(cat);
                 db.SaveChanges();
+                salida = true;
 
             }
-            else
+            catch (Exception)
+            {
+                salida = false;
+            }
+
+            return salida;
+        }
+        public bool EliminarCategoria(int id)
+        {
+            bool salida = false;
+            try
+            {
+
+                Categoria cat = db.categorias.Where(u => u.CatId == id).FirstOrDefault();
+                db.categorias.Remove(cat);
+                db.SaveChanges();
+                salida = true;
+            }
+
+            catch (Exception)
             {
                 return false;
             }
-
-            return true;
-        }
-
-        public bool EliminarCategoria(int ID)
-        {
-            bool encontre = false;
-            int i = 0;
-            while (!encontre && i < categorias.Length)
-            {
-                if (categorias[i] != null)
-                {
-                    encontre = categorias[i].CatId == ID;
-
-                }
-                if (encontre)
-                {
-                    categorias[i].Nombre = " ";
-
-                    var cat = db.categorias.Where(c => c.CatId == ID).FirstOrDefault();
-                    cat.Nombre = " ";
-                    db.SaveChanges();
-                }
-
-                i++;
-            }
-            return encontre;
+            return salida;
         }
 
         public Categoria BuscarCategoriaPorNombre(string Nombre)
         {
-            Categoria categoria = db.categorias.Where(cat => cat.Nombre == Nombre).FirstOrDefault();
-            return categoria;
+            return db.categorias.Where(cat => cat.Nombre == Nombre).FirstOrDefault(); ;
         }
 
-        public Categoria[] MostrarCategorias()
+        public List<Categoria> MostrarCategorias()
         {
-            return categorias;
+            return db.categorias.ToList();
         }
 
         public bool AgregarAlCarro(int Id_Producto, int Cantidad, int Id_Usuario)
@@ -391,48 +330,55 @@ namespace tp_plataformas_2
 
             if (MercadoHelper.SonMenoresACero(new List<int> { Id_Producto, Cantidad, Id_Usuario }))
             {
-                throw new Excepciones("Los parametros numericos deben ser mayor o igual a 0");
+                sePudoAgregar = false;
+                throw new Excepciones("Los parametros numericos deben ser mayor a 0");
+
+            }
+            else if (Cantidad > productoEncontrado.Cantidad)
+            {
+                sePudoAgregar = false;
+                throw new Excepciones("La cantidad que se quiere agregar es mayor al stock disponible.");
             }
             else
             {
-                if (Cantidad > productoEncontrado.Cantidad)
-                {
-                    throw new Excepciones("La cantidad que se quiere agregar es mayor al stock disponible.");
-                }
-                else
-                {
-                    Carro cart = usuarioEncontrado.Carro;
-                    cart.ProductosCompra.Add(productoEncontrado);
-                    db.carro.Update(cart);
-                    db.SaveChanges();
-                    cart.Carro_productos.Last<Carro_productos>().Cantidad = Cantidad;
-                    db.carro.Update(cart);
-                    db.SaveChanges();
-                    sePudoAgregar = true;
-                }
+                Carro cart = usuarioEncontrado.Carro;
+                cart.ProductosCompra.Add(productoEncontrado);
+                db.carro.Update(cart);
+                db.SaveChanges();
+                cart.Carro_productos.Last<Carro_productos>().Cantidad = Cantidad;
+                db.carro.Update(cart);
+                db.SaveChanges();
+                sePudoAgregar = true;
             }
+
             return sePudoAgregar;
         }
 
         public bool QuitarDelCarro(int Id_Producto, int Id_Usuario)
         {
             bool seQuito = false;
-            Usuario usuario = db.usuarios.Where(u => u.UsuarioId == Id_Usuario).FirstOrDefault();
-            Producto productoEncontrado = db.productos.Where(p => p.ProductoId == Id_Producto).FirstOrDefault();
-            Carro carrito = usuario.Carro;
-            Carro_productos prodABorrar = db.Carro_productos.Where(carro => carro.Id_Carro == Id_Usuario && carro.Id_Producto == Id_Producto).FirstOrDefault();
-
-            db.Carro_productos.Remove(prodABorrar);
-            db.SaveChanges();
-                       
+            try
+            {
+                Usuario usuario = db.usuarios.Where(u => u.UsuarioId == Id_Usuario).FirstOrDefault();
+                Producto productoEncontrado = db.productos.Where(p => p.ProductoId == Id_Producto).FirstOrDefault();
+                Carro carrito = usuario.Carro;
+                Carro_productos prodABorrar = db.Carro_productos.Where(carro => carro.Id_Carro == Id_Usuario && carro.Id_Producto == Id_Producto).FirstOrDefault();
+                db.Carro_productos.Remove(prodABorrar);
+                db.SaveChanges();
+                seQuito = true;
+            }
+            catch (Exception)
+            {
+                seQuito = false;
+            }
             return seQuito;
         }
 
         public void Vaciar(int Id_Usuario)
         {
-           var carroABorrar = db.Carro_productos.Where(carro => carro.Id_Carro == Id_Usuario);
-           db.Carro_productos.RemoveRange(carroABorrar);
-           db.SaveChanges();
+            var carroABorrar = db.Carro_productos.Where(carro => carro.Id_Carro == Id_Usuario);
+            db.Carro_productos.RemoveRange(carroABorrar);
+            db.SaveChanges();
         }
 
 
@@ -443,41 +389,70 @@ namespace tp_plataformas_2
             Usuario usuario = db.usuarios.Where(usuario => usuario.UsuarioId == ID_Usuario).FirstOrDefault();
             Carro carro = usuario.Carro;
 
-            foreach (Producto prod in carro.ProductosCompra) { 
-                
-                foreach (Carro_productos cp in carro.Carro_productos)
-                    if(cp.Id_Carro == carro.CarroId && cp.Id_Producto ==  prod.ProductoId)
-                        precioTotal += cp.Cantidad * prod.Precio;
-            }
+            try
+            {
 
-            precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
-            Compra compra = new Compra(usuario.UsuarioId, precioTotal);
-            db.compras.Add(compra);
-            db.SaveChanges();
+                foreach (Producto prod in carro.ProductosCompra)
+                {
 
-            foreach(Producto prod in carro.ProductosCompra) {
-                
-                compra.CompraProducto.Add(prod);
-                
-                db.compras.Update(compra);
-                db.SaveChanges();
-                foreach (Carro_productos cp in carro.Carro_productos) { 
-                    if (cp.Id_Carro == carro.CarroId && cp.Id_Producto == prod.ProductoId)
-                        compra.Productos_compra.Last<Productos_compra>().Cantidad_producto = cp.Cantidad;
-                        ActualizarStockProducto(cp.Id_Producto, cp.Cantidad);
-                        db.compras.Update(compra);
-                        db.SaveChanges();
+                    foreach (Carro_productos cp in carro.Carro_productos)
+                        if (cp.Id_Carro == carro.CarroId && cp.Id_Producto == prod.ProductoId)
+                            precioTotal += cp.Cantidad * prod.Precio;
                 }
-            }
 
-            sePudoComprar = true;
+                precioTotal = MercadoHelper.CalcularPorcentaje(precioTotal, IVA);
+                Compra compra = new Compra(usuario.UsuarioId, precioTotal);
+                db.compras.Add(compra);
+                db.SaveChanges();
+
+                sePudoComprar = true;
+
+                if (sePudoComprar)
+                {
+                    try
+                    {
+                        foreach (Producto prod in carro.ProductosCompra)
+                        {
+
+                            compra.CompraProducto.Add(prod);
+
+                            db.compras.Update(compra);
+                            db.SaveChanges();
+                            foreach (Carro_productos cp in carro.Carro_productos)
+                            {
+                                if (cp.Id_Carro == carro.CarroId && cp.Id_Producto == prod.ProductoId)
+                                    compra.Productos_compra.Last<Productos_compra>().Cantidad_producto = cp.Cantidad;
+                                ActualizarStockProducto(cp.Id_Producto, cp.Cantidad);
+                                db.compras.Update(compra);
+                                db.SaveChanges();
+                            }
+
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        sePudoComprar = false;
+                    }
+                    sePudoComprar = true;
+                }
+                else
+                {
+                    sePudoComprar = false;
+                }
+
+
+            }
+            catch (Exception)
+            {
+                sePudoComprar = false;
+            }
             return sePudoComprar;
-                       
+
         }
 
         public bool ActualizarStockProducto(int idProducto, int cantidad)
         {
-            var productoEncontrado = db.productos.FirstOrDefault(producto => producto.ProductoId == idProducto);
+            Producto productoEncontrado = db.productos.FirstOrDefault(producto => producto.ProductoId == idProducto);
 
             if (productoEncontrado != null)
             {
@@ -488,39 +463,29 @@ namespace tp_plataformas_2
             return false;
         }
 
-
         public Producto BuscarProductoPorId(int Id)
         {
-            Producto producto = db.productos.Where(u => u.ProductoId == Id).FirstOrDefault();
-            return producto;
+            return db.productos.Where(u => u.ProductoId == Id).FirstOrDefault(); ;
         }
 
         public Producto BuscarProductoPorNombre(string busca)
         {
-            Producto producto = db.productos.Where(u => u.Nombre.Contains(busca)).FirstOrDefault();
-            return producto;
+            return db.productos.Where(u => u.Nombre.Contains(busca)).FirstOrDefault(); ;
         }
 
         public List<Producto> BusquedaProductos(string busca)
         {
-            List<Producto> producto = db.productos.Where(u => u.Nombre.Contains(busca)).ToList();
-            return producto;
+            return db.productos.Where(u => u.Nombre.Contains(busca)).ToList();
         }
-     
+
         public List<Producto> MostrarProductoEnPantalla()
         {
-            List<Producto> salida = new List<Producto>();
-            foreach (Producto p in db.productos)
-                salida.Add(p);
-            return salida;
+            return db.productos.ToList();
         }
 
         public List<Compra> mostrarComprasRealizadas()
         {
-            List<Compra> salida = new List<Compra>();
-            foreach (Compra c in db.compras)
-                salida.Add(c);
-            return salida;
+            return db.compras.ToList();
         }
         public List<Carro_productos> mostrarCarroPantalla(int id_usuario)
         {
@@ -535,15 +500,18 @@ namespace tp_plataformas_2
         public bool modificarMonto(int id, double monto)
         {
             bool salida = false;
-            foreach (Compra u in db.compras)
-                if (u.CompraId == id)
-                {
-                    u.Total = monto;
-                    db.compras.Update(u);
-                    salida = true;
-                }
-            if (salida)
+            Compra comp = db.compras.Where(c => c.CompraId == id).FirstOrDefault();
+
+            try
+            {
+                comp.Total = monto;
+                db.compras.Update(comp);
                 db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                salida = false;
+            }
             return salida;
         }
 
@@ -571,9 +539,9 @@ namespace tp_plataformas_2
 
             Usuario usuario = db.usuarios.Where(u => u.UsuarioId == id).FirstOrDefault();
 
-            if(usuario.TipoUsuario == 1)
-                 esAdmin = true;
-            
+            if (usuario.TipoUsuario == 1)
+                esAdmin = true;
+
             return esAdmin;
         }
 

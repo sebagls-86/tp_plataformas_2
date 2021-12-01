@@ -19,15 +19,15 @@ namespace tp_plataformas_2
         public List<Compra> Compra { get; set; }
 
 
-        public Usuario(int id, int cuil, string nombre, string apellido, string mail, string password, Carro carro, int tipoUsuario)
+        public Usuario(int cuil, string nombre, string apellido, string mail, string password, int MiCarro, int tipoUsuario)
         {
-            UsuarioId = id;
+            Carro = new Carro();
             Cuil = cuil;
             Nombre = nombre;
             Apellido = apellido;
             Mail = mail;
             Password = password;
-            Carro = carro;
+            Carro.CarroId = MiCarro;
             TipoUsuario = tipoUsuario;
         }
 

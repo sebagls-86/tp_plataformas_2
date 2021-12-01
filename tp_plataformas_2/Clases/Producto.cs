@@ -18,9 +18,8 @@ namespace tp_plataformas_2
         public List<Productos_compra> Productos_compras { get; set; }
         public List<Carro_productos> Carro_productos { get; set; }
 
-        public Producto(int Id, string Nombre, Double Precio, int Cantidad, Categoria Cat)
+        public Producto(string Nombre, Double Precio, int Cantidad, Categoria Cat)
         {
-            this.ProductoId = Id;
             this.Nombre = Nombre;
             this.Precio = Precio;
             this.Cantidad = Cantidad;
