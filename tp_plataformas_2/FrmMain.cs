@@ -62,7 +62,7 @@ namespace tp_plataformas_2
                 {
                 int inicio = Mercado.IniciarSesion(idUsuario, password);
                 string idUsuarioLogueado = "" + inicio;
-                Usuario usuarioLogueado = Mercado.BuscarUsuarioPorId(usuario);
+                Usuario usuarioLogueado = Mercado.BuscarUsuarioPorId(idUsuario);
                     if (inicio != -1)
                     {
                         bool Admin = Mercado.esAdmin(inicio);

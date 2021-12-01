@@ -33,7 +33,7 @@ namespace tp_plataformas_2
            .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Carro>()
-            .HasKey(pk => pk.id);
+            .HasKey(pk => pk.CarroId);
 
             modelBuilder.Entity<Carro>()
            .HasOne(u => u.Usuario)

@@ -65,6 +65,10 @@ namespace tp_plataformas_2
             this.panelCompras = new System.Windows.Forms.Panel();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.dgvComprasRealizadas = new System.Windows.Forms.DataGridView();
+            this.Compra_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Usuario_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtBoxMonto = new System.Windows.Forms.TextBox();
@@ -74,10 +78,6 @@ namespace tp_plataformas_2
             this.btnEliminarCompra = new System.Windows.Forms.Button();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.label37 = new System.Windows.Forms.Label();
-            this.dgvComprasRealizadas = new System.Windows.Forms.DataGridView();
-            this.Compra_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Usuario_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelUsuarios = new System.Windows.Forms.Panel();
             this.tcUsuarios = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
@@ -135,11 +135,11 @@ namespace tp_plataformas_2
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID_Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodCat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label25 = new System.Windows.Forms.Label();
             this.tabPage10 = new System.Windows.Forms.TabPage();
@@ -196,6 +196,8 @@ namespace tp_plataformas_2
             this.lblMainTitle = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.btnExit = new System.Windows.Forms.Button();
+            this.idCate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomCate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelCategorias.SuspendLayout();
             this.tabUsuarios.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -212,9 +214,9 @@ namespace tp_plataformas_2
             this.panelCompras.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComprasRealizadas)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvComprasRealizadas)).BeginInit();
             this.panelUsuarios.SuspendLayout();
             this.tcUsuarios.SuspendLayout();
             this.tabPage6.SuspendLayout();
@@ -285,7 +287,7 @@ namespace tp_plataformas_2
             this.dataTableCategorias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CatId,
             this.NomCat});
-            this.dataTableCategorias.Location = new System.Drawing.Point(46, 75);
+            this.dataTableCategorias.Location = new System.Drawing.Point(51, 77);
             this.dataTableCategorias.Name = "dataTableCategorias";
             this.dataTableCategorias.RowHeadersWidth = 62;
             this.dataTableCategorias.RowTemplate.Height = 25;
@@ -534,6 +536,9 @@ namespace tp_plataformas_2
             // dataTableCeliminar
             // 
             this.dataTableCeliminar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataTableCeliminar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idCate,
+            this.nomCate});
             this.dataTableCeliminar.Location = new System.Drawing.Point(21, 97);
             this.dataTableCeliminar.Name = "dataTableCeliminar";
             this.dataTableCeliminar.RowHeadersWidth = 62;
@@ -564,10 +569,10 @@ namespace tp_plataformas_2
             // 
             // tabPage13
             // 
+            this.tabPage13.Controls.Add(this.dgvComprasRealizadas);
             this.tabPage13.Controls.Add(this.groupBox1);
             this.tabPage13.Controls.Add(this.pictureBox7);
             this.tabPage13.Controls.Add(this.label37);
-            this.tabPage13.Controls.Add(this.dgvComprasRealizadas);
             this.tabPage13.Location = new System.Drawing.Point(4, 41);
             this.tabPage13.Name = "tabPage13";
             this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
@@ -575,6 +580,41 @@ namespace tp_plataformas_2
             this.tabPage13.TabIndex = 1;
             this.tabPage13.Text = "Gestionar compras";
             this.tabPage13.UseVisualStyleBackColor = true;
+            // 
+            // dgvComprasRealizadas
+            // 
+            this.dgvComprasRealizadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvComprasRealizadas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Compra_id,
+            this.Usuario_Id,
+            this.Total});
+            this.dgvComprasRealizadas.Location = new System.Drawing.Point(46, 87);
+            this.dgvComprasRealizadas.Name = "dgvComprasRealizadas";
+            this.dgvComprasRealizadas.RowHeadersWidth = 62;
+            this.dgvComprasRealizadas.RowTemplate.Height = 25;
+            this.dgvComprasRealizadas.Size = new System.Drawing.Size(477, 260);
+            this.dgvComprasRealizadas.TabIndex = 0;
+            // 
+            // Compra_id
+            // 
+            this.Compra_id.HeaderText = "Compra ID";
+            this.Compra_id.MinimumWidth = 8;
+            this.Compra_id.Name = "Compra_id";
+            this.Compra_id.Width = 150;
+            // 
+            // Usuario_Id
+            // 
+            this.Usuario_Id.HeaderText = "Usuario ID";
+            this.Usuario_Id.MinimumWidth = 8;
+            this.Usuario_Id.Name = "Usuario_Id";
+            this.Usuario_Id.Width = 150;
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total";
+            this.Total.MinimumWidth = 8;
+            this.Total.Name = "Total";
+            this.Total.Width = 150;
             // 
             // groupBox1
             // 
@@ -660,41 +700,6 @@ namespace tp_plataformas_2
             this.label37.Size = new System.Drawing.Size(290, 40);
             this.label37.TabIndex = 1;
             this.label37.Text = "Compras Realizadas";
-            // 
-            // dgvComprasRealizadas
-            // 
-            this.dgvComprasRealizadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvComprasRealizadas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Compra_id,
-            this.Usuario_Id,
-            this.Total});
-            this.dgvComprasRealizadas.Location = new System.Drawing.Point(46, 87);
-            this.dgvComprasRealizadas.Name = "dgvComprasRealizadas";
-            this.dgvComprasRealizadas.RowHeadersWidth = 62;
-            this.dgvComprasRealizadas.RowTemplate.Height = 25;
-            this.dgvComprasRealizadas.Size = new System.Drawing.Size(477, 260);
-            this.dgvComprasRealizadas.TabIndex = 0;
-            // 
-            // Compra_id
-            // 
-            this.Compra_id.HeaderText = "Compra ID";
-            this.Compra_id.MinimumWidth = 8;
-            this.Compra_id.Name = "Compra_id";
-            this.Compra_id.Width = 150;
-            // 
-            // Usuario_Id
-            // 
-            this.Usuario_Id.HeaderText = "Usuario ID";
-            this.Usuario_Id.MinimumWidth = 8;
-            this.Usuario_Id.Name = "Usuario_Id";
-            this.Usuario_Id.Width = 150;
-            // 
-            // Total
-            // 
-            this.Total.HeaderText = "Total";
-            this.Total.MinimumWidth = 8;
-            this.Total.Name = "Total";
-            this.Total.Width = 150;
             // 
             // panelUsuarios
             // 
@@ -1257,52 +1262,52 @@ namespace tp_plataformas_2
             // 
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.Nombre,
-            this.Precio,
-            this.Cantidad,
-            this.ID_Categoria});
-            this.dgvProductos.Location = new System.Drawing.Point(49, 87);
+            this.idProd,
+            this.prodNombre,
+            this.prodPrecio,
+            this.prodCant,
+            this.prodCat});
+            this.dgvProductos.Location = new System.Drawing.Point(49, 107);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.RowHeadersWidth = 62;
-            this.dgvProductos.RowTemplate.Height = 25;
-            this.dgvProductos.Size = new System.Drawing.Size(667, 260);
-            this.dgvProductos.TabIndex = 0;
+            this.dgvProductos.RowTemplate.Height = 33;
+            this.dgvProductos.Size = new System.Drawing.Size(599, 225);
+            this.dgvProductos.TabIndex = 17;
             // 
-            // dataGridViewTextBoxColumn1
+            // idProd
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 8;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 150;
+            this.idProd.HeaderText = "Id Producto";
+            this.idProd.MinimumWidth = 8;
+            this.idProd.Name = "idProd";
+            this.idProd.Width = 150;
             // 
-            // Nombre
+            // prodNombre
             // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.MinimumWidth = 8;
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 150;
+            this.prodNombre.HeaderText = "Nombre";
+            this.prodNombre.MinimumWidth = 8;
+            this.prodNombre.Name = "prodNombre";
+            this.prodNombre.Width = 150;
             // 
-            // Precio
+            // prodPrecio
             // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.MinimumWidth = 8;
-            this.Precio.Name = "Precio";
-            this.Precio.Width = 150;
+            this.prodPrecio.HeaderText = "Precio";
+            this.prodPrecio.MinimumWidth = 8;
+            this.prodPrecio.Name = "prodPrecio";
+            this.prodPrecio.Width = 150;
             // 
-            // Cantidad
+            // prodCant
             // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.MinimumWidth = 8;
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.Width = 150;
+            this.prodCant.HeaderText = "Cantidad";
+            this.prodCant.MinimumWidth = 8;
+            this.prodCant.Name = "prodCant";
+            this.prodCant.Width = 150;
             // 
-            // ID_Categoria
+            // prodCat
             // 
-            this.ID_Categoria.HeaderText = "ID Categoria";
-            this.ID_Categoria.MinimumWidth = 8;
-            this.ID_Categoria.Name = "ID_Categoria";
-            this.ID_Categoria.Width = 150;
+            this.prodCat.HeaderText = "Categoria";
+            this.prodCat.MinimumWidth = 8;
+            this.prodCat.Name = "prodCat";
+            this.prodCat.Width = 150;
             // 
             // pictureBox3
             // 
@@ -1812,6 +1817,20 @@ namespace tp_plataformas_2
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // idCate
+            // 
+            this.idCate.HeaderText = "Id Categoria";
+            this.idCate.MinimumWidth = 8;
+            this.idCate.Name = "idCate";
+            this.idCate.Width = 150;
+            // 
+            // nomCate
+            // 
+            this.nomCate.HeaderText = "Nombre";
+            this.nomCate.MinimumWidth = 8;
+            this.nomCate.Name = "nomCate";
+            this.nomCate.Width = 150;
+            // 
             // FrmMercadoAdm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1819,9 +1838,9 @@ namespace tp_plataformas_2
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1138, 674);
             this.Controls.Add(this.panelCategorias);
-            this.Controls.Add(this.panelUsuarios);
-            this.Controls.Add(this.panelCompras);
             this.Controls.Add(this.panelProductos);
+            this.Controls.Add(this.panelCompras);
+            this.Controls.Add(this.panelUsuarios);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnUsuarios);
             this.Controls.Add(this.lblMainTitle);
@@ -1836,6 +1855,7 @@ namespace tp_plataformas_2
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1160, 730);
             this.MinimumSize = new System.Drawing.Size(1160, 730);
+            this.Name = "FrmMercadoAdm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mercado - Administrador";
             this.Load += new System.EventHandler(this.FrmMercadoAdmin_Load);
@@ -1861,10 +1881,10 @@ namespace tp_plataformas_2
             this.tabControl2.ResumeLayout(false);
             this.tabPage13.ResumeLayout(false);
             this.tabPage13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComprasRealizadas)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvComprasRealizadas)).EndInit();
             this.panelUsuarios.ResumeLayout(false);
             this.tcUsuarios.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
@@ -1921,8 +1941,8 @@ namespace tp_plataformas_2
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Label lblMainTitle;
         private System.Windows.Forms.DataGridView dataTableCategorias;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn Name;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCategoriaAgregar;
         private System.Windows.Forms.TextBox txtboxNombreCategoria;
@@ -1998,7 +2018,6 @@ namespace tp_plataformas_2
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.TabPage tabPage10;
         private System.Windows.Forms.TextBox txtIdCategoriaProductoAgregar;
         private System.Windows.Forms.Label label26;
@@ -2055,11 +2074,6 @@ namespace tp_plataformas_2
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtBoxMonto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Categoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn Compra_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Usuario_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
@@ -2071,5 +2085,13 @@ namespace tp_plataformas_2
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn CatId;
         private System.Windows.Forms.DataGridViewTextBoxColumn NomCat;
+        private System.Windows.Forms.DataGridView dgvProductos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idProd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prodNombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prodPrecio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prodCant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prodCat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nomCate;
     }
 }

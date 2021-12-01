@@ -34,11 +34,13 @@ namespace tp_plataformas_2
             lblMainTitle.Text = "Categorias";
 
             dataTableCategorias.Rows.Clear();
+            dataTableCeliminar.Rows.Clear();
 
-            foreach (Categoria cat in Mercado.todasCategorias())
+            foreach (Categoria cat in Mercado.todasCategorias()) { 
                 dataTableCategorias.Rows.Add(cat.toArray());
+                dataTableCeliminar.Rows.Add(cat.toArray());
+            }
 
-           
         }
 
         private void btnProductos_Click(object sender, EventArgs e)
@@ -104,6 +106,7 @@ namespace tp_plataformas_2
                 if (Mercado.AgregarCategoria(categoriaNueva))
                 {
                     txtboxNombreCategoria.Text = "";
+                    MessageBox.Show("Categoria agregada");
                 }
             }
         }
@@ -118,12 +121,11 @@ namespace tp_plataformas_2
                 Mercado.ModificarCategoria(id, nuevoNombre);
                 txtNombreCategoriaModificar.Text = "";
                 txtIDCategoriaModificar.Text = "";
+                MessageBox.Show("Categoria modificada");
             }
         }
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-
-            
             try
             {
                 int idEliminado = int.Parse(txtIdEliminar.Text);
@@ -133,6 +135,7 @@ namespace tp_plataformas_2
                     if (Mercado.EliminarCategoria(idEliminado))
                     {
                         txtIdEliminar.Text = "";
+                        MessageBox.Show("Categoria eliminada");
                         this.Refresh();
                     }
                     else
@@ -255,8 +258,6 @@ namespace tp_plataformas_2
                             if (Agrega == true)
                             {
                                 MessageBox.Show("Usuario creado con exito");
-                                dgvUsuariosLista.DataSource = null;
-                                dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
                                 txtNombre.Text = "";
                                 txtApellido.Text = "";
                                 txtCuil.Text = "";
@@ -303,8 +304,7 @@ namespace tp_plataformas_2
                         MessageBox.Show("Usuario eliminado");
                         
                         txtIdEliminaar.Text = "";
-                        dgvUsuariosLista.DataSource = null;
-                        dgvUsuariosLista.DataSource = Mercado.MostrarUsuarios();
+                        
                     }
                     else
                     {
@@ -344,8 +344,7 @@ namespace tp_plataformas_2
                 txtCantidadProductoAgregar.Text = "";
                 txtIdCategoriaProductoAgregar.Text = "";
                 MessageBox.Show("Producto Agregado");
-                dgvProductos.DataSource = null;
-                dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
+               
         }
             else
             {
@@ -441,8 +440,8 @@ namespace tp_plataformas_2
             {
                 MessageBox.Show("Producto Eliminado");
                 txtEliminarProductoID.Text = "";
-                dgvProductos.DataSource = null;
-                dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
+                
+
             }
             else
             {
@@ -467,8 +466,6 @@ namespace tp_plataformas_2
                 txtCantidadProductoModificar.Text = "";
                 txtIdCategoriaProductoModificar.Text = "";
 
-                dgvProductos.DataSource = null;
-                dgvProductos.DataSource = Mercado.MostrarProductoEnPantalla();
             }
             else
             {
@@ -489,8 +486,8 @@ namespace tp_plataformas_2
                     txtEliminarCompraId.Text = "";
                     txtboxNombreCategoria.Text = "";
 
-                    MessageBox.Show("Compra Actualizada");
-                    dgvProductos.DataSource = null;
+                    MessageBox.Show("Compra eliminada");
+                    
                 }
 
             }
